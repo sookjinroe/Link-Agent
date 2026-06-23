@@ -1,0 +1,2084 @@
+{
+  "per_column": {
+    "LOAN_DB.LOAN_ACCT_MST.LOAN_NO": {
+      "analytic_freq": 900,
+      "usage_roles": {
+        "select": 400,
+        "where": 20,
+        "groupby": 0,
+        "join": 480,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "LOAN_DB.LOAN_ACCT_MST.CUST_NO": {
+      "analytic_freq": 820,
+      "usage_roles": {
+        "select": 120,
+        "where": 0,
+        "groupby": 0,
+        "join": 600,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "LOAN_DB.LOAN_ACCT_MST.PRDT_CD": {
+      "analytic_freq": 310,
+      "usage_roles": {
+        "select": 0,
+        "where": 40,
+        "groupby": 0,
+        "join": 240,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "LOAN_DB.LOAN_ACCT_MST.LOAN_AMT": {
+      "analytic_freq": 540,
+      "usage_roles": {
+        "select": 300,
+        "where": 60,
+        "groupby": 70,
+        "join": 0,
+        "agg": 380
+      },
+      "where_literals": [],
+      "aliases": [
+        "대출금액",
+        "loan_amt"
+      ]
+    },
+    "LOAN_DB.LOAN_ACCT_MST.LOAN_BAL_AMT": {
+      "analytic_freq": 470,
+      "usage_roles": {
+        "select": 260,
+        "where": 40,
+        "groupby": 0,
+        "join": 0,
+        "agg": 300
+      },
+      "where_literals": [],
+      "aliases": [
+        "대출잔액",
+        "잔액"
+      ]
+    },
+    "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD": {
+      "analytic_freq": 380,
+      "usage_roles": {
+        "select": 180,
+        "where": 210,
+        "groupby": 120,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [
+        "01",
+        "02",
+        "04"
+      ],
+      "aliases": [
+        "대출상태",
+        "계좌상태"
+      ]
+    },
+    "LOAN_DB.LOAN_ACCT_MST.INT_RATE": {
+      "analytic_freq": 260,
+      "usage_roles": {
+        "select": 150,
+        "where": 0,
+        "groupby": 50,
+        "join": 0,
+        "agg": 160
+      },
+      "where_literals": [],
+      "aliases": [
+        "금리",
+        "int_rate"
+      ]
+    },
+    "LOAN_DB.LOAN_ACCT_MST.APLD_RATE": {
+      "analytic_freq": 95,
+      "usage_roles": {
+        "select": 60,
+        "where": 0,
+        "groupby": 0,
+        "join": 0,
+        "agg": 40
+      },
+      "where_literals": [],
+      "aliases": [
+        "적용금리"
+      ]
+    },
+    "LOAN_DB.LOAN_ACCT_MST.EXEC_DT": {
+      "analytic_freq": 290,
+      "usage_roles": {
+        "select": 120,
+        "where": 200,
+        "groupby": 90,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": [
+        "실행일"
+      ]
+    },
+    "LOAN_DB.LOAN_ACCT_MST.LOAN_EXP_DT": {
+      "analytic_freq": 210,
+      "usage_roles": {
+        "select": 110,
+        "where": 120,
+        "groupby": 0,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": [
+        "만기일",
+        "만기"
+      ]
+    },
+    "LOAN_DB.LOAN_ACCT_MST.CREATED_AT": null,
+    "LOAN_DB.LOAN_ACCT_MST.UPDATED_AT": null,
+    "LOAN_DB.LOAN_ACCT_MST.UPDATED_BY": null,
+    "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_SEQ": {
+      "analytic_freq": 120,
+      "usage_roles": {
+        "select": 40,
+        "where": 0,
+        "groupby": 0,
+        "join": 80,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "LOAN_DB.LOAN_DLNQ_HIST.LOAN_NO": {
+      "analytic_freq": 330,
+      "usage_roles": {
+        "select": 0,
+        "where": 0,
+        "groupby": 0,
+        "join": 300,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_FLG": {
+      "analytic_freq": 610,
+      "usage_roles": {
+        "select": 200,
+        "where": 420,
+        "groupby": 150,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [
+        "Y",
+        "N"
+      ],
+      "aliases": [
+        "연체여부",
+        "연체"
+      ]
+    },
+    "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_DAYS": {
+      "analytic_freq": 180,
+      "usage_roles": {
+        "select": 120,
+        "where": 80,
+        "groupby": 0,
+        "join": 0,
+        "agg": 60
+      },
+      "where_literals": [],
+      "aliases": [
+        "연체일수"
+      ]
+    },
+    "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_AMT": {
+      "analytic_freq": 150,
+      "usage_roles": {
+        "select": 100,
+        "where": 0,
+        "groupby": 0,
+        "join": 0,
+        "agg": 110
+      },
+      "where_literals": [],
+      "aliases": [
+        "연체금액"
+      ]
+    },
+    "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_INT_AMT": {
+      "analytic_freq": 85,
+      "usage_roles": {
+        "select": 55,
+        "where": 0,
+        "groupby": 0,
+        "join": 0,
+        "agg": 50
+      },
+      "where_literals": [],
+      "aliases": [
+        "연체이자"
+      ]
+    },
+    "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_OCUR_DT": {
+      "analytic_freq": 240,
+      "usage_roles": {
+        "select": 60,
+        "where": 180,
+        "groupby": 120,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": [
+        "연체발생일"
+      ]
+    },
+    "LOAN_DB.LOAN_DLNQ_HIST.CREATED_AT": null,
+    "LOAN_DB.LOAN_DLNQ_HIST.UPDATED_AT": null,
+    "LOAN_DB.LOAN_DLNQ_HIST.UPDATED_BY": null,
+    "LOAN_DB.LOAN_APPL_HIST.APPL_NO": {
+      "analytic_freq": 140,
+      "usage_roles": {
+        "select": 70,
+        "where": 0,
+        "groupby": 0,
+        "join": 70,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "LOAN_DB.LOAN_APPL_HIST.CUST_NO": {
+      "analytic_freq": 160,
+      "usage_roles": {
+        "select": 0,
+        "where": 0,
+        "groupby": 0,
+        "join": 140,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD": {
+      "analytic_freq": 220,
+      "usage_roles": {
+        "select": 110,
+        "where": 140,
+        "groupby": 90,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [
+        "03",
+        "04"
+      ],
+      "aliases": [
+        "신청상태",
+        "대출상태"
+      ]
+    },
+    "LOAN_DB.LOAN_APPL_HIST.APPL_AMT": {
+      "analytic_freq": 130,
+      "usage_roles": {
+        "select": 80,
+        "where": 0,
+        "groupby": 0,
+        "join": 0,
+        "agg": 90
+      },
+      "where_literals": [],
+      "aliases": [
+        "신청금액"
+      ]
+    },
+    "LOAN_DB.LOAN_APPL_HIST.APPL_DT": {
+      "analytic_freq": 150,
+      "usage_roles": {
+        "select": 0,
+        "where": 110,
+        "groupby": 70,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": [
+        "신청일"
+      ]
+    },
+    "LOAN_DB.LOAN_APPL_HIST.APRV_DT": {
+      "analytic_freq": 90,
+      "usage_roles": {
+        "select": 0,
+        "where": 60,
+        "groupby": 40,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": [
+        "승인일"
+      ]
+    },
+    "LOAN_DB.LOAN_APPL_HIST.APRV_YN": {
+      "analytic_freq": 170,
+      "usage_roles": {
+        "select": 80,
+        "where": 110,
+        "groupby": 60,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [
+        "Y",
+        "N"
+      ],
+      "aliases": [
+        "승인여부"
+      ]
+    },
+    "LOAN_DB.LOAN_APPL_HIST.CREATED_AT": null,
+    "LOAN_DB.LOAN_APPL_HIST.UPDATED_AT": null,
+    "LOAN_DB.LOAN_APPL_HIST.UPDATED_BY": null,
+    "LOAN_DB.LOAN_PRDT_MST.PRDT_CD": {
+      "analytic_freq": 300,
+      "usage_roles": {
+        "select": 0,
+        "where": 30,
+        "groupby": 0,
+        "join": 250,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "LOAN_DB.LOAN_PRDT_MST.PRDT_NM": {
+      "analytic_freq": 110,
+      "usage_roles": {
+        "select": 90,
+        "where": 0,
+        "groupby": 40,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": [
+        "상품명"
+      ]
+    },
+    "LOAN_DB.LOAN_PRDT_MST.PRDT_TYPE_CD": {
+      "analytic_freq": 140,
+      "usage_roles": {
+        "select": 70,
+        "where": 90,
+        "groupby": 80,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [
+        "02"
+      ],
+      "aliases": [
+        "상품유형"
+      ]
+    },
+    "LOAN_DB.LOAN_PRDT_MST.RPY_MTHD_CD": {
+      "analytic_freq": 160,
+      "usage_roles": {
+        "select": 80,
+        "where": 70,
+        "groupby": 90,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [
+        "1",
+        "3"
+      ],
+      "aliases": [
+        "상환방식"
+      ]
+    },
+    "LOAN_DB.LOAN_PRDT_MST.CREATED_AT": null,
+    "LOAN_DB.LOAN_PRDT_MST.UPDATED_AT": null,
+    "LOAN_DB.LOAN_PRDT_MST.UPDATED_BY": null,
+    "LOAN_DB.LOAN_ERLY_RPYMT_HIST.ERLY_SEQ": {
+      "analytic_freq": 60,
+      "usage_roles": {
+        "select": 20,
+        "where": 0,
+        "groupby": 0,
+        "join": 40,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "LOAN_DB.LOAN_ERLY_RPYMT_HIST.LOAN_NO": {
+      "analytic_freq": 90,
+      "usage_roles": {
+        "select": 0,
+        "where": 0,
+        "groupby": 0,
+        "join": 85,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "LOAN_DB.LOAN_ERLY_RPYMT_HIST.ERLY_RPYMT_AMT": {
+      "analytic_freq": 70,
+      "usage_roles": {
+        "select": 50,
+        "where": 0,
+        "groupby": 0,
+        "join": 0,
+        "agg": 45
+      },
+      "where_literals": [],
+      "aliases": [
+        "중도상환금액"
+      ]
+    },
+    "LOAN_DB.LOAN_ERLY_RPYMT_HIST.ERLY_RPYMT_FEE": {
+      "analytic_freq": 35,
+      "usage_roles": {
+        "select": 25,
+        "where": 0,
+        "groupby": 0,
+        "join": 0,
+        "agg": 20
+      },
+      "where_literals": [],
+      "aliases": [
+        "중도상환수수료"
+      ]
+    },
+    "LOAN_DB.LOAN_ERLY_RPYMT_HIST.ERLY_RPYMT_DT": {
+      "analytic_freq": 50,
+      "usage_roles": {
+        "select": 0,
+        "where": 40,
+        "groupby": 25,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": [
+        "중도상환일"
+      ]
+    },
+    "LOAN_DB.LOAN_ERLY_RPYMT_HIST.CREATED_AT": null,
+    "LOAN_DB.LOAN_ERLY_RPYMT_HIST.UPDATED_AT": null,
+    "LOAN_DB.LOAN_ERLY_RPYMT_HIST.UPDATED_BY": null,
+    "CARD_DB.CARD_ACCT_MST.CARD_NO": {
+      "analytic_freq": 640,
+      "usage_roles": {
+        "select": 180,
+        "where": 40,
+        "groupby": 0,
+        "join": 420,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "CARD_DB.CARD_ACCT_MST.CUST_NO": {
+      "analytic_freq": 520,
+      "usage_roles": {
+        "select": 60,
+        "where": 0,
+        "groupby": 0,
+        "join": 460,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "CARD_DB.CARD_ACCT_MST.CARD_GRD_CD": {
+      "analytic_freq": 230,
+      "usage_roles": {
+        "select": 120,
+        "where": 80,
+        "groupby": 130,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [
+        "1",
+        "2"
+      ],
+      "aliases": [
+        "카드등급",
+        "등급"
+      ]
+    },
+    "CARD_DB.CARD_ACCT_MST.CARD_STAT_CD": {
+      "analytic_freq": 290,
+      "usage_roles": {
+        "select": 140,
+        "where": 170,
+        "groupby": 100,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [
+        "01",
+        "02"
+      ],
+      "aliases": [
+        "카드상태",
+        "상태"
+      ]
+    },
+    "CARD_DB.CARD_ACCT_MST.CARD_LMT_AMT": {
+      "analytic_freq": 250,
+      "usage_roles": {
+        "select": 150,
+        "where": 60,
+        "groupby": 0,
+        "join": 0,
+        "agg": 140
+      },
+      "where_literals": [],
+      "aliases": [
+        "이용한도",
+        "한도"
+      ]
+    },
+    "CARD_DB.CARD_ACCT_MST.ISSUE_DT": {
+      "analytic_freq": 120,
+      "usage_roles": {
+        "select": 0,
+        "where": 80,
+        "groupby": 50,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": [
+        "발급일"
+      ]
+    },
+    "CARD_DB.CARD_ACCT_MST.CREATED_AT": null,
+    "CARD_DB.CARD_ACCT_MST.UPDATED_AT": null,
+    "CARD_DB.CARD_ACCT_MST.UPDATED_BY": null,
+    "CARD_DB.CARD_DLNQ_HIST.CDLNQ_SEQ": {
+      "analytic_freq": 80,
+      "usage_roles": {
+        "select": 30,
+        "where": 0,
+        "groupby": 0,
+        "join": 50,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "CARD_DB.CARD_DLNQ_HIST.CARD_NO": {
+      "analytic_freq": 190,
+      "usage_roles": {
+        "select": 0,
+        "where": 0,
+        "groupby": 0,
+        "join": 175,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "CARD_DB.CARD_DLNQ_HIST.DLNQ_FLG": {
+      "analytic_freq": 300,
+      "usage_roles": {
+        "select": 110,
+        "where": 210,
+        "groupby": 90,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [
+        "Y",
+        "N"
+      ],
+      "aliases": [
+        "연체여부",
+        "연체"
+      ]
+    },
+    "CARD_DB.CARD_DLNQ_HIST.DLNQ_DAYS": {
+      "analytic_freq": 90,
+      "usage_roles": {
+        "select": 60,
+        "where": 40,
+        "groupby": 0,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": [
+        "연체일수"
+      ]
+    },
+    "CARD_DB.CARD_DLNQ_HIST.DLNQ_AMT": {
+      "analytic_freq": 85,
+      "usage_roles": {
+        "select": 55,
+        "where": 0,
+        "groupby": 0,
+        "join": 0,
+        "agg": 50
+      },
+      "where_literals": [],
+      "aliases": [
+        "연체금액"
+      ]
+    },
+    "CARD_DB.CARD_DLNQ_HIST.DLNQ_OCUR_DT": {
+      "analytic_freq": 130,
+      "usage_roles": {
+        "select": 0,
+        "where": 100,
+        "groupby": 70,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": [
+        "연체발생일"
+      ]
+    },
+    "CARD_DB.CARD_DLNQ_HIST.CREATED_AT": null,
+    "CARD_DB.CARD_DLNQ_HIST.UPDATED_AT": null,
+    "CARD_DB.CARD_DLNQ_HIST.UPDATED_BY": null,
+    "CARD_DB.CARD_APRV_HIST.APRV_SEQ": {
+      "analytic_freq": 110,
+      "usage_roles": {
+        "select": 50,
+        "where": 0,
+        "groupby": 0,
+        "join": 60,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "CARD_DB.CARD_APRV_HIST.CARD_NO": {
+      "analytic_freq": 280,
+      "usage_roles": {
+        "select": 0,
+        "where": 0,
+        "groupby": 0,
+        "join": 260,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "CARD_DB.CARD_APRV_HIST.APRV_AMT": {
+      "analytic_freq": 300,
+      "usage_roles": {
+        "select": 170,
+        "where": 40,
+        "groupby": 0,
+        "join": 0,
+        "agg": 220
+      },
+      "where_literals": [],
+      "aliases": [
+        "거래금액",
+        "승인금액"
+      ]
+    },
+    "CARD_DB.CARD_APRV_HIST.RPY_MTHD_CD": {
+      "analytic_freq": 150,
+      "usage_roles": {
+        "select": 80,
+        "where": 60,
+        "groupby": 90,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [
+        "1",
+        "2",
+        "3"
+      ],
+      "aliases": [
+        "상환방식"
+      ]
+    },
+    "CARD_DB.CARD_APRV_HIST.APRV_DT": {
+      "analytic_freq": 180,
+      "usage_roles": {
+        "select": 0,
+        "where": 130,
+        "groupby": 90,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": [
+        "거래일"
+      ]
+    },
+    "CARD_DB.CARD_APRV_HIST.CREATED_AT": null,
+    "CARD_DB.CARD_APRV_HIST.UPDATED_AT": null,
+    "CARD_DB.CARD_APRV_HIST.UPDATED_BY": null,
+    "CUST_DB.CUST_BASE_INFO.CUST_NO": {
+      "analytic_freq": 1100,
+      "usage_roles": {
+        "select": 180,
+        "where": 20,
+        "groupby": 0,
+        "join": 900,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "CUST_DB.CUST_BASE_INFO.CUST_NM": {
+      "analytic_freq": 140,
+      "usage_roles": {
+        "select": 130,
+        "where": 30,
+        "groupby": 0,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD": {
+      "analytic_freq": 310,
+      "usage_roles": {
+        "select": 150,
+        "where": 120,
+        "groupby": 160,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [
+        "1"
+      ],
+      "aliases": [
+        "고객등급",
+        "등급"
+      ]
+    },
+    "CUST_DB.CUST_BASE_INFO.BIRTH_DT": {
+      "analytic_freq": 95,
+      "usage_roles": {
+        "select": 40,
+        "where": 70,
+        "groupby": 0,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": [
+        "생년월일"
+      ]
+    },
+    "CUST_DB.CUST_BASE_INFO.GENDER_CD": {
+      "analytic_freq": 130,
+      "usage_roles": {
+        "select": 60,
+        "where": 40,
+        "groupby": 90,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [
+        "M",
+        "F"
+      ],
+      "aliases": [
+        "성별"
+      ]
+    },
+    "CUST_DB.CUST_BASE_INFO.REG_DT": {
+      "analytic_freq": 120,
+      "usage_roles": {
+        "select": 0,
+        "where": 90,
+        "groupby": 50,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": [
+        "가입일"
+      ]
+    },
+    "CUST_DB.CUST_BASE_INFO.MYDATA_CNSNT_YN": {
+      "analytic_freq": 0,
+      "usage_roles": {
+        "select": 0,
+        "where": 0,
+        "groupby": 0,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "CUST_DB.CUST_BASE_INFO.CREATED_AT": null,
+    "CUST_DB.CUST_BASE_INFO.UPDATED_AT": null,
+    "CUST_DB.CUST_BASE_INFO.UPDATED_BY": null,
+    "CUST_DB.CUST_CNSNT_INFO.CNSNT_SEQ": {
+      "analytic_freq": 70,
+      "usage_roles": {
+        "select": 30,
+        "where": 0,
+        "groupby": 0,
+        "join": 40,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "CUST_DB.CUST_CNSNT_INFO.CUST_NO": {
+      "analytic_freq": 150,
+      "usage_roles": {
+        "select": 0,
+        "where": 0,
+        "groupby": 0,
+        "join": 140,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "CUST_DB.CUST_CNSNT_INFO.CNSNT_ITEM_CD": {
+      "analytic_freq": 110,
+      "usage_roles": {
+        "select": 50,
+        "where": 80,
+        "groupby": 40,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [
+        "01",
+        "02",
+        "03"
+      ],
+      "aliases": [
+        "동의항목"
+      ]
+    },
+    "CUST_DB.CUST_CNSNT_INFO.CNSNT_YN": {
+      "analytic_freq": 140,
+      "usage_roles": {
+        "select": 70,
+        "where": 90,
+        "groupby": 50,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [
+        "Y",
+        "N"
+      ],
+      "aliases": [
+        "동의여부"
+      ]
+    },
+    "CUST_DB.CUST_CNSNT_INFO.CNSNT_DT": {
+      "analytic_freq": 60,
+      "usage_roles": {
+        "select": 0,
+        "where": 45,
+        "groupby": 25,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": [
+        "동의일"
+      ]
+    },
+    "CUST_DB.CUST_CNSNT_INFO.CREATED_AT": null,
+    "CUST_DB.CUST_CNSNT_INFO.UPDATED_AT": null,
+    "CUST_DB.CUST_CNSNT_INFO.UPDATED_BY": null,
+    "CUST_DB.CUST_CNTC_HIST.CNTC_SEQ": {
+      "analytic_freq": 40,
+      "usage_roles": {
+        "select": 15,
+        "where": 0,
+        "groupby": 0,
+        "join": 25,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "CUST_DB.CUST_CNTC_HIST.CUST_NO": {
+      "analytic_freq": 80,
+      "usage_roles": {
+        "select": 0,
+        "where": 0,
+        "groupby": 0,
+        "join": 75,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "CUST_DB.CUST_CNTC_HIST.CNTC_TYPE_CD": {
+      "analytic_freq": 45,
+      "usage_roles": {
+        "select": 20,
+        "where": 30,
+        "groupby": 20,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [
+        "01",
+        "02",
+        "05"
+      ],
+      "aliases": [
+        "접촉유형"
+      ]
+    },
+    "CUST_DB.CUST_CNTC_HIST.CNTC_DT": {
+      "analytic_freq": 50,
+      "usage_roles": {
+        "select": 0,
+        "where": 35,
+        "groupby": 20,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": [
+        "접촉일"
+      ]
+    },
+    "CUST_DB.CUST_CNTC_HIST.CREATED_AT": null,
+    "CUST_DB.CUST_CNTC_HIST.UPDATED_AT": null,
+    "CUST_DB.CUST_CNTC_HIST.UPDATED_BY": null,
+    "RISK_DB.CRDT_EVAL_HIST.EVAL_ID": {
+      "analytic_freq": 180,
+      "usage_roles": {
+        "select": 60,
+        "where": 0,
+        "groupby": 0,
+        "join": 90,
+        "agg": 40
+      },
+      "where_literals": [],
+      "aliases": [
+        "신용평가",
+        "평가건수"
+      ]
+    },
+    "RISK_DB.CRDT_EVAL_HIST.CUST_NO": {
+      "analytic_freq": 220,
+      "usage_roles": {
+        "select": 0,
+        "where": 0,
+        "groupby": 0,
+        "join": 200,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "RISK_DB.CRDT_EVAL_HIST.CRDT_SCR": {
+      "analytic_freq": 330,
+      "usage_roles": {
+        "select": 200,
+        "where": 180,
+        "groupby": 40,
+        "join": 0,
+        "agg": 140
+      },
+      "where_literals": [
+        "700",
+        "600"
+      ],
+      "aliases": [
+        "신용점수",
+        "점수"
+      ]
+    },
+    "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD": {
+      "analytic_freq": 290,
+      "usage_roles": {
+        "select": 160,
+        "where": 170,
+        "groupby": 150,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [
+        "01",
+        "02",
+        "03"
+      ],
+      "aliases": [
+        "신용등급",
+        "등급"
+      ]
+    },
+    "RISK_DB.CRDT_EVAL_HIST.EVAL_DT": {
+      "analytic_freq": 160,
+      "usage_roles": {
+        "select": 0,
+        "where": 120,
+        "groupby": 90,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": [
+        "평가일"
+      ]
+    },
+    "RISK_DB.CRDT_EVAL_HIST.CREATED_AT": null,
+    "RISK_DB.CRDT_EVAL_HIST.UPDATED_AT": null,
+    "RISK_DB.CRDT_EVAL_HIST.UPDATED_BY": null,
+    "RISK_DB.RISK_LMT_MST.LMT_SEQ": {
+      "analytic_freq": 50,
+      "usage_roles": {
+        "select": 20,
+        "where": 0,
+        "groupby": 0,
+        "join": 30,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "RISK_DB.RISK_LMT_MST.CUST_NO": {
+      "analytic_freq": 110,
+      "usage_roles": {
+        "select": 0,
+        "where": 0,
+        "groupby": 0,
+        "join": 100,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "RISK_DB.RISK_LMT_MST.CRDT_LMT_AMT": {
+      "analytic_freq": 140,
+      "usage_roles": {
+        "select": 90,
+        "where": 40,
+        "groupby": 0,
+        "join": 0,
+        "agg": 80
+      },
+      "where_literals": [],
+      "aliases": [
+        "여신한도",
+        "한도"
+      ]
+    },
+    "RISK_DB.RISK_LMT_MST.LMT_GRD_CD": {
+      "analytic_freq": 60,
+      "usage_roles": {
+        "select": 30,
+        "where": 25,
+        "groupby": 40,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": [
+        "한도등급",
+        "등급"
+      ]
+    },
+    "RISK_DB.RISK_LMT_MST.LMT_DT": {
+      "analytic_freq": 40,
+      "usage_roles": {
+        "select": 0,
+        "where": 30,
+        "groupby": 15,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": [
+        "한도산정일"
+      ]
+    },
+    "RISK_DB.RISK_LMT_MST.CREATED_AT": null,
+    "RISK_DB.RISK_LMT_MST.UPDATED_AT": null,
+    "RISK_DB.RISK_LMT_MST.UPDATED_BY": null,
+    "RISK_DB.FRAUD_DTCT_HIST.DTCT_SEQ": {
+      "analytic_freq": 45,
+      "usage_roles": {
+        "select": 20,
+        "where": 0,
+        "groupby": 0,
+        "join": 25,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "RISK_DB.FRAUD_DTCT_HIST.CUST_NO": {
+      "analytic_freq": 70,
+      "usage_roles": {
+        "select": 0,
+        "where": 0,
+        "groupby": 0,
+        "join": 65,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "RISK_DB.FRAUD_DTCT_HIST.DTCT_TYPE_CD": {
+      "analytic_freq": 75,
+      "usage_roles": {
+        "select": 40,
+        "where": 50,
+        "groupby": 35,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [
+        "03"
+      ],
+      "aliases": [
+        "이상거래유형"
+      ]
+    },
+    "RISK_DB.FRAUD_DTCT_HIST.DTCT_AMT": {
+      "analytic_freq": 55,
+      "usage_roles": {
+        "select": 35,
+        "where": 0,
+        "groupby": 0,
+        "join": 0,
+        "agg": 40
+      },
+      "where_literals": [],
+      "aliases": [
+        "이상거래금액"
+      ]
+    },
+    "RISK_DB.FRAUD_DTCT_HIST.DTCT_DT": {
+      "analytic_freq": 50,
+      "usage_roles": {
+        "select": 0,
+        "where": 40,
+        "groupby": 20,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": [
+        "탐지일"
+      ]
+    },
+    "RISK_DB.FRAUD_DTCT_HIST.CREATED_AT": null,
+    "RISK_DB.FRAUD_DTCT_HIST.UPDATED_AT": null,
+    "RISK_DB.FRAUD_DTCT_HIST.UPDATED_BY": null,
+    "DEP_DB.DEP_ACCT_MST.DEP_NO": {
+      "analytic_freq": 280,
+      "usage_roles": {
+        "select": 70,
+        "where": 0,
+        "groupby": 0,
+        "join": 200,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "DEP_DB.DEP_ACCT_MST.CUST_NO": {
+      "analytic_freq": 240,
+      "usage_roles": {
+        "select": 0,
+        "where": 0,
+        "groupby": 0,
+        "join": 220,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "DEP_DB.DEP_ACCT_MST.DEP_BAL_AMT": {
+      "analytic_freq": 350,
+      "usage_roles": {
+        "select": 200,
+        "where": 40,
+        "groupby": 0,
+        "join": 0,
+        "agg": 240
+      },
+      "where_literals": [],
+      "aliases": [
+        "예금잔액",
+        "잔액"
+      ]
+    },
+    "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD": {
+      "analytic_freq": 160,
+      "usage_roles": {
+        "select": 80,
+        "where": 100,
+        "groupby": 70,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [
+        "01",
+        "03"
+      ],
+      "aliases": [
+        "예금상태",
+        "상태"
+      ]
+    },
+    "DEP_DB.DEP_ACCT_MST.MTRT_DT": {
+      "analytic_freq": 190,
+      "usage_roles": {
+        "select": 90,
+        "where": 120,
+        "groupby": 0,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": [
+        "만기일",
+        "만기"
+      ]
+    },
+    "DEP_DB.DEP_ACCT_MST.DEP_DT": {
+      "analytic_freq": 80,
+      "usage_roles": {
+        "select": 0,
+        "where": 60,
+        "groupby": 30,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": [
+        "가입일"
+      ]
+    },
+    "DEP_DB.DEP_ACCT_MST.CREATED_AT": null,
+    "DEP_DB.DEP_ACCT_MST.UPDATED_AT": null,
+    "DEP_DB.DEP_ACCT_MST.UPDATED_BY": null,
+    "COMMON_DB.INTG_DLNQ_SUMM.SUMM_SEQ": {
+      "analytic_freq": 40,
+      "usage_roles": {
+        "select": 20,
+        "where": 0,
+        "groupby": 0,
+        "join": 20,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "COMMON_DB.INTG_DLNQ_SUMM.ACCT_TYPE_CD": {
+      "analytic_freq": 95,
+      "usage_roles": {
+        "select": 40,
+        "where": 70,
+        "groupby": 60,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [
+        "L",
+        "C"
+      ],
+      "aliases": [
+        "계좌유형"
+      ]
+    },
+    "COMMON_DB.INTG_DLNQ_SUMM.ACCT_NO": {
+      "analytic_freq": 70,
+      "usage_roles": {
+        "select": 20,
+        "where": 0,
+        "groupby": 0,
+        "join": 50,
+        "agg": 0
+      },
+      "where_literals": [],
+      "aliases": []
+    },
+    "COMMON_DB.INTG_DLNQ_SUMM.DLNQ_FLG": {
+      "analytic_freq": 130,
+      "usage_roles": {
+        "select": 50,
+        "where": 90,
+        "groupby": 60,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [
+        "Y",
+        "N"
+      ],
+      "aliases": [
+        "연체여부",
+        "연체"
+      ]
+    },
+    "COMMON_DB.INTG_DLNQ_SUMM.DLNQ_AMT": {
+      "analytic_freq": 90,
+      "usage_roles": {
+        "select": 50,
+        "where": 0,
+        "groupby": 0,
+        "join": 0,
+        "agg": 60
+      },
+      "where_literals": [],
+      "aliases": [
+        "연체금액"
+      ]
+    },
+    "COMMON_DB.INTG_DLNQ_SUMM.SUMM_YM": {
+      "analytic_freq": 85,
+      "usage_roles": {
+        "select": 0,
+        "where": 70,
+        "groupby": 55,
+        "join": 0,
+        "agg": 0
+      },
+      "where_literals": [
+        "202605",
+        "202604"
+      ],
+      "aliases": [
+        "기준월"
+      ]
+    },
+    "COMMON_DB.INTG_DLNQ_SUMM.CREATED_AT": null,
+    "COMMON_DB.INTG_DLNQ_SUMM.UPDATED_AT": null,
+    "COMMON_DB.INTG_DLNQ_SUMM.UPDATED_BY": null
+  },
+  "join_pairs": [
+    {
+      "a": "LOAN_DB.LOAN_ACCT_MST.CUST_NO",
+      "b": "CUST_DB.CUST_BASE_INFO.CUST_NO",
+      "join_freq": 600
+    },
+    {
+      "a": "LOAN_DB.LOAN_ACCT_MST.PRDT_CD",
+      "b": "LOAN_DB.LOAN_PRDT_MST.PRDT_CD",
+      "join_freq": 240
+    },
+    {
+      "a": "LOAN_DB.LOAN_DLNQ_HIST.LOAN_NO",
+      "b": "LOAN_DB.LOAN_ACCT_MST.LOAN_NO",
+      "join_freq": 300
+    },
+    {
+      "a": "LOAN_DB.LOAN_APPL_HIST.CUST_NO",
+      "b": "CUST_DB.CUST_BASE_INFO.CUST_NO",
+      "join_freq": 140
+    },
+    {
+      "a": "LOAN_DB.LOAN_ERLY_RPYMT_HIST.LOAN_NO",
+      "b": "LOAN_DB.LOAN_ACCT_MST.LOAN_NO",
+      "join_freq": 85
+    },
+    {
+      "a": "CARD_DB.CARD_ACCT_MST.CUST_NO",
+      "b": "CUST_DB.CUST_BASE_INFO.CUST_NO",
+      "join_freq": 460
+    },
+    {
+      "a": "CARD_DB.CARD_DLNQ_HIST.CARD_NO",
+      "b": "CARD_DB.CARD_ACCT_MST.CARD_NO",
+      "join_freq": 175
+    },
+    {
+      "a": "CARD_DB.CARD_APRV_HIST.CARD_NO",
+      "b": "CARD_DB.CARD_ACCT_MST.CARD_NO",
+      "join_freq": 260
+    },
+    {
+      "a": "CUST_DB.CUST_CNSNT_INFO.CUST_NO",
+      "b": "CUST_DB.CUST_BASE_INFO.CUST_NO",
+      "join_freq": 140
+    },
+    {
+      "a": "CUST_DB.CUST_CNTC_HIST.CUST_NO",
+      "b": "CUST_DB.CUST_BASE_INFO.CUST_NO",
+      "join_freq": 75
+    },
+    {
+      "a": "RISK_DB.CRDT_EVAL_HIST.CUST_NO",
+      "b": "CUST_DB.CUST_BASE_INFO.CUST_NO",
+      "join_freq": 200
+    },
+    {
+      "a": "RISK_DB.RISK_LMT_MST.CUST_NO",
+      "b": "CUST_DB.CUST_BASE_INFO.CUST_NO",
+      "join_freq": 100
+    },
+    {
+      "a": "RISK_DB.FRAUD_DTCT_HIST.CUST_NO",
+      "b": "CUST_DB.CUST_BASE_INFO.CUST_NO",
+      "join_freq": 65
+    },
+    {
+      "a": "DEP_DB.DEP_ACCT_MST.CUST_NO",
+      "b": "CUST_DB.CUST_BASE_INFO.CUST_NO",
+      "join_freq": 220
+    }
+  ],
+  "cooccur": [
+    {
+      "a": "LOAN_DB.LOAN_ACCT_MST.LOAN_AMT",
+      "b": "LOAN_DB.LOAN_ACCT_MST.LOAN_BAL_AMT",
+      "cooccur_freq": 58,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_ACCT_MST.LOAN_AMT",
+      "b": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD",
+      "cooccur_freq": 47,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_ACCT_MST.LOAN_AMT",
+      "b": "LOAN_DB.LOAN_ACCT_MST.INT_RATE",
+      "cooccur_freq": 32,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_ACCT_MST.LOAN_AMT",
+      "b": "LOAN_DB.LOAN_ACCT_MST.APLD_RATE",
+      "cooccur_freq": 11,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_ACCT_MST.LOAN_AMT",
+      "b": "LOAN_DB.LOAN_ACCT_MST.EXEC_DT",
+      "cooccur_freq": 36,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_ACCT_MST.LOAN_AMT",
+      "b": "LOAN_DB.LOAN_ACCT_MST.LOAN_EXP_DT",
+      "cooccur_freq": 26,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_ACCT_MST.LOAN_BAL_AMT",
+      "b": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD",
+      "cooccur_freq": 47,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_ACCT_MST.LOAN_BAL_AMT",
+      "b": "LOAN_DB.LOAN_ACCT_MST.INT_RATE",
+      "cooccur_freq": 32,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_ACCT_MST.LOAN_BAL_AMT",
+      "b": "LOAN_DB.LOAN_ACCT_MST.APLD_RATE",
+      "cooccur_freq": 11,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_ACCT_MST.LOAN_BAL_AMT",
+      "b": "LOAN_DB.LOAN_ACCT_MST.EXEC_DT",
+      "cooccur_freq": 36,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_ACCT_MST.LOAN_BAL_AMT",
+      "b": "LOAN_DB.LOAN_ACCT_MST.LOAN_EXP_DT",
+      "cooccur_freq": 26,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD",
+      "b": "LOAN_DB.LOAN_ACCT_MST.INT_RATE",
+      "cooccur_freq": 32,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD",
+      "b": "LOAN_DB.LOAN_ACCT_MST.APLD_RATE",
+      "cooccur_freq": 11,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD",
+      "b": "LOAN_DB.LOAN_ACCT_MST.EXEC_DT",
+      "cooccur_freq": 36,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD",
+      "b": "LOAN_DB.LOAN_ACCT_MST.LOAN_EXP_DT",
+      "cooccur_freq": 26,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_ACCT_MST.INT_RATE",
+      "b": "LOAN_DB.LOAN_ACCT_MST.APLD_RATE",
+      "cooccur_freq": 11,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_ACCT_MST.INT_RATE",
+      "b": "LOAN_DB.LOAN_ACCT_MST.EXEC_DT",
+      "cooccur_freq": 32,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_ACCT_MST.INT_RATE",
+      "b": "LOAN_DB.LOAN_ACCT_MST.LOAN_EXP_DT",
+      "cooccur_freq": 26,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_ACCT_MST.APLD_RATE",
+      "b": "LOAN_DB.LOAN_ACCT_MST.EXEC_DT",
+      "cooccur_freq": 11,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_ACCT_MST.APLD_RATE",
+      "b": "LOAN_DB.LOAN_ACCT_MST.LOAN_EXP_DT",
+      "cooccur_freq": 11,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_ACCT_MST.EXEC_DT",
+      "b": "LOAN_DB.LOAN_ACCT_MST.LOAN_EXP_DT",
+      "cooccur_freq": 26,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_FLG",
+      "b": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_DAYS",
+      "cooccur_freq": 22,
+      "same_concept_hint": true
+    },
+    {
+      "a": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_FLG",
+      "b": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_AMT",
+      "cooccur_freq": 18,
+      "same_concept_hint": true
+    },
+    {
+      "a": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_FLG",
+      "b": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_INT_AMT",
+      "cooccur_freq": 10,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_FLG",
+      "b": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_OCUR_DT",
+      "cooccur_freq": 30,
+      "same_concept_hint": true
+    },
+    {
+      "a": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_DAYS",
+      "b": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_AMT",
+      "cooccur_freq": 18,
+      "same_concept_hint": true
+    },
+    {
+      "a": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_DAYS",
+      "b": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_INT_AMT",
+      "cooccur_freq": 10,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_DAYS",
+      "b": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_OCUR_DT",
+      "cooccur_freq": 22,
+      "same_concept_hint": true
+    },
+    {
+      "a": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_AMT",
+      "b": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_INT_AMT",
+      "cooccur_freq": 10,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_AMT",
+      "b": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_OCUR_DT",
+      "cooccur_freq": 18,
+      "same_concept_hint": true
+    },
+    {
+      "a": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_INT_AMT",
+      "b": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_OCUR_DT",
+      "cooccur_freq": 10,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD",
+      "b": "LOAN_DB.LOAN_APPL_HIST.APPL_AMT",
+      "cooccur_freq": 16,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD",
+      "b": "LOAN_DB.LOAN_APPL_HIST.APPL_DT",
+      "cooccur_freq": 18,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD",
+      "b": "LOAN_DB.LOAN_APPL_HIST.APRV_DT",
+      "cooccur_freq": 11,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD",
+      "b": "LOAN_DB.LOAN_APPL_HIST.APRV_YN",
+      "cooccur_freq": 21,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_APPL_HIST.APPL_AMT",
+      "b": "LOAN_DB.LOAN_APPL_HIST.APPL_DT",
+      "cooccur_freq": 16,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_APPL_HIST.APPL_AMT",
+      "b": "LOAN_DB.LOAN_APPL_HIST.APRV_DT",
+      "cooccur_freq": 11,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_APPL_HIST.APPL_AMT",
+      "b": "LOAN_DB.LOAN_APPL_HIST.APRV_YN",
+      "cooccur_freq": 16,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_APPL_HIST.APPL_DT",
+      "b": "LOAN_DB.LOAN_APPL_HIST.APRV_DT",
+      "cooccur_freq": 11,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_APPL_HIST.APPL_DT",
+      "b": "LOAN_DB.LOAN_APPL_HIST.APRV_YN",
+      "cooccur_freq": 18,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_APPL_HIST.APRV_DT",
+      "b": "LOAN_DB.LOAN_APPL_HIST.APRV_YN",
+      "cooccur_freq": 11,
+      "same_concept_hint": true
+    },
+    {
+      "a": "LOAN_DB.LOAN_PRDT_MST.PRDT_NM",
+      "b": "LOAN_DB.LOAN_PRDT_MST.PRDT_TYPE_CD",
+      "cooccur_freq": 13,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_PRDT_MST.PRDT_NM",
+      "b": "LOAN_DB.LOAN_PRDT_MST.RPY_MTHD_CD",
+      "cooccur_freq": 13,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_PRDT_MST.PRDT_TYPE_CD",
+      "b": "LOAN_DB.LOAN_PRDT_MST.RPY_MTHD_CD",
+      "cooccur_freq": 17,
+      "same_concept_hint": false
+    },
+    {
+      "a": "LOAN_DB.LOAN_ERLY_RPYMT_HIST.ERLY_RPYMT_AMT",
+      "b": "LOAN_DB.LOAN_ERLY_RPYMT_HIST.ERLY_RPYMT_DT",
+      "cooccur_freq": 6,
+      "same_concept_hint": true
+    },
+    {
+      "a": "CARD_DB.CARD_ACCT_MST.CARD_GRD_CD",
+      "b": "CARD_DB.CARD_ACCT_MST.CARD_STAT_CD",
+      "cooccur_freq": 28,
+      "same_concept_hint": false
+    },
+    {
+      "a": "CARD_DB.CARD_ACCT_MST.CARD_GRD_CD",
+      "b": "CARD_DB.CARD_ACCT_MST.CARD_LMT_AMT",
+      "cooccur_freq": 28,
+      "same_concept_hint": false
+    },
+    {
+      "a": "CARD_DB.CARD_ACCT_MST.CARD_GRD_CD",
+      "b": "CARD_DB.CARD_ACCT_MST.ISSUE_DT",
+      "cooccur_freq": 15,
+      "same_concept_hint": false
+    },
+    {
+      "a": "CARD_DB.CARD_ACCT_MST.CARD_STAT_CD",
+      "b": "CARD_DB.CARD_ACCT_MST.CARD_LMT_AMT",
+      "cooccur_freq": 31,
+      "same_concept_hint": false
+    },
+    {
+      "a": "CARD_DB.CARD_ACCT_MST.CARD_STAT_CD",
+      "b": "CARD_DB.CARD_ACCT_MST.ISSUE_DT",
+      "cooccur_freq": 15,
+      "same_concept_hint": false
+    },
+    {
+      "a": "CARD_DB.CARD_ACCT_MST.CARD_LMT_AMT",
+      "b": "CARD_DB.CARD_ACCT_MST.ISSUE_DT",
+      "cooccur_freq": 15,
+      "same_concept_hint": false
+    },
+    {
+      "a": "CARD_DB.CARD_DLNQ_HIST.DLNQ_FLG",
+      "b": "CARD_DB.CARD_DLNQ_HIST.DLNQ_DAYS",
+      "cooccur_freq": 11,
+      "same_concept_hint": true
+    },
+    {
+      "a": "CARD_DB.CARD_DLNQ_HIST.DLNQ_FLG",
+      "b": "CARD_DB.CARD_DLNQ_HIST.DLNQ_AMT",
+      "cooccur_freq": 10,
+      "same_concept_hint": true
+    },
+    {
+      "a": "CARD_DB.CARD_DLNQ_HIST.DLNQ_FLG",
+      "b": "CARD_DB.CARD_DLNQ_HIST.DLNQ_OCUR_DT",
+      "cooccur_freq": 16,
+      "same_concept_hint": true
+    },
+    {
+      "a": "CARD_DB.CARD_DLNQ_HIST.DLNQ_DAYS",
+      "b": "CARD_DB.CARD_DLNQ_HIST.DLNQ_AMT",
+      "cooccur_freq": 10,
+      "same_concept_hint": true
+    },
+    {
+      "a": "CARD_DB.CARD_DLNQ_HIST.DLNQ_DAYS",
+      "b": "CARD_DB.CARD_DLNQ_HIST.DLNQ_OCUR_DT",
+      "cooccur_freq": 11,
+      "same_concept_hint": true
+    },
+    {
+      "a": "CARD_DB.CARD_DLNQ_HIST.DLNQ_AMT",
+      "b": "CARD_DB.CARD_DLNQ_HIST.DLNQ_OCUR_DT",
+      "cooccur_freq": 10,
+      "same_concept_hint": true
+    },
+    {
+      "a": "CARD_DB.CARD_APRV_HIST.APRV_AMT",
+      "b": "CARD_DB.CARD_APRV_HIST.RPY_MTHD_CD",
+      "cooccur_freq": 18,
+      "same_concept_hint": false
+    },
+    {
+      "a": "CARD_DB.CARD_APRV_HIST.APRV_AMT",
+      "b": "CARD_DB.CARD_APRV_HIST.APRV_DT",
+      "cooccur_freq": 22,
+      "same_concept_hint": false
+    },
+    {
+      "a": "CARD_DB.CARD_APRV_HIST.RPY_MTHD_CD",
+      "b": "CARD_DB.CARD_APRV_HIST.APRV_DT",
+      "cooccur_freq": 18,
+      "same_concept_hint": false
+    },
+    {
+      "a": "CUST_DB.CUST_BASE_INFO.CUST_NM",
+      "b": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD",
+      "cooccur_freq": 17,
+      "same_concept_hint": false
+    },
+    {
+      "a": "CUST_DB.CUST_BASE_INFO.CUST_NM",
+      "b": "CUST_DB.CUST_BASE_INFO.BIRTH_DT",
+      "cooccur_freq": 11,
+      "same_concept_hint": false
+    },
+    {
+      "a": "CUST_DB.CUST_BASE_INFO.CUST_NM",
+      "b": "CUST_DB.CUST_BASE_INFO.GENDER_CD",
+      "cooccur_freq": 16,
+      "same_concept_hint": false
+    },
+    {
+      "a": "CUST_DB.CUST_BASE_INFO.CUST_NM",
+      "b": "CUST_DB.CUST_BASE_INFO.REG_DT",
+      "cooccur_freq": 15,
+      "same_concept_hint": false
+    },
+    {
+      "a": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD",
+      "b": "CUST_DB.CUST_BASE_INFO.BIRTH_DT",
+      "cooccur_freq": 11,
+      "same_concept_hint": false
+    },
+    {
+      "a": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD",
+      "b": "CUST_DB.CUST_BASE_INFO.GENDER_CD",
+      "cooccur_freq": 16,
+      "same_concept_hint": false
+    },
+    {
+      "a": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD",
+      "b": "CUST_DB.CUST_BASE_INFO.REG_DT",
+      "cooccur_freq": 15,
+      "same_concept_hint": false
+    },
+    {
+      "a": "CUST_DB.CUST_BASE_INFO.BIRTH_DT",
+      "b": "CUST_DB.CUST_BASE_INFO.GENDER_CD",
+      "cooccur_freq": 11,
+      "same_concept_hint": false
+    },
+    {
+      "a": "CUST_DB.CUST_BASE_INFO.BIRTH_DT",
+      "b": "CUST_DB.CUST_BASE_INFO.REG_DT",
+      "cooccur_freq": 11,
+      "same_concept_hint": false
+    },
+    {
+      "a": "CUST_DB.CUST_BASE_INFO.GENDER_CD",
+      "b": "CUST_DB.CUST_BASE_INFO.REG_DT",
+      "cooccur_freq": 15,
+      "same_concept_hint": false
+    },
+    {
+      "a": "CUST_DB.CUST_CNSNT_INFO.CNSNT_ITEM_CD",
+      "b": "CUST_DB.CUST_CNSNT_INFO.CNSNT_YN",
+      "cooccur_freq": 13,
+      "same_concept_hint": false
+    },
+    {
+      "a": "CUST_DB.CUST_CNSNT_INFO.CNSNT_ITEM_CD",
+      "b": "CUST_DB.CUST_CNSNT_INFO.CNSNT_DT",
+      "cooccur_freq": 7,
+      "same_concept_hint": false
+    },
+    {
+      "a": "CUST_DB.CUST_CNSNT_INFO.CNSNT_YN",
+      "b": "CUST_DB.CUST_CNSNT_INFO.CNSNT_DT",
+      "cooccur_freq": 7,
+      "same_concept_hint": false
+    },
+    {
+      "a": "CUST_DB.CUST_CNTC_HIST.CNTC_TYPE_CD",
+      "b": "CUST_DB.CUST_CNTC_HIST.CNTC_DT",
+      "cooccur_freq": 5,
+      "same_concept_hint": false
+    },
+    {
+      "a": "RISK_DB.CRDT_EVAL_HIST.EVAL_ID",
+      "b": "RISK_DB.CRDT_EVAL_HIST.CRDT_SCR",
+      "cooccur_freq": 22,
+      "same_concept_hint": false
+    },
+    {
+      "a": "RISK_DB.CRDT_EVAL_HIST.EVAL_ID",
+      "b": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD",
+      "cooccur_freq": 22,
+      "same_concept_hint": false
+    },
+    {
+      "a": "RISK_DB.CRDT_EVAL_HIST.EVAL_ID",
+      "b": "RISK_DB.CRDT_EVAL_HIST.EVAL_DT",
+      "cooccur_freq": 20,
+      "same_concept_hint": true
+    },
+    {
+      "a": "RISK_DB.CRDT_EVAL_HIST.CRDT_SCR",
+      "b": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD",
+      "cooccur_freq": 36,
+      "same_concept_hint": false
+    },
+    {
+      "a": "RISK_DB.CRDT_EVAL_HIST.CRDT_SCR",
+      "b": "RISK_DB.CRDT_EVAL_HIST.EVAL_DT",
+      "cooccur_freq": 20,
+      "same_concept_hint": false
+    },
+    {
+      "a": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD",
+      "b": "RISK_DB.CRDT_EVAL_HIST.EVAL_DT",
+      "cooccur_freq": 20,
+      "same_concept_hint": false
+    },
+    {
+      "a": "RISK_DB.RISK_LMT_MST.CRDT_LMT_AMT",
+      "b": "RISK_DB.RISK_LMT_MST.LMT_GRD_CD",
+      "cooccur_freq": 7,
+      "same_concept_hint": false
+    },
+    {
+      "a": "RISK_DB.RISK_LMT_MST.CRDT_LMT_AMT",
+      "b": "RISK_DB.RISK_LMT_MST.LMT_DT",
+      "cooccur_freq": 5,
+      "same_concept_hint": true
+    },
+    {
+      "a": "RISK_DB.RISK_LMT_MST.LMT_GRD_CD",
+      "b": "RISK_DB.RISK_LMT_MST.LMT_DT",
+      "cooccur_freq": 5,
+      "same_concept_hint": false
+    },
+    {
+      "a": "RISK_DB.FRAUD_DTCT_HIST.DTCT_TYPE_CD",
+      "b": "RISK_DB.FRAUD_DTCT_HIST.DTCT_AMT",
+      "cooccur_freq": 6,
+      "same_concept_hint": false
+    },
+    {
+      "a": "RISK_DB.FRAUD_DTCT_HIST.DTCT_TYPE_CD",
+      "b": "RISK_DB.FRAUD_DTCT_HIST.DTCT_DT",
+      "cooccur_freq": 6,
+      "same_concept_hint": false
+    },
+    {
+      "a": "RISK_DB.FRAUD_DTCT_HIST.DTCT_AMT",
+      "b": "RISK_DB.FRAUD_DTCT_HIST.DTCT_DT",
+      "cooccur_freq": 6,
+      "same_concept_hint": false
+    },
+    {
+      "a": "DEP_DB.DEP_ACCT_MST.DEP_BAL_AMT",
+      "b": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD",
+      "cooccur_freq": 20,
+      "same_concept_hint": false
+    },
+    {
+      "a": "DEP_DB.DEP_ACCT_MST.DEP_BAL_AMT",
+      "b": "DEP_DB.DEP_ACCT_MST.MTRT_DT",
+      "cooccur_freq": 23,
+      "same_concept_hint": false
+    },
+    {
+      "a": "DEP_DB.DEP_ACCT_MST.DEP_BAL_AMT",
+      "b": "DEP_DB.DEP_ACCT_MST.DEP_DT",
+      "cooccur_freq": 10,
+      "same_concept_hint": false
+    },
+    {
+      "a": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD",
+      "b": "DEP_DB.DEP_ACCT_MST.MTRT_DT",
+      "cooccur_freq": 20,
+      "same_concept_hint": false
+    },
+    {
+      "a": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD",
+      "b": "DEP_DB.DEP_ACCT_MST.DEP_DT",
+      "cooccur_freq": 10,
+      "same_concept_hint": false
+    },
+    {
+      "a": "DEP_DB.DEP_ACCT_MST.MTRT_DT",
+      "b": "DEP_DB.DEP_ACCT_MST.DEP_DT",
+      "cooccur_freq": 10,
+      "same_concept_hint": false
+    },
+    {
+      "a": "COMMON_DB.INTG_DLNQ_SUMM.ACCT_TYPE_CD",
+      "b": "COMMON_DB.INTG_DLNQ_SUMM.DLNQ_FLG",
+      "cooccur_freq": 11,
+      "same_concept_hint": false
+    },
+    {
+      "a": "COMMON_DB.INTG_DLNQ_SUMM.ACCT_TYPE_CD",
+      "b": "COMMON_DB.INTG_DLNQ_SUMM.DLNQ_AMT",
+      "cooccur_freq": 11,
+      "same_concept_hint": false
+    },
+    {
+      "a": "COMMON_DB.INTG_DLNQ_SUMM.ACCT_TYPE_CD",
+      "b": "COMMON_DB.INTG_DLNQ_SUMM.SUMM_YM",
+      "cooccur_freq": 10,
+      "same_concept_hint": false
+    },
+    {
+      "a": "COMMON_DB.INTG_DLNQ_SUMM.DLNQ_FLG",
+      "b": "COMMON_DB.INTG_DLNQ_SUMM.DLNQ_AMT",
+      "cooccur_freq": 11,
+      "same_concept_hint": false
+    },
+    {
+      "a": "COMMON_DB.INTG_DLNQ_SUMM.DLNQ_FLG",
+      "b": "COMMON_DB.INTG_DLNQ_SUMM.SUMM_YM",
+      "cooccur_freq": 10,
+      "same_concept_hint": false
+    },
+    {
+      "a": "COMMON_DB.INTG_DLNQ_SUMM.DLNQ_AMT",
+      "b": "COMMON_DB.INTG_DLNQ_SUMM.SUMM_YM",
+      "cooccur_freq": 10,
+      "same_concept_hint": false
+    }
+  ],
+  "agg_patterns": [
+    {
+      "surface": "연체율",
+      "table": "LOAN_DLNQ_HIST",
+      "domain": "LOAN",
+      "agg_pattern": "COUNT(CASE WHEN DLNQ_FLG='Y') / COUNT(*)",
+      "base_filter": null,
+      "time_dimension": "LOAN_DLNQ_HIST.DLNQ_OCUR_DT",
+      "freq": 140,
+      "metric_id": "M_LOAN_DLNQ_RATE"
+    },
+    {
+      "surface": "대출승인율",
+      "table": "LOAN_APPL_HIST",
+      "domain": "LOAN",
+      "agg_pattern": "COUNT(CASE WHEN APRV_YN='Y') / COUNT(*)",
+      "base_filter": null,
+      "time_dimension": "LOAN_APPL_HIST.APPL_DT",
+      "freq": 70,
+      "metric_id": "M_LOAN_APRV_RATE"
+    },
+    {
+      "surface": "연체율",
+      "table": "CARD_DLNQ_HIST",
+      "domain": "CARD",
+      "agg_pattern": "COUNT(CASE WHEN DLNQ_FLG='Y') / COUNT(*)",
+      "base_filter": null,
+      "time_dimension": "CARD_DLNQ_HIST.DLNQ_OCUR_DT",
+      "freq": 80,
+      "metric_id": "M_CARD_DLNQ_RATE"
+    },
+    {
+      "surface": "마케팅동의율",
+      "table": "CUST_CNSNT_INFO",
+      "domain": "CUSTOMER",
+      "agg_pattern": "COUNT(CASE WHEN CNSNT_YN='Y') / COUNT(*)",
+      "base_filter": "CNSNT_ITEM_CD='01'",
+      "time_dimension": "CUST_CNSNT_INFO.CNSNT_DT",
+      "freq": 60,
+      "metric_id": "M_MKT_CNSNT_RATE"
+    }
+  ]
+}

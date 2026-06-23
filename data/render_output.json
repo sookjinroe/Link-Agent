@@ -1,0 +1,1822 @@
+{
+  "LOAN_DB.LOAN_ACCT_MST.LOAN_NO": {
+    "description": "대출 계좌를 식별하는 고유 번호",
+    "confidence": "HIGH",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": [],
+    "surface_candidates": []
+  },
+  "LOAN_DB.LOAN_ACCT_MST.CUST_NO": {
+    "description": "고객을 식별하는 외래키",
+    "confidence": "HIGH",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": [],
+    "surface_candidates": []
+  },
+  "LOAN_DB.LOAN_ACCT_MST.PRDT_CD": {
+    "description": "대출 상품을 식별하는 외래키",
+    "confidence": "HIGH",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": [],
+    "surface_candidates": []
+  },
+  "LOAN_DB.LOAN_ACCT_MST.LOAN_AMT": {
+    "description": "대출 실행 원금 금액",
+    "type_candidate": [
+      "measure",
+      "dimension_categorical"
+    ],
+    "surface_candidates": [
+      "대출금액"
+    ],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null,
+    "risk_flags": []
+  },
+  "LOAN_DB.LOAN_ACCT_MST.LOAN_BAL_AMT": {
+    "description": "현재 남은 대출 잔액",
+    "surface_candidates": [
+      "대출잔액",
+      "잔액"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "measure"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": []
+  },
+  "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD": {
+    "description": "대출 계좌의 현재 상태 코드",
+    "surface_candidates": [
+      "대출상태",
+      "계좌상태"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "codedict": {
+      "01": "정상",
+      "02": "연체",
+      "03": "기한이익상실",
+      "04": "완제",
+      "05": "부실"
+    },
+    "format": null,
+    "risk_flags": []
+  },
+  "LOAN_DB.LOAN_ACCT_MST.INT_RATE": {
+    "description": "대출에 적용되는 기준 금리",
+    "type_candidate": [
+      "measure",
+      "dimension_categorical"
+    ],
+    "surface_candidates": [
+      "금리"
+    ],
+    "confidence": "MEDIUM",
+    "codedict": null,
+    "format": null,
+    "risk_flags": []
+  },
+  "LOAN_DB.LOAN_ACCT_MST.APLD_RATE": {
+    "description": "이름은 적용금리지만 실제로는 기준금리에서 우대를 뺀 최종 금리. INT_RATE(기준)와 구분 필요",
+    "surface_candidates": [
+      "적용금리"
+    ],
+    "risk_flags": [
+      "near_confusion"
+    ],
+    "confidence": "MEDIUM",
+    "type_candidate": [
+      "measure"
+    ],
+    "codedict": null,
+    "format": null
+  },
+  "LOAN_DB.LOAN_ACCT_MST.EXEC_DT": {
+    "description": "대출이 실행된 날짜",
+    "surface_candidates": [
+      "실행일"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "codedict": null,
+    "format": "YYYY-MM-DD",
+    "risk_flags": []
+  },
+  "LOAN_DB.LOAN_ACCT_MST.LOAN_EXP_DT": {
+    "description": "대출 만기 예정일. 같은 표에 EXEC_DT 등 날짜가 여럿이라 혼동 주의",
+    "surface_candidates": [
+      "만기",
+      "만기일"
+    ],
+    "risk_flags": [
+      "format_trap"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "codedict": null,
+    "format": "YYYY-MM-DD"
+  },
+  "LOAN_DB.LOAN_ACCT_MST.CREATED_AT": {
+    "description": "생성 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "LOAN_DB.LOAN_ACCT_MST.UPDATED_AT": {
+    "description": "수정 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "LOAN_DB.LOAN_ACCT_MST.UPDATED_BY": {
+    "description": "수정자 ID",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_SEQ": {
+    "description": "연체 이력 행 식별자",
+    "confidence": "HIGH",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": [],
+    "surface_candidates": []
+  },
+  "LOAN_DB.LOAN_DLNQ_HIST.LOAN_NO": {
+    "description": "대출 계좌 외래키",
+    "confidence": "HIGH",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": [],
+    "surface_candidates": []
+  },
+  "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_FLG": {
+    "description": "대출 연체 여부",
+    "surface_candidates": [
+      "연체",
+      "연체여부"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "codedict": {
+      "Y": "연체",
+      "N": "정상"
+    },
+    "format": null,
+    "risk_flags": []
+  },
+  "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_DAYS": {
+    "description": "연체 경과 일수",
+    "surface_candidates": [
+      "연체일수"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "measure"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": []
+  },
+  "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_AMT": {
+    "description": "연체된 원금 금액",
+    "surface_candidates": [
+      "연체금액"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "measure"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": []
+  },
+  "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_INT_AMT": {
+    "description": "연체 발생으로 부과된 가산 이자. 연체여부(상태)와 다른 개념",
+    "surface_candidates": [
+      "연체이자"
+    ],
+    "risk_flags": [
+      "near_confusion"
+    ],
+    "confidence": "MEDIUM",
+    "type_candidate": [
+      "measure"
+    ],
+    "codedict": null,
+    "format": null
+  },
+  "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_OCUR_DT": {
+    "description": "연체가 발생한 날짜",
+    "surface_candidates": [
+      "연체발생일"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "codedict": null,
+    "format": "YYYY-MM-DD",
+    "risk_flags": []
+  },
+  "LOAN_DB.LOAN_DLNQ_HIST.CREATED_AT": {
+    "description": "생성 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "LOAN_DB.LOAN_DLNQ_HIST.UPDATED_AT": {
+    "description": "수정 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "LOAN_DB.LOAN_DLNQ_HIST.UPDATED_BY": {
+    "description": "수정자 ID",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "LOAN_DB.LOAN_APPL_HIST.APPL_NO": {
+    "description": "대출 신청 건 식별자",
+    "confidence": "HIGH",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": [],
+    "surface_candidates": []
+  },
+  "LOAN_DB.LOAN_APPL_HIST.CUST_NO": {
+    "description": "고객 외래키",
+    "confidence": "HIGH",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": [],
+    "surface_candidates": []
+  },
+  "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD": {
+    "description": "대출 신청 건의 처리 상태",
+    "surface_candidates": [
+      "신청상태",
+      "대출상태"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "codedict": {
+      "01": "접수",
+      "02": "심사중",
+      "03": "승인",
+      "04": "거절"
+    },
+    "format": null,
+    "risk_flags": []
+  },
+  "LOAN_DB.LOAN_APPL_HIST.APPL_AMT": {
+    "description": "신청한 대출 금액",
+    "surface_candidates": [
+      "신청금액"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "measure"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": []
+  },
+  "LOAN_DB.LOAN_APPL_HIST.APPL_DT": {
+    "description": "신청 접수 날짜. 같은 표에 APRV_DT 등 날짜 여럿",
+    "surface_candidates": [
+      "신청일"
+    ],
+    "risk_flags": [
+      "format_trap"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "codedict": null,
+    "format": "YYYY-MM-DD"
+  },
+  "LOAN_DB.LOAN_APPL_HIST.APRV_DT": {
+    "description": "승인 처리 날짜. 같은 표에 신청일 등 날짜 여럿이라 혼동 주의",
+    "surface_candidates": [
+      "승인일"
+    ],
+    "risk_flags": [
+      "format_trap"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "codedict": null,
+    "format": "YYYY-MM-DD"
+  },
+  "LOAN_DB.LOAN_APPL_HIST.APRV_YN": {
+    "description": "대출 승인 여부",
+    "surface_candidates": [
+      "승인여부"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "codedict": {
+      "Y": "승인",
+      "N": "미승인"
+    },
+    "format": null,
+    "risk_flags": []
+  },
+  "LOAN_DB.LOAN_APPL_HIST.CREATED_AT": {
+    "description": "생성 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "LOAN_DB.LOAN_APPL_HIST.UPDATED_AT": {
+    "description": "수정 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "LOAN_DB.LOAN_APPL_HIST.UPDATED_BY": {
+    "description": "수정자 ID",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "LOAN_DB.LOAN_PRDT_MST.PRDT_CD": {
+    "description": "대출 상품 식별 코드",
+    "confidence": "HIGH",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": [],
+    "surface_candidates": []
+  },
+  "LOAN_DB.LOAN_PRDT_MST.PRDT_NM": {
+    "description": "대출 상품의 이름(자유 텍스트, 고카디널)",
+    "surface_candidates": [
+      "상품명"
+    ],
+    "confidence": "MEDIUM",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": []
+  },
+  "LOAN_DB.LOAN_PRDT_MST.PRDT_TYPE_CD": {
+    "description": "대출 상품의 유형 코드",
+    "surface_candidates": [
+      "상품유형"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "codedict": {
+      "01": "일반",
+      "02": "정책",
+      "03": "특판",
+      "04": "재대출"
+    },
+    "format": null,
+    "risk_flags": []
+  },
+  "LOAN_DB.LOAN_PRDT_MST.RPY_MTHD_CD": {
+    "description": "대출 원리금 상환 방식",
+    "surface_candidates": [
+      "상환방식"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "codedict": {
+      "1": "원리금균등",
+      "2": "원금균등",
+      "3": "만기일시"
+    },
+    "format": null,
+    "risk_flags": []
+  },
+  "LOAN_DB.LOAN_PRDT_MST.CREATED_AT": {
+    "description": "생성 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "LOAN_DB.LOAN_PRDT_MST.UPDATED_AT": {
+    "description": "수정 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "LOAN_DB.LOAN_PRDT_MST.UPDATED_BY": {
+    "description": "수정자 ID",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "LOAN_DB.LOAN_ERLY_RPYMT_HIST.ERLY_SEQ": {
+    "description": "중도상환 이력 식별자",
+    "confidence": "HIGH",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": [],
+    "surface_candidates": []
+  },
+  "LOAN_DB.LOAN_ERLY_RPYMT_HIST.LOAN_NO": {
+    "description": "대출 계좌 외래키",
+    "confidence": "HIGH",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": [],
+    "surface_candidates": []
+  },
+  "LOAN_DB.LOAN_ERLY_RPYMT_HIST.ERLY_RPYMT_AMT": {
+    "description": "중도 상환한 금액",
+    "surface_candidates": [
+      "중도상환금액",
+      "중도상환"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "measure"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": []
+  },
+  "LOAN_DB.LOAN_ERLY_RPYMT_HIST.ERLY_RPYMT_FEE": {
+    "description": "중도 상환 시 부과되는 수수료. 중도상환금액과 구분",
+    "surface_candidates": [
+      "중도상환수수료"
+    ],
+    "risk_flags": [
+      "near_confusion"
+    ],
+    "confidence": "MEDIUM",
+    "type_candidate": [
+      "measure"
+    ],
+    "codedict": null,
+    "format": null
+  },
+  "LOAN_DB.LOAN_ERLY_RPYMT_HIST.ERLY_RPYMT_DT": {
+    "description": "중도 상환 날짜",
+    "surface_candidates": [
+      "중도상환일"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "codedict": null,
+    "format": "YYYY-MM-DD",
+    "risk_flags": []
+  },
+  "LOAN_DB.LOAN_ERLY_RPYMT_HIST.CREATED_AT": {
+    "description": "생성 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "LOAN_DB.LOAN_ERLY_RPYMT_HIST.UPDATED_AT": {
+    "description": "수정 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "LOAN_DB.LOAN_ERLY_RPYMT_HIST.UPDATED_BY": {
+    "description": "수정자 ID",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "CARD_DB.CARD_ACCT_MST.CARD_NO": {
+    "description": "카드를 식별하는 고유 번호",
+    "confidence": "HIGH",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": [],
+    "surface_candidates": []
+  },
+  "CARD_DB.CARD_ACCT_MST.CUST_NO": {
+    "description": "고객 외래키",
+    "confidence": "HIGH",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": [],
+    "surface_candidates": []
+  },
+  "CARD_DB.CARD_ACCT_MST.CARD_GRD_CD": {
+    "description": "카드 등급 코드",
+    "surface_candidates": [
+      "카드등급",
+      "등급"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "codedict": {
+      "1": "플래티넘",
+      "2": "골드",
+      "3": "실버",
+      "4": "일반"
+    },
+    "format": null,
+    "risk_flags": []
+  },
+  "CARD_DB.CARD_ACCT_MST.CARD_STAT_CD": {
+    "description": "카드의 현재 상태 코드",
+    "surface_candidates": [
+      "카드상태",
+      "상태"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "codedict": {
+      "01": "정상",
+      "02": "정지",
+      "03": "해지",
+      "04": "연체"
+    },
+    "format": null,
+    "risk_flags": []
+  },
+  "CARD_DB.CARD_ACCT_MST.CARD_LMT_AMT": {
+    "description": "카드 이용 한도 금액",
+    "surface_candidates": [
+      "이용한도",
+      "한도"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "measure"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": []
+  },
+  "CARD_DB.CARD_ACCT_MST.ISSUE_DT": {
+    "description": "카드 발급 날짜",
+    "surface_candidates": [
+      "발급일"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "codedict": null,
+    "format": "YYYY-MM-DD",
+    "risk_flags": []
+  },
+  "CARD_DB.CARD_ACCT_MST.CREATED_AT": {
+    "description": "생성 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "CARD_DB.CARD_ACCT_MST.UPDATED_AT": {
+    "description": "수정 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "CARD_DB.CARD_ACCT_MST.UPDATED_BY": {
+    "description": "수정자 ID",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "CARD_DB.CARD_DLNQ_HIST.CDLNQ_SEQ": {
+    "description": "카드 연체 이력 식별자",
+    "confidence": "HIGH",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": [],
+    "surface_candidates": []
+  },
+  "CARD_DB.CARD_DLNQ_HIST.CARD_NO": {
+    "description": "카드 외래키",
+    "confidence": "HIGH",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": [],
+    "surface_candidates": []
+  },
+  "CARD_DB.CARD_DLNQ_HIST.DLNQ_FLG": {
+    "description": "카드 연체 여부",
+    "surface_candidates": [
+      "연체",
+      "연체여부"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "codedict": {
+      "Y": "연체",
+      "N": "정상"
+    },
+    "format": null,
+    "risk_flags": []
+  },
+  "CARD_DB.CARD_DLNQ_HIST.DLNQ_DAYS": {
+    "description": "카드 연체 경과 일수",
+    "surface_candidates": [
+      "연체일수"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "measure"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": []
+  },
+  "CARD_DB.CARD_DLNQ_HIST.DLNQ_AMT": {
+    "description": "카드 연체 금액",
+    "surface_candidates": [
+      "연체금액"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "measure"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": []
+  },
+  "CARD_DB.CARD_DLNQ_HIST.DLNQ_OCUR_DT": {
+    "description": "카드 연체 발생 날짜",
+    "surface_candidates": [
+      "연체발생일"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "codedict": null,
+    "format": "YYYY-MM-DD",
+    "risk_flags": []
+  },
+  "CARD_DB.CARD_DLNQ_HIST.CREATED_AT": {
+    "description": "생성 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "CARD_DB.CARD_DLNQ_HIST.UPDATED_AT": {
+    "description": "수정 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "CARD_DB.CARD_DLNQ_HIST.UPDATED_BY": {
+    "description": "수정자 ID",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "CARD_DB.CARD_APRV_HIST.APRV_SEQ": {
+    "description": "카드 승인(거래) 식별자",
+    "confidence": "HIGH",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": [],
+    "surface_candidates": []
+  },
+  "CARD_DB.CARD_APRV_HIST.CARD_NO": {
+    "description": "카드 외래키",
+    "confidence": "HIGH",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": [],
+    "surface_candidates": []
+  },
+  "CARD_DB.CARD_APRV_HIST.APRV_AMT": {
+    "description": "카드 승인(거래) 금액",
+    "surface_candidates": [
+      "거래금액",
+      "승인금액"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "measure"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": []
+  },
+  "CARD_DB.CARD_APRV_HIST.RPY_MTHD_CD": {
+    "description": "카드 대금 상환 방식",
+    "surface_candidates": [
+      "상환방식"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "codedict": {
+      "1": "일시불",
+      "2": "할부",
+      "3": "리볼빙"
+    },
+    "format": null,
+    "risk_flags": []
+  },
+  "CARD_DB.CARD_APRV_HIST.APRV_DT": {
+    "description": "카드 거래 승인 날짜",
+    "surface_candidates": [
+      "거래일",
+      "승인일"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "codedict": null,
+    "format": "YYYY-MM-DD",
+    "risk_flags": []
+  },
+  "CARD_DB.CARD_APRV_HIST.CREATED_AT": {
+    "description": "생성 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "CARD_DB.CARD_APRV_HIST.UPDATED_AT": {
+    "description": "수정 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "CARD_DB.CARD_APRV_HIST.UPDATED_BY": {
+    "description": "수정자 ID",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "CUST_DB.CUST_BASE_INFO.CUST_NO": {
+    "description": "고객을 식별하는 고유 번호",
+    "surface_candidates": [
+      "고객번호"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": []
+  },
+  "CUST_DB.CUST_BASE_INFO.CUST_NM": {
+    "description": "고객 이름(개인정보, 자유 텍스트)",
+    "surface_candidates": [
+      "고객명",
+      "이름"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": []
+  },
+  "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD": {
+    "description": "고객 관계 등급 코드",
+    "surface_candidates": [
+      "고객등급",
+      "등급"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "codedict": {
+      "1": "VIP",
+      "2": "우수",
+      "3": "일반"
+    },
+    "format": null,
+    "risk_flags": []
+  },
+  "CUST_DB.CUST_BASE_INFO.BIRTH_DT": {
+    "description": "고객 생년월일(개인정보). 형식이 YYYYMMDD로 다른 날짜 컬럼과 다름",
+    "surface_candidates": [
+      "생년월일"
+    ],
+    "risk_flags": [
+      "format_trap"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "codedict": null,
+    "format": "YYYYMMDD"
+  },
+  "CUST_DB.CUST_BASE_INFO.GENDER_CD": {
+    "description": "고객 성별 코드",
+    "surface_candidates": [
+      "성별"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "codedict": {
+      "M": "남",
+      "F": "여"
+    },
+    "format": null,
+    "risk_flags": []
+  },
+  "CUST_DB.CUST_BASE_INFO.REG_DT": {
+    "description": "고객 등록 날짜",
+    "surface_candidates": [
+      "등록일",
+      "가입일"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "codedict": null,
+    "format": "YYYY-MM-DD",
+    "risk_flags": []
+  },
+  "CUST_DB.CUST_BASE_INFO.MYDATA_CNSNT_YN": {
+    "description": "마이데이터 제공 동의 여부(신규 규제 항목)",
+    "surface_candidates": [
+      "마이데이터동의"
+    ],
+    "confidence": "MEDIUM",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "codedict": {
+      "Y": "동의",
+      "N": "미동의"
+    },
+    "format": null,
+    "risk_flags": []
+  },
+  "CUST_DB.CUST_BASE_INFO.CREATED_AT": {
+    "description": "생성 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "CUST_DB.CUST_BASE_INFO.UPDATED_AT": {
+    "description": "수정 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "CUST_DB.CUST_BASE_INFO.UPDATED_BY": {
+    "description": "수정자 ID",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "CUST_DB.CUST_CNSNT_INFO.CNSNT_SEQ": {
+    "description": "동의 이력 식별자",
+    "confidence": "HIGH",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": [],
+    "surface_candidates": []
+  },
+  "CUST_DB.CUST_CNSNT_INFO.CUST_NO": {
+    "description": "고객 외래키",
+    "confidence": "HIGH",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": [],
+    "surface_candidates": []
+  },
+  "CUST_DB.CUST_CNSNT_INFO.CNSNT_ITEM_CD": {
+    "description": "동의 항목 코드. 코드 일부만 확인됨(01 마케팅, 02 제3자제공), 나머지 미상",
+    "surface_candidates": [
+      "동의항목"
+    ],
+    "risk_flags": [
+      "code_value_weak"
+    ],
+    "confidence": "MEDIUM",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "codedict": {
+      "01": "마케팅",
+      "02": "제3자제공"
+    },
+    "format": null
+  },
+  "CUST_DB.CUST_CNSNT_INFO.CNSNT_YN": {
+    "description": "동의 여부",
+    "surface_candidates": [
+      "동의여부"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "codedict": {
+      "Y": "동의",
+      "N": "미동의"
+    },
+    "format": null,
+    "risk_flags": []
+  },
+  "CUST_DB.CUST_CNSNT_INFO.CNSNT_DT": {
+    "description": "동의 날짜",
+    "surface_candidates": [
+      "동의일"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "codedict": null,
+    "format": "YYYY-MM-DD",
+    "risk_flags": []
+  },
+  "CUST_DB.CUST_CNSNT_INFO.CREATED_AT": {
+    "description": "생성 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "CUST_DB.CUST_CNSNT_INFO.UPDATED_AT": {
+    "description": "수정 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "CUST_DB.CUST_CNSNT_INFO.UPDATED_BY": {
+    "description": "수정자 ID",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "CUST_DB.CUST_CNTC_HIST.CNTC_SEQ": {
+    "description": "접촉 이력 식별자",
+    "confidence": "HIGH",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": [],
+    "surface_candidates": []
+  },
+  "CUST_DB.CUST_CNTC_HIST.CUST_NO": {
+    "description": "고객 외래키",
+    "confidence": "HIGH",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": [],
+    "surface_candidates": []
+  },
+  "CUST_DB.CUST_CNTC_HIST.CNTC_TYPE_CD": {
+    "description": "고객 접촉 유형 코드. 코드 라벨을 어디서도 찾지 못함",
+    "codedict": null,
+    "surface_candidates": [
+      "접촉유형"
+    ],
+    "risk_flags": [
+      "code_value_weak"
+    ],
+    "confidence": "LOW",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "format": null
+  },
+  "CUST_DB.CUST_CNTC_HIST.CNTC_DT": {
+    "description": "접촉 날짜",
+    "surface_candidates": [
+      "접촉일"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "codedict": null,
+    "format": "YYYY-MM-DD",
+    "risk_flags": []
+  },
+  "CUST_DB.CUST_CNTC_HIST.CREATED_AT": {
+    "description": "생성 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "CUST_DB.CUST_CNTC_HIST.UPDATED_AT": {
+    "description": "수정 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "CUST_DB.CUST_CNTC_HIST.UPDATED_BY": {
+    "description": "수정자 ID",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "RISK_DB.CRDT_EVAL_HIST.EVAL_ID": {
+    "description": "신용평가 건을 식별하는 번호",
+    "surface_candidates": [
+      "신용평가"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": []
+  },
+  "RISK_DB.CRDT_EVAL_HIST.CUST_NO": {
+    "description": "고객 외래키",
+    "confidence": "HIGH",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": [],
+    "surface_candidates": []
+  },
+  "RISK_DB.CRDT_EVAL_HIST.CRDT_SCR": {
+    "description": "신용을 점수화한 값(0~1000)",
+    "surface_candidates": [
+      "신용점수",
+      "점수"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "measure"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": []
+  },
+  "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD": {
+    "description": "신용을 등급으로 구간화한 값(1~10등급)",
+    "surface_candidates": [
+      "신용등급",
+      "등급"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "codedict": {
+      "01": "1등급",
+      "02": "2등급",
+      "03": "3등급",
+      "04": "4등급",
+      "05": "5등급",
+      "06": "6등급",
+      "07": "7등급",
+      "08": "8등급",
+      "09": "9등급",
+      "10": "10등급"
+    },
+    "format": null,
+    "risk_flags": []
+  },
+  "RISK_DB.CRDT_EVAL_HIST.EVAL_DT": {
+    "description": "신용평가가 수행된 날짜",
+    "surface_candidates": [
+      "평가일"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "codedict": null,
+    "format": "YYYY-MM-DD",
+    "risk_flags": []
+  },
+  "RISK_DB.CRDT_EVAL_HIST.CREATED_AT": {
+    "description": "생성 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "RISK_DB.CRDT_EVAL_HIST.UPDATED_AT": {
+    "description": "수정 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "RISK_DB.CRDT_EVAL_HIST.UPDATED_BY": {
+    "description": "수정자 ID",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "RISK_DB.RISK_LMT_MST.LMT_SEQ": {
+    "description": "여신한도 이력 식별자",
+    "confidence": "HIGH",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": [],
+    "surface_candidates": []
+  },
+  "RISK_DB.RISK_LMT_MST.CUST_NO": {
+    "description": "고객 외래키",
+    "confidence": "HIGH",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": [],
+    "surface_candidates": []
+  },
+  "RISK_DB.RISK_LMT_MST.CRDT_LMT_AMT": {
+    "description": "고객에게 부여된 여신(대출) 한도 금액",
+    "surface_candidates": [
+      "여신한도",
+      "한도"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "measure"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": []
+  },
+  "RISK_DB.RISK_LMT_MST.LMT_GRD_CD": {
+    "description": "여신한도 산정 등급",
+    "surface_candidates": [
+      "한도등급",
+      "등급"
+    ],
+    "confidence": "MEDIUM",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "codedict": {
+      "1": "A",
+      "2": "B",
+      "3": "C",
+      "4": "D",
+      "5": "E"
+    },
+    "format": null,
+    "risk_flags": []
+  },
+  "RISK_DB.RISK_LMT_MST.LMT_DT": {
+    "description": "여신한도 산정 날짜",
+    "surface_candidates": [
+      "한도산정일"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "codedict": null,
+    "format": "YYYY-MM-DD",
+    "risk_flags": []
+  },
+  "RISK_DB.RISK_LMT_MST.CREATED_AT": {
+    "description": "생성 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "RISK_DB.RISK_LMT_MST.UPDATED_AT": {
+    "description": "수정 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "RISK_DB.RISK_LMT_MST.UPDATED_BY": {
+    "description": "수정자 ID",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "RISK_DB.FRAUD_DTCT_HIST.DTCT_SEQ": {
+    "description": "이상거래 탐지 식별자",
+    "confidence": "HIGH",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": [],
+    "surface_candidates": []
+  },
+  "RISK_DB.FRAUD_DTCT_HIST.CUST_NO": {
+    "description": "고객 외래키",
+    "confidence": "HIGH",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": [],
+    "surface_candidates": []
+  },
+  "RISK_DB.FRAUD_DTCT_HIST.DTCT_TYPE_CD": {
+    "description": "이상거래 유형 코드",
+    "surface_candidates": [
+      "이상거래유형",
+      "이상거래"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "codedict": {
+      "01": "이상거래",
+      "02": "도용",
+      "03": "보이스피싱"
+    },
+    "format": null,
+    "risk_flags": []
+  },
+  "RISK_DB.FRAUD_DTCT_HIST.DTCT_AMT": {
+    "description": "이상거래로 탐지된 금액",
+    "surface_candidates": [
+      "이상거래금액"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "measure"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": []
+  },
+  "RISK_DB.FRAUD_DTCT_HIST.DTCT_DT": {
+    "description": "이상거래 탐지 날짜",
+    "surface_candidates": [
+      "탐지일"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "codedict": null,
+    "format": "YYYY-MM-DD",
+    "risk_flags": []
+  },
+  "RISK_DB.FRAUD_DTCT_HIST.CREATED_AT": {
+    "description": "생성 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "RISK_DB.FRAUD_DTCT_HIST.UPDATED_AT": {
+    "description": "수정 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "RISK_DB.FRAUD_DTCT_HIST.UPDATED_BY": {
+    "description": "수정자 ID",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "DEP_DB.DEP_ACCT_MST.DEP_NO": {
+    "description": "예금 계좌를 식별하는 번호",
+    "confidence": "HIGH",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": [],
+    "surface_candidates": []
+  },
+  "DEP_DB.DEP_ACCT_MST.CUST_NO": {
+    "description": "고객 외래키",
+    "confidence": "HIGH",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": [],
+    "surface_candidates": []
+  },
+  "DEP_DB.DEP_ACCT_MST.DEP_BAL_AMT": {
+    "description": "예금 계좌의 현재 잔액",
+    "surface_candidates": [
+      "예금잔액",
+      "잔액"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "measure"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": []
+  },
+  "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD": {
+    "description": "예금 계좌 상태 코드",
+    "surface_candidates": [
+      "예금상태",
+      "상태"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "codedict": {
+      "01": "정상",
+      "02": "해지",
+      "03": "만기"
+    },
+    "format": null,
+    "risk_flags": []
+  },
+  "DEP_DB.DEP_ACCT_MST.MTRT_DT": {
+    "description": "예금 만기 날짜",
+    "surface_candidates": [
+      "만기",
+      "만기일"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "codedict": null,
+    "format": "YYYY-MM-DD",
+    "risk_flags": []
+  },
+  "DEP_DB.DEP_ACCT_MST.DEP_DT": {
+    "description": "예금 가입 날짜",
+    "surface_candidates": [
+      "가입일"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "codedict": null,
+    "format": "YYYY-MM-DD",
+    "risk_flags": []
+  },
+  "DEP_DB.DEP_ACCT_MST.CREATED_AT": {
+    "description": "생성 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "DEP_DB.DEP_ACCT_MST.UPDATED_AT": {
+    "description": "수정 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "DEP_DB.DEP_ACCT_MST.UPDATED_BY": {
+    "description": "수정자 ID",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "COMMON_DB.INTG_DLNQ_SUMM.SUMM_SEQ": {
+    "description": "통합 연체 요약 행 식별자",
+    "confidence": "HIGH",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": [],
+    "surface_candidates": []
+  },
+  "COMMON_DB.INTG_DLNQ_SUMM.ACCT_TYPE_CD": {
+    "description": "행이 대출인지 카드인지 구분하는 코드",
+    "surface_candidates": [
+      "계좌유형"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "codedict": {
+      "L": "대출",
+      "C": "카드"
+    },
+    "format": null,
+    "risk_flags": []
+  },
+  "COMMON_DB.INTG_DLNQ_SUMM.ACCT_NO": {
+    "description": "대출 또는 카드 계좌 번호(유형에 따라 다른 마스터 참조)",
+    "confidence": "MEDIUM",
+    "type_candidate": [
+      "entity"
+    ],
+    "codedict": null,
+    "format": null,
+    "risk_flags": [],
+    "surface_candidates": []
+  },
+  "COMMON_DB.INTG_DLNQ_SUMM.DLNQ_FLG": {
+    "description": "연체 여부. 이 표는 대출·카드가 섞여 있어 ACCT_TYPE_CD를 봐야 어느 연체인지 정해짐",
+    "surface_candidates": [
+      "연체",
+      "연체여부"
+    ],
+    "risk_flags": [
+      "near_confusion"
+    ],
+    "confidence": "MEDIUM",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "codedict": {
+      "Y": "연체",
+      "N": "정상"
+    },
+    "format": null
+  },
+  "COMMON_DB.INTG_DLNQ_SUMM.DLNQ_AMT": {
+    "description": "연체 금액. 대출·카드 혼합이라 어느 연체의 속성인지 행마다 다름",
+    "surface_candidates": [
+      "연체금액"
+    ],
+    "risk_flags": [
+      "near_confusion"
+    ],
+    "confidence": "MEDIUM",
+    "type_candidate": [
+      "measure"
+    ],
+    "codedict": null,
+    "format": null
+  },
+  "COMMON_DB.INTG_DLNQ_SUMM.SUMM_YM": {
+    "description": "요약 기준 연월. 형식이 YYYYMM으로 다른 날짜 컬럼과 다름",
+    "surface_candidates": [
+      "기준월",
+      "요약월"
+    ],
+    "risk_flags": [
+      "format_trap"
+    ],
+    "confidence": "HIGH",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "codedict": null,
+    "format": "YYYYMM"
+  },
+  "COMMON_DB.INTG_DLNQ_SUMM.CREATED_AT": {
+    "description": "생성 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "COMMON_DB.INTG_DLNQ_SUMM.UPDATED_AT": {
+    "description": "수정 시각",
+    "type_candidate": [
+      "dimension_time"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  },
+  "COMMON_DB.INTG_DLNQ_SUMM.UPDATED_BY": {
+    "description": "수정자 ID",
+    "type_candidate": [
+      "dimension_categorical"
+    ],
+    "risk_flags": [],
+    "surface_candidates": [],
+    "confidence": "HIGH",
+    "codedict": null,
+    "format": null
+  }
+}
