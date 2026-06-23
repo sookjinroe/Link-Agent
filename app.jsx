@@ -55,9 +55,33 @@ function Badge({ color, children, onClick }) {
 }
 function HoverRow({ active, onClick, children, style }) {
   const [h, setH] = useState(false);
+  const ref = useRef(null);
+  useEffect(() => { if (active && ref.current && ref.current.scrollIntoView) ref.current.scrollIntoView({ block: "nearest" }); }, [active]);
   const bg = active ? "rgba(255,255,255,0.07)" : (h ? "rgba(255,255,255,0.035)" : "transparent");
-  return <div onClick={onClick} onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
+  return <div ref={ref} onClick={onClick} onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
     style={{ ...style, background: bg, transition: "background .12s", cursor: "pointer" }}>{children}</div>;
+}
+
+// 목록형 뷰의 ↑↓ 방향키 탐색. orderedIds 순서로 현재 sel을 ±1 이동시켜 onPick 호출.
+// 전역 검색 input(data-search="global")에 포커스가 있을 때는 무시한다.
+function useListNav(orderedIds, sel, onPick, active) {
+  const key = orderedIds.join("|");
+  useEffect(() => {
+    if (active === false) return;
+    function onKey(e) {
+      if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
+      if (e.target && e.target.dataset && e.target.dataset.search === "global") return;
+      if (!orderedIds.length) return;
+      e.preventDefault();
+      const i = orderedIds.indexOf(sel);
+      let ni;
+      if (i < 0) ni = 0;
+      else ni = e.key === "ArrowDown" ? Math.min(orderedIds.length - 1, i + 1) : Math.max(0, i - 1);
+      if (orderedIds[ni] && orderedIds[ni] !== sel) onPick(orderedIds[ni]);
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [key, sel, active]);
 }
 function Bar({ value, max, color, w }) {
   const pct = max > 0 ? Math.max(2, Math.round((value / max) * 100)) : 0;
@@ -89,7 +113,7 @@ function SearchBox({ G, nav }) {
   }
   return (
     <div style={{ position: "relative" }}>
-      <input value={q} placeholder="컬럼·개념·충돌 검색" onChange={(e) => { setQ(e.target.value); setOpen(true); }}
+      <input value={q} placeholder="컬럼·개념·충돌 검색" data-search="global" onChange={(e) => { setQ(e.target.value); setOpen(true); }}
         onKeyDown={(e) => { if (e.key === "Enter" && results.length) go(results[0]); if (e.key === "Escape") setOpen(false); }}
         style={{ ...mono, fontSize: 14, width: 240, background: "rgba(0,0,0,0.3)", color: "var(--text)",
           border: "1px solid var(--border)", borderRadius: 4, padding: "5px 10px" }} />
@@ -200,6 +224,7 @@ function SchemaView({ G, route, nav }) {
   const byDom = {};
   tables.forEach((tk) => { const d = tableDomain(tk); (byDom[d] = byDom[d] || []).push(tk); });
   const sel = route.sel && G.schema[route.sel] ? route.sel : tables[0];
+  useListNav(Object.values(byDom).flat(), sel, (tk) => nav("schema", tk), true);
 
   const left = Object.entries(byDom).map(([d, tks]) => (
     <div key={d} style={{ marginBottom: 12 }}>
@@ -251,6 +276,7 @@ function ColumnList({ G, sel, onPick, filter }) {
   let cols = Object.keys(G.golden.per_column);
   if (filter) cols = cols.filter(filter);
   if (q) cols = cols.filter((id) => (id + (L.wt(id, G).concept || "")).toLowerCase().includes(q.toLowerCase()));
+  useListNav(cols, sel, onPick, true);
   // 테이블별 그룹
   const byTable = {};
   cols.forEach((id) => { const t = tableName(id); (byTable[t] = byTable[t] || []).push(id); });
@@ -496,6 +522,10 @@ function ConceptView({ G, route, nav }) {
   // 좌: 상위(포함 가진) 개념 먼저, 나머지
   const withChildren = roots.filter((c) => children[c]);
   const flat = roots.filter((c) => !children[c]);
+  const navOrder = [];
+  withChildren.forEach((cid) => { navOrder.push(cid); (children[cid] || []).forEach((ch) => navOrder.push(ch)); });
+  flat.forEach((cid) => navOrder.push(cid));
+  useListNav(navOrder, sel, (cid) => nav("concept", cid), true);
   const left = (
     <div>
       <Section title="포함 관계 있는 개념">
