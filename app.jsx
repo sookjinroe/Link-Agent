@@ -138,7 +138,7 @@ function ColExpand({ id, G }) {
   return (
     <div style={{ border: "1px solid var(--border)", borderLeft: "3px solid var(--accent)", borderRadius: 7, padding: "13px 17px", margin: "4px 0 12px" }}>
       <div style={{ ...mono, fontSize: 15, color: "var(--text)", marginBottom: 10 }}>{colName(id)}</div>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 16, alignItems: "start" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16, alignItems: "start" }}>
         <div style={{ ...mono, fontSize: 12.5, lineHeight: 1.4 }}>
           <div style={{ ...mono, fontSize: 11.5, color: "var(--muted)", marginBottom: 6 }}>RENDER</div>
           <GRow k="설명" has={!!r.description}><span style={{ fontFamily: "var(--sans)", color: "var(--text)", lineHeight: 1.6 }}>{r.description}</span></GRow>
@@ -173,8 +173,11 @@ function TableView({ G, route, nav }) {
   const tables = Object.values(byDom).flat();
   const sel = route.sel && G.schema[route.sel] ? route.sel : tables[0];
   useListNav(tables, sel, (tk) => nav("table", tk), true);
-  const [openCol, setOpenCol] = useState(route.hl || null);
-  useEffect(() => { setOpenCol(route.hl || null); }, [sel, route.hl]);
+  const firstId = () => sel + "." + G.schema[sel].columns[0].name;
+  const [openCol, setOpenCol] = useState(route.hl || firstId());
+  useEffect(() => { setOpenCol(route.hl || firstId()); }, [sel, route.hl]);
+  const [wide, setWide] = useState(typeof window !== "undefined" ? window.innerWidth >= 1180 : true);
+  useEffect(() => { const h = () => setWide(window.innerWidth >= 1180); window.addEventListener("resize", h); return () => window.removeEventListener("resize", h); }, []);
 
   const left = Object.entries(byDom).map(([d, tks]) => (
     <div key={d} style={{ marginBottom: 12 }}>
@@ -215,7 +218,7 @@ function TableView({ G, route, nav }) {
             const open = openCol === id;
             return (
               <React.Fragment key={c.name}>
-                <tr onClick={() => setOpenCol(open ? null : id)} style={{ cursor: "pointer", background: open ? "rgba(232,179,65,0.08)" : "transparent", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
+                <tr onClick={() => setOpenCol(id)} style={{ cursor: "pointer", background: open ? "rgba(232,179,65,0.08)" : "transparent", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
                   <td style={{ padding: "5px 10px 5px 0", color: "var(--text)", whiteSpace: "nowrap" }}>
                     {c.name}
                     {(r.risk_flags || []).map((f) => <Badge key={f} color={RISK_COLOR[f]}>{RISK_LABEL[f] || f}</Badge>)}
@@ -228,7 +231,6 @@ function TableView({ G, route, nav }) {
                   <td style={{ padding: "5px 10px 5px 0", color: "var(--lin)", whiteSpace: "nowrap" }}>{surf.join(", ") || "-"}</td>
                   <td style={{ padding: "5px 10px 5px 0", color: "var(--muted)", fontFamily: "var(--sans)", fontSize: 14 }}>{r.description || "-"}</td>
                 </tr>
-                {open && <tr><td colSpan={5} style={{ padding: 0 }}><ColExpand id={id} G={G} /></td></tr>}
               </React.Fragment>);
           })}</tbody>
         </table>
@@ -254,7 +256,17 @@ function TableView({ G, route, nav }) {
             </div>))}
         </Section>}
     </div>);
-  return <TwoPane left={left} right={right} />;
+  return (
+    <div style={{ display: "grid", gridTemplateColumns: wide ? "260px minmax(0,1fr) 380px" : "260px minmax(0,1fr)", minHeight: "calc(100vh - 92px)" }}>
+      <div style={{ borderRight: "1px solid var(--border)", padding: 14, overflowY: "auto", maxHeight: "calc(100vh - 92px)" }}>{left}</div>
+      <div style={{ padding: "18px 22px", overflowY: "auto", maxHeight: "calc(100vh - 92px)" }}>
+        {right}
+        {!wide && openCol && <div style={{ marginTop: 16 }}><ColExpand id={openCol} G={G} /></div>}
+      </div>
+      {wide && <div style={{ borderLeft: "1px solid var(--border)", padding: "18px", overflowY: "auto", maxHeight: "calc(100vh - 92px)" }}>
+        {openCol ? <ColExpand id={openCol} G={G} /> : <div style={{ color: "var(--dim)" }}>컬럼을 선택하세요</div>}
+      </div>}
+    </div>);
 }
 
 // ── ⑤ 표면형 겹침 관찰 ────────────────────────────────
