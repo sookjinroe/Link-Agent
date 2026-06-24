@@ -147,7 +147,7 @@ function ColExpand({ id, G }) {
           <GRow k="빈도">{!p || p.analytic_freq === 0 ? <span style={{ color: "var(--low)" }}>0 — 신호 없음</span> : <span style={{ fontSize: 15, color: "var(--text)" }}>{p.analytic_freq}</span>}</GRow>
           {p && <GRow k="역할">
             <table style={{ ...mono, fontSize: 12 }}><tbody>
-              {Object.entries(p.usage_roles || {}).map(([k, v]) => <tr key={k}><td style={{ color: "var(--muted)", padding: "1px 8px 1px 0", width: 50 }}>{k}</td><td style={{ padding: "1px 6px 1px 0" }}><Bar value={v} max={roleMax} w={64} /></td><td style={{ color: "var(--text)" }}>{v}</td></tr>)}
+              {Object.entries(p.usage_roles || {}).map(([k, v]) => <tr key={k}><td style={{ color: "var(--muted)", padding: "1px 8px 1px 0", width: 62, whiteSpace: "nowrap" }}>{k}</td><td style={{ padding: "1px 6px 1px 0" }}><Bar value={v} max={roleMax} w={64} /></td><td style={{ color: "var(--text)" }}>{v}</td></tr>)}
             </tbody></table></GRow>}
           {p && <GRow k="리터럴" has={(p.where_literals || []).length > 0}>{(p.where_literals || []).map((x) => <Chip key={x} color="var(--accent)">{x}</Chip>)}</GRow>}
           {p && <GRow k="별칭" has={(p.aliases || []).length > 0}>{(p.aliases || []).map((x) => <Chip key={x}>{x}</Chip>)}</GRow>}
@@ -304,7 +304,7 @@ function TableView({ G, route, nav }) {
         </Section>}
     </div>);
   return (
-    <div style={{ display: "grid", gridTemplateColumns: wide ? "260px minmax(0,1fr) 380px" : "260px minmax(0,1fr)", minHeight: "calc(100vh - 92px)" }}>
+    <div style={{ display: "grid", gridTemplateColumns: wide ? "260px minmax(0,1fr) 440px" : "260px minmax(0,1fr)", minHeight: "calc(100vh - 92px)" }}>
       <div style={{ borderRight: "1px solid var(--border)", padding: 14, overflowY: "auto", maxHeight: "calc(100vh - 92px)" }}>{left}</div>
       <div style={{ padding: "18px 22px", overflowY: "auto", maxHeight: "calc(100vh - 92px)" }}>
         {right}
