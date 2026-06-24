@@ -435,26 +435,20 @@ function ColumnDetail({ id, G, sim, nav }) {
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 14, marginTop: 18, alignItems: "start" }}>
         <Panel title="Render 산출">
-          <div style={{ fontSize: 14, color: "var(--text)", lineHeight: 1.65, marginBottom: 12 }}>{r.description || "-"}</div>
-          <div style={{ marginBottom: 9 }}>{lbl("type_candidate")}
-            {(r.type_candidate || []).map((t) => <Chip key={t} color="var(--sig)">{STD_LABEL[t] || t}</Chip>)}
-            {(r.type_candidate || []).length > 1 && <span style={{ fontSize: 12, color: "var(--med)" }}>다용도</span>}</div>
-          {(r.risk_flags || []).length > 0 &&
-            <div style={{ marginBottom: 9 }}>{lbl("risk_flags")}
-              {r.risk_flags.map((f) => <Chip key={f} color={RISK_COLOR[f]}>{RISK_LABEL[f] || f}</Chip>)}</div>}
-          <div style={{ marginBottom: 9 }}>{lbl("surface_candidates")}
-            {(r.surface_candidates || []).length ? r.surface_candidates.map((s) => <Chip key={s}>{s}</Chip>)
-              : <span style={{ color: "var(--dim)" }}>-</span>}</div>
-          <div style={{ ...mono, fontSize: 12.5, color: "var(--muted)", marginBottom: 9 }}>
-            format <span style={{ color: "var(--lin)" }}>{r.format || "-"}</span>
-            <span style={{ marginLeft: 14 }}>conf <span style={{ color: "var(--text)" }}>{r.confidence || "-"}</span></span></div>
-          {r.codedict &&
-            <div>{lbl("codedict")}
-              <table style={{ ...mono, fontSize: 12.5 }}><tbody>
-                {Object.entries(r.codedict).map(([k, v]) =>
-                  <tr key={k}><td style={{ color: "var(--accent)", padding: "1px 12px 1px 0" }}>{k}</td>
-                    <td style={{ color: "var(--text)" }}>{v}</td></tr>)}
-              </tbody></table></div>}
+          <div style={{ ...mono, fontSize: 12.5, lineHeight: 1.4 }}>
+            <GRow k="설명" has={!!r.description}><span style={{ fontFamily: "var(--sans)", color: "var(--text)", lineHeight: 1.6 }}>{r.description}</span></GRow>
+            <GRow k="타입" has={(r.type_candidate || []).length > 0}>
+              {(r.type_candidate || []).map((t) => <Chip key={t} color="var(--sig)">{STD_LABEL[t] || t}</Chip>)}
+              {(r.type_candidate || []).length > 1 && <span style={{ fontSize: 11.5, color: "var(--med)" }}>다용도</span>}</GRow>
+            <GRow k="위험" has={(r.risk_flags || []).length > 0}>
+              {(r.risk_flags || []).map((f) => <Chip key={f} color={RISK_COLOR[f]}>{RISK_LABEL[f] || f}</Chip>)}</GRow>
+            <GRow k="표면형" has={(r.surface_candidates || []).length > 0}>
+              {(r.surface_candidates || []).map((s) => <Chip key={s}>{s}</Chip>)}</GRow>
+            <GRow k="형식" has={!!r.format}><span style={{ color: "var(--lin)" }}>{r.format}</span></GRow>
+            <GRow k="신뢰도" has={!!r.confidence}><span style={{ color: "var(--text)" }}>{r.confidence}</span></GRow>
+            <GRow k="코드값" has={!!r.codedict}>
+              {r.codedict && <span style={{ color: "var(--text)" }}>{Object.entries(r.codedict).map(([k, v]) => k + "=" + v).join(" · ")}</span>}</GRow>
+          </div>
         </Panel>
 
         <Panel title="P-SQL 신호">
@@ -493,7 +487,7 @@ function ColumnDetail({ id, G, sim, nav }) {
             <GRow k="verdict"><Badge color={VERDICT_COLOR[g.verdict]}>{VERDICT_LABEL[g.verdict] || g.verdict}</Badge></GRow>
             <GRow k="우선순위"><Badge color={TIER_COLOR[g.priority_tier]}>{TIER_LABEL[g.priority_tier] || g.priority_tier}</Badge></GRow>
             <GRow k="게이팅사유" has={!!g.gate_reason}><span style={{ color: "var(--text)" }}>{g.gate_reason}</span></GRow>
-            <GRow k="개념" has={!!g.concept_id}><span style={{ color: "var(--accent)", cursor: "pointer" }} onClick={() => nav("concept", g.concept_id)}>{g.concept_id}</span></GRow>
+            <GRow k={g.verdict === "absorb" ? "흡수대상" : "개념"} has={!!g.concept_id}><span style={{ color: "var(--accent)", cursor: "pointer" }} onClick={() => nav("concept", g.concept_id)}>{g.concept_id}</span></GRow>
             <GRow k="역할" has={!!g.role}><span style={{ color: "var(--text)" }}>{ROLE_LABEL[g.role] || g.role}</span></GRow>
             <GRow k="표면형" has={!!g.surface}><span style={{ color: "var(--text)" }}>{g.surface}</span></GRow>
             <GRow k="충돌그룹" has={!!g.collision_group}><span style={{ color: "var(--low)", cursor: "pointer" }} onClick={() => nav("collision", g.collision_group)}>{g.collision_group}</span></GRow>
