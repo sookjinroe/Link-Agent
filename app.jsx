@@ -269,16 +269,13 @@ function SchemaView({ G, route, nav }) {
   return <TwoPane left={left} right={right} />;
 }
 
-// ===================== 접이식 =====================
-function Collapsible({ title, defaultOpen, children }) {
-  const [o, setO] = useState(defaultOpen !== false);
+// ===================== 패널 =====================
+function Panel({ title, children }) {
   return (
-    <div style={{ marginTop: 18 }}>
-      <div onClick={() => setO(!o)} style={{ ...mono, fontSize: 13, letterSpacing: "0.05em", color: "var(--muted)",
-        cursor: "pointer", userSelect: "none", marginBottom: o ? 9 : 0 }}>
-        <span style={{ display: "inline-block", width: 15, color: "var(--dim)" }}>{o ? "▾" : "▸"}</span>{title}
-      </div>
-      {o && children}
+    <div style={{ border: "1px solid var(--border)", borderRadius: 7, padding: "12px 14px" }}>
+      <div style={{ ...mono, fontSize: 12.5, letterSpacing: "0.05em", color: "var(--muted)",
+        marginBottom: 10, paddingBottom: 7, borderBottom: "1px solid var(--border)" }}>{title}</div>
+      {children}
     </div>);
 }
 
@@ -415,10 +412,11 @@ function ColumnDetail({ id, G, sim, nav }) {
   const r = L.rend(id, G), w = L.wt(id, G), p = L.psqlOf(id, G), g = L.gold(id, G);
   const roleMax = p ? Math.max(1, ...Object.values(p.usage_roles || {})) : 1;
   const joinPairs = (G.psql.join_pairs || []).filter((x) => x.a === id || x.b === id);
-  const cooc = (G.psql.cooccur || []).filter((x) => x.a === id || x.b === id).sort((a, b) => b.cooccur_freq - a.cooccur_freq).slice(0, 8);
+  const cooc = (G.psql.cooccur || []).filter((x) => x.a === id || x.b === id).sort((a, b) => b.cooccur_freq - a.cooccur_freq).slice(0, 6);
+  const lbl = (t) => <div style={{ ...mono, fontSize: 11.5, color: "var(--dim)", marginBottom: 3 }}>{t}</div>;
 
   return (
-    <div style={{ maxWidth: 840 }}>
+    <div style={{ maxWidth: 1180 }}>
       <div style={{ ...mono, fontSize: 19, color: "var(--text)" }}>{colName(id)}
         <Badge color={dc(w.domain)}>{w.domain}</Badge>
         {w.concept && <span style={{ fontSize: 14, color: "var(--muted)", marginLeft: 10, fontFamily: "var(--sans)" }}>{w.concept}</span>}</div>
@@ -426,81 +424,73 @@ function ColumnDetail({ id, G, sim, nav }) {
 
       <ScoreBreakdown id={id} G={G} sim={sim} />
 
-      <Collapsible title="Render 산출" defaultOpen={true}>
-        <div style={{ fontSize: 14.5, color: "var(--text)", lineHeight: 1.7, marginBottom: 12 }}>{r.description || "-"}</div>
-        <div style={{ marginBottom: 8 }}>
-          <span style={{ ...mono, fontSize: 12.5, color: "var(--muted)", marginRight: 8 }}>type_candidate</span>
-          {(r.type_candidate || []).map((t) => <Chip key={t} color="var(--sig)">{STD_LABEL[t] || t}</Chip>)}
-          {(r.type_candidate || []).length > 1 && <span style={{ fontSize: 12.5, color: "var(--med)" }}>다용도</span>}
-        </div>
-        {(r.risk_flags || []).length > 0 &&
-          <div style={{ marginBottom: 8 }}>
-            <span style={{ ...mono, fontSize: 12.5, color: "var(--muted)", marginRight: 8 }}>risk_flags</span>
-            {r.risk_flags.map((f) => <Chip key={f} color={RISK_COLOR[f]}>{RISK_LABEL[f] || f}</Chip>)}</div>}
-        <div style={{ marginBottom: 8 }}>
-          <span style={{ ...mono, fontSize: 12.5, color: "var(--muted)", marginRight: 8 }}>surface_candidates</span>
-          {(r.surface_candidates || []).length ? r.surface_candidates.map((s) => <Chip key={s}>{s}</Chip>)
-            : <span style={{ color: "var(--dim)" }}>-</span>}</div>
-        <div style={{ ...mono, fontSize: 13, color: "var(--muted)", marginBottom: 8 }}>
-          format <span style={{ color: "var(--lin)" }}>{r.format || "-"}</span>
-          <span style={{ marginLeft: 16 }}>confidence <span style={{ color: "var(--text)" }}>{r.confidence || "-"}</span></span></div>
-        {r.codedict &&
-          <table style={{ ...mono, fontSize: 13, marginTop: 4 }}><tbody>
-            {Object.entries(r.codedict).map(([k, v]) =>
-              <tr key={k}><td style={{ color: "var(--accent)", padding: "2px 14px 2px 0" }}>{k}</td>
-                <td style={{ color: "var(--text)" }}>{v}</td></tr>)}
-          </tbody></table>}
-      </Collapsible>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 14, marginTop: 18, alignItems: "start" }}>
+        <Panel title="Render 산출">
+          <div style={{ fontSize: 14, color: "var(--text)", lineHeight: 1.65, marginBottom: 12 }}>{r.description || "-"}</div>
+          <div style={{ marginBottom: 9 }}>{lbl("type_candidate")}
+            {(r.type_candidate || []).map((t) => <Chip key={t} color="var(--sig)">{STD_LABEL[t] || t}</Chip>)}
+            {(r.type_candidate || []).length > 1 && <span style={{ fontSize: 12, color: "var(--med)" }}>다용도</span>}</div>
+          {(r.risk_flags || []).length > 0 &&
+            <div style={{ marginBottom: 9 }}>{lbl("risk_flags")}
+              {r.risk_flags.map((f) => <Chip key={f} color={RISK_COLOR[f]}>{RISK_LABEL[f] || f}</Chip>)}</div>}
+          <div style={{ marginBottom: 9 }}>{lbl("surface_candidates")}
+            {(r.surface_candidates || []).length ? r.surface_candidates.map((s) => <Chip key={s}>{s}</Chip>)
+              : <span style={{ color: "var(--dim)" }}>-</span>}</div>
+          <div style={{ ...mono, fontSize: 12.5, color: "var(--muted)", marginBottom: 9 }}>
+            format <span style={{ color: "var(--lin)" }}>{r.format || "-"}</span>
+            <span style={{ marginLeft: 14 }}>conf <span style={{ color: "var(--text)" }}>{r.confidence || "-"}</span></span></div>
+          {r.codedict &&
+            <div>{lbl("codedict")}
+              <table style={{ ...mono, fontSize: 12.5 }}><tbody>
+                {Object.entries(r.codedict).map(([k, v]) =>
+                  <tr key={k}><td style={{ color: "var(--accent)", padding: "1px 12px 1px 0" }}>{k}</td>
+                    <td style={{ color: "var(--text)" }}>{v}</td></tr>)}
+              </tbody></table></div>}
+        </Panel>
 
-      <Collapsible title="P-SQL 신호" defaultOpen={true}>
-        {!p ? <div style={{ color: "var(--dim)" }}>P-SQL 산출 없음</div> : (
-          <>
-            <div style={{ marginBottom: 10 }}>
-              <span style={{ ...mono, fontSize: 12.5, color: "var(--muted)", marginRight: 8 }}>분석 빈도</span>
-              {p.analytic_freq === 0
-                ? <span style={{ ...mono, color: "var(--low)" }}>0 — 신호 없음 (부재이지 부정 아님)</span>
-                : <span style={{ ...mono, fontSize: 16, color: "var(--text)" }}>{p.analytic_freq}</span>}
-            </div>
-            <table style={{ ...mono, fontSize: 13, marginBottom: 10 }}><tbody>
-              {Object.entries(p.usage_roles || {}).map(([k, v]) =>
-                <tr key={k}><td style={{ color: "var(--muted)", padding: "2px 14px 2px 0", width: 64 }}>{k}</td>
-                  <td style={{ padding: "2px 10px 2px 0" }}><Bar value={v} max={roleMax} /></td>
-                  <td style={{ color: "var(--text)" }}>{v}</td></tr>)}
-            </tbody></table>
-            <div style={{ marginBottom: 7 }}>
-              <span style={{ ...mono, fontSize: 12.5, color: "var(--muted)", marginRight: 8 }}>where 리터럴</span>
-              {(p.where_literals || []).length ? p.where_literals.map((x) => <Chip key={x} color="var(--accent)">{x}</Chip>)
-                : <span style={{ color: "var(--dim)" }}>-</span>}</div>
-            <div>
-              <span style={{ ...mono, fontSize: 12.5, color: "var(--muted)", marginRight: 8 }}>별칭</span>
-              {(p.aliases || []).length ? p.aliases.map((x) => <Chip key={x}>{x}</Chip>)
-                : <span style={{ color: "var(--dim)" }}>-</span>}</div>
-          </>)}
-        {joinPairs.length > 0 &&
-          <div style={{ marginTop: 10 }}>
-            <span style={{ ...mono, fontSize: 12.5, color: "var(--muted)" }}>조인 쌍</span>
-            {joinPairs.map((x, i) => <div key={i} style={{ ...mono, fontSize: 12.5, color: "var(--muted)", marginTop: 2 }}>
-              {colName(x.a)} ↔ {x.b} <span style={{ color: "var(--dim)" }}>({x.join_freq})</span></div>)}</div>}
-        {cooc.length > 0 &&
-          <div style={{ marginTop: 10 }}>
-            <span style={{ ...mono, fontSize: 12.5, color: "var(--muted)" }}>공동참조</span>
-            {cooc.map((x, i) => { const other = x.a === id ? x.b : x.a;
-              return <div key={i} style={{ ...mono, fontSize: 12.5, color: "var(--muted)", marginTop: 2 }}>
-                {colName(other)} <span style={{ color: "var(--dim)" }}>({x.cooccur_freq})</span>
-                {x.same_concept_hint && <Badge color="var(--high)">동일개념</Badge>}</div>; })}</div>}
-      </Collapsible>
+        <Panel title="P-SQL 신호">
+          {!p ? <div style={{ color: "var(--dim)" }}>산출 없음</div> : (
+            <>
+              <div style={{ marginBottom: 9 }}>{lbl("분석 빈도")}
+                {p.analytic_freq === 0
+                  ? <span style={{ ...mono, fontSize: 13, color: "var(--low)" }}>0 — 신호 없음</span>
+                  : <span style={{ ...mono, fontSize: 16, color: "var(--text)" }}>{p.analytic_freq}</span>}</div>
+              <table style={{ ...mono, fontSize: 12.5, marginBottom: 9 }}><tbody>
+                {Object.entries(p.usage_roles || {}).map(([k, v]) =>
+                  <tr key={k}><td style={{ color: "var(--muted)", padding: "1px 10px 1px 0", width: 56 }}>{k}</td>
+                    <td style={{ padding: "1px 8px 1px 0" }}><Bar value={v} max={roleMax} w={70} /></td>
+                    <td style={{ color: "var(--text)" }}>{v}</td></tr>)}
+              </tbody></table>
+              <div style={{ marginBottom: 8 }}>{lbl("where 리터럴")}
+                {(p.where_literals || []).length ? p.where_literals.map((x) => <Chip key={x} color="var(--accent)">{x}</Chip>)
+                  : <span style={{ color: "var(--dim)" }}>-</span>}</div>
+              <div style={{ marginBottom: 8 }}>{lbl("별칭")}
+                {(p.aliases || []).length ? p.aliases.map((x) => <Chip key={x}>{x}</Chip>)
+                  : <span style={{ color: "var(--dim)" }}>-</span>}</div>
+            </>)}
+          {joinPairs.length > 0 &&
+            <div style={{ marginTop: 8 }}>{lbl("조인 쌍")}
+              {joinPairs.map((x, i) => <div key={i} style={{ ...mono, fontSize: 12, color: "var(--muted)", marginBottom: 2 }}>
+                {colName(x.a)} ↔ {colName(x.b)} <span style={{ color: "var(--dim)" }}>({x.join_freq})</span></div>)}</div>}
+          {cooc.length > 0 &&
+            <div style={{ marginTop: 8 }}>{lbl("공동참조")}
+              {cooc.map((x, i) => { const other = x.a === id ? x.b : x.a;
+                return <div key={i} style={{ ...mono, fontSize: 12, color: "var(--muted)", marginBottom: 2 }}>
+                  {colName(other)} <span style={{ color: "var(--dim)" }}>({x.cooccur_freq})</span></div>; })}</div>}
+        </Panel>
 
-      <Collapsible title="골든 (모으고 가르기)" defaultOpen={false}>
-        <div style={{ ...mono, fontSize: 13, lineHeight: 1.9 }}>
-          <div>verdict <Badge color={VERDICT_COLOR[g.verdict]}>{VERDICT_LABEL[g.verdict] || g.verdict}</Badge></div>
-          {g.concept_id && <div>concept <span style={{ color: "var(--accent)", cursor: "pointer" }} onClick={() => nav("concept", g.concept_id)}>{g.concept_id}</span></div>}
-          {g.role && <div>역할 <span style={{ color: "var(--text)" }}>{ROLE_LABEL[g.role] || g.role}</span></div>}
-          {g.surface && <div>표면형 <span style={{ color: "var(--text)" }}>{g.surface}</span></div>}
-          {g.collision_group && <div>충돌그룹 <span style={{ color: "var(--low)", cursor: "pointer" }} onClick={() => nav("collision", g.collision_group)}>{g.collision_group}</span></div>}
-          {g.contained_by && <div>상위개념 <span style={{ color: "var(--high)", cursor: "pointer" }} onClick={() => nav("concept", g.contained_by)}>{g.contained_by}</span></div>}
-        </div>
-        {g.note && <div style={{ fontSize: 13.5, color: "var(--muted)", marginTop: 8, lineHeight: 1.6 }}>{g.note}</div>}
-      </Collapsible>
+        <Panel title="골든 (모으고 가르기)">
+          <div style={{ ...mono, fontSize: 13, lineHeight: 1.95 }}>
+            <div>verdict <Badge color={VERDICT_COLOR[g.verdict]}>{VERDICT_LABEL[g.verdict] || g.verdict}</Badge></div>
+            {g.concept_id && <div>concept <span style={{ color: "var(--accent)", cursor: "pointer" }} onClick={() => nav("concept", g.concept_id)}>{g.concept_id}</span></div>}
+            {g.role && <div>역할 <span style={{ color: "var(--text)" }}>{ROLE_LABEL[g.role] || g.role}</span></div>}
+            {g.surface && <div>표면형 <span style={{ color: "var(--text)" }}>{g.surface}</span></div>}
+            {g.collision_group && <div>충돌그룹 <span style={{ color: "var(--low)", cursor: "pointer" }} onClick={() => nav("collision", g.collision_group)}>{g.collision_group}</span></div>}
+            {g.contained_by && <div>상위개념 <span style={{ color: "var(--high)", cursor: "pointer" }} onClick={() => nav("concept", g.contained_by)}>{g.contained_by}</span></div>}
+          </div>
+          {g.note && <div style={{ fontSize: 13, color: "var(--muted)", marginTop: 8, lineHeight: 1.55 }}>{g.note}</div>}
+        </Panel>
+      </div>
     </div>);
 }
 
