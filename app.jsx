@@ -166,6 +166,60 @@ function ColExpand({ id, G }) {
     </div>);
 }
 
+// ── ① 개요 ────────────────────────────────────────────
+function Overview({ G, nav }) {
+  const dc = L.domainColor(G);
+  const cols = L.allColumns(G);
+  const doms = L.domains(G);
+  const overlap = L.surfaceOverlap(G);
+  const cap = {};
+  cols.forEach((id) => (L.rend(id, G).type_candidate || []).forEach((t) => cap[t] = (cap[t] || 0) + 1));
+  const buckets = [["0", 0], ["1-50", 0], ["50-150", 0], ["150-400", 0], ["400+", 0]];
+  cols.forEach((id) => { const f = L.freqOf(id, G);
+    const i = f === 0 ? 0 : f < 50 ? 1 : f < 150 ? 2 : f < 400 ? 3 : 4; buckets[i][1]++; });
+  const maxB = Math.max(...buckets.map((b) => b[1]));
+  const rf = {};
+  cols.forEach((id) => (L.rend(id, G).risk_flags || []).forEach((f) => rf[f] = (rf[f] || 0) + 1));
+  const agg = (G.psql.agg_patterns || []).length;
+  return (
+    <div style={{ padding: "22px 30px", maxWidth: 1040 }}>
+      <div style={{ border: "1px solid var(--border)", borderLeft: "3px solid var(--sig)", borderRadius: 7, padding: "12px 18px", marginBottom: 18 }}>
+        <div style={{ fontSize: 14.5, color: "var(--muted)", lineHeight: 1.7 }}>
+          실험의 재료가 되는 은행 mock data입니다. 스키마, render 산출(자연어 설명 + 구조화 출력), SQL 로그 신호만 담겨 있고
+          어떤 판정(용어 여부·충돌·우선순위)도 데이터에 없습니다. 판정은 이 재료 위에서 파이프라인을 돌려 산출하고 분석할 몫입니다.
+        </div>
+      </div>
+      <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+        <Stat label="도메인" value={doms.length} />
+        <Stat label="테이블" value={Object.keys(G.schema).length} />
+        <Stat label="컬럼" value={cols.length} />
+        <Stat label="집계 패턴" value={agg} color="var(--lin)" />
+        <Stat label="겹치는 표면형" value={Object.keys(overlap).length} color="var(--accent)" />
+      </div>
+      <Section title="도메인">
+        <div>{doms.map((d) => <Chip key={d} color={dc(d)} onClick={() => nav("table")}>{d}</Chip>)}</div>
+      </Section>
+      <Section title="빈도 분포 (파레토성: 소수 고빈도, 다수 저빈도)">
+        <table style={{ ...mono, fontSize: 13 }}><tbody>
+          {buckets.map(([lab, n]) => (
+            <tr key={lab}><td style={{ color: "var(--muted)", padding: "2px 12px 2px 0", width: 70 }}>{lab}</td>
+              <td style={{ padding: "2px 10px 2px 0" }}><Bar value={n} max={maxB} w={180} /></td>
+              <td style={{ color: "var(--text)" }}>{n}</td></tr>))}
+        </tbody></table>
+      </Section>
+      <Section title="capability 후보 분포 (render type_candidate)">
+        <div>{Object.entries(cap).sort((a, b) => b[1] - a[1]).map(([t, n]) =>
+          <span key={t} style={{ marginRight: 16 }}><Chip color="var(--sig)">{TYPE_LABEL[t] || t}</Chip><span style={{ ...mono, fontSize: 13, color: "var(--muted)" }}>{n}</span></span>)}</div>
+      </Section>
+      <Section title="구조 오류위험 플래그 (render가 구조에서 파생, 소수)"
+        note="코드값 결손·형식 함정·근접 혼동. 이건 render 산출이지 처리 판정이 아닙니다.">
+        <div>{Object.keys(rf).length ? Object.entries(rf).map(([f, n]) =>
+          <span key={f} style={{ marginRight: 16 }}><Chip color={RISK_COLOR[f]}>{RISK_LABEL[f] || f}</Chip><span style={{ ...mono, fontSize: 13, color: "var(--muted)" }}>{n}</span></span>)
+          : <span style={{ color: "var(--dim)" }}>없음</span>}</div>
+      </Section>
+    </div>);
+}
+
 // ── 테이블 화면 (구조 + render + SQL 신호 통합) ───────
 function TableView({ G, route, nav }) {
   const dc = L.domainColor(G);
