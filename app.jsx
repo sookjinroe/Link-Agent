@@ -15,13 +15,6 @@ const RISK_COLOR = { code_value_weak: "var(--low)", format_trap: "var(--med)", n
 function Center({ children }) {
   return <div style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "70vh", color: "var(--muted)", fontSize: 16 }}>{children}</div>;
 }
-function TwoPane({ left, right }) {
-  return (
-    <div style={{ display: "grid", gridTemplateColumns: "320px 1fr", minHeight: "calc(100vh - 92px)" }}>
-      <div style={{ borderRight: "1px solid var(--border)", padding: 14, overflowY: "auto", maxHeight: "calc(100vh - 92px)" }}>{left}</div>
-      <div style={{ padding: "18px 26px", overflowY: "auto", maxHeight: "calc(100vh - 92px)" }}>{right}</div>
-    </div>);
-}
 function Section({ title, children, note }) {
   return (<div style={{ marginTop: 22 }}>
     <div style={{ ...mono, fontSize: 13, letterSpacing: "0.05em", color: "var(--muted)", marginBottom: note ? 4 : 9 }}>{title}</div>

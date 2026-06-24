@@ -64,9 +64,6 @@
     for (const k in G.schema) (by[G.schema[k].schema] = by[G.schema[k].schema] || []).push(k);
     return by;
   }
-  function tableColumns(tk, G) {
-    return (G.schema[tk] ? G.schema[tk].columns : []).map((c) => tk + "." + c.name);
-  }
   // 나가는 FK: 이 테이블의 FK 컬럼 -> 대상 테이블
   function fkOut(tk, G) {
     const out = [];
@@ -100,5 +97,5 @@
 
   return { PALETTE, tableName, colName, domainOf, domains, domainColor,
            rend, psqlOf, freqOf, surfaceForms, surfaceOverlap, allColumns,
-           tablesByDomain, tableColumns, fkOut, fkIn, searchAll };
+           tablesByDomain, fkOut, fkIn, searchAll };
 });
