@@ -1,1457 +1,1440 @@
 {
-  "LOAN_DB.LOAN_ACCT_MST": {
-    "schema": "LOAN_DB",
-    "columns": [
-      {
-        "name": "LOAN_NO",
-        "dtype": "VARCHAR(20)",
-        "pk": true,
-        "fk": null,
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "CUST_NO",
-        "dtype": "VARCHAR(20)",
-        "pk": false,
-        "fk": "CUST_DB.CUST_BASE_INFO.CUST_NO",
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "PRDT_CD",
-        "dtype": "VARCHAR(10)",
-        "pk": false,
-        "fk": "LOAN_DB.LOAN_PRDT_MST.PRDT_CD",
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "LOAN_AMT",
-        "dtype": "DECIMAL(15,0)",
-        "pk": false,
-        "fk": null,
-        "std_type": "measure",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "LOAN_BAL_AMT",
-        "dtype": "DECIMAL(15,0)",
-        "pk": false,
-        "fk": null,
-        "std_type": "measure",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "LOAN_STAT_CD",
-        "dtype": "CHAR(2)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": {
-          "01": "정상",
-          "02": "연체",
-          "03": "기한이익상실",
-          "04": "완제",
-          "05": "부실"
-        },
-        "format": null
-      },
-      {
-        "name": "INT_RATE",
-        "dtype": "DECIMAL(5,3)",
-        "pk": false,
-        "fk": null,
-        "std_type": "measure",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "APLD_RATE",
-        "dtype": "DECIMAL(5,3)",
-        "pk": false,
-        "fk": null,
-        "std_type": "measure",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "EXEC_DT",
-        "dtype": "DATE",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": "YYYY-MM-DD"
-      },
-      {
-        "name": "LOAN_EXP_DT",
-        "dtype": "DATE",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": "YYYY-MM-DD"
-      },
-      {
-        "name": "CREATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_BY",
-        "dtype": "VARCHAR(30)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": null,
-        "format": null
-      }
-    ],
-    "table": "LOAN_ACCT_MST"
-  },
-  "LOAN_DB.LOAN_DLNQ_HIST": {
-    "schema": "LOAN_DB",
-    "columns": [
-      {
-        "name": "DLNQ_SEQ",
-        "dtype": "BIGINT",
-        "pk": true,
-        "fk": null,
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "LOAN_NO",
-        "dtype": "VARCHAR(20)",
-        "pk": false,
-        "fk": "LOAN_DB.LOAN_ACCT_MST.LOAN_NO",
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "DLNQ_FLG",
-        "dtype": "CHAR(1)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": {
-          "Y": "연체",
-          "N": "정상"
-        },
-        "format": null
-      },
-      {
-        "name": "DLNQ_DAYS",
-        "dtype": "INT",
-        "pk": false,
-        "fk": null,
-        "std_type": "measure",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "DLNQ_AMT",
-        "dtype": "DECIMAL(15,0)",
-        "pk": false,
-        "fk": null,
-        "std_type": "measure",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "DLNQ_INT_AMT",
-        "dtype": "DECIMAL(15,0)",
-        "pk": false,
-        "fk": null,
-        "std_type": "measure",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "DLNQ_OCUR_DT",
-        "dtype": "DATE",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": "YYYY-MM-DD"
-      },
-      {
-        "name": "CREATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_BY",
-        "dtype": "VARCHAR(30)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": null,
-        "format": null
-      }
-    ],
-    "table": "LOAN_DLNQ_HIST"
-  },
-  "LOAN_DB.LOAN_APPL_HIST": {
-    "schema": "LOAN_DB",
-    "columns": [
-      {
-        "name": "APPL_NO",
-        "dtype": "VARCHAR(20)",
-        "pk": true,
-        "fk": null,
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "CUST_NO",
-        "dtype": "VARCHAR(20)",
-        "pk": false,
-        "fk": "CUST_DB.CUST_BASE_INFO.CUST_NO",
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "APPL_STAT_CD",
-        "dtype": "CHAR(2)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": {
-          "01": "접수",
-          "02": "심사중",
-          "03": "승인",
-          "04": "거절"
-        },
-        "format": null
-      },
-      {
-        "name": "APPL_AMT",
-        "dtype": "DECIMAL(15,0)",
-        "pk": false,
-        "fk": null,
-        "std_type": "measure",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "APPL_DT",
-        "dtype": "DATE",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": "YYYY-MM-DD"
-      },
-      {
-        "name": "APRV_DT",
-        "dtype": "DATE",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": "YYYY-MM-DD"
-      },
-      {
-        "name": "APRV_YN",
-        "dtype": "CHAR(1)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": {
-          "Y": "승인",
-          "N": "미승인"
-        },
-        "format": null
-      },
-      {
-        "name": "CREATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_BY",
-        "dtype": "VARCHAR(30)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": null,
-        "format": null
-      }
-    ],
-    "table": "LOAN_APPL_HIST"
-  },
-  "LOAN_DB.LOAN_PRDT_MST": {
-    "schema": "LOAN_DB",
-    "columns": [
-      {
-        "name": "PRDT_CD",
-        "dtype": "VARCHAR(10)",
-        "pk": true,
-        "fk": null,
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "PRDT_NM",
-        "dtype": "VARCHAR(100)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "PRDT_TYPE_CD",
-        "dtype": "CHAR(2)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": {
-          "01": "일반",
-          "02": "정책",
-          "03": "특판",
-          "04": "재대출"
-        },
-        "format": null
-      },
-      {
-        "name": "RPY_MTHD_CD",
-        "dtype": "CHAR(1)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": {
-          "1": "원리금균등",
-          "2": "원금균등",
-          "3": "만기일시"
-        },
-        "format": null
-      },
-      {
-        "name": "CREATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_BY",
-        "dtype": "VARCHAR(30)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": null,
-        "format": null
-      }
-    ],
-    "table": "LOAN_PRDT_MST"
-  },
-  "LOAN_DB.LOAN_ERLY_RPYMT_HIST": {
-    "schema": "LOAN_DB",
-    "columns": [
-      {
-        "name": "ERLY_SEQ",
-        "dtype": "BIGINT",
-        "pk": true,
-        "fk": null,
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "LOAN_NO",
-        "dtype": "VARCHAR(20)",
-        "pk": false,
-        "fk": "LOAN_DB.LOAN_ACCT_MST.LOAN_NO",
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "ERLY_RPYMT_AMT",
-        "dtype": "DECIMAL(15,0)",
-        "pk": false,
-        "fk": null,
-        "std_type": "measure",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "ERLY_RPYMT_FEE",
-        "dtype": "DECIMAL(13,0)",
-        "pk": false,
-        "fk": null,
-        "std_type": "measure",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "ERLY_RPYMT_DT",
-        "dtype": "DATE",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": "YYYY-MM-DD"
-      },
-      {
-        "name": "CREATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_BY",
-        "dtype": "VARCHAR(30)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": null,
-        "format": null
-      }
-    ],
-    "table": "LOAN_ERLY_RPYMT_HIST"
-  },
-  "CARD_DB.CARD_ACCT_MST": {
-    "schema": "CARD_DB",
-    "columns": [
-      {
-        "name": "CARD_NO",
-        "dtype": "VARCHAR(20)",
-        "pk": true,
-        "fk": null,
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "CUST_NO",
-        "dtype": "VARCHAR(20)",
-        "pk": false,
-        "fk": "CUST_DB.CUST_BASE_INFO.CUST_NO",
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "CARD_GRD_CD",
-        "dtype": "CHAR(1)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": {
-          "1": "플래티넘",
-          "2": "골드",
-          "3": "실버",
-          "4": "일반"
-        },
-        "format": null
-      },
-      {
-        "name": "CARD_STAT_CD",
-        "dtype": "CHAR(2)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": {
-          "01": "정상",
-          "02": "정지",
-          "03": "해지",
-          "04": "연체"
-        },
-        "format": null
-      },
-      {
-        "name": "CARD_LMT_AMT",
-        "dtype": "DECIMAL(13,0)",
-        "pk": false,
-        "fk": null,
-        "std_type": "measure",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "ISSUE_DT",
-        "dtype": "DATE",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": "YYYY-MM-DD"
-      },
-      {
-        "name": "CREATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_BY",
-        "dtype": "VARCHAR(30)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": null,
-        "format": null
-      }
-    ],
-    "table": "CARD_ACCT_MST"
-  },
-  "CARD_DB.CARD_DLNQ_HIST": {
-    "schema": "CARD_DB",
-    "columns": [
-      {
-        "name": "CDLNQ_SEQ",
-        "dtype": "BIGINT",
-        "pk": true,
-        "fk": null,
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "CARD_NO",
-        "dtype": "VARCHAR(20)",
-        "pk": false,
-        "fk": "CARD_DB.CARD_ACCT_MST.CARD_NO",
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "DLNQ_FLG",
-        "dtype": "CHAR(1)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": {
-          "Y": "연체",
-          "N": "정상"
-        },
-        "format": null
-      },
-      {
-        "name": "DLNQ_DAYS",
-        "dtype": "INT",
-        "pk": false,
-        "fk": null,
-        "std_type": "measure",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "DLNQ_AMT",
-        "dtype": "DECIMAL(13,0)",
-        "pk": false,
-        "fk": null,
-        "std_type": "measure",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "DLNQ_OCUR_DT",
-        "dtype": "DATE",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": "YYYY-MM-DD"
-      },
-      {
-        "name": "CREATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_BY",
-        "dtype": "VARCHAR(30)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": null,
-        "format": null
-      }
-    ],
-    "table": "CARD_DLNQ_HIST"
-  },
-  "CARD_DB.CARD_APRV_HIST": {
-    "schema": "CARD_DB",
-    "columns": [
-      {
-        "name": "APRV_SEQ",
-        "dtype": "BIGINT",
-        "pk": true,
-        "fk": null,
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "CARD_NO",
-        "dtype": "VARCHAR(20)",
-        "pk": false,
-        "fk": "CARD_DB.CARD_ACCT_MST.CARD_NO",
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "APRV_AMT",
-        "dtype": "DECIMAL(13,0)",
-        "pk": false,
-        "fk": null,
-        "std_type": "measure",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "RPY_MTHD_CD",
-        "dtype": "CHAR(1)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": {
-          "1": "일시불",
-          "2": "할부",
-          "3": "리볼빙"
-        },
-        "format": null
-      },
-      {
-        "name": "APRV_DT",
-        "dtype": "DATE",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": "YYYY-MM-DD"
-      },
-      {
-        "name": "CREATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_BY",
-        "dtype": "VARCHAR(30)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": null,
-        "format": null
-      }
-    ],
-    "table": "CARD_APRV_HIST"
-  },
-  "CUST_DB.CUST_BASE_INFO": {
-    "schema": "CUST_DB",
-    "columns": [
-      {
-        "name": "CUST_NO",
-        "dtype": "VARCHAR(20)",
-        "pk": true,
-        "fk": null,
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "CUST_NM",
-        "dtype": "VARCHAR(50)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "CUST_GRD_CD",
-        "dtype": "CHAR(1)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": {
-          "1": "VIP",
-          "2": "우수",
-          "3": "일반"
-        },
-        "format": null
-      },
-      {
-        "name": "BIRTH_DT",
-        "dtype": "CHAR(8)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": "YYYYMMDD"
-      },
-      {
-        "name": "GENDER_CD",
-        "dtype": "CHAR(1)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": {
-          "M": "남",
-          "F": "여"
-        },
-        "format": null
-      },
-      {
-        "name": "REG_DT",
-        "dtype": "DATE",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": "YYYY-MM-DD"
-      },
-      {
-        "name": "MYDATA_CNSNT_YN",
-        "dtype": "CHAR(1)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": {
-          "Y": "동의",
-          "N": "미동의"
-        },
-        "format": null
-      },
-      {
-        "name": "CREATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_BY",
-        "dtype": "VARCHAR(30)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": null,
-        "format": null
-      }
-    ],
-    "table": "CUST_BASE_INFO"
-  },
-  "CUST_DB.CUST_CNSNT_INFO": {
-    "schema": "CUST_DB",
-    "columns": [
-      {
-        "name": "CNSNT_SEQ",
-        "dtype": "BIGINT",
-        "pk": true,
-        "fk": null,
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "CUST_NO",
-        "dtype": "VARCHAR(20)",
-        "pk": false,
-        "fk": "CUST_DB.CUST_BASE_INFO.CUST_NO",
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "CNSNT_ITEM_CD",
-        "dtype": "CHAR(2)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": {
-          "01": "마케팅",
-          "02": "제3자제공"
-        },
-        "format": null
-      },
-      {
-        "name": "CNSNT_YN",
-        "dtype": "CHAR(1)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": {
-          "Y": "동의",
-          "N": "미동의"
-        },
-        "format": null
-      },
-      {
-        "name": "CNSNT_DT",
-        "dtype": "DATE",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": "YYYY-MM-DD"
-      },
-      {
-        "name": "CREATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_BY",
-        "dtype": "VARCHAR(30)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": null,
-        "format": null
-      }
-    ],
-    "table": "CUST_CNSNT_INFO"
-  },
-  "CUST_DB.CUST_CNTC_HIST": {
-    "schema": "CUST_DB",
-    "columns": [
-      {
-        "name": "CNTC_SEQ",
-        "dtype": "BIGINT",
-        "pk": true,
-        "fk": null,
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "CUST_NO",
-        "dtype": "VARCHAR(20)",
-        "pk": false,
-        "fk": "CUST_DB.CUST_BASE_INFO.CUST_NO",
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "CNTC_TYPE_CD",
-        "dtype": "CHAR(2)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "CNTC_DT",
-        "dtype": "DATE",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": "YYYY-MM-DD"
-      },
-      {
-        "name": "CREATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_BY",
-        "dtype": "VARCHAR(30)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": null,
-        "format": null
-      }
-    ],
-    "table": "CUST_CNTC_HIST"
-  },
-  "RISK_DB.CRDT_EVAL_HIST": {
-    "schema": "RISK_DB",
-    "columns": [
-      {
-        "name": "EVAL_ID",
-        "dtype": "VARCHAR(20)",
-        "pk": true,
-        "fk": null,
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "CUST_NO",
-        "dtype": "VARCHAR(20)",
-        "pk": false,
-        "fk": "CUST_DB.CUST_BASE_INFO.CUST_NO",
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "CRDT_SCR",
-        "dtype": "INT",
-        "pk": false,
-        "fk": null,
-        "std_type": "measure",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "CRDT_GRD_CD",
-        "dtype": "CHAR(2)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": {
-          "01": "1등급",
-          "02": "2등급",
-          "03": "3등급",
-          "04": "4등급",
-          "05": "5등급",
-          "06": "6등급",
-          "07": "7등급",
-          "08": "8등급",
-          "09": "9등급",
-          "10": "10등급"
-        },
-        "format": null
-      },
-      {
-        "name": "EVAL_DT",
-        "dtype": "DATE",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": "YYYY-MM-DD"
-      },
-      {
-        "name": "CREATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_BY",
-        "dtype": "VARCHAR(30)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": null,
-        "format": null
-      }
-    ],
-    "table": "CRDT_EVAL_HIST"
-  },
-  "RISK_DB.RISK_LMT_MST": {
-    "schema": "RISK_DB",
-    "columns": [
-      {
-        "name": "LMT_SEQ",
-        "dtype": "BIGINT",
-        "pk": true,
-        "fk": null,
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "CUST_NO",
-        "dtype": "VARCHAR(20)",
-        "pk": false,
-        "fk": "CUST_DB.CUST_BASE_INFO.CUST_NO",
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "CRDT_LMT_AMT",
-        "dtype": "DECIMAL(15,0)",
-        "pk": false,
-        "fk": null,
-        "std_type": "measure",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "LMT_GRD_CD",
-        "dtype": "CHAR(1)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": {
-          "1": "A",
-          "2": "B",
-          "3": "C",
-          "4": "D",
-          "5": "E"
-        },
-        "format": null
-      },
-      {
-        "name": "LMT_DT",
-        "dtype": "DATE",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": "YYYY-MM-DD"
-      },
-      {
-        "name": "CREATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_BY",
-        "dtype": "VARCHAR(30)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": null,
-        "format": null
-      }
-    ],
-    "table": "RISK_LMT_MST"
-  },
-  "RISK_DB.FRAUD_DTCT_HIST": {
-    "schema": "RISK_DB",
-    "columns": [
-      {
-        "name": "DTCT_SEQ",
-        "dtype": "BIGINT",
-        "pk": true,
-        "fk": null,
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "CUST_NO",
-        "dtype": "VARCHAR(20)",
-        "pk": false,
-        "fk": "CUST_DB.CUST_BASE_INFO.CUST_NO",
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "DTCT_TYPE_CD",
-        "dtype": "CHAR(2)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": {
-          "01": "이상거래",
-          "02": "도용",
-          "03": "보이스피싱"
-        },
-        "format": null
-      },
-      {
-        "name": "DTCT_AMT",
-        "dtype": "DECIMAL(13,0)",
-        "pk": false,
-        "fk": null,
-        "std_type": "measure",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "DTCT_DT",
-        "dtype": "DATE",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": "YYYY-MM-DD"
-      },
-      {
-        "name": "CREATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_BY",
-        "dtype": "VARCHAR(30)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": null,
-        "format": null
-      }
-    ],
-    "table": "FRAUD_DTCT_HIST"
-  },
-  "DEP_DB.DEP_ACCT_MST": {
-    "schema": "DEP_DB",
-    "columns": [
-      {
-        "name": "DEP_NO",
-        "dtype": "VARCHAR(20)",
-        "pk": true,
-        "fk": null,
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "CUST_NO",
-        "dtype": "VARCHAR(20)",
-        "pk": false,
-        "fk": "CUST_DB.CUST_BASE_INFO.CUST_NO",
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "DEP_BAL_AMT",
-        "dtype": "DECIMAL(15,0)",
-        "pk": false,
-        "fk": null,
-        "std_type": "measure",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "DEP_STAT_CD",
-        "dtype": "CHAR(2)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": {
-          "01": "정상",
-          "02": "해지",
-          "03": "만기"
-        },
-        "format": null
-      },
-      {
-        "name": "MTRT_DT",
-        "dtype": "DATE",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": "YYYY-MM-DD"
-      },
-      {
-        "name": "DEP_DT",
-        "dtype": "DATE",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": "YYYY-MM-DD"
-      },
-      {
-        "name": "CREATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_BY",
-        "dtype": "VARCHAR(30)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": null,
-        "format": null
-      }
-    ],
-    "table": "DEP_ACCT_MST"
-  },
-  "COMMON_DB.INTG_DLNQ_SUMM": {
-    "schema": "COMMON_DB",
-    "columns": [
-      {
-        "name": "SUMM_SEQ",
-        "dtype": "BIGINT",
-        "pk": true,
-        "fk": null,
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "ACCT_TYPE_CD",
-        "dtype": "CHAR(1)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": {
-          "L": "대출",
-          "C": "카드"
-        },
-        "format": null
-      },
-      {
-        "name": "ACCT_NO",
-        "dtype": "VARCHAR(20)",
-        "pk": false,
-        "fk": null,
-        "std_type": "entity",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "DLNQ_FLG",
-        "dtype": "CHAR(1)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": {
-          "Y": "연체",
-          "N": "정상"
-        },
-        "format": null
-      },
-      {
-        "name": "DLNQ_AMT",
-        "dtype": "DECIMAL(15,0)",
-        "pk": false,
-        "fk": null,
-        "std_type": "measure",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "SUMM_YM",
-        "dtype": "CHAR(6)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": "YYYYMM"
-      },
-      {
-        "name": "CREATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_AT",
-        "dtype": "TIMESTAMP",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_time",
-        "codedict": null,
-        "format": null
-      },
-      {
-        "name": "UPDATED_BY",
-        "dtype": "VARCHAR(30)",
-        "pk": false,
-        "fk": null,
-        "std_type": "dimension_categorical",
-        "codedict": null,
-        "format": null
-      }
-    ],
-    "table": "INTG_DLNQ_SUMM"
-  }
+ "CUST_DB.CUST_BASE_INFO": {
+  "schema": "CUST_DB",
+  "table": "CUST_BASE_INFO",
+  "label": "고객 기본정보",
+  "columns": [
+   {
+    "name": "CUST_NO",
+    "dtype": "VARCHAR(20)",
+    "pk": true,
+    "fk": null
+   },
+   {
+    "name": "CUST_NM",
+    "dtype": "VARCHAR(50)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "BIRTH_DT",
+    "dtype": "VARCHAR(8)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "GENDER_CD",
+    "dtype": "CHAR(1)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CUST_GRD_CD",
+    "dtype": "VARCHAR(4)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "JOIN_DT",
+    "dtype": "DATE",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "MKTG_CNSNT_YN",
+    "dtype": "CHAR(1)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "DORMANT_YN",
+    "dtype": "CHAR(1)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CREATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_BY",
+    "dtype": "VARCHAR(30)",
+    "pk": false,
+    "fk": null
+   }
+  ]
+ },
+ "CUST_DB.CUST_CONTACT": {
+  "schema": "CUST_DB",
+  "table": "CUST_CONTACT",
+  "label": "고객 연락처",
+  "columns": [
+   {
+    "name": "CONTACT_SEQ",
+    "dtype": "BIGINT",
+    "pk": true,
+    "fk": null
+   },
+   {
+    "name": "CUST_NO",
+    "dtype": "VARCHAR(20)",
+    "pk": false,
+    "fk": "CUST_DB.CUST_BASE_INFO.CUST_NO"
+   },
+   {
+    "name": "CNTC_TYPE_CD",
+    "dtype": "VARCHAR(4)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CNTC_VAL",
+    "dtype": "VARCHAR(100)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "REG_DT",
+    "dtype": "DATE",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "VALID_YN",
+    "dtype": "CHAR(1)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CREATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_BY",
+    "dtype": "VARCHAR(30)",
+    "pk": false,
+    "fk": null
+   }
+  ]
+ },
+ "CUST_DB.CUST_GRD_HIST": {
+  "schema": "CUST_DB",
+  "table": "CUST_GRD_HIST",
+  "label": "고객 등급 이력",
+  "columns": [
+   {
+    "name": "GRD_HIST_SEQ",
+    "dtype": "BIGINT",
+    "pk": true,
+    "fk": null
+   },
+   {
+    "name": "CUST_NO",
+    "dtype": "VARCHAR(20)",
+    "pk": false,
+    "fk": "CUST_DB.CUST_BASE_INFO.CUST_NO"
+   },
+   {
+    "name": "CUST_GRD_CD",
+    "dtype": "VARCHAR(4)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "APLD_DT",
+    "dtype": "DATE",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "RSN_CD",
+    "dtype": "VARCHAR(4)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CREATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_BY",
+    "dtype": "VARCHAR(30)",
+    "pk": false,
+    "fk": null
+   }
+  ]
+ },
+ "LOAN_DB.LOAN_ACCT_MST": {
+  "schema": "LOAN_DB",
+  "table": "LOAN_ACCT_MST",
+  "label": "대출 계좌 마스터",
+  "columns": [
+   {
+    "name": "LOAN_NO",
+    "dtype": "VARCHAR(20)",
+    "pk": true,
+    "fk": null
+   },
+   {
+    "name": "CUST_NO",
+    "dtype": "VARCHAR(20)",
+    "pk": false,
+    "fk": "CUST_DB.CUST_BASE_INFO.CUST_NO"
+   },
+   {
+    "name": "PRDT_CD",
+    "dtype": "VARCHAR(10)",
+    "pk": false,
+    "fk": "LOAN_DB.LOAN_PRDT_MST.PRDT_CD"
+   },
+   {
+    "name": "LOAN_AMT",
+    "dtype": "DECIMAL(15,0)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "LOAN_BAL_AMT",
+    "dtype": "DECIMAL(15,0)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "INT_RATE",
+    "dtype": "DECIMAL(5,3)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "APLD_RATE",
+    "dtype": "DECIMAL(5,3)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "LOAN_STAT_CD",
+    "dtype": "VARCHAR(4)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "EXEC_DT",
+    "dtype": "DATE",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "MTRT_DT",
+    "dtype": "DATE",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "RPY_MTHD_CD",
+    "dtype": "VARCHAR(4)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CREATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_BY",
+    "dtype": "VARCHAR(30)",
+    "pk": false,
+    "fk": null
+   }
+  ]
+ },
+ "LOAN_DB.LOAN_APPL_HIST": {
+  "schema": "LOAN_DB",
+  "table": "LOAN_APPL_HIST",
+  "label": "대출 신청 이력",
+  "columns": [
+   {
+    "name": "APPL_NO",
+    "dtype": "VARCHAR(20)",
+    "pk": true,
+    "fk": null
+   },
+   {
+    "name": "CUST_NO",
+    "dtype": "VARCHAR(20)",
+    "pk": false,
+    "fk": "CUST_DB.CUST_BASE_INFO.CUST_NO"
+   },
+   {
+    "name": "PRDT_CD",
+    "dtype": "VARCHAR(10)",
+    "pk": false,
+    "fk": "LOAN_DB.LOAN_PRDT_MST.PRDT_CD"
+   },
+   {
+    "name": "APPL_AMT",
+    "dtype": "DECIMAL(15,0)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "APRV_AMT",
+    "dtype": "DECIMAL(15,0)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "APPL_STAT_CD",
+    "dtype": "VARCHAR(4)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "APPL_DT",
+    "dtype": "DATE",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "APRV_DT",
+    "dtype": "DATE",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "RPY_MTHD_CD",
+    "dtype": "VARCHAR(4)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CREATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_BY",
+    "dtype": "VARCHAR(30)",
+    "pk": false,
+    "fk": null
+   }
+  ]
+ },
+ "LOAN_DB.LOAN_DLNQ_HIST": {
+  "schema": "LOAN_DB",
+  "table": "LOAN_DLNQ_HIST",
+  "label": "대출 연체 이력",
+  "columns": [
+   {
+    "name": "DLNQ_SEQ",
+    "dtype": "BIGINT",
+    "pk": true,
+    "fk": null
+   },
+   {
+    "name": "LOAN_NO",
+    "dtype": "VARCHAR(20)",
+    "pk": false,
+    "fk": "LOAN_DB.LOAN_ACCT_MST.LOAN_NO"
+   },
+   {
+    "name": "DLNQ_STAT_CD",
+    "dtype": "VARCHAR(4)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "DLNQ_AMT",
+    "dtype": "DECIMAL(15,0)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "DLNQ_DAYS",
+    "dtype": "INTEGER",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "DLNQ_INT_AMT",
+    "dtype": "DECIMAL(15,0)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "OCUR_DT",
+    "dtype": "DATE",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CLEAR_DT",
+    "dtype": "DATE",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CREATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_BY",
+    "dtype": "VARCHAR(30)",
+    "pk": false,
+    "fk": null
+   }
+  ]
+ },
+ "LOAN_DB.LOAN_PRDT_MST": {
+  "schema": "LOAN_DB",
+  "table": "LOAN_PRDT_MST",
+  "label": "대출 상품 마스터",
+  "columns": [
+   {
+    "name": "PRDT_CD",
+    "dtype": "VARCHAR(10)",
+    "pk": true,
+    "fk": null
+   },
+   {
+    "name": "PRDT_NM",
+    "dtype": "VARCHAR(100)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "PRDT_TYPE_CD",
+    "dtype": "VARCHAR(4)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "BASE_RATE",
+    "dtype": "DECIMAL(5,3)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "MAX_LMT_AMT",
+    "dtype": "DECIMAL(15,0)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "SALE_YN",
+    "dtype": "CHAR(1)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CREATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_BY",
+    "dtype": "VARCHAR(30)",
+    "pk": false,
+    "fk": null
+   }
+  ]
+ },
+ "CARD_DB.CARD_MST": {
+  "schema": "CARD_DB",
+  "table": "CARD_MST",
+  "label": "카드 마스터",
+  "columns": [
+   {
+    "name": "CARD_NO",
+    "dtype": "VARCHAR(20)",
+    "pk": true,
+    "fk": null
+   },
+   {
+    "name": "CUST_NO",
+    "dtype": "VARCHAR(20)",
+    "pk": false,
+    "fk": "CUST_DB.CUST_BASE_INFO.CUST_NO"
+   },
+   {
+    "name": "CARD_GRD_CD",
+    "dtype": "VARCHAR(4)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CARD_LMT_AMT",
+    "dtype": "DECIMAL(15,0)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CARD_BAL_AMT",
+    "dtype": "DECIMAL(15,0)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CARD_STAT_CD",
+    "dtype": "VARCHAR(4)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "ISSUE_DT",
+    "dtype": "DATE",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "EXPIRE_DT",
+    "dtype": "DATE",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CREATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_BY",
+    "dtype": "VARCHAR(30)",
+    "pk": false,
+    "fk": null
+   }
+  ]
+ },
+ "CARD_DB.CARD_APPL": {
+  "schema": "CARD_DB",
+  "table": "CARD_APPL",
+  "label": "카드 신청",
+  "columns": [
+   {
+    "name": "CARD_APPL_NO",
+    "dtype": "VARCHAR(20)",
+    "pk": true,
+    "fk": null
+   },
+   {
+    "name": "CUST_NO",
+    "dtype": "VARCHAR(20)",
+    "pk": false,
+    "fk": "CUST_DB.CUST_BASE_INFO.CUST_NO"
+   },
+   {
+    "name": "ISSUE_STAT_CD",
+    "dtype": "VARCHAR(4)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "REQ_LMT_AMT",
+    "dtype": "DECIMAL(15,0)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "APPL_DT",
+    "dtype": "DATE",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CREATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_BY",
+    "dtype": "VARCHAR(30)",
+    "pk": false,
+    "fk": null
+   }
+  ]
+ },
+ "CARD_DB.CARD_APRV_HIST": {
+  "schema": "CARD_DB",
+  "table": "CARD_APRV_HIST",
+  "label": "카드 승인 이력",
+  "columns": [
+   {
+    "name": "APRV_SEQ",
+    "dtype": "BIGINT",
+    "pk": true,
+    "fk": null
+   },
+   {
+    "name": "CARD_NO",
+    "dtype": "VARCHAR(20)",
+    "pk": false,
+    "fk": "CARD_DB.CARD_MST.CARD_NO"
+   },
+   {
+    "name": "APRV_AMT",
+    "dtype": "DECIMAL(15,0)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "MRCHT_NM",
+    "dtype": "VARCHAR(100)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "MRCHT_CTGR_CD",
+    "dtype": "VARCHAR(6)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "APRV_DT",
+    "dtype": "DATE",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CNCL_YN",
+    "dtype": "CHAR(1)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CREATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_BY",
+    "dtype": "VARCHAR(30)",
+    "pk": false,
+    "fk": null
+   }
+  ]
+ },
+ "CARD_DB.CARD_DLNQ_HIST": {
+  "schema": "CARD_DB",
+  "table": "CARD_DLNQ_HIST",
+  "label": "카드 연체 이력",
+  "columns": [
+   {
+    "name": "CDLNQ_SEQ",
+    "dtype": "BIGINT",
+    "pk": true,
+    "fk": null
+   },
+   {
+    "name": "CARD_NO",
+    "dtype": "VARCHAR(20)",
+    "pk": false,
+    "fk": "CARD_DB.CARD_MST.CARD_NO"
+   },
+   {
+    "name": "DLNQ_STAT_CD",
+    "dtype": "VARCHAR(4)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "DLNQ_AMT",
+    "dtype": "DECIMAL(15,0)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "DLNQ_DAYS",
+    "dtype": "INTEGER",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "OCUR_DT",
+    "dtype": "DATE",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CREATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_BY",
+    "dtype": "VARCHAR(30)",
+    "pk": false,
+    "fk": null
+   }
+  ]
+ },
+ "DEP_DB.DEP_ACCT_MST": {
+  "schema": "DEP_DB",
+  "table": "DEP_ACCT_MST",
+  "label": "예금 계좌 마스터",
+  "columns": [
+   {
+    "name": "DEP_NO",
+    "dtype": "VARCHAR(20)",
+    "pk": true,
+    "fk": null
+   },
+   {
+    "name": "CUST_NO",
+    "dtype": "VARCHAR(20)",
+    "pk": false,
+    "fk": "CUST_DB.CUST_BASE_INFO.CUST_NO"
+   },
+   {
+    "name": "PRDT_CD",
+    "dtype": "VARCHAR(10)",
+    "pk": false,
+    "fk": "DEP_DB.DEP_PRDT_MST.PRDT_CD"
+   },
+   {
+    "name": "DEP_BAL_AMT",
+    "dtype": "DECIMAL(15,0)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "INT_RATE",
+    "dtype": "DECIMAL(5,3)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "DEP_STAT_CD",
+    "dtype": "VARCHAR(4)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "OPEN_DT",
+    "dtype": "DATE",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "MTRT_DT",
+    "dtype": "DATE",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CREATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_BY",
+    "dtype": "VARCHAR(30)",
+    "pk": false,
+    "fk": null
+   }
+  ]
+ },
+ "DEP_DB.DEP_TXN_HIST": {
+  "schema": "DEP_DB",
+  "table": "DEP_TXN_HIST",
+  "label": "예금 거래 이력",
+  "columns": [
+   {
+    "name": "TXN_SEQ",
+    "dtype": "BIGINT",
+    "pk": true,
+    "fk": null
+   },
+   {
+    "name": "DEP_NO",
+    "dtype": "VARCHAR(20)",
+    "pk": false,
+    "fk": "DEP_DB.DEP_ACCT_MST.DEP_NO"
+   },
+   {
+    "name": "TXN_TYPE_CD",
+    "dtype": "VARCHAR(4)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "TXN_AMT",
+    "dtype": "DECIMAL(15,0)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "BAL_AFTR_AMT",
+    "dtype": "DECIMAL(15,0)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "TXN_DT",
+    "dtype": "DATE",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CREATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_BY",
+    "dtype": "VARCHAR(30)",
+    "pk": false,
+    "fk": null
+   }
+  ]
+ },
+ "DEP_DB.DEP_PRDT_MST": {
+  "schema": "DEP_DB",
+  "table": "DEP_PRDT_MST",
+  "label": "예금 상품 마스터",
+  "columns": [
+   {
+    "name": "PRDT_CD",
+    "dtype": "VARCHAR(10)",
+    "pk": true,
+    "fk": null
+   },
+   {
+    "name": "PRDT_NM",
+    "dtype": "VARCHAR(100)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "PRDT_TYPE_CD",
+    "dtype": "VARCHAR(4)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "BASE_RATE",
+    "dtype": "DECIMAL(5,3)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "SALE_YN",
+    "dtype": "CHAR(1)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CREATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_BY",
+    "dtype": "VARCHAR(30)",
+    "pk": false,
+    "fk": null
+   }
+  ]
+ },
+ "RISK_DB.CRDT_EVAL_HIST": {
+  "schema": "RISK_DB",
+  "table": "CRDT_EVAL_HIST",
+  "label": "신용 평가 이력",
+  "columns": [
+   {
+    "name": "EVAL_ID",
+    "dtype": "VARCHAR(20)",
+    "pk": true,
+    "fk": null
+   },
+   {
+    "name": "CUST_NO",
+    "dtype": "VARCHAR(20)",
+    "pk": false,
+    "fk": "CUST_DB.CUST_BASE_INFO.CUST_NO"
+   },
+   {
+    "name": "CRDT_SCR",
+    "dtype": "INTEGER",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CRDT_GRD_CD",
+    "dtype": "VARCHAR(4)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "EVAL_DT",
+    "dtype": "DATE",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "EVAL_RSN_CD",
+    "dtype": "VARCHAR(4)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CREATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_BY",
+    "dtype": "VARCHAR(30)",
+    "pk": false,
+    "fk": null
+   }
+  ]
+ },
+ "RISK_DB.CRDT_LMT_MST": {
+  "schema": "RISK_DB",
+  "table": "CRDT_LMT_MST",
+  "label": "신용 한도 관리",
+  "columns": [
+   {
+    "name": "LMT_SEQ",
+    "dtype": "BIGINT",
+    "pk": true,
+    "fk": null
+   },
+   {
+    "name": "CUST_NO",
+    "dtype": "VARCHAR(20)",
+    "pk": false,
+    "fk": "CUST_DB.CUST_BASE_INFO.CUST_NO"
+   },
+   {
+    "name": "CRDT_LMT_AMT",
+    "dtype": "DECIMAL(15,0)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "USE_AMT",
+    "dtype": "DECIMAL(15,0)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "LMT_GRD_CD",
+    "dtype": "VARCHAR(4)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "APLD_DT",
+    "dtype": "DATE",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CREATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_BY",
+    "dtype": "VARCHAR(30)",
+    "pk": false,
+    "fk": null
+   }
+  ]
+ },
+ "RISK_DB.FRAUD_DTCT_HIST": {
+  "schema": "RISK_DB",
+  "table": "FRAUD_DTCT_HIST",
+  "label": "이상거래 탐지 이력",
+  "columns": [
+   {
+    "name": "DTCT_SEQ",
+    "dtype": "BIGINT",
+    "pk": true,
+    "fk": null
+   },
+   {
+    "name": "CUST_NO",
+    "dtype": "VARCHAR(20)",
+    "pk": false,
+    "fk": "CUST_DB.CUST_BASE_INFO.CUST_NO"
+   },
+   {
+    "name": "DTCT_TYPE_CD",
+    "dtype": "VARCHAR(4)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "DTCT_AMT",
+    "dtype": "DECIMAL(15,0)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "RISK_SCR",
+    "dtype": "INTEGER",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "DTCT_DT",
+    "dtype": "DATE",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "BLOCK_YN",
+    "dtype": "CHAR(1)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CREATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_BY",
+    "dtype": "VARCHAR(30)",
+    "pk": false,
+    "fk": null
+   }
+  ]
+ },
+ "PAY_DB.TRANSFER_HIST": {
+  "schema": "PAY_DB",
+  "table": "TRANSFER_HIST",
+  "label": "이체 이력",
+  "columns": [
+   {
+    "name": "TRF_SEQ",
+    "dtype": "BIGINT",
+    "pk": true,
+    "fk": null
+   },
+   {
+    "name": "CUST_NO",
+    "dtype": "VARCHAR(20)",
+    "pk": false,
+    "fk": "CUST_DB.CUST_BASE_INFO.CUST_NO"
+   },
+   {
+    "name": "FROM_ACCT_NO",
+    "dtype": "VARCHAR(20)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "TO_ACCT_NO",
+    "dtype": "VARCHAR(20)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "TRF_AMT",
+    "dtype": "DECIMAL(15,0)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "FEE_AMT",
+    "dtype": "DECIMAL(10,0)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "TRF_STAT_CD",
+    "dtype": "VARCHAR(4)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "TRF_DT",
+    "dtype": "DATE",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CREATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_BY",
+    "dtype": "VARCHAR(30)",
+    "pk": false,
+    "fk": null
+   }
+  ]
+ },
+ "PAY_DB.AUTO_TRF_MST": {
+  "schema": "PAY_DB",
+  "table": "AUTO_TRF_MST",
+  "label": "자동이체 등록",
+  "columns": [
+   {
+    "name": "AUTO_SEQ",
+    "dtype": "BIGINT",
+    "pk": true,
+    "fk": null
+   },
+   {
+    "name": "CUST_NO",
+    "dtype": "VARCHAR(20)",
+    "pk": false,
+    "fk": "CUST_DB.CUST_BASE_INFO.CUST_NO"
+   },
+   {
+    "name": "TRF_AMT",
+    "dtype": "DECIMAL(15,0)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "TRF_DAY",
+    "dtype": "INTEGER",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "AUTO_STAT_CD",
+    "dtype": "VARCHAR(4)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "REG_DT",
+    "dtype": "DATE",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CREATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_BY",
+    "dtype": "VARCHAR(30)",
+    "pk": false,
+    "fk": null
+   }
+  ]
+ },
+ "CHN_DB.ACCESS_LOG": {
+  "schema": "CHN_DB",
+  "table": "ACCESS_LOG",
+  "label": "채널 접속 로그",
+  "columns": [
+   {
+    "name": "ACCESS_SEQ",
+    "dtype": "BIGINT",
+    "pk": true,
+    "fk": null
+   },
+   {
+    "name": "CUST_NO",
+    "dtype": "VARCHAR(20)",
+    "pk": false,
+    "fk": "CUST_DB.CUST_BASE_INFO.CUST_NO"
+   },
+   {
+    "name": "CHANNEL_CD",
+    "dtype": "VARCHAR(4)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "ACCESS_DT",
+    "dtype": "DATE",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "DEVICE_CD",
+    "dtype": "VARCHAR(4)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "SUCCESS_YN",
+    "dtype": "CHAR(1)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CREATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_BY",
+    "dtype": "VARCHAR(30)",
+    "pk": false,
+    "fk": null
+   }
+  ]
+ },
+ "CHN_DB.CNSNT_HIST": {
+  "schema": "CHN_DB",
+  "table": "CNSNT_HIST",
+  "label": "약관 동의 이력",
+  "columns": [
+   {
+    "name": "CNSNT_SEQ",
+    "dtype": "BIGINT",
+    "pk": true,
+    "fk": null
+   },
+   {
+    "name": "CUST_NO",
+    "dtype": "VARCHAR(20)",
+    "pk": false,
+    "fk": "CUST_DB.CUST_BASE_INFO.CUST_NO"
+   },
+   {
+    "name": "CNSNT_TYPE_CD",
+    "dtype": "VARCHAR(4)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CNSNT_YN",
+    "dtype": "CHAR(1)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CNSNT_DT",
+    "dtype": "DATE",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CREATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_BY",
+    "dtype": "VARCHAR(30)",
+    "pk": false,
+    "fk": null
+   }
+  ]
+ },
+ "CHN_DB.MYDATA_LINK": {
+  "schema": "CHN_DB",
+  "table": "MYDATA_LINK",
+  "label": "마이데이터 연동",
+  "columns": [
+   {
+    "name": "LINK_SEQ",
+    "dtype": "BIGINT",
+    "pk": true,
+    "fk": null
+   },
+   {
+    "name": "CUST_NO",
+    "dtype": "VARCHAR(20)",
+    "pk": false,
+    "fk": "CUST_DB.CUST_BASE_INFO.CUST_NO"
+   },
+   {
+    "name": "PROVIDER_CD",
+    "dtype": "VARCHAR(6)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "LINK_STAT_CD",
+    "dtype": "VARCHAR(4)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "MYDATA_CNSNT_YN",
+    "dtype": "CHAR(1)",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "LINK_DT",
+    "dtype": "DATE",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "CREATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_AT",
+    "dtype": "TIMESTAMP",
+    "pk": false,
+    "fk": null
+   },
+   {
+    "name": "UPDATED_BY",
+    "dtype": "VARCHAR(30)",
+    "pk": false,
+    "fk": null
+   }
+  ]
+ }
 }
