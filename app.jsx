@@ -487,7 +487,7 @@ function ColumnDetail({ id, G, sim, nav }) {
             <GRow k="verdict"><Badge color={VERDICT_COLOR[g.verdict]}>{VERDICT_LABEL[g.verdict] || g.verdict}</Badge></GRow>
             <GRow k="우선순위"><Badge color={TIER_COLOR[g.priority_tier]}>{TIER_LABEL[g.priority_tier] || g.priority_tier}</Badge></GRow>
             <GRow k="게이팅사유" has={!!g.gate_reason}><span style={{ color: "var(--text)" }}>{g.gate_reason}</span></GRow>
-            <GRow k={g.verdict === "absorb" ? "흡수대상" : "개념"} has={!!g.concept_id}><span style={{ color: "var(--accent)", cursor: "pointer" }} onClick={() => nav("concept", g.concept_id)}>{g.concept_id}</span></GRow>
+            <GRow k="개념" has={!!g.concept_id}><span style={{ color: "var(--accent)", cursor: "pointer" }} onClick={() => nav("concept", g.concept_id)}>{g.concept_id}</span></GRow>
             <GRow k="역할" has={!!g.role}><span style={{ color: "var(--text)" }}>{ROLE_LABEL[g.role] || g.role}</span></GRow>
             <GRow k="표면형" has={!!g.surface}><span style={{ color: "var(--text)" }}>{g.surface}</span></GRow>
             <GRow k="충돌그룹" has={!!g.collision_group}><span style={{ color: "var(--low)", cursor: "pointer" }} onClick={() => nav("collision", g.collision_group)}>{g.collision_group}</span></GRow>
