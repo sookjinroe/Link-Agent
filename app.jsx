@@ -328,6 +328,13 @@ function GateList({ G, sim, sel, onPick }) {
           <input type="checkbox" checked={showNoTerm} onChange={(e) => setShowNoTerm(e.target.checked)}
             style={{ verticalAlign: "middle", marginRight: 5 }} />no_term(식별자·기술) 표시
         </label>}
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "3px 10px", marginBottom: 7,
+        paddingTop: 7, borderTop: "1px solid var(--border)" }}>
+        {[["must", "필수"], ["nice", "선택"], ["absorb", "흡수"], ["human", "사람비준"], ["no_term", "불필요"]].map(([t, desc]) => (
+          <span key={t} style={{ ...mono, fontSize: 11, color: "var(--dim)", whiteSpace: "nowrap" }}>
+            <Badge color={TIER_COLOR[t]}>{TIER_LABEL[t]}</Badge> {desc}
+          </span>))}
+      </div>
       <div style={{ ...mono, fontSize: 11.5, color: "var(--dim)", marginBottom: 8 }}>{cols.length}개</div>
       {Object.entries(byTable).map(([t, ids]) => (
         <div key={t} style={{ marginBottom: 10 }}>
