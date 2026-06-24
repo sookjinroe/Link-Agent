@@ -187,7 +187,7 @@ function Overview({ G, nav }) {
               <div key={id} style={{ border: "1px solid var(--border)", borderLeft: "3px solid var(--low)",
                 borderRadius: 6, padding: "10px 14px", marginBottom: 8 }}>
                 <span style={{ ...mono, fontSize: 14.5, color: "var(--text)", cursor: "pointer" }}
-                  onClick={() => nav("gating", id)}>{colName(id)}</span>
+                  onClick={() => nav("column", id)}>{colName(id)}</span>
                 <Badge color={dc(L.wt(id, G).domain)}>{L.wt(id, G).domain}</Badge>
                 <span style={{ ...mono, fontSize: 12.5, color: "var(--dim)", marginLeft: 8 }}>
                   freq={L.psqlOf(id, G) ? L.psqlOf(id, G).analytic_freq : 0} · score={(sim.scores[id] || 0).toFixed(1)}
@@ -254,7 +254,7 @@ function SchemaView({ G, route, nav }) {
             return (
               <tr key={c.name} style={{ background: hl ? "rgba(232,179,65,0.08)" : "transparent" }}>
                 <td style={{ padding: "5px 12px 5px 0", color: "var(--text)", cursor: "pointer" }}
-                  onClick={() => nav("render", id)}>{c.name}</td>
+                  onClick={() => nav("column", id)}>{c.name}</td>
                 <td style={{ padding: "5px 12px 5px 0", color: "var(--dim)" }}>{c.dtype}</td>
                 <td style={{ padding: "5px 12px 5px 0", color: "var(--sig)" }}>{STD_LABEL[c.std_type] || c.std_type}</td>
                 <td style={{ padding: "5px 12px 5px 0", color: c.codedict ? "var(--high)" : "var(--dim)" }}>
@@ -269,189 +269,244 @@ function SchemaView({ G, route, nav }) {
   return <TwoPane left={left} right={right} />;
 }
 
-// ===================== 컬럼 리스트 좌측 (Render/P-SQL 공용) =====================
-function ColumnList({ G, sel, onPick, filter }) {
+// ===================== 접이식 =====================
+function Collapsible({ title, defaultOpen, children }) {
+  const [o, setO] = useState(defaultOpen !== false);
+  return (
+    <div style={{ marginTop: 18 }}>
+      <div onClick={() => setO(!o)} style={{ ...mono, fontSize: 13, letterSpacing: "0.05em", color: "var(--muted)",
+        cursor: "pointer", userSelect: "none", marginBottom: o ? 9 : 0 }}>
+        <span style={{ display: "inline-block", width: 15, color: "var(--dim)" }}>{o ? "▾" : "▸"}</span>{title}
+      </div>
+      {o && children}
+    </div>);
+}
+
+// ===================== 좌측: 전수 목록 + 티어/필터 =====================
+function GateList({ G, sim, sel, onPick }) {
   const dc = L.domainColor(G);
   const [q, setQ] = useState("");
-  let cols = Object.keys(G.golden.per_column);
-  if (filter) cols = cols.filter(filter);
-  if (q) cols = cols.filter((id) => (id + (L.wt(id, G).concept || "")).toLowerCase().includes(q.toLowerCase()));
+  const [mode, setMode] = useState("all");   // all | pass | fail | missed
+  const [showNoTerm, setShowNoTerm] = useState(false);
+
+  const missedSet = new Set(sim.mustMissed);
+  function visible(id) {
+    const biz = L.isBiz(id, G), tier = L.tierOf(id, G);
+    if (q && !(id + (L.wt(id, G).concept || "")).toLowerCase().includes(q.toLowerCase())) return false;
+    if (mode === "pass") return sim.gated.has(id);
+    if (mode === "fail") return biz && !sim.gated.has(id);
+    if (mode === "missed") return missedSet.has(id);
+    if (!showNoTerm && tier === "no_term") return false;  // all 모드에서 no_term 접기
+    return true;
+  }
+
+  let cols = Object.keys(G.golden.per_column).filter(visible);
   useListNav(cols, sel, onPick, true);
-  // 테이블별 그룹
+
   const byTable = {};
   cols.forEach((id) => { const t = tableName(id); (byTable[t] = byTable[t] || []).push(id); });
+
+  const MODES = [["all", "전체"], ["pass", "통과"], ["fail", "탈락"], ["missed", "must놓침"]];
+  function tierBadge(id) {
+    const t = L.tierOf(id, G);
+    return <Badge color={TIER_COLOR[t]}>{TIER_LABEL[t] || t}</Badge>;
+  }
   return (
     <div>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 4, marginBottom: 8 }}>
+        {MODES.map(([m, label]) => (
+          <span key={m} onClick={() => setMode(m)} style={{ ...mono, fontSize: 12, padding: "2px 8px", cursor: "pointer",
+            borderRadius: 4, border: "1px solid var(--border)",
+            color: mode === m ? "var(--text)" : "var(--dim)",
+            background: mode === m ? "rgba(255,255,255,0.06)" : "transparent" }}>{label}</span>))}
+      </div>
       <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="컬럼 필터"
         style={{ ...mono, fontSize: 13, width: "100%", background: "rgba(0,0,0,0.3)", color: "var(--text)",
-          border: "1px solid var(--border)", borderRadius: 4, padding: "5px 9px", marginBottom: 10 }} />
+          border: "1px solid var(--border)", borderRadius: 4, padding: "5px 9px", marginBottom: 6 }} />
+      {mode === "all" &&
+        <label style={{ ...mono, fontSize: 12, color: "var(--dim)", display: "block", marginBottom: 8, cursor: "pointer" }}>
+          <input type="checkbox" checked={showNoTerm} onChange={(e) => setShowNoTerm(e.target.checked)}
+            style={{ verticalAlign: "middle", marginRight: 5 }} />no_term(식별자·기술) 표시
+        </label>}
+      <div style={{ ...mono, fontSize: 11.5, color: "var(--dim)", marginBottom: 8 }}>{cols.length}개</div>
       {Object.entries(byTable).map(([t, ids]) => (
         <div key={t} style={{ marginBottom: 10 }}>
           <div style={{ ...mono, fontSize: 11.5, color: "var(--dim)", marginBottom: 3 }}>{G.schema[t] ? G.schema[t].table : t}</div>
           {ids.map((id) => (
-            <HoverRow key={id} active={sel === id} onClick={() => onPick(id)} style={{ padding: "3px 8px", borderRadius: 4 }}>
-              <span style={{ ...mono, fontSize: 13, color: "var(--text)" }}>{colName(id)}</span>
+            <HoverRow key={id} active={sel === id} onClick={() => onPick(id)}
+              style={{ display: "flex", alignItems: "center", padding: "3px 8px", borderRadius: 4 }}>
+              <span style={{ ...mono, fontSize: 13, color: sim.gated.has(id) ? "var(--text)" : "var(--dim)" }}>{colName(id)}</span>
+              <span style={{ flex: 1 }} />
+              {L.isBiz(id, G) && <span style={{ ...mono, fontSize: 11, color: "var(--muted)", marginRight: 4 }}>{(sim.scores[id] || 0).toFixed(1)}</span>}
+              {tierBadge(id)}
             </HoverRow>))}
         </div>))}
     </div>);
 }
 
-// ===================== ③ Render 산출 =====================
-function RenderView({ G, route, nav }) {
-  const dc = L.domainColor(G);
-  const first = Object.keys(G.golden.per_column)[0];
-  const sel = route.sel && G.render[route.sel] ? route.sel : first;
-  const r = L.rend(sel, G), w = L.wt(sel, G);
-  const right = (
-    <div style={{ maxWidth: 820 }}>
-      <div style={{ ...mono, fontSize: 18, color: "var(--text)" }}>{colName(sel)}
-        <Badge color={dc(w.domain)}>{w.domain}</Badge></div>
-      <div style={{ ...mono, fontSize: 12.5, color: "var(--dim)", marginTop: 3 }}>{sel}</div>
+// ===================== 우측: 점수 분해 =====================
+function ScoreBreakdown({ id, G, sim }) {
+  const biz = L.isBiz(id, G);
+  const tier = L.tierOf(id, G);
+  if (!biz) {
+    const w = L.wt(id, G);
+    return (
+      <div style={{ border: "1px solid var(--border)", borderLeft: "3px solid var(--dim)", borderRadius: 7, padding: "13px 17px" }}>
+        <div style={{ ...mono, fontSize: 14, color: "var(--muted)" }}>게이팅 대상 아님</div>
+        <div style={{ fontSize: 13.5, color: "var(--dim)", marginTop: 5, lineHeight: 1.6 }}>
+          {w.std_type === "entity" ? "식별자·조인키" : "기술·감사"} 컬럼이라 용어 분석 대상에서 제외됩니다.
+        </div>
+        <div style={{ marginTop: 8 }}><Badge color={TIER_COLOR[tier]}>{TIER_LABEL[tier] || tier}</Badge></div>
+      </div>);
+  }
+  const p = L.psqlOf(id, G);
+  const freq = p ? p.analytic_freq : 0;
+  const freqC = Math.min(freq / 100, 5);
+  const flags = L.rend(id, G).risk_flags || [];
+  const riskC = flags.length * 2;
+  const inColForms = [...(sim.inCol[id] || [])];
+  const colC = inColForms.length ? 1 : 0;
+  const total = sim.scores[id] != null ? sim.scores[id] : (freqC + riskC + colC);
+  const result = sim.passed.has(id) ? ["1차 통과", "var(--high)"]
+    : sim.pulled.has(id) ? ["클러스터 끌림", "var(--accent)"] : ["탈락", "var(--low)"];
+  const maxC = 5;
+  function line(label, contrib, detail, color) {
+    return (
+      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>
+        <span style={{ ...mono, fontSize: 12.5, color: "var(--muted)", width: 74 }}>{label}</span>
+        <Bar value={contrib} max={maxC} w={80} color={color} />
+        <span style={{ ...mono, fontSize: 13, color: "var(--text)", width: 34 }}>+{contrib.toFixed(1)}</span>
+        <span style={{ fontSize: 12.5, color: "var(--dim)" }}>{detail}</span>
+      </div>);
+  }
+  return (
+    <div style={{ border: "1px solid var(--border)", borderLeft: `3px solid ${result[1]}`, borderRadius: 7, padding: "14px 18px" }}>
+      <div style={{ ...mono, fontSize: 13, letterSpacing: "0.05em", color: "var(--muted)", marginBottom: 11 }}>게이팅 점수 분해</div>
+      {line("빈도", freqC, freq === 0 ? "freq 0 (신호 없음)" : `freq ${freq}`, "var(--sig)")}
+      {line("구조위험", riskC, flags.length ? flags.map((f) => RISK_LABEL[f] || f).join(", ") : "위험 없음", "var(--low)")}
+      {line("충돌가점", colC, colC ? `표면형 "${inColForms.join("·")}" 충돌 연루` : "충돌 없음", "var(--accent)")}
+      <div style={{ borderTop: "1px solid var(--border)", margin: "9px 0", paddingTop: 9, display: "flex", alignItems: "center", gap: 14 }}>
+        <span style={{ ...mono, fontSize: 15, color: "var(--text)" }}>합계 {total.toFixed(1)}</span>
+        <span style={{ ...mono, fontSize: 12.5, color: "var(--dim)" }}>임계 {sim.threshold}</span>
+        <Badge color={result[1]}>{result[0]}</Badge>
+        <Badge color={TIER_COLOR[tier]}>{TIER_LABEL[tier] || tier}</Badge>
+      </div>
+      {tier === "must" && !sim.gated.has(id) &&
+        <div style={{ fontSize: 13, color: "var(--low)", marginTop: 4 }}>
+          must인데 게이팅이 못 잡음 — 빈도·구조·충돌 신호 밖의 중요성(발견)
+        </div>}
+      {sim.pulled.has(id) &&
+        <div style={{ fontSize: 13, color: "var(--accent)", marginTop: 4 }}>
+          1차 점수는 임계 미만이나 충돌 클러스터로 끌려와 게이팅됨
+        </div>}
+    </div>);
+}
 
-      <Section title="description">
-        <div style={{ fontSize: 15, color: "var(--text)", lineHeight: 1.7 }}>{r.description || "-"}</div>
-      </Section>
-      <Section title="type_candidate (capability 후보)">
-        <div>{(r.type_candidate || []).map((t) => <Chip key={t} color="var(--sig)">{STD_LABEL[t] || t}</Chip>)}
-          {(r.type_candidate || []).length > 1 && <span style={{ fontSize: 13, color: "var(--med)", marginLeft: 6 }}>다용도</span>}</div>
-      </Section>
-      {r.risk_flags && r.risk_flags.length > 0 &&
-        <Section title="오류위험 플래그">
-          <div>{r.risk_flags.map((f) => <Chip key={f} color={RISK_COLOR[f]}>{RISK_LABEL[f] || f}</Chip>)}</div>
-        </Section>}
-      <Section title="surface_candidates (구조에서 뽑은 표면형)">
-        <div>{(r.surface_candidates || []).length
-          ? r.surface_candidates.map((s) => <Chip key={s}>{s}</Chip>)
-          : <span style={{ color: "var(--dim)" }}>-</span>}</div>
-      </Section>
-      {r.codedict &&
-        <Section title="codedict">
-          <table style={{ ...mono, fontSize: 13 }}><tbody>
+// ===================== 우측: 컬럼 종합 상세 =====================
+function ColumnDetail({ id, G, sim, nav }) {
+  const dc = L.domainColor(G);
+  const r = L.rend(id, G), w = L.wt(id, G), p = L.psqlOf(id, G), g = L.gold(id, G);
+  const roleMax = p ? Math.max(1, ...Object.values(p.usage_roles || {})) : 1;
+  const joinPairs = (G.psql.join_pairs || []).filter((x) => x.a === id || x.b === id);
+  const cooc = (G.psql.cooccur || []).filter((x) => x.a === id || x.b === id).sort((a, b) => b.cooccur_freq - a.cooccur_freq).slice(0, 8);
+
+  return (
+    <div style={{ maxWidth: 840 }}>
+      <div style={{ ...mono, fontSize: 19, color: "var(--text)" }}>{colName(id)}
+        <Badge color={dc(w.domain)}>{w.domain}</Badge>
+        {w.concept && <span style={{ fontSize: 14, color: "var(--muted)", marginLeft: 10, fontFamily: "var(--sans)" }}>{w.concept}</span>}</div>
+      <div style={{ ...mono, fontSize: 12.5, color: "var(--dim)", marginTop: 3, marginBottom: 16 }}>{id}</div>
+
+      <ScoreBreakdown id={id} G={G} sim={sim} />
+
+      <Collapsible title="Render 산출" defaultOpen={true}>
+        <div style={{ fontSize: 14.5, color: "var(--text)", lineHeight: 1.7, marginBottom: 12 }}>{r.description || "-"}</div>
+        <div style={{ marginBottom: 8 }}>
+          <span style={{ ...mono, fontSize: 12.5, color: "var(--muted)", marginRight: 8 }}>type_candidate</span>
+          {(r.type_candidate || []).map((t) => <Chip key={t} color="var(--sig)">{STD_LABEL[t] || t}</Chip>)}
+          {(r.type_candidate || []).length > 1 && <span style={{ fontSize: 12.5, color: "var(--med)" }}>다용도</span>}
+        </div>
+        {(r.risk_flags || []).length > 0 &&
+          <div style={{ marginBottom: 8 }}>
+            <span style={{ ...mono, fontSize: 12.5, color: "var(--muted)", marginRight: 8 }}>risk_flags</span>
+            {r.risk_flags.map((f) => <Chip key={f} color={RISK_COLOR[f]}>{RISK_LABEL[f] || f}</Chip>)}</div>}
+        <div style={{ marginBottom: 8 }}>
+          <span style={{ ...mono, fontSize: 12.5, color: "var(--muted)", marginRight: 8 }}>surface_candidates</span>
+          {(r.surface_candidates || []).length ? r.surface_candidates.map((s) => <Chip key={s}>{s}</Chip>)
+            : <span style={{ color: "var(--dim)" }}>-</span>}</div>
+        <div style={{ ...mono, fontSize: 13, color: "var(--muted)", marginBottom: 8 }}>
+          format <span style={{ color: "var(--lin)" }}>{r.format || "-"}</span>
+          <span style={{ marginLeft: 16 }}>confidence <span style={{ color: "var(--text)" }}>{r.confidence || "-"}</span></span></div>
+        {r.codedict &&
+          <table style={{ ...mono, fontSize: 13, marginTop: 4 }}><tbody>
             {Object.entries(r.codedict).map(([k, v]) =>
               <tr key={k}><td style={{ color: "var(--accent)", padding: "2px 14px 2px 0" }}>{k}</td>
                 <td style={{ color: "var(--text)" }}>{v}</td></tr>)}
-          </tbody></table>
-        </Section>}
-      <Section title="기타">
-        <div style={{ ...mono, fontSize: 13.5, color: "var(--muted)" }}>
-          format: <span style={{ color: "var(--lin)" }}>{r.format || "-"}</span>
-          <span style={{ marginLeft: 18 }}>confidence: <span style={{ color: "var(--text)" }}>{r.confidence || "-"}</span></span>
-        </div>
-      </Section>
-    </div>);
-  return <TwoPane left={<ColumnList G={G} sel={sel} onPick={(id) => nav("render", id)} />} right={right} />;
-}
+          </tbody></table>}
+      </Collapsible>
 
-// ===================== ④ P-SQL 신호 =====================
-function PsqlView({ G, route, nav }) {
-  const first = Object.keys(G.golden.per_column)[0];
-  const sel = route.sel && G.golden.per_column[route.sel] ? route.sel : first;
-  const p = L.psqlOf(sel, G);
-  const roleMax = p ? Math.max(1, ...Object.values(p.usage_roles || {})) : 1;
-  const joinPairs = (G.psql.join_pairs || []).filter((x) => x.a === sel || x.b === sel);
-  const cooc = (G.psql.cooccur || []).filter((x) => x.a === sel || x.b === sel).sort((a, b) => b.cooccur_freq - a.cooccur_freq).slice(0, 8);
-
-  const right = (
-    <div style={{ maxWidth: 820 }}>
-      <div style={{ ...mono, fontSize: 18, color: "var(--text)" }}>{colName(sel)}</div>
-      <div style={{ ...mono, fontSize: 12.5, color: "var(--dim)", marginTop: 3 }}>{sel}</div>
-      {!p ? <Section title="신호"><div style={{ color: "var(--dim)" }}>P-SQL 산출 없음</div></Section> : (
-        <>
-          <Section title="분석 빈도">
-            {p.analytic_freq === 0
-              ? <div style={{ ...mono, color: "var(--low)" }}>0 — 신호 없음 (부재이지 부정이 아님)</div>
-              : <span style={{ ...mono, fontSize: 22, color: "var(--text)" }}>{p.analytic_freq}</span>}
-          </Section>
-          <Section title="사용 역할 (타입 확증, 강화 전용)">
-            <table style={{ ...mono, fontSize: 13 }}><tbody>
+      <Collapsible title="P-SQL 신호" defaultOpen={true}>
+        {!p ? <div style={{ color: "var(--dim)" }}>P-SQL 산출 없음</div> : (
+          <>
+            <div style={{ marginBottom: 10 }}>
+              <span style={{ ...mono, fontSize: 12.5, color: "var(--muted)", marginRight: 8 }}>분석 빈도</span>
+              {p.analytic_freq === 0
+                ? <span style={{ ...mono, color: "var(--low)" }}>0 — 신호 없음 (부재이지 부정 아님)</span>
+                : <span style={{ ...mono, fontSize: 16, color: "var(--text)" }}>{p.analytic_freq}</span>}
+            </div>
+            <table style={{ ...mono, fontSize: 13, marginBottom: 10 }}><tbody>
               {Object.entries(p.usage_roles || {}).map(([k, v]) =>
-                <tr key={k}><td style={{ color: "var(--muted)", padding: "3px 14px 3px 0", width: 70 }}>{k}</td>
-                  <td style={{ padding: "3px 10px 3px 0" }}><Bar value={v} max={roleMax} /></td>
+                <tr key={k}><td style={{ color: "var(--muted)", padding: "2px 14px 2px 0", width: 64 }}>{k}</td>
+                  <td style={{ padding: "2px 10px 2px 0" }}><Bar value={v} max={roleMax} /></td>
                   <td style={{ color: "var(--text)" }}>{v}</td></tr>)}
             </tbody></table>
-          </Section>
-          <Section title="where 리터럴 (값 binding 후보)">
-            <div>{(p.where_literals || []).length ? p.where_literals.map((x) => <Chip key={x} color="var(--accent)">{x}</Chip>)
-              : <span style={{ color: "var(--dim)" }}>-</span>}</div>
-          </Section>
-          <Section title="별칭 (사용에서 온 표면형)">
-            <div>{(p.aliases || []).length ? p.aliases.map((x) => <Chip key={x}>{x}</Chip>)
-              : <span style={{ color: "var(--dim)" }}>-</span>}</div>
-          </Section>
-        </>)}
-      {joinPairs.length > 0 &&
-        <Section title="조인 쌍 (entity·미선언 FK 후보)">
-          {joinPairs.map((x, i) => <div key={i} style={{ ...mono, fontSize: 13, color: "var(--muted)", marginBottom: 3 }}>
-            {colName(x.a)} <span style={{ color: "var(--dim)" }}>↔</span> {x.b} <span style={{ color: "var(--dim)" }}>({x.join_freq})</span></div>)}
-        </Section>}
-      {cooc.length > 0 &&
-        <Section title="공동참조 (개념 경계 신호)">
-          {cooc.map((x, i) => { const other = x.a === sel ? x.b : x.a;
-            return <div key={i} style={{ ...mono, fontSize: 13, color: "var(--muted)", marginBottom: 3 }}>
-              {colName(other)} <span style={{ color: "var(--dim)" }}>({x.cooccur_freq})</span>
-              {x.same_concept_hint && <Badge color="var(--high)">동일개념</Badge>}</div>; })}
-        </Section>}
-    </div>);
-  return <TwoPane left={<ColumnList G={G} sel={sel} onPick={(id) => nav("psql", id)} />} right={right} />;
-}
+            <div style={{ marginBottom: 7 }}>
+              <span style={{ ...mono, fontSize: 12.5, color: "var(--muted)", marginRight: 8 }}>where 리터럴</span>
+              {(p.where_literals || []).length ? p.where_literals.map((x) => <Chip key={x} color="var(--accent)">{x}</Chip>)
+                : <span style={{ color: "var(--dim)" }}>-</span>}</div>
+            <div>
+              <span style={{ ...mono, fontSize: 12.5, color: "var(--muted)", marginRight: 8 }}>별칭</span>
+              {(p.aliases || []).length ? p.aliases.map((x) => <Chip key={x}>{x}</Chip>)
+                : <span style={{ color: "var(--dim)" }}>-</span>}</div>
+          </>)}
+        {joinPairs.length > 0 &&
+          <div style={{ marginTop: 10 }}>
+            <span style={{ ...mono, fontSize: 12.5, color: "var(--muted)" }}>조인 쌍</span>
+            {joinPairs.map((x, i) => <div key={i} style={{ ...mono, fontSize: 12.5, color: "var(--muted)", marginTop: 2 }}>
+              {colName(x.a)} ↔ {x.b} <span style={{ color: "var(--dim)" }}>({x.join_freq})</span></div>)}</div>}
+        {cooc.length > 0 &&
+          <div style={{ marginTop: 10 }}>
+            <span style={{ ...mono, fontSize: 12.5, color: "var(--muted)" }}>공동참조</span>
+            {cooc.map((x, i) => { const other = x.a === id ? x.b : x.a;
+              return <div key={i} style={{ ...mono, fontSize: 12.5, color: "var(--muted)", marginTop: 2 }}>
+                {colName(other)} <span style={{ color: "var(--dim)" }}>({x.cooccur_freq})</span>
+                {x.same_concept_hint && <Badge color="var(--high)">동일개념</Badge>}</div>; })}</div>}
+      </Collapsible>
 
-// ===================== ⑤ 게이팅 =====================
-function GatingView({ G, route, nav }) {
-  const dc = L.domainColor(G);
-  const sim = L.simulateGating(G);
-  const order = ["must", "nice", "absorb", "human", "no_term"];
-  const byTier = {};
-  sim.biz.forEach((id) => { const t = L.tierOf(id, G); (byTier[t] = byTier[t] || []).push(id); });
-  const maxScore = Math.max(1, ...Object.values(sim.scores));
-
-  function row(id) {
-    const sc = sim.scores[id] || 0;
-    const inGate = sim.gated.has(id);
-    const pulled = sim.pulled.has(id);
-    const w = L.wt(id, G);
-    const hl = route.sel === id;
-    return (
-      <HoverRow key={id} active={hl} onClick={() => nav("render", id)}
-        style={{ display: "flex", gap: 10, alignItems: "center", padding: "4px 10px", borderRadius: 4 }}>
-        <span style={{ ...mono, fontSize: 13.5, color: inGate ? "var(--text)" : "var(--dim)", width: 180 }}>{colName(id)}</span>
-        <Badge color={dc(w.domain)}>{w.domain}</Badge>
-        <span style={{ flex: 1 }} />
-        <Bar value={sc} max={maxScore} w={90} color={inGate ? "var(--high)" : "var(--dim)"} />
-        <span style={{ ...mono, fontSize: 12.5, color: "var(--muted)", width: 34, textAlign: "right" }}>{sc.toFixed(1)}</span>
-        {pulled && <Badge color="var(--accent)">클러스터</Badge>}
-        {!inGate && <Badge color="var(--low)">탈락</Badge>}
-      </HoverRow>);
-  }
-
-  return (
-    <div style={{ padding: "18px 26px", maxWidth: 1040 }}>
-      <div style={{ border: "1px solid var(--border)", borderLeft: "3px solid var(--sig)", borderRadius: 7,
-        padding: "13px 18px", marginBottom: 20 }}>
-        <div style={{ fontSize: 14.5, color: "var(--muted)", lineHeight: 1.7 }}>
-          게이팅 점수 = 빈도 + 구조 오류위험 + 약한 충돌가점(+1). 임계 {sim.threshold} 이상이면 1차 통과.
-          충돌 표면형 클러스터는 멤버 하나가 통과하면 나머지를 끌어옵니다(저빈도 충돌상대 구제).
-          빈도 0은 신호 없음이지 탈락 사유가 아닙니다.
+      <Collapsible title="골든 (모으고 가르기)" defaultOpen={false}>
+        <div style={{ ...mono, fontSize: 13, lineHeight: 1.9 }}>
+          <div>verdict <Badge color={VERDICT_COLOR[g.verdict]}>{VERDICT_LABEL[g.verdict] || g.verdict}</Badge></div>
+          {g.concept_id && <div>concept <span style={{ color: "var(--accent)", cursor: "pointer" }} onClick={() => nav("concept", g.concept_id)}>{g.concept_id}</span></div>}
+          {g.role && <div>역할 <span style={{ color: "var(--text)" }}>{ROLE_LABEL[g.role] || g.role}</span></div>}
+          {g.surface && <div>표면형 <span style={{ color: "var(--text)" }}>{g.surface}</span></div>}
+          {g.collision_group && <div>충돌그룹 <span style={{ color: "var(--low)", cursor: "pointer" }} onClick={() => nav("collision", g.collision_group)}>{g.collision_group}</span></div>}
+          {g.contained_by && <div>상위개념 <span style={{ color: "var(--high)", cursor: "pointer" }} onClick={() => nav("concept", g.contained_by)}>{g.contained_by}</span></div>}
         </div>
-        <div style={{ marginTop: 10 }}>
-          <Stat label="비즈니스" value={sim.biz.length} /> <span style={{ display: "inline-block", width: 8 }} />
-          <span style={{ ...mono, color: "var(--high)" }}>게이팅 {sim.gated.size}</span>
-          <span style={{ ...mono, color: "var(--accent)", marginLeft: 16 }}>클러스터 구제 {sim.pulled.size}</span>
-          <span style={{ ...mono, color: "var(--low)", marginLeft: 16 }}>must 놓침 {sim.mustMissed.length}</span>
-          <span style={{ ...mono, color: "var(--dim)", marginLeft: 16 }}>no_term FP {sim.noTermFp.length}</span>
-        </div>
-      </div>
-
-      {order.map((t) => byTier[t] && byTier[t].length ? (
-        <Section key={t} title={
-          <span><Badge color={TIER_COLOR[t]}>{TIER_LABEL[t] || t}</Badge> <span style={{ color: "var(--muted)" }}>{byTier[t].length}</span></span>}>
-          {t === "must" && sim.mustMissed.length > 0 &&
-            <div style={{ fontSize: 13, color: "var(--low)", marginBottom: 6 }}>
-              must 중 탈락(발견): {sim.mustMissed.map(colName).join(", ")}
-            </div>}
-          {byTier[t].sort((a, b) => (sim.scores[b] || 0) - (sim.scores[a] || 0)).map(row)}
-        </Section>) : null)}
+        {g.note && <div style={{ fontSize: 13.5, color: "var(--muted)", marginTop: 8, lineHeight: 1.6 }}>{g.note}</div>}
+      </Collapsible>
     </div>);
 }
+
+// ===================== 컬럼 종합 탭 =====================
+function ColumnView({ G, route, nav }) {
+  const sim = useMemo(() => L.simulateGating(G), [G]);
+  const first = Object.keys(G.golden.per_column)[0];
+  const sel = route.sel && G.golden.per_column[route.sel] ? route.sel : first;
+  return <TwoPane
+    left={<GateList G={G} sim={sim} sel={sel} onPick={(id) => nav("column", id)} />}
+    right={<ColumnDetail id={sel} G={G} sim={sim} nav={nav} />} />;
+}
+
 
 // ===================== ⑥ 충돌 지도 =====================
 function CollisionView({ G, route, nav }) {
@@ -483,7 +538,7 @@ function CollisionView({ G, route, nav }) {
                   표면형 "{surfaces.join("·")}" 이 {domsIn.length}개 도메인에 걸침
                 </div>
                 <div>{members.map((m) =>
-                  <Chip key={m.id} color={dc(m.domain)} onClick={() => nav("render", m.id)}
+                  <Chip key={m.id} color={dc(m.domain)} onClick={() => nav("column", m.id)}
                     title={m.id}>{colName(m.id)} ·{m.domain}</Chip>)}</div>
               </div>);
           })}
@@ -499,7 +554,7 @@ function CollisionView({ G, route, nav }) {
             <span style={{ ...mono, fontSize: 12, color: "var(--dim)" }}>→</span>
             <div style={{ display: "flex", flexWrap: "wrap" }}>
               {ids.map((id) => { const w = L.wt(id, G);
-                return <Chip key={id} color={dc(w.domain)} onClick={() => nav("render", id)} title={id}>
+                return <Chip key={id} color={dc(w.domain)} onClick={() => nav("column", id)} title={id}>
                   {w.concept || colName(id)} <span style={{ color: "var(--dim)" }}>·{w.domain}</span></Chip>; })}
             </div>
           </div>))}
@@ -550,7 +605,7 @@ function ConceptView({ G, route, nav }) {
   const kids = children[sel] || [];
   function colChip(id) {
     const g = G.golden.per_column[id] || {};
-    return <Chip key={id} color={VERDICT_COLOR[g.verdict]} onClick={() => nav("render", id)} title={id}>
+    return <Chip key={id} color={VERDICT_COLOR[g.verdict]} onClick={() => nav("column", id)} title={id}>
       {colName(id)} <span style={{ color: "var(--dim)" }}>{ROLE_LABEL[(L.wt(id, G)).role] || ""}</span></Chip>;
   }
   const right = (
@@ -581,13 +636,13 @@ function ConceptView({ G, route, nav }) {
 }
 
 // ===================== 셸 =====================
-const TABS = [["overview", "개요"], ["schema", "구조"], ["render", "Render"], ["psql", "P-SQL"],
-              ["gating", "게이팅"], ["collision", "충돌"], ["concept", "개념"]];
+const TABS = [["overview", "개요"], ["schema", "구조"], ["column", "컬럼"], ["collision", "충돌"], ["concept", "개념"]];
 
 function parseHash() {
   const m = (location.hash || "").match(/^#([a-z]+)(?:\/(.+))?$/);
   if (!m) return { v: "overview", sel: null };
-  return { v: m[1], sel: m[2] ? decodeURIComponent(m[2]) : null };
+  const vmap = { render: "column", psql: "column", gating: "column" };
+  return { v: vmap[m[1]] || m[1], sel: m[2] ? decodeURIComponent(m[2]) : null };
 }
 
 function App({ G }) {
@@ -614,9 +669,7 @@ function App({ G }) {
       </div>
       {route.v === "overview" && <Overview {...props} />}
       {route.v === "schema" && <SchemaView {...props} />}
-      {route.v === "render" && <RenderView {...props} />}
-      {route.v === "psql" && <PsqlView {...props} />}
-      {route.v === "gating" && <GatingView {...props} />}
+      {route.v === "column" && <ColumnView {...props} />}
       {route.v === "collision" && <CollisionView {...props} />}
       {route.v === "concept" && <ConceptView {...props} />}
     </div>);
