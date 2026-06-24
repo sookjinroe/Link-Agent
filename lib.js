@@ -59,6 +59,30 @@
     return ids;
   }
 
+  function tablesByDomain(G) {
+    const by = {};
+    for (const k in G.schema) (by[G.schema[k].schema] = by[G.schema[k].schema] || []).push(k);
+    return by;
+  }
+  function tableColumns(tk, G) {
+    return (G.schema[tk] ? G.schema[tk].columns : []).map((c) => tk + "." + c.name);
+  }
+  // 나가는 FK: 이 테이블의 FK 컬럼 -> 대상 테이블
+  function fkOut(tk, G) {
+    const out = [];
+    for (const c of (G.schema[tk] ? G.schema[tk].columns : []))
+      if (c.fk) out.push({ via: c.name, to: c.fk.split(".").slice(0, 2).join(".") });
+    return out;
+  }
+  // 들어오는 FK: 다른 테이블이 이 테이블을 참조
+  function fkIn(tk, G) {
+    const inn = [];
+    for (const ok in G.schema) if (ok !== tk)
+      for (const c of G.schema[ok].columns)
+        if (c.fk && c.fk.split(".").slice(0, 2).join(".") === tk) inn.push({ from: ok, via: c.name });
+    return inn;
+  }
+
   function searchAll(G, q, cap) {
     cap = cap || 14;
     const nq = (q || "").toLowerCase().replace(/\s+/g, "");
@@ -75,5 +99,6 @@
   }
 
   return { PALETTE, tableName, colName, domainOf, domains, domainColor,
-           rend, psqlOf, freqOf, surfaceForms, surfaceOverlap, allColumns, searchAll };
+           rend, psqlOf, freqOf, surfaceForms, surfaceOverlap, allColumns,
+           tablesByDomain, tableColumns, fkOut, fkIn, searchAll };
 });
