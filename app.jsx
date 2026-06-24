@@ -279,6 +279,15 @@ function Panel({ title, children }) {
     </div>);
 }
 
+// 골든 패널의 한 행. 값이 없으면 '없음'을 표시해 정답지처럼 모든 항목이 일관되게 보이게 한다.
+function GRow({ k, children, has }) {
+  return (
+    <div style={{ display: "flex", gap: 8, marginBottom: 5 }}>
+      <span style={{ color: "var(--muted)", width: 78, flexShrink: 0 }}>{k}</span>
+      <span style={{ wordBreak: "break-word" }}>{has === false ? <span style={{ color: "var(--dim)" }}>없음</span> : children}</span>
+    </div>);
+}
+
 // ===================== 좌측: 전수 목록 + 티어/필터 =====================
 function GateList({ G, sim, sel, onPick }) {
   const dc = L.domainColor(G);
@@ -479,16 +488,18 @@ function ColumnDetail({ id, G, sim, nav }) {
                   {colName(other)} <span style={{ color: "var(--dim)" }}>({x.cooccur_freq})</span></div>; })}</div>}
         </Panel>
 
-        <Panel title="골든 (모으고 가르기)">
-          <div style={{ ...mono, fontSize: 13, lineHeight: 1.95 }}>
-            <div>verdict <Badge color={VERDICT_COLOR[g.verdict]}>{VERDICT_LABEL[g.verdict] || g.verdict}</Badge></div>
-            {g.concept_id && <div>concept <span style={{ color: "var(--accent)", cursor: "pointer" }} onClick={() => nav("concept", g.concept_id)}>{g.concept_id}</span></div>}
-            {g.role && <div>역할 <span style={{ color: "var(--text)" }}>{ROLE_LABEL[g.role] || g.role}</span></div>}
-            {g.surface && <div>표면형 <span style={{ color: "var(--text)" }}>{g.surface}</span></div>}
-            {g.collision_group && <div>충돌그룹 <span style={{ color: "var(--low)", cursor: "pointer" }} onClick={() => nav("collision", g.collision_group)}>{g.collision_group}</span></div>}
-            {g.contained_by && <div>상위개념 <span style={{ color: "var(--high)", cursor: "pointer" }} onClick={() => nav("concept", g.contained_by)}>{g.contained_by}</span></div>}
+        <Panel title="골든 (정답 라벨)">
+          <div style={{ ...mono, fontSize: 12.5, lineHeight: 1.4 }}>
+            <GRow k="verdict"><Badge color={VERDICT_COLOR[g.verdict]}>{VERDICT_LABEL[g.verdict] || g.verdict}</Badge></GRow>
+            <GRow k="우선순위"><Badge color={TIER_COLOR[g.priority_tier]}>{TIER_LABEL[g.priority_tier] || g.priority_tier}</Badge></GRow>
+            <GRow k="게이팅사유" has={!!g.gate_reason}><span style={{ color: "var(--text)" }}>{g.gate_reason}</span></GRow>
+            <GRow k="개념" has={!!g.concept_id}><span style={{ color: "var(--accent)", cursor: "pointer" }} onClick={() => nav("concept", g.concept_id)}>{g.concept_id}</span></GRow>
+            <GRow k="역할" has={!!g.role}><span style={{ color: "var(--text)" }}>{ROLE_LABEL[g.role] || g.role}</span></GRow>
+            <GRow k="표면형" has={!!g.surface}><span style={{ color: "var(--text)" }}>{g.surface}</span></GRow>
+            <GRow k="충돌그룹" has={!!g.collision_group}><span style={{ color: "var(--low)", cursor: "pointer" }} onClick={() => nav("collision", g.collision_group)}>{g.collision_group}</span></GRow>
+            <GRow k="상위개념" has={!!g.contained_by}><span style={{ color: "var(--high)", cursor: "pointer" }} onClick={() => nav("concept", g.contained_by)}>{g.contained_by}</span></GRow>
+            <GRow k="메모" has={!!g.note}><span style={{ color: "var(--muted)", fontFamily: "var(--sans)" }}>{g.note}</span></GRow>
           </div>
-          {g.note && <div style={{ fontSize: 13, color: "var(--muted)", marginTop: 8, lineHeight: 1.55 }}>{g.note}</div>}
         </Panel>
       </div>
     </div>);
