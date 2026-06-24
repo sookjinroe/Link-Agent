@@ -134,6 +134,14 @@
     return { concepts, children, roots };
   }
 
+  // ---- 개념의 대표 용어명(표면형). 개념 id 대신 사람이 읽는 이름을 보여주기 위함 ----
+  function conceptLabel(cid, G) {
+    const c = (G.golden.concepts || {})[cid] || {};
+    for (const id of (c.direct || [])) { const s = gold(id, G).surface; if (s) return s; }
+    if (c.surfaces && c.surfaces.length) return c.surfaces[0];
+    return cid;
+  }
+
   // ---- 통합 검색 ----
   function searchAll(G, q, cap) {
     cap = cap || 14;
@@ -159,6 +167,6 @@
   return {
     PALETTE, domains, domainColor, wt, gold, rend, psqlOf,
     surfaceForms, isBiz, collisionGraph, gatingScore, tierOf,
-    simulateGating, conceptTree, searchAll,
+    simulateGating, conceptTree, conceptLabel, searchAll,
   };
 });

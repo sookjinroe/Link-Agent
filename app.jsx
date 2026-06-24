@@ -589,17 +589,17 @@ function ConceptView({ G, route, nav }) {
         {withChildren.length ? withChildren.map((cid) => (
           <div key={cid} style={{ marginBottom: 4 }}>
             <HoverRow active={sel === cid} onClick={() => nav("concept", cid)} style={{ padding: "3px 8px", borderRadius: 4 }}>
-              <span style={{ ...mono, fontSize: 13.5, color: "var(--accent)" }}>{cid}</span></HoverRow>
+              <span style={{ ...mono, fontSize: 13.5, color: "var(--accent)" }}>{L.conceptLabel(cid, G)}</span><span style={{ ...mono, fontSize: 10.5, color: "var(--dim)", marginLeft: 6 }}>{cid}</span></HoverRow>
             {children[cid].map((ch) => (
               <HoverRow key={ch} active={sel === ch} onClick={() => nav("concept", ch)}
                 style={{ padding: "2px 8px 2px 22px", borderRadius: 4 }}>
-                <span style={{ ...mono, fontSize: 12.5, color: "var(--sig)" }}>└ {ch}</span></HoverRow>))}
+                <span style={{ ...mono, fontSize: 12.5, color: "var(--sig)" }}>└ {L.conceptLabel(ch, G)}</span></HoverRow>))}
           </div>)) : <div style={{ color: "var(--dim)", fontSize: 13 }}>없음</div>}
       </Section>
       <Section title={`그 외 개념 ${flat.length}`}>
         {flat.map((cid) => (
           <HoverRow key={cid} active={sel === cid} onClick={() => nav("concept", cid)} style={{ padding: "3px 8px", borderRadius: 4 }}>
-            <span style={{ ...mono, fontSize: 13, color: "var(--text)" }}>{cid}</span></HoverRow>))}
+            <span style={{ ...mono, fontSize: 13, color: "var(--text)" }}>{L.conceptLabel(cid, G)}</span></HoverRow>))}
       </Section>
     </div>);
 
@@ -612,10 +612,11 @@ function ConceptView({ G, route, nav }) {
   }
   const right = (
     <div style={{ maxWidth: 820 }}>
-      <div style={{ ...mono, fontSize: 19, color: "var(--accent)" }}>{sel}
-        <Badge color={dc(conceptDomain(sel))}>{conceptDomain(sel)}</Badge></div>
+      <div style={{ ...mono, fontSize: 20, color: "var(--accent)" }}>{L.conceptLabel(sel, G)}
+        <Badge color={dc(conceptDomain(sel))}>{conceptDomain(sel)}</Badge>
+        <span style={{ ...mono, fontSize: 12, color: "var(--dim)", marginLeft: 10 }}>{sel}</span></div>
       {c.surfaces && c.surfaces.length > 0 &&
-        <div style={{ marginTop: 8 }}>{c.surfaces.map((s) => <Chip key={s}>{s}</Chip>)}</div>}
+        <div style={{ marginTop: 8 }}><span style={{ ...mono, fontSize: 11.5, color: "var(--dim)", marginRight: 6 }}>표면형</span>{c.surfaces.map((s) => <Chip key={s}>{s}</Chip>)}</div>}
 
       {c.direct && c.direct.length > 0 &&
         <Section title="직접객체 (개념 자체를 담는 컬럼)">{c.direct.map(colChip)}</Section>}
@@ -623,7 +624,7 @@ function ConceptView({ G, route, nav }) {
         <Section title="포함 하위 개념">
           {kids.map((ch) => (
             <div key={ch} style={{ marginBottom: 8 }}>
-              <span style={{ ...mono, fontSize: 14, color: "var(--sig)", cursor: "pointer" }} onClick={() => nav("concept", ch)}>{ch}</span>
+              <span style={{ ...mono, fontSize: 14, color: "var(--sig)", cursor: "pointer" }} onClick={() => nav("concept", ch)}>{L.conceptLabel(ch, G)}</span>
               <span style={{ marginLeft: 8 }}>{(concepts[ch].surfaces || []).map((s) => <Chip key={s}>{s}</Chip>)}</span>
             </div>))}
         </Section>}
