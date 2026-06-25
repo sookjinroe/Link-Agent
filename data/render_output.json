@@ -1,6 +1,6 @@
 {
  "CUST_DB.CUST_BASE_INFO.CUST_NO": {
-  "description": "고객을 식별하는 고유 번호",
+  "description": "전사 고객 마스터의 기본 식별자로, 다른 테이블에서 고객을 참조할 때 조인 키로 사용된다. CUST_NM(성명)·BIRTH_DT(생년월일) 등 개인식별 가능 정보와 결합 시 PII로 취급해야 한다.",
   "type_candidate": [
    "entity"
   ],
@@ -9,7 +9,7 @@
   "confidence": "HIGH"
  },
  "CUST_DB.CUST_BASE_INFO.CUST_NM": {
-  "description": "고객 성명",
+  "description": "고객의 실명(법적 성명)으로, PII에 해당하므로 조회·출력 시 접근 권한 및 마스킹 정책을 확인해야 한다. 식별자로 사용하지 말고 CUST_NO를 기준 키로 쓸 것(동명이인 존재 가능).",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -18,7 +18,7 @@
   "confidence": "HIGH"
  },
  "CUST_DB.CUST_BASE_INFO.BIRTH_DT": {
-  "description": "생년월일",
+  "description": "고객 생년월일(PII). YYYYMMDD 형식의 문자열로 저장되므로 날짜 연산 시 형변환 필요. 가입일(JOIN_DT)과 혼동 주의—JOIN_DT는 최초 거래 개시일이며 이 컬럼과 무관하다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -32,7 +32,7 @@
   "format": "YYYYMMDD"
  },
  "CUST_DB.CUST_BASE_INFO.GENDER_CD": {
-  "description": "성별 코드",
+  "description": "고객의 법적 성별을 나타내는 코드로, M=남·F=여로 구분된다. BIRTH_DT·CUST_NM과 함께 개인을 특정할 수 있는 PII 항목이므로 조회·활용 시 개인정보 처리 기준을 준수해야 한다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -45,7 +45,7 @@
   }
  },
  "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD": {
-  "description": "고객 등급. 거래 실적 기반 우수고객 분류",
+  "description": "거래 실적 기반으로 산정된 고객 등급 코드. 01=일반, 02=우수, 03=VIP, 04=VVIP 순으로 높아지며, 휴면 고객(DORMANT_YN='Y')도 등급값을 유지하므로 활성 고객 필터링 시 DORMANT_YN을 함께 조건으로 걸어야 한다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -63,7 +63,7 @@
   }
  },
  "CUST_DB.CUST_BASE_INFO.JOIN_DT": {
-  "description": "고객 최초 거래 개시일",
+  "description": "고객이 최초로 거래를 개시한 날짜로, 회원가입 시점이 아닌 실제 첫 거래 발생일을 기록한다. 레코드 생성 시각인 CREATED_AT과 혼동 주의—CREATED_AT은 DB 행 생성 시각이며 JOIN_DT는 비즈니스상 거래 시작일이다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -75,7 +75,7 @@
   "format": null
  },
  "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN": {
-  "description": "마케팅 정보 수신 동의 여부",
+  "description": "마케팅 정보 수신에 대한 고객의 명시적 동의 여부(Y=예, N=아니오). 동의 철회 시 UPDATED_AT·UPDATED_BY가 갱신되므로, 현재 레코드의 값이 최신 의사를 반영한다. 수신 채널(SMS·이메일 등)별 세분화 동의는 이 컬럼에 담기지 않으므로, 채널별 필터링이 필요하면 별도 동의 테이블을 확인해야 한다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -88,7 +88,7 @@
   }
  },
  "CUST_DB.CUST_BASE_INFO.DORMANT_YN": {
-  "description": "휴면 여부",
+  "description": "고객 계정의 휴면 상태 여부(Y=휴면, N=정상). 휴면 전환 기준(예: 1년 미거래 등)은 이 컬럼에 반영되지 않으므로, 기준 시점이나 전환 이력이 필요하면 별도 이력 테이블을 확인해야 한다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -101,7 +101,7 @@
   }
  },
  "CUST_DB.CUST_BASE_INFO.CREATED_AT": {
-  "description": "레코드 생성 시각",
+  "description": "이 레코드가 DB에 최초 삽입된 시각으로, 고객 가입 시점과 다를 수 있다(고객 최초 거래 개시일은 JOIN_DT 참조). UPDATED_AT(최종 수정 시각)과 달리 변경되지 않는 불변 감사 필드다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -111,7 +111,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "CUST_DB.CUST_BASE_INFO.UPDATED_AT": {
-  "description": "레코드 최종 수정 시각",
+  "description": "이 레코드가 마지막으로 변경된 시각으로, CREATED_AT(최초 생성)과 달리 MKTG_CNSNT_YN·DORMANT_YN·CUST_GRD_CD 등 어느 컬럼이든 수정될 때마다 갱신된다. 수정 주체는 UPDATED_BY에서 확인하며, 고객 정보 변경 이력 추적이나 최신성 판단 기준으로 사용한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -121,7 +121,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "CUST_DB.CUST_BASE_INFO.UPDATED_BY": {
-  "description": "최종 수정자 ID",
+  "description": "레코드를 마지막으로 수정한 주체의 ID로, 시스템 배치·API 계정 등 비인간 계정 ID도 포함될 수 있어 고객 담당자 조회 시 주의가 필요하다. 수정 시각은 UPDATED_AT 참조.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -130,7 +130,7 @@
   "confidence": "HIGH"
  },
  "CUST_DB.CUST_CONTACT.CONTACT_SEQ": {
-  "description": "연락처 일련번호",
+  "description": "고객 연락처 레코드의 PK로, 한 고객(CUST_NO)이 여러 연락처를 가질 수 있어 행을 유일하게 식별하는 대리 키다. 비즈니스 의미 없는 시스템 생성 순번이므로 조회·조인 키로만 사용하고 값 자체를 해석하지 않는다.",
   "type_candidate": [
    "entity"
   ],
@@ -139,7 +139,7 @@
   "confidence": "HIGH"
  },
  "CUST_DB.CUST_CONTACT.CUST_NO": {
-  "description": "고객 식별 외래키",
+  "description": "CUST_BASE_INFO의 고객을 참조하는 FK로, 이 테이블에서 한 고객이 여러 연락처 행을 가질 수 있으므로 단독으로는 행을 식별하지 못한다(PK는 CONTACT_SEQ). 특정 고객의 연락처를 조회할 때 CUST_BASE_INFO와 조인 기준 컬럼으로 사용한다.",
   "type_candidate": [
    "entity"
   ],
@@ -148,7 +148,7 @@
   "confidence": "HIGH"
  },
  "CUST_DB.CUST_CONTACT.CNTC_TYPE_CD": {
-  "description": "연락처 유형",
+  "description": "연락처 채널 유형을 나타내는 분류 코드로, 01=휴대폰, 02=집전화, 03=이메일, 04=직장 중 하나다. 같은 테이블의 CNTC_VAL이 실제 연락처 값(번호·주소)을 담으며, 이 컬럼은 그 값의 종류를 식별하는 데 쓰인다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -163,7 +163,7 @@
   }
  },
  "CUST_DB.CUST_CONTACT.CNTC_VAL": {
-  "description": "연락처 값",
+  "description": "CNTC_TYPE_CD가 나타내는 유형(이메일·전화·주소 등)에 따라 실제 연락처 값이 저장되며, 유형별로 형식이 다르므로 조회 시 반드시 CNTC_TYPE_CD와 함께 필터링해야 한다. PII에 해당하므로 직접 노출·조인 시 접근 권한을 확인할 것.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -172,7 +172,7 @@
   "confidence": "HIGH"
  },
  "CUST_DB.CUST_CONTACT.REG_DT": {
-  "description": "연락처 등록일",
+  "description": "고객이 해당 연락처를 실제로 등록(신고·제출)한 날짜로, 시스템이 레코드를 생성한 시각인 CREATED_AT과 다를 수 있다(예: 과거 연락처 소급 입력). 유효 연락처 기준일 필터링 시 VALID_YN과 함께 사용할 것.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -182,7 +182,7 @@
   "format": null
  },
  "CUST_DB.CUST_CONTACT.VALID_YN": {
-  "description": "유효 여부",
+  "description": "해당 연락처 레코드가 현재 유효한지 여부를 나타낸다(Y=유효, N=무효). 무효 처리된 행은 물리적으로 삭제되지 않고 남아 있으므로, 실제 사용 가능한 연락처만 조회할 때는 반드시 VALID_YN = 'Y' 조건을 적용해야 한다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -195,7 +195,7 @@
   }
  },
  "CUST_DB.CUST_CONTACT.CREATED_AT": {
-  "description": "레코드 생성 시각",
+  "description": "레코드가 DB에 처음 삽입된 시스템 타임스탬프로, 연락처가 실제로 사용되기 시작한 날짜를 뜻하는 REG_DT(DATE)와 다르다. UPDATED_AT은 이후 변경 시각이므로, 최초 등록 시점을 기준으로 필터링하거나 정렬할 때 이 컬럼을 사용한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -205,7 +205,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "CUST_DB.CUST_CONTACT.UPDATED_AT": {
-  "description": "레코드 최종 수정 시각",
+  "description": "연락처 레코드가 마지막으로 변경된 시각으로, 최초 생성 시각인 CREATED_AT과 달리 INSERT 이후 UPDATE가 발생할 때마다 갱신된다. 수정 주체는 UPDATED_BY에서 확인하며, 변경 이력이 없으면 CREATED_AT과 동일한 값을 가질 수 있다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -215,7 +215,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "CUST_DB.CUST_CONTACT.UPDATED_BY": {
-  "description": "최종 수정자 ID",
+  "description": "이 레코드를 마지막으로 수정한 주체의 ID로, 사람(직원 ID) 또는 배치·시스템 계정일 수 있다. UPDATED_AT과 쌍을 이루며, 수정 시각이 아닌 수정 주체를 추적할 때 사용한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -224,7 +224,7 @@
   "confidence": "HIGH"
  },
  "CUST_DB.CUST_GRD_HIST.GRD_HIST_SEQ": {
-  "description": "등급 이력 일련번호",
+  "description": "고객 등급 변경 이력 한 건을 고유하게 식별하는 대리 키로, 비즈니스 의미는 없다. 동일 고객(CUST_NO)의 등급 변경 순서를 추적하려면 APLD_DT 또는 CREATED_AT을 기준으로 정렬해야 한다.",
   "type_candidate": [
    "entity"
   ],
@@ -233,7 +233,7 @@
   "confidence": "HIGH"
  },
  "CUST_DB.CUST_GRD_HIST.CUST_NO": {
-  "description": "고객 식별 외래키",
+  "description": "CUST_BASE_INFO의 고객을 참조하는 식별자로, 이 테이블에서 한 고객이 여러 등급 이력 행(GRD_HIST_SEQ)을 가질 수 있으므로 단독으로는 유일하지 않다. 특정 시점의 등급을 조회할 때는 APLD_DT 또는 CREATED_AT과 함께 사용해야 한다.",
   "type_candidate": [
    "entity"
   ],
@@ -242,7 +242,7 @@
   "confidence": "HIGH"
  },
  "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD": {
-  "description": "변경된 고객 등급",
+  "description": "변경 후 적용된 고객 등급 코드(01=일반, 02=우수, 03=VIP, 04=VVIP); 변경 전 등급이 아닌 APLD_DT 시점부터 유효한 신규 등급이며, 변경 사유는 RSN_CD를 참조한다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -260,7 +260,7 @@
   }
  },
  "CUST_DB.CUST_GRD_HIST.APLD_DT": {
-  "description": "등급 적용일",
+  "description": "등급이 실제로 효력을 발생한 날짜로, 레코드가 DB에 기록된 시점(CREATED_AT)과 다를 수 있다. 동일 고객의 이력이 여러 행일 때 이 컬럼 기준으로 유효 등급 구간을 산정한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -270,7 +270,7 @@
   "format": null
  },
  "CUST_DB.CUST_GRD_HIST.RSN_CD": {
-  "description": "등급 변경 사유 코드",
+  "description": "등급이 변경된 사유를 나타내는 코드로, 실제 코드 목록은 별도 코드 테이블을 참조해야 한다. CUST_GRD_CD(변경된 등급 값)와 쌍을 이루며, 이 컬럼은 '왜 바뀌었는가'를 담는다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -281,7 +281,7 @@
   "confidence": "MEDIUM"
  },
  "CUST_DB.CUST_GRD_HIST.CREATED_AT": {
-  "description": "레코드 생성 시각",
+  "description": "이 레코드가 최초 삽입된 시각으로, 등급 변경이 시스템에 기록된 시점을 나타낸다. 등급이 실제로 효력을 발휘하는 날짜는 APLD_DT, 이후 수정이 발생한 시각은 UPDATED_AT을 참조해야 한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -291,7 +291,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "CUST_DB.CUST_GRD_HIST.UPDATED_AT": {
-  "description": "레코드 최종 수정 시각",
+  "description": "레코드가 마지막으로 수정된 시각으로, 등급 변경 이벤트 자체의 발생 시점(APLD_DT)이나 이력 최초 생성 시각(CREATED_AT)과 다르다. 수정 이력 추적 목적이며, 실제 등급 변경 시점을 구하려면 APLD_DT를 사용해야 한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -301,7 +301,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "CUST_DB.CUST_GRD_HIST.UPDATED_BY": {
-  "description": "최종 수정자 ID",
+  "description": "등급 이력 레코드를 마지막으로 수정한 주체의 ID로, 사람(운영자) 계정 또는 배치·시스템 계정이 모두 기록될 수 있다. CREATED_AT/UPDATED_AT이 시각을 담당하므로 이 컬럼은 '누가'만 나타내며, 등급을 변경한 원래 신청자나 승인자가 아닌 레코드 수정자임에 주의.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -310,7 +310,7 @@
   "confidence": "HIGH"
  },
  "LOAN_DB.LOAN_ACCT_MST.LOAN_NO": {
-  "description": "대출 계좌를 식별하는 고유 번호",
+  "description": "대출 계좌를 유일하게 식별하는 PK로, 한 고객(CUST_NO)이 여러 대출을 보유할 수 있으므로 고객 단위가 아닌 계좌 단위 집계 시 이 키를 기준으로 삼아야 한다.",
   "type_candidate": [
    "entity"
   ],
@@ -319,7 +319,7 @@
   "confidence": "HIGH"
  },
  "LOAN_DB.LOAN_ACCT_MST.CUST_NO": {
-  "description": "고객 식별 외래키",
+  "description": "이 계좌를 보유한 고객의 식별자로, CUST_DB.CUST_BASE_INFO의 고객 원장과 조인하는 키다. 계좌 식별자인 LOAN_NO와 혼동 주의—한 고객(CUST_NO)이 여러 대출 계좌(LOAN_NO)를 가질 수 있다.",
   "type_candidate": [
    "entity"
   ],
@@ -328,7 +328,7 @@
   "confidence": "HIGH"
  },
  "LOAN_DB.LOAN_ACCT_MST.PRDT_CD": {
-  "description": "대출 상품 외래키",
+  "description": "이 계좌에 적용된 대출 상품을 식별하는 코드로, LOAN_PRDT_MST를 조인하면 상품명·유형 등 상품 속성을 확인할 수 있다. 계좌 상태(LOAN_STAT_CD)나 상환 방식(RPY_MTHD_CD)과 달리 상품 자체의 분류 기준이므로, 상품별 집계 시 이 컬럼을 기준으로 그룹핑해야 한다.",
   "type_candidate": [
    "entity"
   ],
@@ -337,7 +337,7 @@
   "confidence": "HIGH"
  },
  "LOAN_DB.LOAN_ACCT_MST.LOAN_AMT": {
-  "description": "대출 실행 원금",
+  "description": "대출 실행 시점에 확정된 원금 총액으로, 이후 상환이 진행되어도 변하지 않는 최초 실행 금액이다. 현재 남은 원금은 LOAN_BAL_AMT를 사용할 것.",
   "type_candidate": [
    "measure"
   ],
@@ -348,7 +348,7 @@
   "confidence": "HIGH"
  },
  "LOAN_DB.LOAN_ACCT_MST.LOAN_BAL_AMT": {
-  "description": "대출 잔액. 남은 원금",
+  "description": "대출 실행 원금(LOAN_AMT)에서 상환된 금액을 차감한 현재 시점의 잔여 원금. 이자·연체료는 포함하지 않으며, LOAN_AMT와 비교해 상환 진행 정도를 파악할 수 있다.",
   "type_candidate": [
    "measure"
   ],
@@ -360,7 +360,7 @@
   "confidence": "HIGH"
  },
  "LOAN_DB.LOAN_ACCT_MST.INT_RATE": {
-  "description": "기준 금리",
+  "description": "대출 계약 시점에 확정된 기준 금리(우대 조건 미반영). 실제 적용 금리는 APLD_RATE를 사용해야 하며, 이 컬럼은 우대금리 산출의 출발점으로만 참조한다.",
   "type_candidate": [
    "measure"
   ],
@@ -371,7 +371,7 @@
   "confidence": "HIGH"
  },
  "LOAN_DB.LOAN_ACCT_MST.APLD_RATE": {
-  "description": "실제 적용 금리. 기준금리 INT_RATE 에서 우대를 반영한 최종 금리라 구분 필요",
+  "description": "고객에게 실제 부과되는 최종 금리로, 기준 금리(INT_RATE)에서 우대금리·가산금리 등을 반영한 결과값이다. 금리 조건 조회 시 INT_RATE가 아닌 이 컬럼을 사용해야 한다.",
   "type_candidate": [
    "measure"
   ],
@@ -384,7 +384,7 @@
   "confidence": "HIGH"
  },
  "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD": {
-  "description": "대출 계좌 상태",
+  "description": "대출 계좌의 현재 상태를 나타내는 코드로, 01=정상·02=연체·03=기한이익상실·04=완제 중 하나를 가진다. 기한이익상실(03)은 연체 심화로 잔여 만기 전 전액 상환 의무가 발생한 상태이며, 완제(04)는 LOAN_BAL_AMT가 0이 되어 계좌가 종결된 상태다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -402,7 +402,7 @@
   }
  },
  "LOAN_DB.LOAN_ACCT_MST.EXEC_DT": {
-  "description": "대출 실행일",
+  "description": "실제 대출금이 고객에게 지급된 날짜로, 대출 신청·승인 시점이 아닌 자금 집행 시점을 기록한다. LOAN_AMT(실행 원금)와 함께 대출 개시 기준점이 되며, CREATED_AT(레코드 생성 시각)과 혼동하지 말 것.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -414,7 +414,7 @@
   "format": null
  },
  "LOAN_DB.LOAN_ACCT_MST.MTRT_DT": {
-  "description": "대출 만기일",
+  "description": "대출 계좌의 최종 만기일로, 대출 실행일(EXEC_DT)과 구분된다. 만기 연장이 발생하면 이 값이 갱신되므로, 원래 약정 만기가 필요한 경우 이력 테이블을 확인해야 한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -427,7 +427,7 @@
   "format": null
  },
  "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD": {
-  "description": "상환 방식",
+  "description": "대출 계좌의 원금·이자 상환 방식을 나타내는 코드로, 01=원금균등(매월 원금 동일, 이자 감소), 02=원리금균등(매월 납입액 동일), 03=만기일시(만기에 원금 전액 상환)를 구분한다. 만기일시(03)는 MTRT_DT까지 이자만 납부하므로 LOAN_BAL_AMT가 실행 원금과 동일하게 유지될 수 있음에 유의.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -443,7 +443,7 @@
   }
  },
  "LOAN_DB.LOAN_ACCT_MST.CREATED_AT": {
-  "description": "레코드 생성 시각",
+  "description": "레코드가 처음 INSERT된 시각으로, 대출 실행일(EXEC_DT)과 다를 수 있다. EXEC_DT는 금융 계약상 실행일이고, CREATED_AT은 시스템에 행이 생성된 시각이므로 대출 시점 분석에는 EXEC_DT를 사용해야 한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -453,7 +453,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "LOAN_DB.LOAN_ACCT_MST.UPDATED_AT": {
-  "description": "레코드 최종 수정 시각",
+  "description": "레코드가 마지막으로 변경된 시각으로, 대출 조건·상태 등 어떤 컬럼이든 수정되면 갱신된다. 최초 생성 시각은 CREATED_AT, 수정 주체는 UPDATED_BY를 함께 참조할 것.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -463,7 +463,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "LOAN_DB.LOAN_ACCT_MST.UPDATED_BY": {
-  "description": "최종 수정자 ID",
+  "description": "레코드를 마지막으로 수정한 주체의 ID로, 사람(행원·관리자) 또는 배치 시스템 계정일 수 있다. 수정 시각은 UPDATED_AT을 참조하며, 이 컬럼은 수정 시각이 아닌 수정 주체만 담는다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -472,7 +472,7 @@
   "confidence": "HIGH"
  },
  "LOAN_DB.LOAN_APPL_HIST.APPL_NO": {
-  "description": "대출 신청 번호",
+  "description": "대출 신청 건을 고유하게 식별하는 PK. 고객(CUST_NO)·상품(PRDT_CD)과 달리 신청 이벤트 자체를 식별하므로, 한 고객이 동일 상품을 여러 번 신청하면 각각 별도의 APPL_NO가 부여된다.",
   "type_candidate": [
    "entity"
   ],
@@ -481,7 +481,7 @@
   "confidence": "HIGH"
  },
  "LOAN_DB.LOAN_APPL_HIST.CUST_NO": {
-  "description": "고객 식별 외래키",
+  "description": "이 신청 이력 레코드를 일으킨 고객의 식별자로, CUST_DB.CUST_BASE_INFO의 동일 컬럼과 조인해 고객 기본정보를 참조한다. 신청 건 식별에는 APPL_NO를, 고객 식별에는 이 컬럼을 사용하며, 한 고객이 여러 신청 이력을 가질 수 있으므로 이 컬럼 단독으로는 행을 특정할 수 없다.",
   "type_candidate": [
    "entity"
   ],
@@ -490,7 +490,7 @@
   "confidence": "HIGH"
  },
  "LOAN_DB.LOAN_APPL_HIST.PRDT_CD": {
-  "description": "대출 상품 외래키",
+  "description": "고객이 신청한 대출 상품을 식별하는 코드로, LOAN_PRDT_MST를 조인해 상품명·유형 등 상세 속성을 조회할 수 있다. 신청 시점에 선택된 상품을 기록하며, 이후 상품 조건이 변경되더라도 이 값은 갱신되지 않을 수 있으므로 현행 상품 정보와 혼용 시 주의가 필요하다.",
   "type_candidate": [
    "entity"
   ],
@@ -499,7 +499,7 @@
   "confidence": "HIGH"
  },
  "LOAN_DB.LOAN_APPL_HIST.APPL_AMT": {
-  "description": "신청 금액. 고객이 신청한 희망 한도",
+  "description": "고객이 심사 전 신청 시점에 요청한 희망 대출 한도액으로, 심사 후 확정된 승인 금액(APRV_AMT)과 다를 수 있다.",
   "type_candidate": [
    "measure"
   ],
@@ -510,7 +510,7 @@
   "confidence": "HIGH"
  },
  "LOAN_DB.LOAN_APPL_HIST.APRV_AMT": {
-  "description": "승인 금액. 심사 결과 승인된 금액이라 신청금액과 구분",
+  "description": "심사 완료 후 승인된 대출 금액으로, 고객이 요청한 희망 한도인 APPL_AMT와 다를 수 있으며 미승인 건은 NULL일 수 있다. APPL_STAT_CD가 승인 상태가 아닌 경우 이 값을 집계에서 제외해야 한다.",
   "type_candidate": [
    "measure"
   ],
@@ -523,7 +523,7 @@
   "confidence": "HIGH"
  },
  "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD": {
-  "description": "신청 진행 상태",
+  "description": "대출 신청 건의 현재 진행 단계를 나타내며, 01=접수·02=심사중·03=승인·04=거절 순으로 진행된다. 승인 여부(03/04)가 확정된 시점의 금액은 APRV_AMT를, 해당 날짜는 APRV_DT를 참조해야 하며 이 컬럼 단독으로 승인 금액이나 처리일을 추론하지 말 것.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -541,7 +541,7 @@
   }
  },
  "LOAN_DB.LOAN_APPL_HIST.APPL_DT": {
-  "description": "신청 접수일",
+  "description": "고객이 대출을 신청한 접수일(영업일 기준). 심사 완료 후 기록되는 승인 처리일 APRV_DT, 시스템 레코드 생성 시각 CREATED_AT과 구분해야 한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -553,7 +553,7 @@
   "format": null
  },
  "LOAN_DB.LOAN_APPL_HIST.APRV_DT": {
-  "description": "승인 처리일. 신청일 APPL_DT 와 구분",
+  "description": "심사 완료 후 승인이 확정된 날짜. 신청 접수일(APPL_DT)과 달리 심사 결과가 확정된 시점이며, APPL_STAT_CD가 승인 상태가 아닌 경우 NULL일 수 있다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -567,7 +567,7 @@
   "format": null
  },
  "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD": {
-  "description": "신청 시 선택한 상환 방식. 실제 적용 상환방식과 혼동 주의",
+  "description": "고객이 신청 시점에 선택한 상환 방식 코드(01 원금균등, 02 원리금균등, 03 만기일시). 심사·실행 후 실제 적용된 상환 방식과 다를 수 있으므로, 실행 계약 기준 조회 시에는 이 컬럼 대신 실행 테이블의 해당 컬럼을 참조해야 한다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -585,7 +585,7 @@
   }
  },
  "LOAN_DB.LOAN_APPL_HIST.CREATED_AT": {
-  "description": "레코드 생성 시각",
+  "description": "이 레코드가 DB에 최초 삽입된 시각으로, 고객이 신청을 제출한 비즈니스 시점인 APPL_DT와 다르다(시스템 지연·배치 적재 등으로 차이 발생 가능). 신청 접수 시점 기준 분석에는 APPL_DT를 사용할 것.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -595,7 +595,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "LOAN_DB.LOAN_APPL_HIST.UPDATED_AT": {
-  "description": "레코드 최종 수정 시각",
+  "description": "레코드가 마지막으로 변경된 시각으로, 상태 전이(APPL_STAT_CD 변경)·금액 수정 등 어떤 필드 갱신이든 반영된다. 최초 생성 시각은 CREATED_AT, 수정 주체는 UPDATED_BY를 함께 참조할 것.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -605,7 +605,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "LOAN_DB.LOAN_APPL_HIST.UPDATED_BY": {
-  "description": "최종 수정자 ID",
+  "description": "레코드를 마지막으로 수정한 주체의 ID로, 사람(행원·심사자) 또는 시스템 배치 프로세스 ID가 모두 기록될 수 있다. 신청자 본인 식별자인 CUST_NO와 혼동하지 말 것.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -614,7 +614,7 @@
   "confidence": "HIGH"
  },
  "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_SEQ": {
-  "description": "연체 이력 일련번호",
+  "description": "대출 연체 이력 테이블의 PK로, 연체 이벤트 1건당 하나씩 부여되는 시스템 생성 식별자다. LOAN_NO 하나에 연체 이력이 여러 건 존재할 수 있으므로, 특정 연체 회차를 특정할 때 이 값으로 구분한다.",
   "type_candidate": [
    "entity"
   ],
@@ -623,7 +623,7 @@
   "confidence": "HIGH"
  },
  "LOAN_DB.LOAN_DLNQ_HIST.LOAN_NO": {
-  "description": "대출 계좌 외래키",
+  "description": "이 테이블의 연체 이력 레코드가 귀속되는 대출 계좌 식별자로, LOAN_ACCT_MST의 LOAN_NO를 참조한다. 한 LOAN_NO에 연체 발생·해소 이력이 여러 건 존재할 수 있으며, 개별 이력은 DLNQ_SEQ로 구분한다.",
   "type_candidate": [
    "entity"
   ],
@@ -632,7 +632,7 @@
   "confidence": "HIGH"
  },
  "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD": {
-  "description": "연체 상태",
+  "description": "연체 이력 레코드의 현재 상태를 나타내는 코드로, 01=연체발생·02=연체지속·03=연체해소 중 하나를 가진다. OCUR_DT(발생일)·CLEAR_DT(해소일)가 이벤트 시점을 기록하는 반면, 이 컬럼은 해당 레코드 시점의 상태 단계를 나타내므로 UPDATED_AT 기준 최신 행의 값이 현재 연체 여부 판단에 쓰인다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -649,7 +649,7 @@
   }
  },
  "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_AMT": {
-  "description": "연체 금액",
+  "description": "연체 발생 시점의 미상환 원금 기준 연체 금액(원 단위 정수)으로, 연체로 인해 추가 부과된 가산 이자는 DLNQ_INT_AMT에 별도 관리되므로 총 연체 부담액 산출 시 두 컬럼을 합산해야 한다.",
   "type_candidate": [
    "measure"
   ],
@@ -660,7 +660,7 @@
   "confidence": "HIGH"
  },
  "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_DAYS": {
-  "description": "연체 일수",
+  "description": "연체 발생일(OCUR_DT)부터 연체 해소일(CLEAR_DT) 또는 기록 시점까지 경과한 누적 연체 일수로, 연체 금액(DLNQ_AMT)·가산 이자(DLNQ_INT_AMT)와 달리 기간 차원의 심각도를 나타낸다. CLEAR_DT가 NULL인 진행 중 연체의 경우 조회 시점 기준으로 갱신될 수 있으므로 UPDATED_AT과 함께 확인해야 한다.",
   "type_candidate": [
    "measure"
   ],
@@ -671,7 +671,7 @@
   "confidence": "HIGH"
  },
  "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_INT_AMT": {
-  "description": "연체로 부과된 가산 이자. 연체금액과 구분",
+  "description": "연체 기간 동안 발생한 가산 이자 금액(원 단위 정수). 같은 테이블의 DLNQ_AMT(연체 원금)와 구분되며, 이 컬럼은 연체 원금에 대해 추가로 부과된 이자만을 나타낸다.",
   "type_candidate": [
    "measure"
   ],
@@ -684,7 +684,7 @@
   "confidence": "HIGH"
  },
  "LOAN_DB.LOAN_DLNQ_HIST.OCUR_DT": {
-  "description": "연체 발생일",
+  "description": "연체가 실제로 발생한 날짜(최초 상환 미이행일). 연체가 해소된 날짜인 CLEAR_DT, 레코드가 생성된 시각인 CREATED_AT과 구분해야 하며, 연체 기간 계산(DLNQ_DAYS)의 기산점으로 사용된다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -696,7 +696,7 @@
   "format": null
  },
  "LOAN_DB.LOAN_DLNQ_HIST.CLEAR_DT": {
-  "description": "연체 해소일",
+  "description": "연체가 실제로 해소된 날짜(상환 완료 또는 조건 충족 시점)로, 연체가 발생한 OCUR_DT와 쌍을 이룬다. 연체 미해소 상태이면 NULL이므로, 해소 여부 필터링 시 NULL 체크가 필요하다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -706,7 +706,7 @@
   "format": null
  },
  "LOAN_DB.LOAN_DLNQ_HIST.CREATED_AT": {
-  "description": "레코드 생성 시각",
+  "description": "이 레코드가 DB에 삽입된 시스템 시각으로, 연체 발생 시점(OCUR_DT)과 다르다. 연체 이력의 생성 시점 추적·감사 목적으로만 쓰이며, 비즈니스 연체 분석에는 OCUR_DT를 사용해야 한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -716,7 +716,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "LOAN_DB.LOAN_DLNQ_HIST.UPDATED_AT": {
-  "description": "레코드 최종 수정 시각",
+  "description": "레코드가 마지막으로 변경된 시스템 타임스탬프로, 연체 발생·해소 등 비즈니스 이벤트 시점인 OCUR_DT·CLEAR_DT와 달리 DB 행 갱신 시각을 나타낸다. UPDATED_BY와 쌍으로 쓰이며, 연체 상태(DLNQ_STAT_CD)나 금액 변경 이력 추적 시 기준 시각으로 활용된다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -726,7 +726,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "LOAN_DB.LOAN_DLNQ_HIST.UPDATED_BY": {
-  "description": "최종 수정자 ID",
+  "description": "이 레코드를 마지막으로 수정한 주체의 ID로, 사람(행원) 계정 또는 배치·시스템 계정이 모두 기록될 수 있다. 수정 시각은 UPDATED_AT을 참조하며, 최초 생성자·시각은 이 컬럼이 아닌 CREATED_AT으로 확인해야 한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -735,7 +735,7 @@
   "confidence": "HIGH"
  },
  "LOAN_DB.LOAN_PRDT_MST.PRDT_CD": {
-  "description": "대출 상품 코드",
+  "description": "대출 상품을 고유하게 식별하는 PK 코드로, 상품명(PRDT_NM)·유형(PRDT_TYPE_CD)·금리·한도 등 상품 속성을 조회하거나 다른 테이블과 조인할 때 기준 키로 사용한다.",
   "type_candidate": [
    "entity"
   ],
@@ -744,7 +744,7 @@
   "confidence": "HIGH"
  },
  "LOAN_DB.LOAN_PRDT_MST.PRDT_NM": {
-  "description": "상품명",
+  "description": "대출 상품의 공식 명칭으로, PRDT_CD(코드)·PRDT_TYPE_CD(유형 분류)와 달리 사람이 읽는 표시용 텍스트다. 상품 조회·보고서 출력 시 사용자에게 노출되는 값이며, UPDATED_AT 기준으로 변경될 수 있으므로 이력 비교 시 최신 레코드를 기준으로 삼아야 한다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -753,7 +753,7 @@
   "confidence": "HIGH"
  },
  "LOAN_DB.LOAN_PRDT_MST.PRDT_TYPE_CD": {
-  "description": "상품 유형",
+  "description": "대출 상품의 담보·상환 방식에 따른 유형 분류 코드로, 01=신용·02=담보·03=전세·04=정책 중 하나를 가진다. 개별 상품 식별자인 PRDT_CD나 상품명 PRDT_NM과 달리, 이 컬럼은 상품군 단위 필터링(예: 담보 대출 전체 조회)에 사용한다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -768,7 +768,7 @@
   }
  },
  "LOAN_DB.LOAN_PRDT_MST.BASE_RATE": {
-  "description": "상품 기본 금리",
+  "description": "상품 마스터에 등록된 기준 금리(단위: %, 예: 3.500 = 3.500%)로, 실제 고객에게 적용되는 최종 금리가 아닌 가산·우대 금리 산출의 기준값이다. 동일 테이블에 실행 시점 금리나 고객별 적용 금리 컬럼이 없으므로, 개인화 금리가 필요하면 별도 실행 테이블을 참조해야 한다.",
   "type_candidate": [
    "measure"
   ],
@@ -777,7 +777,7 @@
   "confidence": "HIGH"
  },
  "LOAN_DB.LOAN_PRDT_MST.MAX_LMT_AMT": {
-  "description": "상품 최대 한도",
+  "description": "이 상품에 설정된 대출 한도의 상한값(원 단위)으로, 개별 고객에게 실제 승인된 한도가 아닌 상품 설계 시 정의된 정책적 최대치다. 고객 심사 결과로 산출되는 실행 한도와 혼동하지 말 것.",
   "type_candidate": [
    "measure"
   ],
@@ -788,7 +788,7 @@
   "confidence": "HIGH"
  },
  "LOAN_DB.LOAN_PRDT_MST.SALE_YN": {
-  "description": "판매 여부",
+  "description": "해당 대출 상품이 현재 신규 판매 중인지 여부(Y=판매 중, N=판매 중단·미출시). 상품 마스터에 레코드가 존재하더라도 N이면 실제 취급 불가 상품이므로, 판매 가능 상품 조회 시 반드시 Y 조건으로 필터링해야 한다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -801,7 +801,7 @@
   }
  },
  "LOAN_DB.LOAN_PRDT_MST.CREATED_AT": {
-  "description": "레코드 생성 시각",
+  "description": "이 상품 레코드가 마스터 테이블에 처음 등록된 시각으로, 상품 출시·도입 시점의 기준값이다. 이후 속성 변경은 UPDATED_AT에 반영되므로, 상품 이력 조회 시 두 컬럼을 혼동하지 않도록 주의.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -811,7 +811,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "LOAN_DB.LOAN_PRDT_MST.UPDATED_AT": {
-  "description": "레코드 최종 수정 시각",
+  "description": "상품 마스터 레코드가 마지막으로 변경된 시각으로, 금리·한도·판매 여부 등 어떤 필드 수정이든 갱신된다. 최초 등록 시각은 CREATED_AT, 수정 주체는 UPDATED_BY를 함께 조회해야 변경 이력을 온전히 파악할 수 있다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -821,7 +821,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "LOAN_DB.LOAN_PRDT_MST.UPDATED_BY": {
-  "description": "최종 수정자 ID",
+  "description": "이 상품 마스터 레코드를 마지막으로 수정한 사용자의 시스템 ID. UPDATED_AT(수정 시각)과 쌍을 이루며, 누가 변경했는지를 추적할 때 함께 조회한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -830,7 +830,7 @@
   "confidence": "HIGH"
  },
  "CARD_DB.CARD_MST.CARD_NO": {
-  "description": "카드 식별 번호",
+  "description": "카드 한 장을 고유하게 식별하는 PK로, 실물 카드 번호와 다를 수 있는 내부 관리 키다. 고객 한 명(CUST_NO)이 여러 카드를 보유할 수 있으므로, 고객 단위 조회 시 CUST_NO와 혼용하지 않도록 주의.",
   "type_candidate": [
    "entity"
   ],
@@ -839,7 +839,7 @@
   "confidence": "HIGH"
  },
  "CARD_DB.CARD_MST.CUST_NO": {
-  "description": "고객 식별 외래키",
+  "description": "카드 소유자를 식별하는 고객 번호로, CUST_DB.CUST_BASE_INFO의 고객 원장과 조인하는 FK다. 카드 식별자인 CARD_NO와 혼동 주의—한 고객(CUST_NO)이 여러 카드(CARD_NO)를 보유할 수 있다.",
   "type_candidate": [
    "entity"
   ],
@@ -848,7 +848,7 @@
   "confidence": "HIGH"
  },
  "CARD_DB.CARD_MST.CARD_GRD_CD": {
-  "description": "카드 등급",
+  "description": "카드 등급을 나타내는 코드로, 01=일반·02=골드·03=플래티넘·04=다이아 순으로 등급이 높아진다. CARD_LMT_AMT(한도)와 혜택 수준이 이 등급에 연동되는 경우가 많으므로, 등급 조건 필터링 시 코드값 기준으로 비교해야 한다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -866,7 +866,7 @@
   }
  },
  "CARD_DB.CARD_MST.CARD_LMT_AMT": {
-  "description": "카드 이용 한도",
+  "description": "카드에 부여된 총 이용 한도 금액(원 단위). CARD_BAL_AMT(잔여 한도)와 달리 이 값은 소진·결제와 무관하게 고정된 승인 한도 기준값이며, 잔여 한도 계산의 분모로 사용된다.",
   "type_candidate": [
    "measure"
   ],
@@ -878,7 +878,7 @@
   "confidence": "HIGH"
  },
  "CARD_DB.CARD_MST.CARD_BAL_AMT": {
-  "description": "카드 잔여 한도. 남은 사용 가능액",
+  "description": "카드 이용 한도(CARD_LMT_AMT)에서 현재까지의 승인 누계를 차감한 잔여 사용 가능 금액(원 단위 정수)으로, 한도 자체가 아닌 남은 여력을 나타낸다. 실시간 승인 처리 시 이 값을 기준으로 가용 여부를 판단하므로, 한도 조회가 목적이면 CARD_LMT_AMT를 사용해야 한다.",
   "type_candidate": [
    "measure"
   ],
@@ -890,7 +890,7 @@
   "confidence": "HIGH"
  },
  "CARD_DB.CARD_MST.CARD_STAT_CD": {
-  "description": "카드 상태",
+  "description": "카드의 현재 운영 상태를 나타내는 코드로, 01=정상·02=정지·03=연체·04=해지 중 하나를 가진다. CARD_GRD_CD(등급 분류)와 달리 이 컬럼은 카드 사용 가능 여부를 결정하므로, 거래 가능 여부 조회 시 반드시 01(정상) 여부를 확인해야 한다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -908,7 +908,7 @@
   }
  },
  "CARD_DB.CARD_MST.ISSUE_DT": {
-  "description": "카드 발급일",
+  "description": "카드가 고객에게 실제 발급된 날짜. 레코드 생성 시각(CREATED_AT)과 다를 수 있으며, 유효기간 기산점·카드 연령 계산 시 이 컬럼을 기준으로 사용한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -920,7 +920,7 @@
   "format": null
  },
  "CARD_DB.CARD_MST.EXPIRE_DT": {
-  "description": "카드 유효기간 만료일",
+  "description": "카드 실물에 인쇄된 유효기간의 마지막 날(월말 기준)로, 이 날 이후 카드 결제가 거절된다. 발급 시점을 나타내는 ISSUE_DT, 레코드 이력용 CREATED_AT·UPDATED_AT과 혼동하지 말 것.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -932,7 +932,7 @@
   "format": null
  },
  "CARD_DB.CARD_MST.CREATED_AT": {
-  "description": "레코드 생성 시각",
+  "description": "이 레코드가 DB에 최초 삽입된 시각으로, 카드 발급일(ISSUE_DT)과 다를 수 있다. ISSUE_DT는 업무상 발급 처리일이고, CREATED_AT은 시스템 입력 시점이므로 발급 시점 분석에는 ISSUE_DT를 사용해야 한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -942,7 +942,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "CARD_DB.CARD_MST.UPDATED_AT": {
-  "description": "레코드 최종 수정 시각",
+  "description": "카드 마스터 레코드가 마지막으로 변경된 시각으로, CREATED_AT(생성 시각)과 달리 한도·상태 등 어떤 필드든 수정될 때마다 갱신된다. 수정 주체는 UPDATED_BY에서 확인하며, 최초 생성 시에는 CREATED_AT과 동일한 값을 가질 수 있다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -952,7 +952,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "CARD_DB.CARD_MST.UPDATED_BY": {
-  "description": "최종 수정자 ID",
+  "description": "레코드를 마지막으로 수정한 주체의 ID로, 사람(직원 ID) 또는 배치·시스템 계정일 수 있다. UPDATED_AT이 수정 시각을 나타내며 이 컬럼은 수정 주체만 식별하므로, 변경 이력 추적 시 두 컬럼을 함께 조회해야 한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -961,7 +961,7 @@
   "confidence": "HIGH"
  },
  "CARD_DB.CARD_APPL.CARD_APPL_NO": {
-  "description": "카드 신청 번호",
+  "description": "카드 신청 1건을 고유하게 식별하는 PK로, 동일 고객(CUST_NO)이 여러 번 신청하면 신청마다 별도 번호가 부여된다. 신청 시점의 식별자이므로 발급 완료 후 카드 자체를 식별하는 번호와는 다를 수 있다.",
   "type_candidate": [
    "entity"
   ],
@@ -970,7 +970,7 @@
   "confidence": "HIGH"
  },
  "CARD_DB.CARD_APPL.CUST_NO": {
-  "description": "고객 식별 외래키",
+  "description": "카드 신청 건을 제출한 고객의 식별자로, CUST_DB.CUST_BASE_INFO에서 고객 기본 정보를 조인할 때 사용한다. 신청자 본인을 가리키며, UPDATED_BY(수정 처리자)와 혼동하지 말 것.",
   "type_candidate": [
    "entity"
   ],
@@ -979,7 +979,7 @@
   "confidence": "HIGH"
  },
  "CARD_DB.CARD_APPL.ISSUE_STAT_CD": {
-  "description": "발급 진행 단계. 유사한 심사 상태와 혼동 주의",
+  "description": "카드 신청 건의 현재 처리 단계를 나타내며, 01=신청→02=심사→03=발급→04=반려 순으로 진행된다. 심사 결과(승인/반려)가 아닌 전체 프로세스 단계를 추적하는 값으로, 최종 완료 상태는 03(발급) 또는 04(반려) 두 가지다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -999,7 +999,7 @@
   }
  },
  "CARD_DB.CARD_APPL.REQ_LMT_AMT": {
-  "description": "신청 희망 한도",
+  "description": "고객이 신청 시점에 직접 입력한 희망 한도 금액(원 단위 정수)으로, 심사·승인 후 실제 부여 한도와 다를 수 있다. 같은 테이블에 승인 한도 컬럼이 없으나, 신청 단계의 값임을 명확히 구분해 사용할 것.",
   "type_candidate": [
    "measure"
   ],
@@ -1010,7 +1010,7 @@
   "confidence": "HIGH"
  },
  "CARD_DB.CARD_APPL.APPL_DT": {
-  "description": "카드 신청일",
+  "description": "고객이 카드를 신청한 날짜(시각 아님)로, 심사·발급 기준일로 사용된다. 레코드 생성 시각인 CREATED_AT과 달리 실제 신청 접수일을 나타내며, 시스템 입력 지연 등으로 두 값이 다를 수 있다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1020,7 +1020,7 @@
   "format": null
  },
  "CARD_DB.CARD_APPL.CREATED_AT": {
-  "description": "레코드 생성 시각",
+  "description": "레코드가 DB에 처음 삽입된 시각으로, 고객이 카드를 신청한 날짜인 APPL_DT와 다를 수 있다(시스템 처리 지연·배치 적재 등). 신청 시점 기준 분석에는 APPL_DT를, 데이터 적재·감사 추적 목적에는 이 컬럼을 사용한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1030,7 +1030,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "CARD_DB.CARD_APPL.UPDATED_AT": {
-  "description": "레코드 최종 수정 시각",
+  "description": "레코드가 마지막으로 변경된 시각으로, CREATED_AT(최초 생성)과 달리 ISSUE_STAT_CD 변경·한도 조정 등 이후 수정이 발생할 때마다 갱신된다. 수정 주체는 UPDATED_BY를 함께 조회해야 하며, 신청 시점이 필요하면 APPL_DT를 사용할 것.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1040,7 +1040,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "CARD_DB.CARD_APPL.UPDATED_BY": {
-  "description": "최종 수정자 ID",
+  "description": "레코드를 마지막으로 수정한 주체의 ID로, 사람(직원·상담사) 또는 배치·시스템 계정일 수 있다. UPDATED_AT과 쌍으로 쓰이며, 수정 시각이 아닌 수정 주체를 추적할 때 이 컬럼을 참조한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1049,7 +1049,7 @@
   "confidence": "HIGH"
  },
  "CARD_DB.CARD_APRV_HIST.APRV_SEQ": {
-  "description": "승인 이력 일련번호",
+  "description": "카드 승인 1건을 고유하게 식별하는 대리 키로, 비즈니스 의미 없이 시스템이 자동 부여한 순번이다. 승인 취소(CNCL_YN='Y')도 별도 행으로 적재되므로 원승인과 취소 행은 각각 다른 APRV_SEQ를 가진다.",
   "type_candidate": [
    "entity"
   ],
@@ -1058,7 +1058,7 @@
   "confidence": "HIGH"
  },
  "CARD_DB.CARD_APRV_HIST.CARD_NO": {
-  "description": "카드 외래키",
+  "description": "이 승인 이력이 귀속되는 카드를 식별하는 키로, CARD_MST의 실물 카드 레코드를 참조한다. 동일 카드의 승인 이력을 집계하거나 카드 속성(회원, 상품 등)과 조인할 때 기준 컬럼으로 사용한다.",
   "type_candidate": [
    "entity"
   ],
@@ -1067,7 +1067,7 @@
   "confidence": "HIGH"
  },
  "CARD_DB.CARD_APRV_HIST.APRV_AMT": {
-  "description": "승인 금액. 1건 결제 승인액",
+  "description": "1건 결제 승인 시점의 금액(원 단위 정수). 취소 시에도 원래 승인액이 유지되므로, 실제 취소 여부는 CNCL_YN을 함께 확인해야 한다.",
   "type_candidate": [
    "measure"
   ],
@@ -1078,7 +1078,7 @@
   "confidence": "HIGH"
  },
  "CARD_DB.CARD_APRV_HIST.MRCHT_NM": {
-  "description": "가맹점명",
+  "description": "결제 승인 시점에 가맹점이 제출한 상호명으로, 이후 상호 변경이 있어도 갱신되지 않는 승인 당시 스냅샷 값이다. 동일 가맹점이라도 MRCHT_CTGR_CD(업종 분류)와 달리 정형화된 코드가 아닌 자유 텍스트이므로 같은 가맹점이 표기 방식을 달리할 수 있어 GROUP BY나 일치 검색 시 주의가 필요하다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -1087,7 +1087,7 @@
   "confidence": "HIGH"
  },
  "CARD_DB.CARD_APRV_HIST.MRCHT_CTGR_CD": {
-  "description": "가맹점 업종 코드",
+  "description": "승인 시점 가맹점의 업종 분류 코드(예: 음식점·주유소·백화점 등 카드사 내부 업종 체계). codedict가 제공되지 않아 코드값 해석 시 별도 코드 테이블 조인이 필요하며, 취소(CNCL_YN='Y') 건에서도 원 승인 당시 업종이 그대로 유지된다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -1098,7 +1098,7 @@
   "confidence": "MEDIUM"
  },
  "CARD_DB.CARD_APRV_HIST.APRV_DT": {
-  "description": "승인 일시",
+  "description": "카드사가 해당 건을 승인한 실제 일시(YYYY-MM-DD HH:MM:SS). 레코드 적재 시각인 CREATED_AT, 취소·수정 시각인 UPDATED_AT과 다르며, 취소(CNCL_YN='Y') 건도 원 승인 일시를 그대로 유지한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1108,7 +1108,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "CARD_DB.CARD_APRV_HIST.CNCL_YN": {
-  "description": "취소 여부",
+  "description": "해당 승인 건이 취소되었는지 여부를 나타낸다(Y=취소, N=정상 승인). 취소 건도 별도 행으로 삭제되지 않고 이 플래그로 구분되므로, 유효 승인 집계 시 CNCL_YN = 'N' 조건을 반드시 적용해야 한다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -1121,7 +1121,7 @@
   }
  },
  "CARD_DB.CARD_APRV_HIST.CREATED_AT": {
-  "description": "레코드 생성 시각",
+  "description": "레코드가 DB에 처음 삽입된 시각으로, 실제 카드 승인이 발생한 시각인 APRV_DT와 다를 수 있다. 승인 발생 시점이 필요하면 APRV_DT를, 데이터 적재·감사 추적 목적이면 이 컬럼을 사용하라.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1131,7 +1131,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "CARD_DB.CARD_APRV_HIST.UPDATED_AT": {
-  "description": "레코드 최종 수정 시각",
+  "description": "레코드가 마지막으로 변경된 시각으로, 취소(CNCL_YN 갱신) 등 승인 후 상태 변경 시점을 추적할 때 사용한다. 최초 생성 시각은 CREATED_AT을 참조하며, 수정 주체는 UPDATED_BY에서 확인한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1141,7 +1141,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "CARD_DB.CARD_APRV_HIST.UPDATED_BY": {
-  "description": "최종 수정자 ID",
+  "description": "이 레코드를 마지막으로 수정한 주체의 ID로, 사람(운영자) 또는 배치·시스템 계정일 수 있다. CREATED_AT/UPDATED_AT이 시각을 담당하므로 이 컬럼은 '누가'만 나타내며, 취소(CNCL_YN) 처리나 금액 정정 등 수기 개입 여부를 추적할 때 활용한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1150,7 +1150,7 @@
   "confidence": "HIGH"
  },
  "CARD_DB.CARD_DLNQ_HIST.CDLNQ_SEQ": {
-  "description": "카드 연체 일련번호",
+  "description": "카드 연체 이력 테이블의 PK로, 연체 이벤트 발생 시 시스템이 자동 부여하는 대리 식별자다. 동일 카드(CARD_NO)에 연체가 반복 발생하면 각 건마다 별도 CDLNQ_SEQ가 생성되므로, 카드 단위 집계 시 CARD_NO로 그룹핑해야 한다.",
   "type_candidate": [
    "entity"
   ],
@@ -1159,7 +1159,7 @@
   "confidence": "HIGH"
  },
  "CARD_DB.CARD_DLNQ_HIST.CARD_NO": {
-  "description": "카드 외래키",
+  "description": "연체 이력이 귀속되는 카드를 식별하는 키로, CARD_MST의 카드 원장과 조인하면 카드 상품·회원 정보를 얻을 수 있다. 한 카드에 연체 이력이 여러 건 존재할 수 있으므로, 카드 단위 집계 시 CDLNQ_SEQ가 아닌 이 컬럼으로 그룹핑해야 한다.",
   "type_candidate": [
    "entity"
   ],
@@ -1168,7 +1168,7 @@
   "confidence": "HIGH"
  },
  "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD": {
-  "description": "연체 상태",
+  "description": "연체 이력 레코드의 현재 상태 단계를 나타내며, 01=연체발생·02=연체지속·03=연체해소 중 하나를 가진다. OCUR_DT(발생일)·DLNQ_DAYS(경과일수)와 달리 이 컬럼은 시점별 상태 스냅샷이므로, 동일 카드에 대해 이력 행이 여러 개일 때 최신 행의 값이 현재 상태를 의미한다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -1185,7 +1185,7 @@
   }
  },
  "CARD_DB.CARD_DLNQ_HIST.DLNQ_AMT": {
-  "description": "카드 연체 금액",
+  "description": "연체 발생 시점의 미상환 원금 기준 연체 금액(원 단위 정수)으로, 이후 일부 상환·연체 해소로 잔액이 변동되더라도 이 값은 갱신되지 않을 수 있으므로 현재 잔여 연체액이 필요하면 DLNQ_STAT_CD·UPDATED_AT과 함께 확인해야 한다.",
   "type_candidate": [
    "measure"
   ],
@@ -1196,7 +1196,7 @@
   "confidence": "HIGH"
  },
  "CARD_DB.CARD_DLNQ_HIST.DLNQ_DAYS": {
-  "description": "연체 일수",
+  "description": "연체 발생일(OCUR_DT) 기준으로 누적된 연체 일수이며, DLNQ_STAT_CD가 해소 상태로 바뀐 후에도 이력 레코드가 남으므로 현재 진행 중인 연체 일수와 혼동하지 말 것.",
   "type_candidate": [
    "measure"
   ],
@@ -1207,7 +1207,7 @@
   "confidence": "HIGH"
  },
  "CARD_DB.CARD_DLNQ_HIST.OCUR_DT": {
-  "description": "연체 발생일",
+  "description": "연체가 실제로 발생한 날짜(결제 미납 확정일)로, 레코드가 시스템에 기록된 시점인 CREATED_AT과 다를 수 있다. DLNQ_DAYS(연체 일수)의 기산점이 되므로 연체 기간 계산 시 이 컬럼을 기준으로 사용해야 한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1219,7 +1219,7 @@
   "format": null
  },
  "CARD_DB.CARD_DLNQ_HIST.CREATED_AT": {
-  "description": "레코드 생성 시각",
+  "description": "이 레코드가 DB에 최초 삽입된 시각으로, 연체 사건 자체의 발생 시점인 OCUR_DT(DATE)와 다르다. 연체 발생 후 배치·실시간 적재 지연이 있을 수 있으므로 연체 시점 분석에는 OCUR_DT를 사용해야 한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1229,7 +1229,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "CARD_DB.CARD_DLNQ_HIST.UPDATED_AT": {
-  "description": "레코드 최종 수정 시각",
+  "description": "레코드가 마지막으로 변경된 시스템 타임스탬프로, 연체 상태(DLNQ_STAT_CD)·금액·일수 등 어느 필드든 수정되면 갱신된다. 연체 최초 등록 시각은 CREATED_AT, 수정 주체는 UPDATED_BY를 함께 참조할 것.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1239,7 +1239,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "CARD_DB.CARD_DLNQ_HIST.UPDATED_BY": {
-  "description": "최종 수정자 ID",
+  "description": "이 레코드를 마지막으로 수정한 주체의 ID로, 사람(직원 ID) 또는 배치 프로세스 계정일 수 있어 연체 상태 변경의 수동·자동 여부를 구분하는 단서가 된다. 수정 시각은 UPDATED_AT을 참조.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1248,7 +1248,7 @@
   "confidence": "HIGH"
  },
  "DEP_DB.DEP_ACCT_MST.DEP_NO": {
-  "description": "예금 계좌 번호",
+  "description": "예금 계좌를 고유하게 식별하는 PK로, 한 고객(CUST_NO)이 여러 계좌를 보유할 수 있어 고객 식별자와 혼동하지 않아야 한다. 금융 계좌번호로 PII에 해당하며, 조회·집계 시 CUST_NO 기준 그룹핑과 구분해 사용할 것.",
   "type_candidate": [
    "entity"
   ],
@@ -1257,7 +1257,7 @@
   "confidence": "HIGH"
  },
  "DEP_DB.DEP_ACCT_MST.CUST_NO": {
-  "description": "고객 식별 외래키",
+  "description": "이 계좌를 보유한 고객의 식별자로, CUST_DB.CUST_BASE_INFO의 고객 원장과 조인하는 FK다. 계좌 식별자인 DEP_NO와 혼동 주의—DEP_NO는 계좌 단위, CUST_NO는 고객 단위이며 한 고객이 여러 계좌를 가질 수 있다.",
   "type_candidate": [
    "entity"
   ],
@@ -1266,7 +1266,7 @@
   "confidence": "HIGH"
  },
  "DEP_DB.DEP_ACCT_MST.PRDT_CD": {
-  "description": "예금 상품 외래키",
+  "description": "이 계좌가 가입된 예금 상품을 식별하는 FK로, DEP_PRDT_MST에서 상품명·유형·기본 조건 등을 조인해 확인한다. 계좌 단위 적용 이율(INT_RATE)·만기일(MTRT_DT)은 이 테이블에 별도 저장되므로, 상품 기준값과 실제 계좌 적용값을 혼동하지 않도록 주의한다.",
   "type_candidate": [
    "entity"
   ],
@@ -1275,7 +1275,7 @@
   "confidence": "HIGH"
  },
  "DEP_DB.DEP_ACCT_MST.DEP_BAL_AMT": {
-  "description": "예금 잔액",
+  "description": "계좌의 현재 예금 잔액(원 단위 정수). UPDATED_AT 기준 최종 갱신 시점의 스냅샷 값이므로 실시간 원장 잔액과 차이가 있을 수 있으며, 이자 미포함 원금 기준인지 여부는 PRDT_CD별 상품 정의를 확인해야 한다.",
   "type_candidate": [
    "measure"
   ],
@@ -1287,7 +1287,7 @@
   "confidence": "HIGH"
  },
  "DEP_DB.DEP_ACCT_MST.INT_RATE": {
-  "description": "적용 이율",
+  "description": "이 계좌에 실제 적용 중인 연이율(%)로, 소수점 셋째 자리까지 저장된다(예: 3.750 = 연 3.750%). 상품 기준금리(PRDT_CD 참조 테이블의 금리)와 다를 수 있으며, 우대금리 반영·금리 변경 이력은 이 컬럼의 현재값만으로는 알 수 없다.",
   "type_candidate": [
    "measure"
   ],
@@ -1299,7 +1299,7 @@
   "confidence": "HIGH"
  },
  "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD": {
-  "description": "계좌 상태",
+  "description": "계좌의 현재 운영 상태를 나타내는 코드로, 01=정상·02=지급정지·03=해지 중 하나다. 지급정지·해지 계좌는 DEP_BAL_AMT에 잔액이 남아 있어도 출금 가능 여부와 무관하므로, 잔액 조회 시 반드시 이 컬럼으로 필터링해야 한다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -1316,7 +1316,7 @@
   }
  },
  "DEP_DB.DEP_ACCT_MST.OPEN_DT": {
-  "description": "계좌 개설일",
+  "description": "계좌가 실제로 개설된 영업일로, 이자 기산점·가입 기간 산정의 기준이 된다. 레코드 생성 시각(CREATED_AT)·만기일(MTRT_DT)과 혼동 주의: CREATED_AT은 DB 행 생성 시각이고 MTRT_DT은 만기 도래일이며, 이 컬럼만이 계약 개시 시점을 나타낸다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1328,7 +1328,7 @@
   "format": null
  },
  "DEP_DB.DEP_ACCT_MST.MTRT_DT": {
-  "description": "예금 만기일",
+  "description": "예금 계좌의 만기일(계약 종료 기준일)로, 이 날짜 이후에는 약정 이율이 적용되지 않는다. 만기 미도래 계좌 조회 시 OPEN_DT(개설일)와 혼동하지 말 것.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1341,7 +1341,7 @@
   "format": null
  },
  "DEP_DB.DEP_ACCT_MST.CREATED_AT": {
-  "description": "레코드 생성 시각",
+  "description": "레코드가 DB에 처음 삽입된 시각으로, 계좌 개설일(OPEN_DT)과 다를 수 있다(OPEN_DT는 영업 기준 개설일, CREATED_AT은 시스템 입력 시각). UPDATED_AT과 달리 최초 1회만 기록되며 이후 변경되지 않는다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1351,7 +1351,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "DEP_DB.DEP_ACCT_MST.UPDATED_AT": {
-  "description": "레코드 최종 수정 시각",
+  "description": "레코드가 마지막으로 변경된 시각으로, 계좌 잔액·이율·상태 등 어느 컬럼이든 수정되면 갱신된다. 계좌 최초 생성 시각은 CREATED_AT, 수정 주체는 UPDATED_BY를 함께 참조할 것.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1361,7 +1361,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "DEP_DB.DEP_ACCT_MST.UPDATED_BY": {
-  "description": "최종 수정자 ID",
+  "description": "레코드를 마지막으로 수정한 주체의 ID로, 사람(행원·고객) 또는 배치 시스템 계정일 수 있다. 수정 시각은 UPDATED_AT을 참조하며, 계좌 최초 생성자는 이 컬럼이 아닌 CREATED_AT 생성 시점의 별도 감사 로그에서 확인해야 한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1370,7 +1370,7 @@
   "confidence": "HIGH"
  },
  "DEP_DB.DEP_TXN_HIST.TXN_SEQ": {
-  "description": "거래 일련번호",
+  "description": "예금 거래 이력 테이블의 행을 고유하게 식별하는 시스템 생성 대리키로, 비즈니스 의미 없이 단순 식별 목적으로만 사용된다. 거래 자체의 고유 식별이 필요할 때 이 키를 사용하며, 거래 일자 기반 조회는 TXN_DT를, 발생 순서 추적은 CREATED_AT을 함께 참조해야 한다.",
   "type_candidate": [
    "entity"
   ],
@@ -1379,7 +1379,7 @@
   "confidence": "HIGH"
  },
  "DEP_DB.DEP_TXN_HIST.DEP_NO": {
-  "description": "예금 계좌 외래키",
+  "description": "이 거래 이력 레코드가 속한 예금 계좌를 식별하는 키로, DEP_ACCT_MST의 계좌 원장과 조인할 때 사용한다. 거래 당사자 계좌를 특정하며, 거래 자체의 식별은 TXN_SEQ가 담당한다.",
   "type_candidate": [
    "entity"
   ],
@@ -1388,7 +1388,7 @@
   "confidence": "HIGH"
  },
  "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD": {
-  "description": "거래 유형",
+  "description": "거래의 종류를 나타내는 코드로, 01=입금·02=출금·03=이체·04=이자 중 하나다. TXN_AMT는 모든 유형에서 양수로 저장되므로, 출금·이체 여부는 이 컬럼으로만 판별해야 한다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -1405,7 +1405,7 @@
   }
  },
  "DEP_DB.DEP_TXN_HIST.TXN_AMT": {
-  "description": "거래 금액",
+  "description": "이 거래에서 발생한 금액(원 단위, 소수점 없음); 입금·출금 방향은 TXN_TYPE_CD로 구분하며, 이 컬럼 자체는 항상 양수로 저장된다. 거래 후 잔액은 BAL_AFTR_AMT를 참조할 것.",
   "type_candidate": [
    "measure"
   ],
@@ -1416,7 +1416,7 @@
   "confidence": "HIGH"
  },
  "DEP_DB.DEP_TXN_HIST.BAL_AFTR_AMT": {
-  "description": "거래 후 잔액",
+  "description": "거래 처리 완료 후 해당 계좌(DEP_NO)의 잔액 스냅샷으로, TXN_AMT(거래 금액)와 달리 거래 결과로 확정된 잔액을 나타낸다. 원화 기준 정수 단위이며, 취소·정정 거래 시 UPDATED_AT·UPDATED_BY가 갱신되더라도 이 값이 소급 수정될 수 있으므로 잔액 추이 분석 시 TXN_SEQ 순서와 함께 검증해야 한다.",
   "type_candidate": [
    "measure"
   ],
@@ -1427,7 +1427,7 @@
   "confidence": "HIGH"
  },
  "DEP_DB.DEP_TXN_HIST.TXN_DT": {
-  "description": "거래 일자",
+  "description": "실제 거래가 발생한 영업일 기준 날짜로, 시스템에 레코드가 적재된 시각인 CREATED_AT과 다를 수 있다(예: 야간 배치, 소급 처리). 날짜 범위 조건 쿼리 시 이 컬럼을 기준으로 삼아야 하며, 처리 시점 기준이 필요하면 CREATED_AT을 사용할 것.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1437,7 +1437,7 @@
   "format": null
  },
  "DEP_DB.DEP_TXN_HIST.CREATED_AT": {
-  "description": "레코드 생성 시각",
+  "description": "레코드가 DB에 최초 삽입된 시각으로, 실제 거래가 발생한 시점인 TXN_DT·TXN_SEQ 기준 시각과 다를 수 있다(배치 적재·재처리 시 괴리 발생). 거래 발생 시점 조회에는 TXN_DT를, 데이터 적재·감사 추적에는 이 컬럼을 사용하라.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1447,7 +1447,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "DEP_DB.DEP_TXN_HIST.UPDATED_AT": {
-  "description": "레코드 최종 수정 시각",
+  "description": "레코드가 마지막으로 변경된 시각으로, 거래 자체가 발생한 시점인 TXN_DT·CREATED_AT과 다르다. 후처리(정정·취소·메모 수정 등)가 없으면 CREATED_AT과 동일하며, 실제 거래 시점 조회에는 TXN_DT를 사용해야 한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1457,7 +1457,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "DEP_DB.DEP_TXN_HIST.UPDATED_BY": {
-  "description": "최종 수정자 ID",
+  "description": "레코드를 마지막으로 수정한 주체의 ID로, 사람(행원·관리자) 또는 배치 프로세스 계정일 수 있다. 거래를 실행한 주체(별도 컬럼 없음)가 아니라 이 이력 레코드 자체를 수정한 주체이므로, 정정·재처리 등 사후 변경이 없었다면 생성자와 동일할 수 있다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1466,7 +1466,7 @@
   "confidence": "HIGH"
  },
  "DEP_DB.DEP_PRDT_MST.PRDT_CD": {
-  "description": "예금 상품 코드",
+  "description": "예금 상품을 고유하게 식별하는 PK 코드로, 상품명(PRDT_NM)·유형(PRDT_TYPE_CD) 등 이 테이블의 모든 속성이 이 값을 기준으로 귀속된다. 타 시스템에서 예금 상품을 참조할 때 조인 키로 사용되므로, 상품 유형 분류 목적의 PRDT_TYPE_CD와 혼동하지 않도록 주의한다.",
   "type_candidate": [
    "entity"
   ],
@@ -1475,7 +1475,7 @@
   "confidence": "HIGH"
  },
  "DEP_DB.DEP_PRDT_MST.PRDT_NM": {
-  "description": "상품명",
+  "description": "예금 상품의 공식 판매 명칭으로, 고객에게 노출되는 마케팅용 이름이다. 상품을 식별하는 코드는 PRDT_CD를 사용하고, 이 컬럼은 검색·표시 목적으로만 쓴다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -1484,7 +1484,7 @@
   "confidence": "HIGH"
  },
  "DEP_DB.DEP_PRDT_MST.PRDT_TYPE_CD": {
-  "description": "상품 유형",
+  "description": "예금 상품의 수신 유형을 나타내는 분류 코드로, 01=보통예금·02=정기예금·03=적금 중 하나다. 개별 상품을 식별하는 PRDT_CD와 달리 이 컬럼은 상품군 단위 분류에 사용한다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -1498,7 +1498,7 @@
   }
  },
  "DEP_DB.DEP_PRDT_MST.BASE_RATE": {
-  "description": "기본 이율",
+  "description": "상품 마스터에 등록된 기준 금리(연율, 단위: %)로, 실제 고객 적용 금리(우대·가산 반영 전)의 출발점이 된다. DECIMAL(5,3) 구조상 최대 99.999% 표현 가능하나 통상 소수점 셋째 자리까지의 연이율 값(예: 3.500)이 저장되며, 이 테이블에는 우대금리·가산금리 컬럼이 없으므로 최종 적용 금리와 동일하지 않을 수 있음에 주의.",
   "type_candidate": [
    "measure"
   ],
@@ -1507,7 +1507,7 @@
   "confidence": "HIGH"
  },
  "DEP_DB.DEP_PRDT_MST.SALE_YN": {
-  "description": "판매 여부",
+  "description": "해당 상품이 현재 고객에게 판매 가능한 상태인지 나타낸다(Y=예, N=아니오). 마스터 레코드가 존재하더라도 N이면 판매 중단·미출시 상품이므로, 판매 가능 상품 조회 시 반드시 SALE_YN = 'Y' 조건을 적용해야 한다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -1520,7 +1520,7 @@
   }
  },
  "DEP_DB.DEP_PRDT_MST.CREATED_AT": {
-  "description": "레코드 생성 시각",
+  "description": "이 레코드가 마스터 테이블에 처음 삽입된 시각으로, 상품 자체의 출시일·판매 개시일과는 다를 수 있다. 최종 수정 시각은 UPDATED_AT을 참조할 것.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1530,7 +1530,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "DEP_DB.DEP_PRDT_MST.UPDATED_AT": {
-  "description": "레코드 최종 수정 시각",
+  "description": "상품 마스터 레코드가 마지막으로 변경된 시각으로, 이율·판매 여부 등 어떤 필드 수정이든 갱신된다. 최초 등록 시각은 CREATED_AT, 수정 주체는 UPDATED_BY를 함께 조회할 것.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1540,7 +1540,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "DEP_DB.DEP_PRDT_MST.UPDATED_BY": {
-  "description": "최종 수정자 ID",
+  "description": "이 레코드를 마지막으로 수정한 주체의 시스템 ID로, 사람(행원·관리자) 외에 배치 프로그램·시스템 계정도 들어올 수 있다. 수정 시각은 UPDATED_AT을 참조하며, 최초 생성자·생성 시각은 이 컬럼이 아닌 CREATED_AT으로 확인해야 한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1549,7 +1549,7 @@
   "confidence": "HIGH"
  },
  "RISK_DB.CRDT_EVAL_HIST.EVAL_ID": {
-  "description": "신용 평가 건 식별자",
+  "description": "개별 신용 평가 수행 건을 고유하게 식별하는 PK로, 동일 고객(CUST_NO)이 여러 시점에 평가를 받으면 평가마다 별도의 EVAL_ID가 부여된다. CUST_NO(고객 식별자)·EVAL_DT(평가일)와 혼동하지 말 것.",
   "type_candidate": [
    "entity"
   ],
@@ -1558,7 +1558,7 @@
   "confidence": "HIGH"
  },
  "RISK_DB.CRDT_EVAL_HIST.CUST_NO": {
-  "description": "고객 식별 외래키",
+  "description": "CUST_DB.CUST_BASE_INFO를 참조하는 고객 식별자로, 한 고객이 여러 평가 이력을 가질 수 있어 이 테이블에서 반복 등장한다. 평가 건 자체의 식별에는 EVAL_ID를 사용하고, 이 컬럼은 '누구의' 평가인지를 특정할 때만 사용한다. PII에 해당하므로 조회·조인 시 접근 권한을 확인할 것.",
   "type_candidate": [
    "entity"
   ],
@@ -1567,7 +1567,7 @@
   "confidence": "HIGH"
  },
  "RISK_DB.CRDT_EVAL_HIST.CRDT_SCR": {
-  "description": "신용 점수. 0~1000 척도",
+  "description": "평가 시점의 신용 점수(0~1000, 높을수록 우량). 같은 테이블의 CRDT_GRD_CD는 이 점수를 구간으로 변환한 등급 코드이므로, 수치 기반 조건은 CRDT_SCR을, 등급 기반 조건은 CRDT_GRD_CD를 사용할 것.",
   "type_candidate": [
    "measure"
   ],
@@ -1578,7 +1578,7 @@
   "confidence": "HIGH"
  },
  "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD": {
-  "description": "신용 등급",
+  "description": "신용 평가 결과를 5단계로 나타내는 등급 코드로, 01=1등급(최우량)~05=5등급(최하) 순이다. 동일 테이블의 CRDT_SCR(0~1000 점수)과 함께 평가 결과를 표현하며, 등급은 점수를 구간으로 변환한 값이므로 정밀 필터링 시 점수 컬럼을 우선 사용할 것.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -1597,7 +1597,7 @@
   }
  },
  "RISK_DB.CRDT_EVAL_HIST.EVAL_DT": {
-  "description": "평가 수행일",
+  "description": "신용 평가가 실제로 수행된 날짜로, 레코드가 DB에 기록된 시각인 CREATED_AT·UPDATED_AT과 구별된다. 소급 입력이나 배치 처리 시 CREATED_AT보다 이를 수 있으므로 평가 시점 기준 조회에는 이 컬럼을 사용해야 한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1609,7 +1609,7 @@
   "format": null
  },
  "RISK_DB.CRDT_EVAL_HIST.EVAL_RSN_CD": {
-  "description": "평가 사유 코드",
+  "description": "신용 평가가 수행된 사유를 나타내는 코드로, 정기 평가·신규 신청·한도 변경 요청 등 평가 트리거를 구분한다. CRDT_GRD_CD(등급)·CRDT_SCR(점수)가 평가 결과라면 이 컬럼은 평가를 유발한 원인이며, codedict가 없으므로 허용 값 목록은 별도 코드 테이블을 확인해야 한다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -1620,7 +1620,7 @@
   "confidence": "MEDIUM"
  },
  "RISK_DB.CRDT_EVAL_HIST.CREATED_AT": {
-  "description": "레코드 생성 시각",
+  "description": "레코드가 DB에 처음 삽입된 시각으로, 평가가 실제 수행된 날짜인 EVAL_DT(DATE)와 다를 수 있다. 수정 이력 추적에는 UPDATED_AT을 사용하고, 이 컬럼은 생성 시점 고정값이다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1630,7 +1630,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "RISK_DB.CRDT_EVAL_HIST.UPDATED_AT": {
-  "description": "레코드 최종 수정 시각",
+  "description": "레코드가 마지막으로 변경된 시각으로, 평가 수행 시점인 EVAL_DT(DATE)·레코드 최초 적재 시각인 CREATED_AT과 구별된다. 점수·등급 정정이나 사유 코드 수정 등 어떤 필드 변경이든 갱신되므로, 평가 자체의 발생 시점이 아닌 데이터 최종 변경 시점을 추적할 때 사용한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1640,7 +1640,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "RISK_DB.CRDT_EVAL_HIST.UPDATED_BY": {
-  "description": "최종 수정자 ID",
+  "description": "레코드를 마지막으로 수정한 주체의 ID로, 사람(직원 ID) 또는 시스템·배치 프로세스 계정일 수 있다. EVAL_DT(평가 수행일)·CREATED_AT(생성자)와 혼동 주의—이 컬럼은 평가자가 아닌 데이터 수정자를 가리키며, 수정 시각은 UPDATED_AT을 함께 확인해야 한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1649,7 +1649,7 @@
   "confidence": "HIGH"
  },
  "RISK_DB.CRDT_LMT_MST.LMT_SEQ": {
-  "description": "한도 일련번호",
+  "description": "고객(CUST_NO)별 신용 한도 레코드를 고유하게 식별하는 시스템 생성 대리키로, 비즈니스 의미는 없다. 한 고객이 여러 한도 이력을 가질 수 있으므로 CUST_NO만으로는 행을 특정할 수 없고 반드시 이 키를 사용해야 한다.",
   "type_candidate": [
    "entity"
   ],
@@ -1658,7 +1658,7 @@
   "confidence": "HIGH"
  },
  "RISK_DB.CRDT_LMT_MST.CUST_NO": {
-  "description": "고객 식별 외래키",
+  "description": "신용 한도 레코드의 소유 고객을 식별하는 FK로, CUST_DB.CUST_BASE_INFO의 동일 컬럼과 조인해 고객 속성을 참조한다. 한 고객이 복수의 한도 레코드를 가질 수 있으므로(LMT_SEQ로 구분), 고객 단위 집계 시 GROUP BY 또는 DISTINCT 처리가 필요하다.",
   "type_candidate": [
    "entity"
   ],
@@ -1667,7 +1667,7 @@
   "confidence": "HIGH"
  },
  "RISK_DB.CRDT_LMT_MST.CRDT_LMT_AMT": {
-  "description": "신용 공여 한도",
+  "description": "고객에게 승인된 신용 공여 한도 금액(원 단위 정수)으로, 실제 사용액은 USE_AMT를 참조해야 하며 이 컬럼은 잔여 한도가 아닌 총 한도를 나타낸다.",
   "type_candidate": [
    "measure"
   ],
@@ -1679,7 +1679,7 @@
   "confidence": "HIGH"
  },
  "RISK_DB.CRDT_LMT_MST.USE_AMT": {
-  "description": "한도 사용액",
+  "description": "신용 공여 한도(CRDT_LMT_AMT) 중 현재 실제로 사용된 누적 금액(원 단위, 소수점 없음)으로, 잔여 한도는 CRDT_LMT_AMT - USE_AMT로 산출한다. UPDATED_AT 기준 시점의 스냅샷 값이므로 실시간 잔액이 아닐 수 있다.",
   "type_candidate": [
    "measure"
   ],
@@ -1690,7 +1690,7 @@
   "confidence": "HIGH"
  },
  "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD": {
-  "description": "한도 등급",
+  "description": "신용 한도에 부여된 등급 코드로, 01=A(최우량)·02=B(일반)·03=C(주의) 순으로 한도 품질을 나타낸다. CRDT_LMT_AMT(한도 금액)와 함께 조회 시 등급별 한도 규모를 파악할 수 있으며, 등급이 낮을수록(C) 리스크 관리 대상임을 의미한다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -1707,7 +1707,7 @@
   }
  },
  "RISK_DB.CRDT_LMT_MST.APLD_DT": {
-  "description": "한도 적용일",
+  "description": "한도가 실제로 효력을 발생한 날짜로, 레코드 생성·수정 시각(CREATED_AT/UPDATED_AT)과 달리 비즈니스상 한도 적용 기준일을 나타낸다. 특정 시점의 유효 한도를 조회할 때 이 컬럼을 기준으로 필터링해야 한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1717,7 +1717,7 @@
   "format": null
  },
  "RISK_DB.CRDT_LMT_MST.CREATED_AT": {
-  "description": "레코드 생성 시각",
+  "description": "한도 레코드가 최초 INSERT된 시각으로, 한도 신청·승인 시점이 아닌 DB 기록 생성 시점임에 주의. 한도 조건 변경 시 갱신되는 UPDATED_AT과 달리 이 값은 불변이므로, 해당 한도 이력의 시작점 기준으로 사용한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1727,7 +1727,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "RISK_DB.CRDT_LMT_MST.UPDATED_AT": {
-  "description": "레코드 최종 수정 시각",
+  "description": "레코드가 마지막으로 변경된 시각으로, 한도 금액·등급·사용액 등 어느 필드 수정이든 갱신된다. 최초 생성 시각은 CREATED_AT, 수정 주체는 UPDATED_BY를 함께 조회해야 한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1737,7 +1737,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "RISK_DB.CRDT_LMT_MST.UPDATED_BY": {
-  "description": "최종 수정자 ID",
+  "description": "한도 레코드를 마지막으로 수정한 주체의 시스템 사용자 ID(사람 또는 배치 프로세스 계정 모두 포함될 수 있음); 수정 시각은 UPDATED_AT을 참조하며, 최초 생성자·생성 시각은 이 컬럼이 아닌 CREATED_AT으로 확인해야 한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1746,7 +1746,7 @@
   "confidence": "HIGH"
  },
  "RISK_DB.FRAUD_DTCT_HIST.DTCT_SEQ": {
-  "description": "탐지 일련번호",
+  "description": "이상거래 탐지 이벤트 한 건을 고유하게 식별하는 시스템 생성 일련번호로, 비즈니스 의미 없이 순번만 부여된다. DTCT_DT(탐지 일시)·CREATED_AT(레코드 생성 시각)과 혼동 주의—시간 순서를 나타내지 않으며 조인 키로만 사용한다.",
   "type_candidate": [
    "entity"
   ],
@@ -1755,7 +1755,7 @@
   "confidence": "HIGH"
  },
  "RISK_DB.FRAUD_DTCT_HIST.CUST_NO": {
-  "description": "고객 식별 외래키",
+  "description": "이상거래 탐지 이력의 대상 고객을 식별하는 PII 컬럼으로, CUST_DB.CUST_BASE_INFO를 조인해야 고객 상세 정보를 얻을 수 있다. 탐지 행위자(UPDATED_BY)와 혼동 주의—UPDATED_BY는 시스템·운영자 ID이며 이 컬럼만이 거래 당사자 고객을 가리킨다.",
   "type_candidate": [
    "entity"
   ],
@@ -1764,7 +1764,7 @@
   "confidence": "HIGH"
  },
  "RISK_DB.FRAUD_DTCT_HIST.DTCT_TYPE_CD": {
-  "description": "탐지 유형",
+  "description": "이상거래 탐지 이벤트의 유형을 구분하는 코드로, 01=이상결제·02=이상로그인·03=이상이체 중 하나다. DTCT_AMT(거래 금액)는 결제·이체 유형(01·03)에만 유의미하며, 로그인 유형(02)에서는 null이거나 무시해야 한다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -1778,7 +1778,7 @@
   }
  },
  "RISK_DB.FRAUD_DTCT_HIST.DTCT_AMT": {
-  "description": "탐지 거래 금액",
+  "description": "이상거래로 탐지된 시점의 거래 금액(원 단위 정수). 실제 청구·정산 금액이 아닌 탐지 트리거 기준 금액이며, 이후 BLOCK_YN·UPDATED_AT 등으로 처리 결과가 갱신되어도 이 값은 변경되지 않는다.",
   "type_candidate": [
    "measure"
   ],
@@ -1789,7 +1789,7 @@
   "confidence": "HIGH"
  },
  "RISK_DB.FRAUD_DTCT_HIST.RISK_SCR": {
-  "description": "위험 점수",
+  "description": "이상거래 탐지 시점에 산출된 위험 점수로, 값이 높을수록 사기 가능성이 높음을 의미한다. BLOCK_YN(차단 여부)과 함께 조회하면 점수 임계값과 실제 차단 결정 간의 관계를 파악할 수 있으며, 점수 범위(예: 0–1000)나 임계값 기준은 별도 정책 문서를 확인해야 한다.",
   "type_candidate": [
    "measure"
   ],
@@ -1800,7 +1800,7 @@
   "confidence": "HIGH"
  },
  "RISK_DB.FRAUD_DTCT_HIST.DTCT_DT": {
-  "description": "탐지 일시",
+  "description": "이상거래가 시스템에 의해 탐지된 일시로, 실제 거래 발생 시각이 아닌 탐지 엔진이 이상 징후를 포착한 시점이다. 타입은 DATE이나 format이 YYYY-MM-DD HH:MM:SS이므로 시분초까지 유효하며, 레코드 적재 시각인 CREATED_AT과 혼동 주의—CREATED_AT은 DB 행 생성 시각이고 이 컬럼은 탐지 이벤트 자체의 발생 시각이다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1810,7 +1810,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "RISK_DB.FRAUD_DTCT_HIST.BLOCK_YN": {
-  "description": "차단 여부",
+  "description": "이상거래 탐지 후 해당 거래(또는 계정)를 실제로 차단 처리했는지 여부를 나타내며, Y=차단 실행, N=미차단이다. 탐지 자체는 DTCT_DT 시점에 항상 발생하므로, 이 컬럼이 N이라도 탐지 이력이 존재함을 의미하며 '탐지 여부'와 혼동하지 않도록 주의한다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -1823,7 +1823,7 @@
   }
  },
  "RISK_DB.FRAUD_DTCT_HIST.CREATED_AT": {
-  "description": "레코드 생성 시각",
+  "description": "레코드가 DB에 삽입된 시각으로, 탐지 이벤트 발생 시각인 DTCT_DT와 다를 수 있다(탐지 후 배치 적재 등으로 지연 가능). 이력 조회 시 탐지 시점 기준이 필요하면 DTCT_DT를, 적재·감사 기준이 필요하면 이 컬럼을 사용하라.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1833,7 +1833,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "RISK_DB.FRAUD_DTCT_HIST.UPDATED_AT": {
-  "description": "레코드 최종 수정 시각",
+  "description": "레코드가 마지막으로 변경된 시각으로, 탐지 이벤트 발생 시각인 DTCT_DT와 달리 DB 행 자체의 수정 이력을 나타낸다. 차단 여부(BLOCK_YN) 변경·위험 점수 재산정 등 후속 처리로 갱신되므로, 탐지 시점 조회에는 DTCT_DT를 사용해야 한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1843,7 +1843,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "RISK_DB.FRAUD_DTCT_HIST.UPDATED_BY": {
-  "description": "최종 수정자 ID",
+  "description": "레코드를 마지막으로 수정한 시스템 또는 사용자의 ID로, 자동 처리(배치·룰엔진)일 경우 시스템 계정 ID가 기록될 수 있어 사람 검토자와 구분이 필요하다. 수정 시각은 UPDATED_AT을 참조하며, 최초 생성자·생성 시각은 이 컬럼이 아닌 CREATED_AT으로 확인해야 한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1852,7 +1852,7 @@
   "confidence": "HIGH"
  },
  "PAY_DB.TRANSFER_HIST.TRF_SEQ": {
-  "description": "이체 일련번호",
+  "description": "이체 1건당 시스템이 자동 부여하는 고유 식별자(PK)로, 비즈니스 이체 번호가 아닌 내부 레코드 키다. 동일 이체가 재처리·수정되어 UPDATED_AT이 바뀌어도 이 값은 변하지 않으므로, 이력 추적 시 TRF_STAT_CD·UPDATED_AT과 함께 사용해야 한다.",
   "type_candidate": [
    "entity"
   ],
@@ -1861,7 +1861,7 @@
   "confidence": "HIGH"
  },
  "PAY_DB.TRANSFER_HIST.CUST_NO": {
-  "description": "고객 식별 외래키",
+  "description": "이체를 요청한 고객의 식별자(PII)로, FROM_ACCT_NO·TO_ACCT_NO가 계좌 기준 식별인 것과 달리 이 컬럼은 계좌 소유 고객 기준 식별에 쓰인다. 한 고객이 여러 계좌를 보유할 수 있으므로 고객 단위 집계 시 이 컬럼을 기준으로 삼아야 한다.",
   "type_candidate": [
    "entity"
   ],
@@ -1870,7 +1870,7 @@
   "confidence": "HIGH"
  },
  "PAY_DB.TRANSFER_HIST.FROM_ACCT_NO": {
-  "description": "출금 계좌번호",
+  "description": "이체 거래에서 돈이 빠져나가는 출금 계좌번호. TO_ACCT_NO(입금 계좌)와 쌍을 이루며, 자행·타행 계좌번호가 혼재할 수 있어 기관 구분 없이 원장 조회 시 주의가 필요하다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -1879,7 +1879,7 @@
   "confidence": "HIGH"
  },
  "PAY_DB.TRANSFER_HIST.TO_ACCT_NO": {
-  "description": "입금 계좌번호",
+  "description": "이체 거래에서 돈을 받는 쪽(수취인)의 계좌번호. 돈을 보내는 쪽은 FROM_ACCT_NO이며, 두 컬럼을 혼동하지 않도록 주의. 타행 계좌도 포함될 수 있어 자행 계좌 테이블과 항상 조인되지는 않는다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -1888,7 +1888,7 @@
   "confidence": "HIGH"
  },
  "PAY_DB.TRANSFER_HIST.TRF_AMT": {
-  "description": "이체 금액",
+  "description": "출금 계좌(FROM_ACCT_NO)에서 입금 계좌(TO_ACCT_NO)로 이체된 원금 금액(원 단위 정수)이며, 수수료는 포함하지 않는다(수수료는 FEE_AMT 참조). TRF_STAT_CD가 완료 상태가 아닌 행에도 금액이 기록될 수 있으므로, 실제 완료된 이체 합산 시 상태 필터링이 필요하다.",
   "type_candidate": [
    "measure"
   ],
@@ -1899,7 +1899,7 @@
   "confidence": "HIGH"
  },
  "PAY_DB.TRANSFER_HIST.FEE_AMT": {
-  "description": "이체 수수료",
+  "description": "이체 건에 부과된 수수료 금액(원 단위 정수). TRF_AMT(이체 원금)와 별도로 관리되며, 수수료 면제 시 0이 저장되고 NULL과 구분해야 한다.",
   "type_candidate": [
    "measure"
   ],
@@ -1910,7 +1910,7 @@
   "confidence": "HIGH"
  },
  "PAY_DB.TRANSFER_HIST.TRF_STAT_CD": {
-  "description": "이체 상태",
+  "description": "이체 처리 단계를 나타내는 상태 코드로, 01=요청(처리 전), 02=완료(출금·입금 확정), 03=실패(처리 오류), 04=취소 중 하나를 가진다. TRF_DT(이체 일시)는 요청 시점을 기록하므로 완료 여부와 무관하게 존재하며, 실제 확정 건만 집계할 때는 02(완료)로 필터링해야 한다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -1928,7 +1928,7 @@
   }
  },
  "PAY_DB.TRANSFER_HIST.TRF_DT": {
-  "description": "이체 일시",
+  "description": "이체가 실제로 실행된 일시(거래 발생 시점)로, 레코드 생성 시각인 CREATED_AT과 다를 수 있다. 타입은 DATE이나 format이 YYYY-MM-DD HH:MM:SS이므로 시분초까지 저장되며, 날짜 범위 조건 외에 시간대 필터링에도 활용 가능하다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1938,7 +1938,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "PAY_DB.TRANSFER_HIST.CREATED_AT": {
-  "description": "레코드 생성 시각",
+  "description": "레코드가 DB에 처음 삽입된 시각으로, 이체 요청·처리 시각을 나타내는 TRF_DT와 달리 시스템 감사 목적의 메타데이터다. 이체 실행 시점 기준 조회에는 TRF_DT를, 레코드 생성·변경 이력 추적에는 이 컬럼과 UPDATED_AT을 사용한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1948,7 +1948,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "PAY_DB.TRANSFER_HIST.UPDATED_AT": {
-  "description": "레코드 최종 수정 시각",
+  "description": "레코드가 마지막으로 변경된 시각으로, 이체 실행 시각인 TRF_DT·최초 생성 시각인 CREATED_AT과 구별된다. 상태 변경(TRF_STAT_CD) 등 어떤 필드라도 수정되면 갱신되므로, 이체 발생 시점이 아닌 데이터 변경 이력 추적 용도로만 사용해야 한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1958,7 +1958,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "PAY_DB.TRANSFER_HIST.UPDATED_BY": {
-  "description": "최종 수정자 ID",
+  "description": "레코드를 마지막으로 수정한 주체의 ID로, 사람(행원·고객) 또는 배치·시스템 계정일 수 있다. 이체를 실행한 고객(CUST_NO)이나 이체 요청 원장과는 무관하며, 언제 수정됐는지는 UPDATED_AT을 함께 조회해야 한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -1967,7 +1967,7 @@
   "confidence": "HIGH"
  },
  "PAY_DB.AUTO_TRF_MST.AUTO_SEQ": {
-  "description": "자동이체 일련번호",
+  "description": "자동이체 등록 건을 식별하는 시스템 생성 대리키(surrogate key)로, 고객(CUST_NO)·금액·약정일이 같더라도 등록 건마다 고유하게 부여된다. 동일 고객의 복수 자동이체 등록을 구분하는 기준 키이므로, 특정 등록 건을 조회·조인할 때 반드시 이 값을 사용해야 한다.",
   "type_candidate": [
    "entity"
   ],
@@ -1976,7 +1976,7 @@
   "confidence": "HIGH"
  },
  "PAY_DB.AUTO_TRF_MST.CUST_NO": {
-  "description": "고객 식별 외래키",
+  "description": "자동이체를 등록한 고객을 식별하는 FK로, CUST_DB.CUST_BASE_INFO의 CUST_NO를 참조한다. UPDATED_BY(수정자 ID)와 혼동 주의—이 컬럼은 서비스 이용 고객 본인을 가리키며 PII에 해당한다.",
   "type_candidate": [
    "entity"
   ],
@@ -1985,7 +1985,7 @@
   "confidence": "HIGH"
  },
  "PAY_DB.AUTO_TRF_MST.TRF_AMT": {
-  "description": "자동이체 금액",
+  "description": "매월 TRF_DAY일에 자동이체되도록 등록된 약정 금액(원 단위 정수)으로, 실제 출금 결과가 아닌 신청 시 등록된 예정 금액이다. 0 또는 NULL이면 정액이 아닌 전액이체 방식일 수 있으므로 AUTO_STAT_CD와 함께 확인이 필요하다.",
   "type_candidate": [
    "measure"
   ],
@@ -1996,7 +1996,7 @@
   "confidence": "HIGH"
  },
  "PAY_DB.AUTO_TRF_MST.TRF_DAY": {
-  "description": "이체 약정일. 매월 며칠",
+  "description": "매월 자동이체가 실행되는 약정일(1~31). 말일 처리 관행상 28~31처럼 해당 월에 존재하지 않는 날짜가 저장된 경우 월말일로 대체 실행될 수 있으므로, 실제 출금일과 일치하지 않을 수 있다.",
   "type_candidate": [
    "measure"
   ],
@@ -2005,7 +2005,7 @@
   "confidence": "HIGH"
  },
  "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD": {
-  "description": "자동이체 상태",
+  "description": "자동이체 등록 건의 현재 운영 상태를 나타내는 코드로, 01=정상(이체 활성), 02=정지(일시 중단), 03=해지(계약 종료)를 구분한다. 실제 이체 실행 여부는 이 값이 '01'일 때만 유효하므로, 이체 대상 조회 시 반드시 정상 여부를 필터링해야 한다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -2021,7 +2021,7 @@
   }
  },
  "PAY_DB.AUTO_TRF_MST.REG_DT": {
-  "description": "등록일",
+  "description": "고객이 자동이체를 신청·등록한 날짜(시각 아님). 레코드 생성 시각인 CREATED_AT과 달리, 실제 약정 등록일 기준이므로 소급 등록 시 두 값이 다를 수 있다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -2031,7 +2031,7 @@
   "format": null
  },
  "PAY_DB.AUTO_TRF_MST.CREATED_AT": {
-  "description": "레코드 생성 시각",
+  "description": "자동이체 등록 레코드가 DB에 처음 삽입된 시각으로, 이후 변경되지 않는다. 같은 테이블의 REG_DT(등록 신청일, DATE)와 혼동 주의—REG_DT는 비즈니스상 등록일, CREATED_AT은 시스템 삽입 시각이므로 두 값이 다를 수 있다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -2041,7 +2041,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "PAY_DB.AUTO_TRF_MST.UPDATED_AT": {
-  "description": "레코드 최종 수정 시각",
+  "description": "레코드가 마지막으로 변경된 시각으로, 자동이체 약정 내용(금액·약정일·상태 등) 수정 시 갱신된다. 최초 등록 시각은 CREATED_AT, 등록 날짜(DATE)는 REG_DT를 사용하며, 수정 주체는 UPDATED_BY로 확인한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -2051,7 +2051,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "PAY_DB.AUTO_TRF_MST.UPDATED_BY": {
-  "description": "최종 수정자 ID",
+  "description": "레코드를 마지막으로 수정한 주체의 ID로, 시스템 배치·API 계정 ID 또는 내부 운영자 ID가 기록된다. UPDATED_AT과 쌍을 이루며, 수정 이력 추적 시 두 컬럼을 함께 조회해야 한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -2060,7 +2060,7 @@
   "confidence": "HIGH"
  },
  "CHN_DB.ACCESS_LOG.ACCESS_SEQ": {
-  "description": "접속 일련번호",
+  "description": "접속 이벤트 1건을 고유하게 식별하는 시스템 생성 대리키로, 비즈니스 의미 없이 삽입 순서를 반영한다. 동일 고객(CUST_NO)의 중복 접속 집계나 특정 접속 이벤트 참조 시 이 키를 기준으로 삼는다.",
   "type_candidate": [
    "entity"
   ],
@@ -2069,7 +2069,7 @@
   "confidence": "HIGH"
  },
  "CHN_DB.ACCESS_LOG.CUST_NO": {
-  "description": "고객 식별 외래키",
+  "description": "이 접속 로그를 발생시킨 고객의 식별자(PII)로, CUST_DB.CUST_BASE_INFO와 조인해 고객 속성을 조회할 수 있다. 비로그인·익명 접속은 NULL일 수 있으므로 SUCCESS_YN='Y' 조건과 함께 쓸 때 주의.",
   "type_candidate": [
    "entity"
   ],
@@ -2078,7 +2078,7 @@
   "confidence": "HIGH"
  },
  "CHN_DB.ACCESS_LOG.CHANNEL_CD": {
-  "description": "접속 채널",
+  "description": "고객이 접속한 채널 유형을 나타내며, 01=앱·02=웹·03=ATM·04=영업점으로 구분된다. 같은 테이블의 DEVICE_CD가 기기 유형(예: iOS/Android/PC)을 별도로 기록하므로, 채널 종류를 필터링할 때는 DEVICE_CD와 혼용하지 않도록 주의한다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -2095,7 +2095,7 @@
   }
  },
  "CHN_DB.ACCESS_LOG.ACCESS_DT": {
-  "description": "접속 일시",
+  "description": "고객이 채널에 실제 접속을 시도한 일시(성공·실패 무관)로, 타입은 DATE이나 YYYY-MM-DD HH:MM:SS 형식의 시각 정보를 포함한다. 레코드 삽입 시각인 CREATED_AT과 혼동 주의—CREATED_AT은 로그 행이 DB에 기록된 시각이며, ACCESS_DT는 접속 이벤트 자체가 발생한 시각이다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -2105,7 +2105,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "CHN_DB.ACCESS_LOG.DEVICE_CD": {
-  "description": "기기 유형",
+  "description": "접속 시 사용한 기기 유형 코드(예: PC, MBL, TAB 등)로, 접속 경로를 나타내는 CHANNEL_CD(앱·웹·ATM 등 채널 종류)와 구분된다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -2116,7 +2116,7 @@
   "confidence": "MEDIUM"
  },
  "CHN_DB.ACCESS_LOG.SUCCESS_YN": {
-  "description": "접속 성공 여부",
+  "description": "채널 접속 시도의 성공(Y) 또는 실패(N) 여부를 나타내며, 인증 실패·세션 오류 등 접속이 완료되지 않은 경우 N으로 기록된다. UPDATED_AT·UPDATED_BY가 존재하므로 초기 기록 후 값이 변경될 수 있어 집계 시 최신 상태 기준 여부를 확인해야 한다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -2129,7 +2129,7 @@
   }
  },
  "CHN_DB.ACCESS_LOG.CREATED_AT": {
-  "description": "레코드 생성 시각",
+  "description": "레코드가 처음 삽입된 시각으로, 실제 채널 접속이 발생한 시각은 ACCESS_DT를 참조해야 한다. UPDATED_AT(최종 수정 시각)과 혼동 주의.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -2139,7 +2139,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "CHN_DB.ACCESS_LOG.UPDATED_AT": {
-  "description": "레코드 최종 수정 시각",
+  "description": "레코드가 마지막으로 변경된 시각으로, 실제 채널 접속이 발생한 시점인 ACCESS_DT와 다르다. 배치 보정·상태 갱신 등 사후 처리 이력을 추적할 때 쓰며, 변경 주체는 UPDATED_BY를 함께 확인한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -2149,7 +2149,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "CHN_DB.ACCESS_LOG.UPDATED_BY": {
-  "description": "최종 수정자 ID",
+  "description": "레코드를 마지막으로 수정한 주체의 ID로, 실제 접속을 수행한 고객(CUST_NO)이 아니라 로그 데이터를 변경한 시스템 계정 또는 운영자를 가리킨다. 접속 이벤트 자체의 행위자가 아니므로 접속 분석 쿼리에서 사용자 식별 컬럼으로 혼용하지 않도록 주의.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -2158,7 +2158,7 @@
   "confidence": "HIGH"
  },
  "CHN_DB.CNSNT_HIST.CNSNT_SEQ": {
-  "description": "동의 일련번호",
+  "description": "CNSNT_HIST 테이블의 서로게이트 PK로, 동의 이력 레코드를 고유하게 식별하는 시스템 생성 일련번호다. 비즈니스 식별자가 아니므로 동의 내용 조회 시에는 CUST_NO·CNSNT_TYPE_CD·CNSNT_DT를 조건으로 사용하고, 이 컬럼은 조인 키나 중복 제거 기준으로만 활용한다.",
   "type_candidate": [
    "entity"
   ],
@@ -2167,7 +2167,7 @@
   "confidence": "HIGH"
  },
  "CHN_DB.CNSNT_HIST.CUST_NO": {
-  "description": "고객 식별 외래키",
+  "description": "약관 동의 이력의 주체를 식별하는 고객 번호로, CUST_DB.CUST_BASE_INFO의 CUST_NO를 참조한다(PII). 동의 행위자를 특정하므로, 동의 처리자를 나타내는 UPDATED_BY와 혼동하지 말 것.",
   "type_candidate": [
    "entity"
   ],
@@ -2176,7 +2176,7 @@
   "confidence": "HIGH"
  },
  "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD": {
-  "description": "동의 유형",
+  "description": "고객이 동의한 약관의 유형을 나타내며, 01=필수, 02=선택, 03=마케팅, 04=마이데이터로 구분된다. 동의 여부 자체는 CNSNT_YN을 참조하며, 이 컬럼은 어떤 종류의 약관에 동의했는지를 식별한다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -2191,7 +2191,7 @@
   }
  },
  "CHN_DB.CNSNT_HIST.CNSNT_YN": {
-  "description": "동의 여부",
+  "description": "고객이 해당 약관 유형(CNSNT_TYPE_CD)에 동의했는지 여부를 나타내며, Y=예·N=아니오로 기록된다. 동의 행위가 발생한 시점(CNSNT_DT)이 아닌 레코드 상태를 반영하므로, 철회·재동의 시 UPDATED_AT과 함께 변경될 수 있다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -2204,7 +2204,7 @@
   }
  },
  "CHN_DB.CNSNT_HIST.CNSNT_DT": {
-  "description": "동의 일자",
+  "description": "고객이 약관에 동의(또는 철회)한 실제 행위 일자로, 레코드가 시스템에 적재된 시각인 CREATED_AT과 다를 수 있다. CNSNT_YN이 'N'인 철회 이력에도 이 컬럼이 철회 행위 일자를 나타낸다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -2214,7 +2214,7 @@
   "format": null
  },
  "CHN_DB.CNSNT_HIST.CREATED_AT": {
-  "description": "레코드 생성 시각",
+  "description": "레코드가 DB에 처음 삽입된 시각으로, 고객이 실제로 동의한 날짜인 CNSNT_DT와 다를 수 있다(예: 배치 적재·소급 입력 시 불일치). 동의 시점 기준 조회는 CNSNT_DT를, 데이터 적재·감사 추적 기준 조회는 이 컬럼을 사용할 것.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -2224,7 +2224,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "CHN_DB.CNSNT_HIST.UPDATED_AT": {
-  "description": "레코드 최종 수정 시각",
+  "description": "고객의 동의 상태(CNSNT_YN)나 유형(CNSNT_TYPE_CD)이 변경될 때 갱신되는 수정 시각으로, 실제 동의가 발생한 날짜인 CNSNT_DT와 다를 수 있다. 동의 이력 조회 시 '언제 동의했는가'는 CNSNT_DT를, '레코드가 마지막으로 바뀐 시점'은 이 컬럼을 사용해야 한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -2234,7 +2234,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "CHN_DB.CNSNT_HIST.UPDATED_BY": {
-  "description": "최종 수정자 ID",
+  "description": "레코드를 마지막으로 수정한 주체의 ID로, 고객 본인(CUST_NO)이 아닌 시스템 계정 또는 운영자 ID가 기록된다. 동의 행위자가 아닌 데이터 변경자를 추적하므로, 동의 주체 조회 시에는 CUST_NO를 사용해야 한다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -2243,7 +2243,7 @@
   "confidence": "HIGH"
  },
  "CHN_DB.MYDATA_LINK.LINK_SEQ": {
-  "description": "연동 일련번호",
+  "description": "고객(CUST_NO)과 정보제공 기관(PROVIDER_CD) 간 마이데이터 연동 건을 식별하는 시스템 생성 대리키로, 비즈니스 의미 없이 단순 식별 목적으로만 사용된다. 연동 개시일(LINK_DT)·상태(LINK_STAT_CD) 등 연동 이력 조회 시 조인 기준 키가 된다.",
   "type_candidate": [
    "entity"
   ],
@@ -2252,7 +2252,7 @@
   "confidence": "HIGH"
  },
  "CHN_DB.MYDATA_LINK.CUST_NO": {
-  "description": "고객 식별 외래키",
+  "description": "마이데이터 연동 동의 및 이력의 주체 고객을 식별하는 FK로, CUST_DB.CUST_BASE_INFO.CUST_NO를 참조한다. PII에 해당하므로 조회·조인 시 접근 권한 확인이 필요하며, PROVIDER_CD·LINK_STAT_CD 등 연동 속성은 모두 이 고객 단위로 귀속된다.",
   "type_candidate": [
    "entity"
   ],
@@ -2261,7 +2261,7 @@
   "confidence": "HIGH"
  },
  "CHN_DB.MYDATA_LINK.PROVIDER_CD": {
-  "description": "정보제공 기관 코드",
+  "description": "마이데이터 연동 대상 정보제공기관(금융사·공공기관 등)을 식별하는 코드로, 금융위원회 마이데이터 표준 기관코드 체계를 따른다. LINK_STAT_CD(연동 상태)·LINK_DT(연동 개시일)와 함께 쓰면 특정 기관과의 연동 이력을 추적할 수 있으며, 고객이 동의한 기관 목록을 조회할 때는 MYDATA_CNSNT_YN=Y 조건을 함께 적용해야 한다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -2272,7 +2272,7 @@
   "confidence": "MEDIUM"
  },
  "CHN_DB.MYDATA_LINK.LINK_STAT_CD": {
-  "description": "연동 상태",
+  "description": "마이데이터 연동의 현재 상태를 나타내는 코드로, 01=연동(활성), 02=해지(고객 직접 해지), 03=만료(기간 종료 또는 동의 만료)를 구분한다. MYDATA_CNSNT_YN이 동의 여부(Y/N)를 나타내는 반면, 이 컬럼은 실제 연동 처리 상태를 반영하므로 동의가 있어도 만료·해지 상태일 수 있다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -2288,7 +2288,7 @@
   }
  },
  "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN": {
-  "description": "마이데이터 전송 동의 여부",
+  "description": "고객이 해당 정보제공 기관(PROVIDER_CD)으로부터 마이데이터 전송에 동의했는지 여부(Y=예, N=아니오); 연동이 개시(LINK_DT)되거나 상태(LINK_STAT_CD)가 활성이더라도 이 값이 N이면 실제 동의가 없는 상태이므로, 동의 기반 필터링 시 LINK_STAT_CD 대신 이 컬럼을 기준으로 삼아야 한다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -2301,7 +2301,7 @@
   }
  },
  "CHN_DB.MYDATA_LINK.LINK_DT": {
-  "description": "연동 개시일",
+  "description": "고객이 해당 정보제공 기관(PROVIDER_CD)과의 마이데이터 연동을 최초로 개시한 날짜로, 레코드 생성 시각인 CREATED_AT과 달리 비즈니스상 연동 시작일을 의미하며 재연동 시 갱신 여부는 LINK_STAT_CD와 함께 확인 필요.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -2311,7 +2311,7 @@
   "format": null
  },
  "CHN_DB.MYDATA_LINK.CREATED_AT": {
-  "description": "레코드 생성 시각",
+  "description": "연동 신청·동의가 최초 기록된 시각으로, 연동 개시일(LINK_DT)보다 앞서거나 같을 수 있다. 레코드 수정 이력은 UPDATED_AT을 참조하며, 이 컬럼은 이후 변경되지 않는다.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -2321,7 +2321,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "CHN_DB.MYDATA_LINK.UPDATED_AT": {
-  "description": "레코드 최종 수정 시각",
+  "description": "레코드가 마지막으로 변경된 시각으로, 연동 상태·동의 여부 등 어떤 컬럼이든 수정되면 갱신된다. 최초 생성 시각은 CREATED_AT, 수정 주체는 UPDATED_BY를 함께 참조할 것.",
   "type_candidate": [
    "dimension_time"
   ],
@@ -2331,7 +2331,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "CHN_DB.MYDATA_LINK.UPDATED_BY": {
-  "description": "최종 수정자 ID",
+  "description": "레코드를 마지막으로 수정한 주체의 ID로, 사람(직원·관리자) 또는 배치 프로세스 계정일 수 있다. UPDATED_AT과 쌍으로 사용하며, 생성 주체가 필요하면 CREATED_AT 기준 별도 컬럼을 확인해야 한다(이 테이블에는 CREATED_BY가 없음).",
   "type_candidate": [
    "dimension_time"
   ],
