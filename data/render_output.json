@@ -1087,7 +1087,7 @@
   "confidence": "HIGH"
  },
  "CARD_DB.CARD_APRV_HIST.MRCHT_CTGR_CD": {
-  "description": "승인 시점 가맹점의 업종 분류 코드(예: 음식점·주유소·백화점 등 카드사 내부 업종 체계). codedict가 제공되지 않아 코드값 해석 시 별도 코드 테이블 조인이 필요하며, 취소(CNCL_YN='Y') 건에서도 원 승인 당시 업종이 그대로 유지된다.",
+  "description": "승인 시점 가맹점의 업종 분류 코드. codedict가 제공되지 않아 코드값 해석 시 별도 코드 테이블 조인이 필요하며, 취소 건에서도 원 승인 당시 업종이 그대로 유지된다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -2078,7 +2078,7 @@
   "confidence": "HIGH"
  },
  "CHN_DB.ACCESS_LOG.CHANNEL_CD": {
-  "description": "고객이 접속한 채널 유형을 나타내며, 01=앱·02=웹·03=ATM·04=영업점으로 구분된다. 같은 테이블의 DEVICE_CD가 기기 유형(예: iOS/Android/PC)을 별도로 기록하므로, 채널 종류를 필터링할 때는 DEVICE_CD와 혼용하지 않도록 주의한다.",
+  "description": "고객이 접속한 채널 유형을 나타내며, 01=앱·02=웹·03=ATM·04=영업점으로 구분된다. 같은 테이블의 DEVICE_CD가 기기 유형을 별도로 기록하므로 채널과 기기를 혼동하지 않도록 주의한다.",
   "type_candidate": [
    "dimension_categorical"
   ],
@@ -2105,7 +2105,7 @@
   "format": "YYYY-MM-DD HH:MM:SS"
  },
  "CHN_DB.ACCESS_LOG.DEVICE_CD": {
-  "description": "접속 시 사용한 기기 유형 코드(예: PC, MBL, TAB 등)로, 접속 경로를 나타내는 CHANNEL_CD(앱·웹·ATM 등 채널 종류)와 구분된다.",
+  "description": "접속 시 사용한 기기 유형 코드. codedict가 제공되지 않아 코드값 해석 시 별도 코드 테이블 조회가 필요하며, 접속 경로를 나타내는 CHANNEL_CD(앱·웹·ATM·영업점 등 채널 종류)와는 구분되는 차원이다.",
   "type_candidate": [
    "dimension_categorical"
   ],
