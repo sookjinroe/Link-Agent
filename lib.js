@@ -80,6 +80,25 @@
     return inn;
   }
 
+  // ── 게이트(결과) 헬퍼 ──
+  function gateTags(cid, G) { return (G.gate && G.gate.gate[cid]) || null; }
+  function gateReason(cid, G) {
+    const tags = gateTags(cid, G) || [];
+    const out = [];
+    if (tags.includes("빈도")) out.push({ tag: "빈도", text: `분석 빈도 ${freqOf(cid, G)} ≥ ${G.gate.threshold}` });
+    if (tags.includes("이명")) { const s = surfaceForms(cid, G); out.push({ tag: "이명", text: `표면형 ${s.length}개: ${s.join(", ")}` }); }
+    if (tags.includes("충돌")) {
+      const ov = surfaceOverlap(G); const mine = surfaceForms(cid, G).filter((sf) => ov[sf]);
+      const detail = mine.map((sf) => `${sf}(${[...new Set(ov[sf].map(domainOf))].length}개 도메인)`).join(", ");
+      out.push({ tag: "충돌", text: `겹치는 표면형: ${detail}` });
+    }
+    if (tags.includes("metric")) {
+      const ag = (G.psql.agg_patterns || []).filter((x) => x.measure === cid);
+      out.push({ tag: "metric", text: `집계 패턴 ${ag.length}건: ` + ag.slice(0, 3).map((x) => `${x.agg_func} by ${x.group_by.map(colName).join("·")}`).join(" / ") });
+    }
+    return out;
+  }
+
   function searchAll(G, q, cap) {
     cap = cap || 14;
     const nq = (q || "").toLowerCase().replace(/\s+/g, "");
@@ -97,5 +116,5 @@
 
   return { PALETTE, tableName, colName, domainOf, domains, domainColor,
            rend, psqlOf, freqOf, surfaceForms, surfaceOverlap, allColumns,
-           tablesByDomain, fkOut, fkIn, searchAll };
+           tablesByDomain, fkOut, fkIn, gateTags, gateReason, searchAll };
 });

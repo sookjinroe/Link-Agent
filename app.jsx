@@ -15,6 +15,13 @@ const RISK_COLOR = { code_value_weak: "var(--low)", format_trap: "var(--med)", n
 function Center({ children }) {
   return <div style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "70vh", color: "var(--muted)", fontSize: 16 }}>{children}</div>;
 }
+function TwoPane({ left, right }) {
+  return (
+    <div style={{ display: "grid", gridTemplateColumns: "320px minmax(0,1fr)", minHeight: "calc(100vh - 92px)" }}>
+      <div style={{ borderRight: "1px solid var(--border)", padding: 14, overflowY: "auto", maxHeight: "calc(100vh - 92px)" }}>{left}</div>
+      <div style={{ padding: "18px 26px", overflowY: "auto", maxHeight: "calc(100vh - 92px)" }}>{right}</div>
+    </div>);
+}
 function Section({ title, children, note }) {
   return (<div style={{ marginTop: 22 }}>
     <div style={{ ...mono, fontSize: 13, letterSpacing: "0.05em", color: "var(--muted)", marginBottom: note ? 4 : 9 }}>{title}</div>
@@ -356,6 +363,90 @@ function SurfaceView({ G, nav }) {
     </div>);
 }
 
+// ── 게이트 결과 화면 ──────────────────────────────────
+const TAG_COLOR = { "빈도": "var(--sig)", "이명": "var(--lin)", "충돌": "var(--accent)", "metric": "var(--high)" };
+function GateView({ G, nav }) {
+  const gd = G.gate;
+  const dc = L.domainColor(G);
+  const allcols = L.allColumns(G);
+  const passedIds = allcols.filter((c) => L.gateTags(c, G));
+  const notPassed = allcols.filter((c) => !L.gateTags(c, G));
+  const [filter, setFilter] = useState("all");
+  const list = filter === "all" ? passedIds : filter === "notpass" ? notPassed
+    : passedIds.filter((c) => (L.gateTags(c, G) || []).includes(filter));
+  const [sel, setSel] = useState(passedIds[0] || null);
+  useEffect(() => { if (!list.includes(sel)) setSel(list[0] || null); }, [filter]);
+
+  const filters = [["all", `통과 ${passedIds.length}`], ["빈도", `빈도 ${gd.stats.by_tag["빈도"]}`],
+    ["이명", `이명 ${gd.stats.by_tag["이명"]}`], ["충돌", `충돌 ${gd.stats.by_tag["충돌"]}`],
+    ["metric", `metric ${gd.stats.by_tag["metric"]}`], ["notpass", `미통과 ${notPassed.length}`]];
+
+  const left = (
+    <div>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginBottom: 12 }}>
+        {filters.map(([k, lab]) => (
+          <button key={k} onClick={() => setFilter(k)} style={{ ...mono, fontSize: 12.5, padding: "4px 10px", borderRadius: 5, cursor: "pointer",
+            background: filter === k ? "rgba(255,255,255,0.1)" : "transparent", color: filter === k ? "var(--text)" : "var(--muted)",
+            border: `1px solid ${filter === k ? (TAG_COLOR[k] || "var(--border)") : "var(--border)"}` }}>{lab}</button>))}
+      </div>
+      {Object.entries((() => { const by = {}; list.forEach((id) => { const t = tableName(id); (by[t] = by[t] || []).push(id); }); return by; })()).map(([t, ids]) => (
+        <div key={t} style={{ marginBottom: 9 }}>
+          <div style={{ ...mono, fontSize: 11, color: "var(--dim)", marginBottom: 2 }}>{G.schema[t] ? G.schema[t].label : t}</div>
+          {ids.map((id) => (
+            <HoverRow key={id} active={sel === id} onClick={() => setSel(id)} style={{ padding: "3px 8px", borderRadius: 4, display: "flex", alignItems: "center", gap: 6 }}>
+              <span style={{ ...mono, fontSize: 13, color: "var(--text)" }}>{colName(id)}</span>
+              {(L.gateTags(id, G) || []).map((tg) => <span key={tg} style={{ width: 7, height: 7, borderRadius: 2, background: TAG_COLOR[tg], display: "inline-block" }} title={tg} />)}
+            </HoverRow>))}
+        </div>))}
+    </div>);
+
+  const right = sel ? (() => {
+    const tags = L.gateTags(sel, G);
+    const reasons = tags ? L.gateReason(sel, G) : [];
+    return (
+      <div style={{ maxWidth: 640 }}>
+        <div style={{ ...mono, fontSize: 18, color: "var(--text)" }}>{colName(sel)}<Badge color={dc(L.domainOf(sel))}>{L.domainOf(sel)}</Badge></div>
+        <div style={{ ...mono, fontSize: 12, color: "var(--dim)", marginTop: 3, marginBottom: 14 }}>{sel}</div>
+        <div style={{ fontSize: 14, color: "var(--muted)", marginBottom: 12, lineHeight: 1.6 }}>{L.rend(sel, G).description}</div>
+        {tags ? (
+          <div style={{ border: "1px solid var(--border)", borderLeft: "3px solid var(--high)", borderRadius: 7, padding: "12px 16px" }}>
+            <div style={{ ...mono, fontSize: 12, color: "var(--high)", marginBottom: 8 }}>통과 — 근거</div>
+            {reasons.map((r, i) => (
+              <div key={i} style={{ display: "flex", gap: 9, marginBottom: 6, alignItems: "baseline" }}>
+                <span style={{ ...mono, fontSize: 11.5, color: TAG_COLOR[r.tag], border: `1px solid ${TAG_COLOR[r.tag]}66`, borderRadius: 4, padding: "1px 7px", flexShrink: 0 }}>{r.tag}</span>
+                <span style={{ fontSize: 13, color: "var(--text)", lineHeight: 1.5 }}>{r.text}</span>
+              </div>))}
+          </div>
+        ) : (
+          <div style={{ border: "1px solid var(--border)", borderLeft: "3px solid var(--dim)", borderRadius: 7, padding: "12px 16px" }}>
+            <div style={{ ...mono, fontSize: 12, color: "var(--dim)", marginBottom: 6 }}>미통과 — 어느 조건에도 안 걸림</div>
+            <div style={{ fontSize: 13, color: "var(--muted)" }}>분석 빈도 {L.freqOf(sel, G)} · 표면형 {L.surfaceForms(sel, G).length}개</div>
+          </div>)}
+        <div style={{ marginTop: 14 }}>
+          <span onClick={() => nav("table", tableName(sel), sel)} style={{ ...mono, fontSize: 12.5, color: "var(--sig)", cursor: "pointer" }}>→ 재료에서 이 컬럼 보기</span>
+        </div>
+      </div>);
+  })() : <div style={{ color: "var(--dim)" }}>컬럼을 선택하세요</div>;
+
+  return (
+    <div>
+      <div style={{ padding: "16px 26px", borderBottom: "1px solid var(--border)" }}>
+        <div style={{ border: "1px solid var(--border)", borderLeft: "3px solid var(--high)", borderRadius: 7, padding: "12px 18px", maxWidth: 1040 }}>
+          <div style={{ fontSize: 14.5, color: "var(--text)", marginBottom: 8 }}>
+            Term을 만들 컬럼을 고르는 1차 게이트 결과입니다. 재료에 로직을 돌린 산출이지 재료가 아닙니다.
+            전체 {gd.stats.total}개 중 <span style={{ color: "var(--high)" }}>{gd.stats.passed}개 통과</span>. 네 조건의 OR이고, 통과마다 어느 조건으로 걸렸는지 꼬리표를 답니다.
+          </div>
+          <div style={{ ...mono, fontSize: 12.5, color: "var(--muted)", lineHeight: 1.7 }}>
+            빈도 임계 {gd.threshold} · {gd.threshold_basis}<br />
+            {Object.entries(gd.conditions).map(([k, v]) => (
+              <span key={k} style={{ display: "block" }}><span style={{ color: TAG_COLOR[k] }}>{k}</span> — {v}</span>))}
+          </div>
+        </div>
+      </div>
+      <TwoPane left={left} right={right} />
+    </div>);
+}
+
 // ── 셸 ────────────────────────────────────────────────
 const TABS = [["overview", "개요"], ["table", "테이블"], ["surface", "표면형 관찰"]];
 function parseHash() {
@@ -369,26 +460,34 @@ function App({ G }) {
   function nav(v, sel, hl) { const r = { v, sel: sel || null, hl: hl || null }; setRoute(r);
     try { history.replaceState(null, "", "#" + v + (sel ? "/" + encodeURIComponent(sel) : "")); } catch (e) {} }
   const props = { G, route, nav };
+  const isGate = route.v === "gate";
   return (
     <div>
       <div style={{ display: "flex", gap: 2, alignItems: "flex-end", padding: "10px 16px 0", borderBottom: "1px solid var(--border)" }}>
-        <span style={{ ...mono, fontSize: 15, color: "var(--text)", marginRight: 14, paddingBottom: 8 }}>은행 mock data</span>
-        {TABS.map(([k, label]) => (
+        <span style={{ ...mono, fontSize: 15, color: "var(--text)", marginRight: 12, paddingBottom: 8 }}>은행 mock data</span>
+        <div style={{ display: "flex", gap: 4, marginRight: 16, paddingBottom: 6 }}>
+          {[["재료", false, "overview"], ["게이트", true, "gate"]].map(([lab, g, dest]) => (
+            <div key={lab} onClick={() => nav(dest, null)} style={{ ...mono, fontSize: 13.5, padding: "5px 14px", cursor: "pointer", borderRadius: 6,
+              background: isGate === g ? "rgba(255,255,255,0.09)" : "transparent",
+              color: isGate === g ? "var(--text)" : "var(--dim)", border: `1px solid ${isGate === g ? "var(--border)" : "transparent"}` }}>{lab}</div>))}
+        </div>
+        {!isGate && TABS.map(([k, label]) => (
           <div key={k} onClick={() => nav(k, null)} style={{ ...mono, fontSize: 14.5, padding: "7px 14px", cursor: "pointer",
             color: route.v === k ? "var(--text)" : "var(--dim)", borderBottom: route.v === k ? "2px solid var(--accent)" : "2px solid transparent" }}>{label}</div>))}
         <div style={{ flex: 1 }} />
-        <div style={{ paddingBottom: 6 }}><SearchBox G={G} nav={nav} /></div>
+        {!isGate && <div style={{ paddingBottom: 6 }}><SearchBox G={G} nav={nav} /></div>}
       </div>
       {route.v === "overview" && <Overview {...props} />}
       {route.v === "table" && <TableView {...props} />}
       {route.v === "surface" && <SurfaceView {...props} />}
+      {route.v === "gate" && <GateView {...props} />}
     </div>);
 }
 function Root() {
   const [G, setG] = useState(null); const [err, setErr] = useState(null);
   useEffect(() => {
-    Promise.all(["schema", "render_output", "psql_output"].map((f) => fetch("data/" + f + ".json").then((r) => { if (!r.ok) throw new Error(f + " " + r.status); return r.json(); })))
-      .then(([schema, render, psql]) => setG({ schema, render, psql })).catch((e) => setErr(String(e.message || e)));
+    Promise.all(["schema", "render_output", "psql_output", "gate_output"].map((f) => fetch("data/" + f + ".json").then((r) => { if (!r.ok) throw new Error(f + " " + r.status); return r.json(); })))
+      .then(([schema, render, psql, gate]) => setG({ schema, render, psql, gate })).catch((e) => setErr(String(e.message || e)));
   }, []);
   if (err) return <Center>로드 실패: {err}<br />(http 서버로 실행했는지 확인)</Center>;
   if (!G) return <Center>데이터 적재 중…</Center>;

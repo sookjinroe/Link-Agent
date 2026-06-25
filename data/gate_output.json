@@ -1,0 +1,384 @@
+{
+ "threshold": 100,
+ "threshold_basis": "폴백 커버율 87% 지점 (지칭 트래픽 합 기준). 통과 수를 보고 고치지 않음.",
+ "conditions": {
+  "빈도": "analytic_freq >= 100 (폴백 회피 가치: 자주 쓰여 폴백 노출이 잦은 컬럼 보호)",
+  "이명": "표면형 2개 이상 (사용자가 여러 이름으로 부름 → 폴백 텍스트 매칭이 못 이음)",
+  "충돌": "표면형이 2+ 도메인에 겹침 (도메인 미명시 질문에서 변별 불가)",
+  "metric": "집계 패턴에 측정값으로 등장 (정본 지표 후보, 폴백이 원천적으로 못 줌)"
+ },
+ "stats": {
+  "total": 214,
+  "passed": 93,
+  "by_tag": {
+   "빈도": 90,
+   "이명": 21,
+   "충돌": 34,
+   "metric": 31
+  }
+ },
+ "gate": {
+  "CUST_DB.CUST_BASE_INFO.BIRTH_DT": [
+   "빈도"
+  ],
+  "CUST_DB.CUST_BASE_INFO.GENDER_CD": [
+   "빈도"
+  ],
+  "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD": [
+   "빈도",
+   "이명",
+   "충돌"
+  ],
+  "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN": [
+   "빈도"
+  ],
+  "CUST_DB.CUST_CONTACT.VALID_YN": [
+   "빈도"
+  ],
+  "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD": [
+   "빈도",
+   "이명",
+   "충돌"
+  ],
+  "CUST_DB.CUST_GRD_HIST.APLD_DT": [
+   "빈도"
+  ],
+  "CUST_DB.CUST_GRD_HIST.RSN_CD": [
+   "빈도"
+  ],
+  "LOAN_DB.LOAN_ACCT_MST.LOAN_AMT": [
+   "빈도",
+   "metric"
+  ],
+  "LOAN_DB.LOAN_ACCT_MST.LOAN_BAL_AMT": [
+   "빈도",
+   "이명",
+   "충돌",
+   "metric"
+  ],
+  "LOAN_DB.LOAN_ACCT_MST.INT_RATE": [
+   "빈도",
+   "충돌",
+   "metric"
+  ],
+  "LOAN_DB.LOAN_ACCT_MST.APLD_RATE": [
+   "빈도",
+   "metric"
+  ],
+  "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD": [
+   "빈도",
+   "이명",
+   "충돌"
+  ],
+  "LOAN_DB.LOAN_ACCT_MST.EXEC_DT": [
+   "빈도"
+  ],
+  "LOAN_DB.LOAN_ACCT_MST.MTRT_DT": [
+   "빈도",
+   "이명",
+   "충돌"
+  ],
+  "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD": [
+   "빈도"
+  ],
+  "LOAN_DB.LOAN_APPL_HIST.APPL_AMT": [
+   "빈도",
+   "metric"
+  ],
+  "LOAN_DB.LOAN_APPL_HIST.APRV_AMT": [
+   "빈도",
+   "충돌",
+   "metric"
+  ],
+  "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD": [
+   "빈도",
+   "이명",
+   "충돌"
+  ],
+  "LOAN_DB.LOAN_APPL_HIST.APPL_DT": [
+   "빈도"
+  ],
+  "LOAN_DB.LOAN_APPL_HIST.APRV_DT": [
+   "빈도"
+  ],
+  "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD": [
+   "빈도"
+  ],
+  "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD": [
+   "빈도",
+   "이명",
+   "충돌"
+  ],
+  "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_AMT": [
+   "빈도",
+   "충돌",
+   "metric"
+  ],
+  "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_DAYS": [
+   "빈도",
+   "충돌",
+   "metric"
+  ],
+  "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_INT_AMT": [
+   "빈도",
+   "metric"
+  ],
+  "LOAN_DB.LOAN_DLNQ_HIST.OCUR_DT": [
+   "빈도",
+   "충돌"
+  ],
+  "LOAN_DB.LOAN_DLNQ_HIST.CLEAR_DT": [
+   "빈도"
+  ],
+  "LOAN_DB.LOAN_PRDT_MST.BASE_RATE": [
+   "빈도",
+   "metric"
+  ],
+  "LOAN_DB.LOAN_PRDT_MST.MAX_LMT_AMT": [
+   "빈도",
+   "충돌",
+   "metric"
+  ],
+  "LOAN_DB.LOAN_PRDT_MST.SALE_YN": [
+   "빈도"
+  ],
+  "CARD_DB.CARD_MST.CARD_GRD_CD": [
+   "빈도",
+   "이명",
+   "충돌"
+  ],
+  "CARD_DB.CARD_MST.CARD_LMT_AMT": [
+   "빈도",
+   "이명",
+   "충돌",
+   "metric"
+  ],
+  "CARD_DB.CARD_MST.CARD_BAL_AMT": [
+   "빈도",
+   "이명",
+   "충돌",
+   "metric"
+  ],
+  "CARD_DB.CARD_MST.CARD_STAT_CD": [
+   "빈도",
+   "이명",
+   "충돌"
+  ],
+  "CARD_DB.CARD_MST.ISSUE_DT": [
+   "빈도"
+  ],
+  "CARD_DB.CARD_MST.EXPIRE_DT": [
+   "빈도"
+  ],
+  "CARD_DB.CARD_APPL.CUST_NO": [
+   "빈도"
+  ],
+  "CARD_DB.CARD_APPL.ISSUE_STAT_CD": [
+   "빈도",
+   "이명",
+   "충돌"
+  ],
+  "CARD_DB.CARD_APPL.REQ_LMT_AMT": [
+   "빈도",
+   "metric"
+  ],
+  "CARD_DB.CARD_APPL.APPL_DT": [
+   "빈도"
+  ],
+  "CARD_DB.CARD_APRV_HIST.APRV_AMT": [
+   "빈도",
+   "충돌",
+   "metric"
+  ],
+  "CARD_DB.CARD_APRV_HIST.MRCHT_CTGR_CD": [
+   "빈도"
+  ],
+  "CARD_DB.CARD_APRV_HIST.CNCL_YN": [
+   "빈도"
+  ],
+  "CARD_DB.CARD_DLNQ_HIST.CARD_NO": [
+   "빈도"
+  ],
+  "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD": [
+   "빈도",
+   "이명",
+   "충돌"
+  ],
+  "CARD_DB.CARD_DLNQ_HIST.DLNQ_AMT": [
+   "빈도",
+   "충돌",
+   "metric"
+  ],
+  "CARD_DB.CARD_DLNQ_HIST.DLNQ_DAYS": [
+   "빈도",
+   "충돌",
+   "metric"
+  ],
+  "CARD_DB.CARD_DLNQ_HIST.OCUR_DT": [
+   "빈도",
+   "충돌"
+  ],
+  "DEP_DB.DEP_ACCT_MST.PRDT_CD": [
+   "빈도"
+  ],
+  "DEP_DB.DEP_ACCT_MST.DEP_BAL_AMT": [
+   "빈도",
+   "이명",
+   "충돌",
+   "metric"
+  ],
+  "DEP_DB.DEP_ACCT_MST.INT_RATE": [
+   "빈도",
+   "이명",
+   "충돌",
+   "metric"
+  ],
+  "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD": [
+   "빈도",
+   "이명",
+   "충돌"
+  ],
+  "DEP_DB.DEP_ACCT_MST.OPEN_DT": [
+   "빈도"
+  ],
+  "DEP_DB.DEP_ACCT_MST.MTRT_DT": [
+   "빈도",
+   "이명",
+   "충돌"
+  ],
+  "DEP_DB.DEP_TXN_HIST.DEP_NO": [
+   "빈도"
+  ],
+  "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD": [
+   "빈도"
+  ],
+  "DEP_DB.DEP_TXN_HIST.TXN_AMT": [
+   "빈도",
+   "metric"
+  ],
+  "DEP_DB.DEP_TXN_HIST.BAL_AFTR_AMT": [
+   "빈도",
+   "충돌",
+   "metric"
+  ],
+  "DEP_DB.DEP_TXN_HIST.TXN_DT": [
+   "빈도"
+  ],
+  "DEP_DB.DEP_PRDT_MST.PRDT_TYPE_CD": [
+   "빈도"
+  ],
+  "DEP_DB.DEP_PRDT_MST.BASE_RATE": [
+   "빈도",
+   "metric"
+  ],
+  "DEP_DB.DEP_PRDT_MST.SALE_YN": [
+   "빈도"
+  ],
+  "RISK_DB.CRDT_EVAL_HIST.EVAL_ID": [
+   "빈도"
+  ],
+  "RISK_DB.CRDT_EVAL_HIST.CRDT_SCR": [
+   "빈도",
+   "metric"
+  ],
+  "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD": [
+   "빈도",
+   "이명",
+   "충돌"
+  ],
+  "RISK_DB.CRDT_EVAL_HIST.EVAL_DT": [
+   "빈도"
+  ],
+  "RISK_DB.CRDT_EVAL_HIST.EVAL_RSN_CD": [
+   "빈도"
+  ],
+  "RISK_DB.CRDT_LMT_MST.CRDT_LMT_AMT": [
+   "빈도",
+   "이명",
+   "충돌",
+   "metric"
+  ],
+  "RISK_DB.CRDT_LMT_MST.USE_AMT": [
+   "빈도",
+   "metric"
+  ],
+  "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD": [
+   "이명",
+   "충돌"
+  ],
+  "RISK_DB.FRAUD_DTCT_HIST.DTCT_AMT": [
+   "metric"
+  ],
+  "RISK_DB.FRAUD_DTCT_HIST.RISK_SCR": [
+   "빈도",
+   "metric"
+  ],
+  "RISK_DB.FRAUD_DTCT_HIST.DTCT_DT": [
+   "빈도"
+  ],
+  "RISK_DB.FRAUD_DTCT_HIST.BLOCK_YN": [
+   "빈도"
+  ],
+  "PAY_DB.TRANSFER_HIST.FROM_ACCT_NO": [
+   "빈도"
+  ],
+  "PAY_DB.TRANSFER_HIST.TRF_AMT": [
+   "빈도",
+   "metric"
+  ],
+  "PAY_DB.TRANSFER_HIST.FEE_AMT": [
+   "빈도",
+   "metric"
+  ],
+  "PAY_DB.TRANSFER_HIST.TRF_STAT_CD": [
+   "빈도",
+   "이명",
+   "충돌"
+  ],
+  "PAY_DB.TRANSFER_HIST.TRF_DT": [
+   "빈도"
+  ],
+  "PAY_DB.AUTO_TRF_MST.TRF_AMT": [
+   "빈도",
+   "metric"
+  ],
+  "PAY_DB.AUTO_TRF_MST.TRF_DAY": [
+   "빈도",
+   "metric"
+  ],
+  "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD": [
+   "충돌"
+  ],
+  "PAY_DB.AUTO_TRF_MST.REG_DT": [
+   "빈도"
+  ],
+  "CHN_DB.ACCESS_LOG.CUST_NO": [
+   "빈도"
+  ],
+  "CHN_DB.ACCESS_LOG.CHANNEL_CD": [
+   "빈도"
+  ],
+  "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD": [
+   "빈도"
+  ],
+  "CHN_DB.CNSNT_HIST.CNSNT_YN": [
+   "빈도"
+  ],
+  "CHN_DB.MYDATA_LINK.CUST_NO": [
+   "빈도"
+  ],
+  "CHN_DB.MYDATA_LINK.PROVIDER_CD": [
+   "빈도"
+  ],
+  "CHN_DB.MYDATA_LINK.LINK_STAT_CD": [
+   "빈도",
+   "충돌"
+  ],
+  "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN": [
+   "빈도"
+  ],
+  "CHN_DB.MYDATA_LINK.LINK_DT": [
+   "빈도"
+  ]
+ }
+}
