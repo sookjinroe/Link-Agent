@@ -463,19 +463,22 @@ function App({ G }) {
   const isGate = route.v === "gate";
   return (
     <div>
-      <div style={{ display: "flex", gap: 2, alignItems: "flex-end", padding: "10px 16px 0", borderBottom: "1px solid var(--border)" }}>
-        <span style={{ ...mono, fontSize: 15, color: "var(--text)", marginRight: 12, paddingBottom: 8 }}>은행 mock data</span>
-        <div style={{ display: "flex", gap: 4, marginRight: 16, paddingBottom: 6 }}>
+      <div style={{ borderBottom: "1px solid var(--border)" }}>
+        <div style={{ display: "flex", gap: 8, alignItems: "center", padding: "9px 16px" }}>
+          <span style={{ ...mono, fontSize: 15, color: "var(--text)", marginRight: 6 }}>은행 mock data</span>
           {[["재료", false, "overview"], ["게이트", true, "gate"]].map(([lab, g, dest]) => (
-            <div key={lab} onClick={() => nav(dest, null)} style={{ ...mono, fontSize: 13.5, padding: "5px 14px", cursor: "pointer", borderRadius: 6,
-              background: isGate === g ? "rgba(255,255,255,0.09)" : "transparent",
+            <div key={lab} onClick={() => nav(dest, null)} style={{ ...mono, fontSize: 13.5, padding: "5px 16px", cursor: "pointer", borderRadius: 6,
+              background: isGate === g ? "rgba(255,255,255,0.1)" : "transparent",
               color: isGate === g ? "var(--text)" : "var(--dim)", border: `1px solid ${isGate === g ? "var(--border)" : "transparent"}` }}>{lab}</div>))}
         </div>
-        {!isGate && TABS.map(([k, label]) => (
-          <div key={k} onClick={() => nav(k, null)} style={{ ...mono, fontSize: 14.5, padding: "7px 14px", cursor: "pointer",
-            color: route.v === k ? "var(--text)" : "var(--dim)", borderBottom: route.v === k ? "2px solid var(--accent)" : "2px solid transparent" }}>{label}</div>))}
-        <div style={{ flex: 1 }} />
-        {!isGate && <div style={{ paddingBottom: 6 }}><SearchBox G={G} nav={nav} /></div>}
+        {!isGate &&
+          <div style={{ display: "flex", gap: 2, alignItems: "flex-end", padding: "0 24px", background: "rgba(255,255,255,0.02)" }}>
+            {TABS.map(([k, label]) => (
+              <div key={k} onClick={() => nav(k, null)} style={{ ...mono, fontSize: 14, padding: "7px 14px", cursor: "pointer",
+                color: route.v === k ? "var(--text)" : "var(--dim)", borderBottom: route.v === k ? "2px solid var(--accent)" : "2px solid transparent" }}>{label}</div>))}
+            <div style={{ flex: 1 }} />
+            <div style={{ paddingBottom: 5 }}><SearchBox G={G} nav={nav} /></div>
+          </div>}
       </div>
       {route.v === "overview" && <Overview {...props} />}
       {route.v === "table" && <TableView {...props} />}
