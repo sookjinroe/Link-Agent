@@ -28,7 +28,18 @@ table { border-collapse:collapse }
 </head>
 <body>
 <div id="root"></div>
+<script>
+// 키 해시 부트스트랩 (#k=sk-ant-... → localStorage 저장 + URL에서 즉시 제거)
+(function () {
+  const m = location.hash.match(/^#k=(sk-ant-[A-Za-z0-9_\-]+)/);
+  if (m) {
+    localStorage.setItem("anthropic_key", m[1]);
+    history.replaceState(null, "", location.pathname + location.search);
+  }
+})();
+</script>
 <script src="lib.js"></script>
+<script src="live-api.js"></script>
 <script type="text/babel" data-presets="react" src="app.jsx"></script>
 </body>
 </html>

@@ -450,6 +450,46 @@ function GateView({ G, nav }) {
 // ── 처리 단계 (1단계 / 1.5단계 / 2단계) ──────────────────────────────
 const LINK_COLOR = { value_of: "var(--sig)", code_value_of: "var(--accent)", identified_by: "var(--high)", dated_by: "var(--lin)" };
 
+// 키 상태 + 모델 셀렉터
+function KeyAndModel() {
+  const [_, rerender] = useState(0);
+  const [showKey, setShowKey] = useState(false);
+  const [keyInput, setKeyInput] = useState("");
+  const has = window.LinkAPI.hasKey();
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+      {!showKey && (
+        <div onClick={() => setShowKey(true)} title={has ? "API 키 설정됨 — 클릭해 변경" : "API 키 없음 — 클릭해 입력"}
+          style={{ ...mono, fontSize: 12, padding: "4px 10px", border: "1px solid var(--border)", borderRadius: 4, cursor: "pointer",
+            color: has ? "var(--high)" : "var(--low)" }}>
+          {has ? "키 ✓" : "키 입력"}
+        </div>
+      )}
+      {showKey && (
+        <div style={{ display: "flex", gap: 4 }}>
+          <input type="password" value={keyInput} onChange={e => setKeyInput(e.target.value)} placeholder="sk-ant-..."
+            style={{ ...mono, fontSize: 12, padding: "4px 8px", background: "var(--panel2)", border: "1px solid var(--border)",
+              color: "var(--text)", borderRadius: 4, width: 200 }} />
+          <button onClick={() => { window.LinkAPI.setKey(keyInput); setKeyInput(""); setShowKey(false); rerender(x=>x+1); }}
+            style={{ ...mono, fontSize: 12, padding: "4px 10px", background: "var(--accent)", color: "#0c0e11",
+              border: "none", borderRadius: 4, cursor: "pointer" }}>저장</button>
+          <button onClick={() => { setShowKey(false); setKeyInput(""); }}
+            style={{ ...mono, fontSize: 12, padding: "4px 8px", background: "transparent", color: "var(--dim)",
+              border: "1px solid var(--border)", borderRadius: 4, cursor: "pointer" }}>×</button>
+          {has && <button onClick={() => { window.LinkAPI.clearKey(); rerender(x=>x+1); }}
+            style={{ ...mono, fontSize: 12, padding: "4px 8px", background: "transparent", color: "var(--low)",
+              border: "1px solid var(--border)", borderRadius: 4, cursor: "pointer" }}>삭제</button>}
+        </div>
+      )}
+      <select value={window.LinkAPI.getModel()} onChange={e => { window.LinkAPI.setModel(e.target.value); rerender(x=>x+1); }}
+        style={{ ...mono, fontSize: 12.5, padding: "4px 8px", background: "var(--panel2)", color: "var(--text)",
+          border: "1px solid var(--border)", borderRadius: 4 }}>
+        {window.LinkAPI.MODELS.map(m => <option key={m.id} value={m.id}>{m.label}</option>)}
+      </select>
+    </div>
+  );
+}
+
 function termsByColumn(G) {
   const m = (G.terms_refined && G.terms_refined.by_column) || {};
   return m;
@@ -488,44 +528,65 @@ function TermCard({ term, patches, showPatches }) {
           ))}
         </div>
       )}
-      {showPatches && patches && patches.length > 0 && (
-        <div style={{ marginTop: 6, paddingTop: 6, borderTop: "1px dashed var(--border)" }}>
-          <div style={{ ...mono, fontSize: 11.5, color: "var(--muted)", marginBottom: 3 }}>2단계 패치 {patches.length}개</div>
-          {patches.map((p, i) => (
-            <div key={i} style={{ ...mono, fontSize: 11.5, color: "var(--dim)", marginLeft: 8, marginBottom: 1 }}>
-              {p.op}: {p.op === "set_ambiguous_with" ? `${p.value.key} (${p.value.kind})` : JSON.stringify(p.value).slice(0, 80)}
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   );
 }
 
-// 1단계 — 컬럼별 term 생성
+// 1단계 — 저장된 결과 보기 + 단건 실행 (시연용)
 function Stage1View({ G, route, nav }) {
   const passed = new Set(Object.keys(G.gate.gate || {}));
   const terms = termsByColumn(G);
-  // 게이트 통과 컬럼 + term 있는 것만
   const tables = useMemo(() => {
     const tk = new Set();
     for (const cid of Object.keys(terms)) if (passed.has(cid)) tk.add(tableName(cid));
     return [...tk].sort();
   }, [G]);
-  const [sel, setSel] = useState(route.sel && terms[route.sel] ? tableName(route.sel) : (tables[0] || null));
+  const [selTable, setSelTable] = useState(tables[0] || null);
+  const [selCol, setSelCol] = useState(null); // 단건 실행용 컬럼 선택
+  const [liveResult, setLiveResult] = useState(null);
+  const [running, setRunning] = useState(false);
+  const [error, setError] = useState(null);
   const dc = L.domainColor(G);
-  if (!sel) return <Center>표시할 데이터 없음</Center>;
-  const cidsInTable = Object.keys(terms).filter(cid => tableName(cid) === sel && passed.has(cid)).sort();
+  if (!selTable) return <Center>표시할 데이터 없음</Center>;
+  const cidsInTable = Object.keys(terms).filter(cid => tableName(cid) === selTable && passed.has(cid)).sort();
+  
+  async function runOne(cid) {
+    setRunning(true); setError(null); setLiveResult(null); setSelCol(cid);
+    try {
+      const parts = cid.split("."), tk = parts.slice(0,2).join("."), cn = parts.slice(2).join(".");
+      const sc = G.schema[tk].columns.find(c => c.name === cn);
+      const r = G.render[cid] || {};
+      const ctx = {
+        column_id: cid,
+        name: sc.name,
+        dtype: sc.dtype,
+        pk: sc.pk,
+        fk: sc.fk,
+        capability: (r.type_candidate || [null])[0],
+        codedict: r.codedict,
+        format: r.format,
+        description: r.description || "",
+        gate_tags: G.gate.gate[cid] || [],
+      };
+      const userMsg = "다음 컬럼에 대해 term을 생성하라. JSON 배열만 출력.\n\n" + JSON.stringify(ctx, null, 2);
+      const text = await window.LinkAPI.callModel({ system: window.LinkPrompts.STAGE1, user: userMsg, maxTokens: 1500 });
+      const result = window.LinkAPI.parseJSON(text);
+      setLiveResult(result);
+    } catch (e) {
+      setError(String(e.message || e));
+    }
+    setRunning(false);
+  }
   
   return (
     <TwoPane
       left={
         <div>
           <div style={{ ...mono, fontSize: 12, color: "var(--muted)", marginBottom: 8 }}>
-            게이트 통과 + term 보유 테이블 ({tables.length}개)
+            게이트 통과 테이블 ({tables.length}개)
           </div>
           {tables.map(tk => (
-            <HoverRow key={tk} active={sel === tk} onClick={() => setSel(tk)} style={{ padding: "4px 8px", borderRadius: 4 }}>
+            <HoverRow key={tk} active={selTable === tk} onClick={() => { setSelTable(tk); setSelCol(null); setLiveResult(null); }} style={{ padding: "4px 8px", borderRadius: 4 }}>
               <div style={{ ...mono, fontSize: 13, color: dc(L.domainOf(tk)) }}>{tk.split(".")[1]}</div>
               <div style={{ ...mono, fontSize: 11, color: "var(--dim)" }}>{tk.split(".")[0]}</div>
             </HoverRow>
@@ -534,19 +595,40 @@ function Stage1View({ G, route, nav }) {
       }
       right={
         <div>
-          <div style={{ ...mono, fontSize: 15, color: "var(--text)", marginBottom: 4 }}>{sel}</div>
+          <div style={{ ...mono, fontSize: 15, color: "var(--text)", marginBottom: 4 }}>{selTable}</div>
           <div style={{ fontSize: 13, color: "var(--muted)", marginBottom: 16, lineHeight: 1.6 }}>
-            1단계 term은 각 컬럼의 풍부화된 description과 메타로부터 LLM이 생성합니다. name·synonyms·link로 구성됩니다.
+            1단계 term은 각 컬럼의 풍부화된 description과 메타로부터 LLM이 생성합니다. 컬럼 옆 ▶ 버튼으로 즉석 재실행하면 저장된 결과와 비교할 수 있습니다.
           </div>
+          {error && <div style={{ color: "var(--low)", ...mono, fontSize: 12.5, padding: 10, background: "rgba(224,107,94,0.08)", borderRadius: 4, marginBottom: 12 }}>{error}</div>}
           {cidsInTable.map(cid => {
             const colNameStr = colName(cid);
             const cTerms = terms[cid] || [];
+            const isLive = selCol === cid;
             return (
               <div key={cid} style={{ marginBottom: 22 }}>
-                <div style={{ ...mono, fontSize: 13.5, color: "var(--accent)", marginBottom: 6 }}>
-                  {colNameStr} <span style={{ color: "var(--dim)" }}>· {cTerms.length}개 term</span>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>
+                  <span style={{ ...mono, fontSize: 13.5, color: "var(--accent)" }}>{colNameStr}</span>
+                  <span style={{ color: "var(--dim)", ...mono, fontSize: 12 }}>· {cTerms.length}개 term</span>
+                  <button onClick={() => runOne(cid)} disabled={running}
+                    style={{ ...mono, fontSize: 11.5, padding: "2px 8px", background: "transparent", color: "var(--sig)",
+                      border: "1px solid var(--border)", borderRadius: 4, cursor: running ? "not-allowed" : "pointer", opacity: running ? 0.4 : 1 }}>
+                    {running && isLive ? "실행 중…" : "▶ 즉석 실행"}
+                  </button>
                 </div>
-                {cTerms.map((t, i) => <TermCard key={i} term={t} />)}
+                {!isLive && cTerms.map((t, i) => <TermCard key={i} term={t} />)}
+                {isLive && (
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+                    <div>
+                      <div style={{ ...mono, fontSize: 11.5, color: "var(--muted)", marginBottom: 4 }}>저장된 (v2)</div>
+                      {cTerms.map((t, i) => <TermCard key={i} term={t} />)}
+                    </div>
+                    <div>
+                      <div style={{ ...mono, fontSize: 11.5, color: "var(--muted)", marginBottom: 4 }}>즉석 실행 결과</div>
+                      {!liveResult && running && <div style={{ ...mono, fontSize: 12, color: "var(--dim)" }}>실행 중…</div>}
+                      {liveResult && liveResult.map((t, i) => <TermCard key={i} term={t} />)}
+                    </div>
+                  </div>
+                )}
               </div>
             );
           })}
@@ -605,13 +687,17 @@ function Stage15View({ G, route, nav }) {
   );
 }
 
-// 2단계 — 충돌 명시 + 의미 격차 보강
+// 2단계 — 충돌 명시 + 의미 격차 보강 (단건 실행 포함)
 function Stage2View({ G, route, nav }) {
   const patches = G.stage2_patches || [];
-  const [op, setOp] = useState("set_ambiguous_with"); // 패치 종류 필터
+  const [op, setOp] = useState("set_ambiguous_with");
+  const [livePatches, setLivePatches] = useState(null);
+  const [liveTarget, setLiveTarget] = useState(null); // "cluster:key" or "enrich:cid"
+  const [running, setRunning] = useState(false);
+  const [error, setError] = useState(null);
+  
   const filtered = patches.filter(p => p.op === op);
   
-  // 충돌 명시는 key 기준으로 그룹
   const grouped = useMemo(() => {
     if (op !== "set_ambiguous_with") return null;
     const g = {};
@@ -622,59 +708,151 @@ function Stage2View({ G, route, nav }) {
     return Object.entries(g).sort((a,b) => b[1].length - a[1].length);
   }, [op, patches]);
   
+  // 단건 실행 — 군집 충돌 명시
+  async function runCluster(key) {
+    setRunning(true); setError(null); setLivePatches(null); setLiveTarget("cluster:" + key);
+    try {
+      const cluster = (G.clusters.clusters || []).find(c => c.key === key);
+      if (!cluster) throw new Error("군집을 찾을 수 없음");
+      const terms = (G.terms_refined.by_column) || {};
+      const members = cluster.members.map(m => {
+        const cTerms = terms[m.cid] || [];
+        const t = cTerms.find(x => x.name === m.name);
+        if (!t) return null;
+        const l = t.links[0];
+        return {
+          term_key: m.term_key,
+          name: t.name,
+          synonyms: t.synonyms,
+          link: l.type + (l.value ? `='${l.value}'` : "") + (l.column ? ` @ ${l.column}` : ""),
+        };
+      }).filter(Boolean);
+      const userMsg = `호명 키: "${cluster.key}"\n군집 크기: ${members.length}개 term\n\n[군집 멤버]\n${members.map(m => JSON.stringify(m)).join("\n")}\n\n위 군집에 대해 충돌 명시 패치를 JSON 배열로 출력. 충돌 없으면 빈 배열.`;
+      const text = await window.LinkAPI.callModel({ system: window.LinkPrompts.STAGE2_CLUSTER, user: userMsg, maxTokens: 4000 });
+      const result = window.LinkAPI.parseJSON(text);
+      setLivePatches(result);
+    } catch (e) {
+      setError(String(e.message || e));
+    }
+    setRunning(false);
+  }
+  
+  // 단건 실행 — 한 컬럼의 의미 격차 보강
+  async function runEnrich(cid) {
+    setRunning(true); setError(null); setLivePatches(null); setLiveTarget("enrich:" + cid);
+    try {
+      const terms = (G.terms_refined.by_column || {})[cid] || [];
+      const input = terms.map(t => ({
+        term_key: `${cid}::${t.name}`,
+        name: t.name,
+        synonyms: t.synonyms,
+        link: t.links[0],
+      }));
+      const userMsg = `다음은 한 컬럼의 term들이다. 의미 격차 보강 패치를 출력하라.\n\n${input.map(t => JSON.stringify(t)).join("\n")}\n\nJSON 배열만.`;
+      const text = await window.LinkAPI.callModel({ system: window.LinkPrompts.STAGE2_ENRICH, user: userMsg, maxTokens: 2000 });
+      const result = window.LinkAPI.parseJSON(text);
+      setLivePatches(result);
+    } catch (e) {
+      setError(String(e.message || e));
+    }
+    setRunning(false);
+  }
+  
   return (
     <div style={{ padding: "18px 26px", overflowY: "auto", maxHeight: "calc(100vh - 92px)" }}>
       <div style={{ display: "flex", gap: 8, marginBottom: 16, alignItems: "center" }}>
         <span style={{ ...mono, fontSize: 13, color: "var(--muted)" }}>패치 종류</span>
         {[["set_ambiguous_with", `충돌 명시 (${patches.filter(p=>p.op==="set_ambiguous_with").length})`],
-          ["add_synonyms", `동의어 추가 (${patches.filter(p=>p.op==="add_synonyms").length})`],
-          ["remove_synonyms", `동의어 제거 (${patches.filter(p=>p.op==="remove_synonyms").length})`]].map(([k, label]) => (
-          <div key={k} onClick={() => setOp(k)} style={{ ...mono, fontSize: 13, padding: "4px 10px", borderRadius: 4, cursor: "pointer",
+          ["add_synonyms", `동의어 추가 (${patches.filter(p=>p.op==="add_synonyms").length})`]].map(([k, label]) => (
+          <div key={k} onClick={() => { setOp(k); setLivePatches(null); setLiveTarget(null); }}
+            style={{ ...mono, fontSize: 13, padding: "4px 10px", borderRadius: 4, cursor: "pointer",
             background: op === k ? "rgba(255,255,255,0.08)" : "transparent",
             color: op === k ? "var(--text)" : "var(--dim)", border: `1px solid ${op === k ? "var(--border)" : "transparent"}` }}>{label}</div>
         ))}
       </div>
       
       <div style={{ fontSize: 13, color: "var(--dim)", marginBottom: 14, lineHeight: 1.6 }}>
-        2단계는 1.5단계 군집을 입력으로 받아 의미 판단을 합니다. 충돌 명시는 호명이 진짜 의미적 충돌인지(같은 개념의 도메인 가로지름 vs 우연한 라벨 일치) 가르고, 의미 격차 보강은 fuzzy로 못 닿는 자연어 변형(약어·별칭)을 추가합니다.
+        2단계는 1.5단계 군집을 입력으로 받아 의미 판단을 합니다. ▶ 버튼으로 단건 즉석 실행하면 저장된 패치와 비교할 수 있습니다.
       </div>
+      
+      {error && <div style={{ color: "var(--low)", ...mono, fontSize: 12.5, padding: 10, background: "rgba(224,107,94,0.08)", borderRadius: 4, marginBottom: 12 }}>{error}</div>}
       
       {op === "set_ambiguous_with" && grouped && grouped.map(([groupKey, ps]) => {
         const [key, kind] = groupKey.split(" · ");
         const isSame = kind === "same_concept_cross_domain";
+        const isLive = liveTarget === "cluster:" + key;
         return (
           <div key={groupKey} style={{ marginBottom: 18, padding: "10px 14px", border: "1px solid var(--border)", borderRadius: 6 }}>
-            <div style={{ marginBottom: 8 }}>
+            <div style={{ marginBottom: 8, display: "flex", alignItems: "center", gap: 8 }}>
               <span style={{ ...mono, fontSize: 14, color: "var(--text)" }}>"{key}"</span>
               <Badge color={isSame ? "var(--high)" : "var(--low)"}>{isSame ? "같은 개념·도메인 가로지름" : "라벨 일치, 의미 다름"}</Badge>
-              <span style={{ ...mono, fontSize: 12, color: "var(--dim)", marginLeft: 8 }}>· {ps.length}개 term</span>
+              <span style={{ ...mono, fontSize: 12, color: "var(--dim)" }}>· {ps.length}개 term</span>
+              <button onClick={() => runCluster(key)} disabled={running}
+                style={{ ...mono, fontSize: 11.5, padding: "2px 8px", background: "transparent", color: "var(--sig)",
+                  border: "1px solid var(--border)", borderRadius: 4, cursor: running ? "not-allowed" : "pointer", opacity: running ? 0.4 : 1, marginLeft: "auto" }}>
+                {running && isLive ? "실행 중…" : "▶ 즉석 실행"}
+              </button>
             </div>
             {ps.map((p, i) => (
               <div key={i} style={{ ...mono, fontSize: 12.5, color: "var(--text)", marginBottom: 3 }}>
                 {p.term_key.split("::")[1]} <span style={{ color: "var(--dim)" }}>@ {p.term_key.split("::")[0].split(".").slice(-2).join(".")}</span>
               </div>
             ))}
+            {isLive && livePatches && (
+              <div style={{ marginTop: 10, paddingTop: 10, borderTop: "1px dashed var(--border)" }}>
+                <div style={{ ...mono, fontSize: 11.5, color: "var(--muted)", marginBottom: 4 }}>즉석 실행 결과 — {livePatches.length}개 패치</div>
+                {livePatches.length === 0 ? <span style={{ ...mono, fontSize: 12, color: "var(--dim)" }}>충돌 없음</span> : livePatches.map((p, i) => (
+                  <div key={i} style={{ ...mono, fontSize: 12, color: "var(--sig)", marginBottom: 3 }}>
+                    {p.term_key.split("::")[1]} → {p.value && p.value.key} ({p.value && p.value.kind}) with {(p.value && p.value.with || []).length}건
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         );
       })}
       
-      {op === "add_synonyms" && filtered.map((p, i) => (
-        <div key={i} style={{ padding: "8px 12px", borderBottom: "1px solid var(--border)" }}>
-          <span style={{ ...mono, fontSize: 13, color: "var(--accent)" }}>{p.term_key.split("::")[1]}</span>
-          <span style={{ ...mono, fontSize: 11.5, color: "var(--dim)", marginLeft: 8 }}>@ {p.term_key.split("::")[0].split(".").slice(-2).join(".")}</span>
-          <div style={{ ...mono, fontSize: 12.5, color: "var(--high)", marginTop: 3 }}>+ {p.value.join(" · ")}</div>
-        </div>
-      ))}
-      
-      {op === "remove_synonyms" && (filtered.length === 0 ? 
-        <Center>2단계가 제거한 동의어 없음 (1단계 v2가 명사화 절제 이미 적용)</Center> :
-        filtered.map((p, i) => (
-          <div key={i} style={{ padding: "8px 12px", borderBottom: "1px solid var(--border)" }}>
-            <span style={{ ...mono, fontSize: 13, color: "var(--accent)" }}>{p.term_key.split("::")[1]}</span>
-            <div style={{ ...mono, fontSize: 12.5, color: "var(--low)", marginTop: 3 }}>− {p.value.join(" · ")}</div>
-          </div>
-        )))
-      }
+      {op === "add_synonyms" && (() => {
+        // 컬럼별 묶음
+        const byCid = {};
+        for (const p of filtered) {
+          const cid = p.term_key.split("::")[0];
+          (byCid[cid] = byCid[cid] || []).push(p);
+        }
+        return Object.entries(byCid).map(([cid, ps]) => {
+          const isLive = liveTarget === "enrich:" + cid;
+          return (
+            <div key={cid} style={{ marginBottom: 18, padding: "10px 14px", border: "1px solid var(--border)", borderRadius: 6 }}>
+              <div style={{ marginBottom: 8, display: "flex", alignItems: "center", gap: 8 }}>
+                <span style={{ ...mono, fontSize: 13, color: "var(--accent)" }}>{cid.split(".").slice(-2).join(".")}</span>
+                <span style={{ ...mono, fontSize: 12, color: "var(--dim)" }}>· {ps.length}개 추가</span>
+                <button onClick={() => runEnrich(cid)} disabled={running}
+                  style={{ ...mono, fontSize: 11.5, padding: "2px 8px", background: "transparent", color: "var(--sig)",
+                    border: "1px solid var(--border)", borderRadius: 4, cursor: running ? "not-allowed" : "pointer", opacity: running ? 0.4 : 1, marginLeft: "auto" }}>
+                  {running && isLive ? "실행 중…" : "▶ 즉석 실행"}
+                </button>
+              </div>
+              {ps.map((p, i) => (
+                <div key={i} style={{ ...mono, fontSize: 12.5, marginBottom: 3 }}>
+                  <span style={{ color: "var(--text)" }}>{p.term_key.split("::")[1]}</span>
+                  <span style={{ color: "var(--high)", marginLeft: 8 }}>+ {p.value.join(" · ")}</span>
+                </div>
+              ))}
+              {isLive && livePatches && (
+                <div style={{ marginTop: 10, paddingTop: 10, borderTop: "1px dashed var(--border)" }}>
+                  <div style={{ ...mono, fontSize: 11.5, color: "var(--muted)", marginBottom: 4 }}>즉석 실행 결과 — {livePatches.length}개 패치</div>
+                  {livePatches.length === 0 ? <span style={{ ...mono, fontSize: 12, color: "var(--dim)" }}>추가 동의어 없음</span> : livePatches.map((p, i) => (
+                    <div key={i} style={{ ...mono, fontSize: 12, marginBottom: 3 }}>
+                      <span style={{ color: "var(--sig)" }}>{p.term_key.split("::")[1]}</span>
+                      <span style={{ color: "var(--high)", marginLeft: 8 }}>+ {(p.value || []).join(" · ")}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        });
+      })()}
     </div>
   );
 }
@@ -709,6 +887,8 @@ function App({ G }) {
             <div key={lab} onClick={() => nav(dest, null)} style={{ ...mono, fontSize: 13.5, padding: "5px 16px", cursor: "pointer", borderRadius: 6,
               background: active ? "rgba(255,255,255,0.1)" : "transparent",
               color: active ? "var(--text)" : "var(--dim)", border: `1px solid ${active ? "var(--border)" : "transparent"}` }}>{lab}</div>))}
+          {isStage && <div style={{ flex: 1 }} />}
+          {isStage && <KeyAndModel />}
         </div>
         {isMaterial &&
           <div style={{ display: "flex", gap: 2, alignItems: "flex-end", padding: "0 24px", background: "rgba(255,255,255,0.02)" }}>
