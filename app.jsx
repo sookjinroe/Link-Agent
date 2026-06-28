@@ -447,10 +447,243 @@ function GateView({ G, nav }) {
     </div>);
 }
 
+// ── 처리 단계 (1단계 / 1.5단계 / 2단계) ──────────────────────────────
+const LINK_COLOR = { value_of: "var(--sig)", code_value_of: "var(--accent)", identified_by: "var(--high)", dated_by: "var(--lin)" };
+
+function termsByColumn(G) {
+  const m = (G.terms_refined && G.terms_refined.by_column) || {};
+  return m;
+}
+function patchesByTermKey(G) {
+  const out = {};
+  for (const p of (G.stage2_patches || [])) (out[p.term_key] = out[p.term_key] || []).push(p);
+  return out;
+}
+
+function TermCard({ term, patches, showPatches }) {
+  const linkLabel = term.links[0].type + (term.links[0].value ? `='${term.links[0].value}'` : "");
+  const linkColor = LINK_COLOR[term.links[0].type] || "var(--text)";
+  const syns = term.synonyms.filter(s => s !== term.name);
+  const amb = term.ambiguous_with || [];
+  return (
+    <div style={{ padding: "10px 12px", border: "1px solid var(--border)", borderRadius: 6, marginBottom: 8, background: "rgba(0,0,0,0.15)" }}>
+      <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: 4 }}>
+        <span style={{ ...mono, fontSize: 14, color: "var(--text)" }}>{term.name}</span>
+        <Badge color={linkColor}>{linkLabel}</Badge>
+      </div>
+      {syns.length > 0 && (
+        <div style={{ ...mono, fontSize: 12.5, color: "var(--lin)", marginTop: 4 }}>
+          syn: {syns.join(" · ")}
+        </div>
+      )}
+      {amb.length > 0 && (
+        <div style={{ marginTop: 6, paddingTop: 6, borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+          {amb.map((aw, i) => (
+            <div key={i} style={{ ...mono, fontSize: 12, color: aw.kind === "same_concept_cross_domain" ? "var(--high)" : "var(--low)", marginBottom: 2 }}>
+              ⚠ "{aw.key}" {aw.kind === "same_concept_cross_domain" ? "같은 개념·도메인 가로지름" : "라벨 일치, 의미 다름"} · with {(aw.with||[]).length}건
+              <div style={{ ...mono, fontSize: 11.5, color: "var(--dim)", marginLeft: 12, marginTop: 2 }}>
+                {(aw.with||[]).map(tk => tk.split("::")[1] || tk).join(", ")}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      {showPatches && patches && patches.length > 0 && (
+        <div style={{ marginTop: 6, paddingTop: 6, borderTop: "1px dashed var(--border)" }}>
+          <div style={{ ...mono, fontSize: 11.5, color: "var(--muted)", marginBottom: 3 }}>2단계 패치 {patches.length}개</div>
+          {patches.map((p, i) => (
+            <div key={i} style={{ ...mono, fontSize: 11.5, color: "var(--dim)", marginLeft: 8, marginBottom: 1 }}>
+              {p.op}: {p.op === "set_ambiguous_with" ? `${p.value.key} (${p.value.kind})` : JSON.stringify(p.value).slice(0, 80)}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// 1단계 — 컬럼별 term 생성
+function Stage1View({ G, route, nav }) {
+  const passed = new Set(Object.keys(G.gate.gate || {}));
+  const terms = termsByColumn(G);
+  // 게이트 통과 컬럼 + term 있는 것만
+  const tables = useMemo(() => {
+    const tk = new Set();
+    for (const cid of Object.keys(terms)) if (passed.has(cid)) tk.add(tableName(cid));
+    return [...tk].sort();
+  }, [G]);
+  const [sel, setSel] = useState(route.sel && terms[route.sel] ? tableName(route.sel) : (tables[0] || null));
+  const dc = L.domainColor(G);
+  if (!sel) return <Center>표시할 데이터 없음</Center>;
+  const cidsInTable = Object.keys(terms).filter(cid => tableName(cid) === sel && passed.has(cid)).sort();
+  
+  return (
+    <TwoPane
+      left={
+        <div>
+          <div style={{ ...mono, fontSize: 12, color: "var(--muted)", marginBottom: 8 }}>
+            게이트 통과 + term 보유 테이블 ({tables.length}개)
+          </div>
+          {tables.map(tk => (
+            <HoverRow key={tk} active={sel === tk} onClick={() => setSel(tk)} style={{ padding: "4px 8px", borderRadius: 4 }}>
+              <div style={{ ...mono, fontSize: 13, color: dc(L.domainOf(tk)) }}>{tk.split(".")[1]}</div>
+              <div style={{ ...mono, fontSize: 11, color: "var(--dim)" }}>{tk.split(".")[0]}</div>
+            </HoverRow>
+          ))}
+        </div>
+      }
+      right={
+        <div>
+          <div style={{ ...mono, fontSize: 15, color: "var(--text)", marginBottom: 4 }}>{sel}</div>
+          <div style={{ fontSize: 13, color: "var(--muted)", marginBottom: 16, lineHeight: 1.6 }}>
+            1단계 term은 각 컬럼의 풍부화된 description과 메타로부터 LLM이 생성합니다. name·synonyms·link로 구성됩니다.
+          </div>
+          {cidsInTable.map(cid => {
+            const colNameStr = colName(cid);
+            const cTerms = terms[cid] || [];
+            return (
+              <div key={cid} style={{ marginBottom: 22 }}>
+                <div style={{ ...mono, fontSize: 13.5, color: "var(--accent)", marginBottom: 6 }}>
+                  {colNameStr} <span style={{ color: "var(--dim)" }}>· {cTerms.length}개 term</span>
+                </div>
+                {cTerms.map((t, i) => <TermCard key={i} term={t} />)}
+              </div>
+            );
+          })}
+        </div>
+      }
+    />
+  );
+}
+
+// 1.5단계 — 클러스터링 (호명별 군집)
+function Stage15View({ G, route, nav }) {
+  const C = G.clusters || { clusters: [] };
+  const [sel, setSel] = useState((C.clusters[0] || {}).key);
+  const [filter, setFilter] = useState("");
+  const filtered = useMemo(() => 
+    C.clusters.filter(c => !filter || c.key.includes(filter)), 
+    [filter, C]);
+  const selected = C.clusters.find(c => c.key === sel) || C.clusters[0];
+  return (
+    <TwoPane
+      left={
+        <div>
+          <div style={{ ...mono, fontSize: 12, color: "var(--muted)", marginBottom: 6 }}>
+            B-token 군집 · {C.clusters.length}개
+          </div>
+          <input value={filter} onChange={e => setFilter(e.target.value)} placeholder="호명 키 검색"
+            style={{ width: "100%", ...mono, fontSize: 12.5, padding: "5px 8px", marginBottom: 8,
+              background: "var(--panel2)", border: "1px solid var(--border)", color: "var(--text)", borderRadius: 4 }} />
+          {filtered.map(c => (
+            <HoverRow key={c.key} active={(selected && selected.key === c.key)} onClick={() => setSel(c.key)} style={{ padding: "4px 8px", borderRadius: 4 }}>
+              <div style={{ ...mono, fontSize: 12.5, color: "var(--text)" }}>{c.key} <span style={{ color: "var(--dim)" }}>· {c.size}</span></div>
+            </HoverRow>
+          ))}
+        </div>
+      }
+      right={
+        selected ? (
+          <div>
+            <div style={{ ...mono, fontSize: 18, color: "var(--text)" }}>"{selected.key}"</div>
+            <div style={{ fontSize: 13, color: "var(--muted)", marginBottom: 4 }}>{selected.size}개 term이 이 호명을 공유합니다.</div>
+            <div style={{ fontSize: 13, color: "var(--dim)", marginBottom: 14, lineHeight: 1.6 }}>
+              1.5단계 클러스터링은 토큰 단위 매칭이라 글자만 겹치는 우연 매칭도 들어옵니다. 이 중 진짜 의미 충돌인지는 2단계 LLM이 가립니다.
+            </div>
+            <div>
+              {selected.members.map((m, i) => (
+                <div key={i} style={{ padding: "8px 10px", borderBottom: "1px solid var(--border)" }}>
+                  <span style={{ ...mono, fontSize: 13, color: "var(--accent)" }}>{m.name}</span>
+                  <span style={{ ...mono, fontSize: 11.5, color: "var(--dim)", marginLeft: 10 }}>{m.cid}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : <Center>군집 선택</Center>
+      }
+    />
+  );
+}
+
+// 2단계 — 충돌 명시 + 의미 격차 보강
+function Stage2View({ G, route, nav }) {
+  const patches = G.stage2_patches || [];
+  const [op, setOp] = useState("set_ambiguous_with"); // 패치 종류 필터
+  const filtered = patches.filter(p => p.op === op);
+  
+  // 충돌 명시는 key 기준으로 그룹
+  const grouped = useMemo(() => {
+    if (op !== "set_ambiguous_with") return null;
+    const g = {};
+    for (const p of filtered) {
+      const k = p.value.key + " · " + p.value.kind;
+      (g[k] = g[k] || []).push(p);
+    }
+    return Object.entries(g).sort((a,b) => b[1].length - a[1].length);
+  }, [op, patches]);
+  
+  return (
+    <div style={{ padding: "18px 26px", overflowY: "auto", maxHeight: "calc(100vh - 92px)" }}>
+      <div style={{ display: "flex", gap: 8, marginBottom: 16, alignItems: "center" }}>
+        <span style={{ ...mono, fontSize: 13, color: "var(--muted)" }}>패치 종류</span>
+        {[["set_ambiguous_with", `충돌 명시 (${patches.filter(p=>p.op==="set_ambiguous_with").length})`],
+          ["add_synonyms", `동의어 추가 (${patches.filter(p=>p.op==="add_synonyms").length})`],
+          ["remove_synonyms", `동의어 제거 (${patches.filter(p=>p.op==="remove_synonyms").length})`]].map(([k, label]) => (
+          <div key={k} onClick={() => setOp(k)} style={{ ...mono, fontSize: 13, padding: "4px 10px", borderRadius: 4, cursor: "pointer",
+            background: op === k ? "rgba(255,255,255,0.08)" : "transparent",
+            color: op === k ? "var(--text)" : "var(--dim)", border: `1px solid ${op === k ? "var(--border)" : "transparent"}` }}>{label}</div>
+        ))}
+      </div>
+      
+      <div style={{ fontSize: 13, color: "var(--dim)", marginBottom: 14, lineHeight: 1.6 }}>
+        2단계는 1.5단계 군집을 입력으로 받아 의미 판단을 합니다. 충돌 명시는 호명이 진짜 의미적 충돌인지(같은 개념의 도메인 가로지름 vs 우연한 라벨 일치) 가르고, 의미 격차 보강은 fuzzy로 못 닿는 자연어 변형(약어·별칭)을 추가합니다.
+      </div>
+      
+      {op === "set_ambiguous_with" && grouped && grouped.map(([groupKey, ps]) => {
+        const [key, kind] = groupKey.split(" · ");
+        const isSame = kind === "same_concept_cross_domain";
+        return (
+          <div key={groupKey} style={{ marginBottom: 18, padding: "10px 14px", border: "1px solid var(--border)", borderRadius: 6 }}>
+            <div style={{ marginBottom: 8 }}>
+              <span style={{ ...mono, fontSize: 14, color: "var(--text)" }}>"{key}"</span>
+              <Badge color={isSame ? "var(--high)" : "var(--low)"}>{isSame ? "같은 개념·도메인 가로지름" : "라벨 일치, 의미 다름"}</Badge>
+              <span style={{ ...mono, fontSize: 12, color: "var(--dim)", marginLeft: 8 }}>· {ps.length}개 term</span>
+            </div>
+            {ps.map((p, i) => (
+              <div key={i} style={{ ...mono, fontSize: 12.5, color: "var(--text)", marginBottom: 3 }}>
+                {p.term_key.split("::")[1]} <span style={{ color: "var(--dim)" }}>@ {p.term_key.split("::")[0].split(".").slice(-2).join(".")}</span>
+              </div>
+            ))}
+          </div>
+        );
+      })}
+      
+      {op === "add_synonyms" && filtered.map((p, i) => (
+        <div key={i} style={{ padding: "8px 12px", borderBottom: "1px solid var(--border)" }}>
+          <span style={{ ...mono, fontSize: 13, color: "var(--accent)" }}>{p.term_key.split("::")[1]}</span>
+          <span style={{ ...mono, fontSize: 11.5, color: "var(--dim)", marginLeft: 8 }}>@ {p.term_key.split("::")[0].split(".").slice(-2).join(".")}</span>
+          <div style={{ ...mono, fontSize: 12.5, color: "var(--high)", marginTop: 3 }}>+ {p.value.join(" · ")}</div>
+        </div>
+      ))}
+      
+      {op === "remove_synonyms" && (filtered.length === 0 ? 
+        <Center>2단계가 제거한 동의어 없음 (1단계 v2가 명사화 절제 이미 적용)</Center> :
+        filtered.map((p, i) => (
+          <div key={i} style={{ padding: "8px 12px", borderBottom: "1px solid var(--border)" }}>
+            <span style={{ ...mono, fontSize: 13, color: "var(--accent)" }}>{p.term_key.split("::")[1]}</span>
+            <div style={{ ...mono, fontSize: 12.5, color: "var(--low)", marginTop: 3 }}>− {p.value.join(" · ")}</div>
+          </div>
+        )))
+      }
+    </div>
+  );
+}
+
 // ── 셸 ────────────────────────────────────────────────
 const TABS = [["overview", "개요"], ["table", "테이블"], ["surface", "표면형 관찰"]];
+const STAGE_TABS = [["stage1", "1단계 · term 생성"], ["stage15", "1.5단계 · 클러스터링"], ["stage2", "2단계 · 충돌·보강"]];
 function parseHash() {
-  const m = (location.hash || "").match(/^#([a-z]+)(?:\/(.+))?$/);
+  const m = (location.hash || "").match(/^#([a-z0-9]+)(?:\/(.+))?$/);
   if (!m) return { v: "overview", sel: null };
   const vmap = { schema: "table", render: "table", psql: "table", gating: "table", concept: "surface", collision: "surface", column: "table" };
   return { v: vmap[m[1]] || m[1], sel: m[2] ? decodeURIComponent(m[2]) : null };
@@ -460,18 +693,24 @@ function App({ G }) {
   function nav(v, sel, hl) { const r = { v, sel: sel || null, hl: hl || null }; setRoute(r);
     try { history.replaceState(null, "", "#" + v + (sel ? "/" + encodeURIComponent(sel) : "")); } catch (e) {} }
   const props = { G, route, nav };
+  const MATERIAL_VIEWS = ["overview", "table", "surface"];
+  const STAGE_VIEWS = ["stage1", "stage15", "stage2"];
   const isGate = route.v === "gate";
+  const isStage = STAGE_VIEWS.includes(route.v);
+  const isMaterial = MATERIAL_VIEWS.includes(route.v);
+  
   return (
     <div>
       <div style={{ borderBottom: "1px solid var(--border)" }}>
         <div style={{ display: "flex", gap: 8, alignItems: "center", padding: "9px 16px" }}>
-          <span style={{ ...mono, fontSize: 15, color: "var(--text)", marginRight: 6 }}>은행 mock data</span>
-          {[["재료", false, "overview"], ["게이트", true, "gate"]].map(([lab, g, dest]) => (
+          <span style={{ ...mono, fontSize: 15, color: "var(--accent)", fontWeight: 600, marginRight: 4 }}>Link Agent</span>
+          <span style={{ ...mono, fontSize: 12, color: "var(--dim)", marginRight: 10 }}>· 시맨틱 레이어 용어 구축</span>
+          {[["재료", isMaterial, "overview"], ["게이트", isGate, "gate"], ["처리", isStage, "stage1"]].map(([lab, active, dest]) => (
             <div key={lab} onClick={() => nav(dest, null)} style={{ ...mono, fontSize: 13.5, padding: "5px 16px", cursor: "pointer", borderRadius: 6,
-              background: isGate === g ? "rgba(255,255,255,0.1)" : "transparent",
-              color: isGate === g ? "var(--text)" : "var(--dim)", border: `1px solid ${isGate === g ? "var(--border)" : "transparent"}` }}>{lab}</div>))}
+              background: active ? "rgba(255,255,255,0.1)" : "transparent",
+              color: active ? "var(--text)" : "var(--dim)", border: `1px solid ${active ? "var(--border)" : "transparent"}` }}>{lab}</div>))}
         </div>
-        {!isGate &&
+        {isMaterial &&
           <div style={{ display: "flex", gap: 2, alignItems: "flex-end", padding: "0 24px", background: "rgba(255,255,255,0.02)" }}>
             {TABS.map(([k, label]) => (
               <div key={k} onClick={() => nav(k, null)} style={{ ...mono, fontSize: 14, padding: "7px 14px", cursor: "pointer",
@@ -479,18 +718,29 @@ function App({ G }) {
             <div style={{ flex: 1 }} />
             <div style={{ paddingBottom: 5 }}><SearchBox G={G} nav={nav} /></div>
           </div>}
+        {isStage &&
+          <div style={{ display: "flex", gap: 2, alignItems: "flex-end", padding: "0 24px", background: "rgba(255,255,255,0.02)" }}>
+            {STAGE_TABS.map(([k, label]) => (
+              <div key={k} onClick={() => nav(k, null)} style={{ ...mono, fontSize: 14, padding: "7px 14px", cursor: "pointer",
+                color: route.v === k ? "var(--text)" : "var(--dim)", borderBottom: route.v === k ? "2px solid var(--accent)" : "2px solid transparent" }}>{label}</div>))}
+          </div>}
       </div>
       {route.v === "overview" && <Overview {...props} />}
       {route.v === "table" && <TableView {...props} />}
       {route.v === "surface" && <SurfaceView {...props} />}
       {route.v === "gate" && <GateView {...props} />}
+      {route.v === "stage1" && <Stage1View {...props} />}
+      {route.v === "stage15" && <Stage15View {...props} />}
+      {route.v === "stage2" && <Stage2View {...props} />}
     </div>);
 }
 function Root() {
   const [G, setG] = useState(null); const [err, setErr] = useState(null);
   useEffect(() => {
-    Promise.all(["schema", "render_output", "psql_output", "gate_output"].map((f) => fetch("data/" + f + ".json").then((r) => { if (!r.ok) throw new Error(f + " " + r.status); return r.json(); })))
-      .then(([schema, render, psql, gate]) => setG({ schema, render, psql, gate })).catch((e) => setErr(String(e.message || e)));
+    const files = ["schema", "render_output", "psql_output", "gate_output", "terms_refined", "clusters_b_tok", "stage2_patches"];
+    Promise.all(files.map((f) => fetch("data/" + f + ".json").then((r) => { if (!r.ok) throw new Error(f + " " + r.status); return r.json(); })))
+      .then(([schema, render, psql, gate, terms_refined, clusters, stage2_patches]) => 
+        setG({ schema, render, psql, gate, terms_refined, clusters, stage2_patches })).catch((e) => setErr(String(e.message || e)));
   }, []);
   if (err) return <Center>로드 실패: {err}<br />(http 서버로 실행했는지 확인)</Center>;
   if (!G) return <Center>데이터 적재 중…</Center>;

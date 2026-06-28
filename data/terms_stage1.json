@@ -1,0 +1,5547 @@
+{
+  "by_column": {
+    "CUST_DB.CUST_BASE_INFO.CUST_NO": [
+      {
+        "name": "고객번호",
+        "synonyms": [
+          "고객번호",
+          "고객 번호",
+          "고객ID",
+          "고객 ID",
+          "고객식별번호",
+          "고객 식별번호",
+          "고객코드",
+          "고객 코드"
+        ],
+        "links": [
+          {
+            "type": "identified_by",
+            "column": "CUST_DB.CUST_BASE_INFO.CUST_NO"
+          }
+        ]
+      }
+    ],
+    "CUST_DB.CUST_BASE_INFO.CUST_NM": [
+      {
+        "name": "고객 실명",
+        "synonyms": [
+          "고객 실명",
+          "고객 이름",
+          "고객명",
+          "고객 성명",
+          "고객 법적 성명"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CUST_DB.CUST_BASE_INFO.CUST_NM"
+          }
+        ]
+      }
+    ],
+    "CUST_DB.CUST_BASE_INFO.BIRTH_DT": [
+      {
+        "name": "고객 생년월일",
+        "synonyms": [
+          "고객 생년월일",
+          "생년월일",
+          "출생일",
+          "생일",
+          "태어난 날",
+          "birth date",
+          "생년월일(YYYYMMDD)"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CUST_DB.CUST_BASE_INFO.BIRTH_DT"
+          }
+        ]
+      }
+    ],
+    "CUST_DB.CUST_BASE_INFO.GENDER_CD": [
+      {
+        "name": "성별 코드",
+        "synonyms": [
+          "성별 코드",
+          "성별",
+          "고객 성별",
+          "젠더"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CUST_DB.CUST_BASE_INFO.GENDER_CD"
+          }
+        ]
+      },
+      {
+        "name": "남성 고객",
+        "synonyms": [
+          "남성 고객",
+          "남성",
+          "남자",
+          "남자 고객"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CUST_DB.CUST_BASE_INFO.GENDER_CD",
+            "value": "M"
+          }
+        ]
+      },
+      {
+        "name": "여성 고객",
+        "synonyms": [
+          "여성 고객",
+          "여성",
+          "여자",
+          "여자 고객"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CUST_DB.CUST_BASE_INFO.GENDER_CD",
+            "value": "F"
+          }
+        ]
+      }
+    ],
+    "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD": [
+      {
+        "name": "고객 등급 코드",
+        "synonyms": [
+          "고객 등급 코드",
+          "고객 등급",
+          "거래 실적 등급",
+          "고객 등급값"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD"
+          }
+        ]
+      },
+      {
+        "name": "일반 등급 고객",
+        "synonyms": [
+          "일반 등급 고객",
+          "일반 고객",
+          "일반 등급"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD",
+            "value": "01"
+          }
+        ]
+      },
+      {
+        "name": "우수 등급 고객",
+        "synonyms": [
+          "우수 등급 고객",
+          "우수 고객",
+          "우수 등급"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD",
+            "value": "02"
+          }
+        ]
+      },
+      {
+        "name": "VIP 등급 고객",
+        "synonyms": [
+          "VIP 등급 고객",
+          "VIP 고객",
+          "VIP 등급"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD",
+            "value": "03"
+          }
+        ]
+      },
+      {
+        "name": "VVIP 등급 고객",
+        "synonyms": [
+          "VVIP 등급 고객",
+          "VVIP 고객",
+          "VVIP 등급"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD",
+            "value": "04"
+          }
+        ]
+      }
+    ],
+    "CUST_DB.CUST_BASE_INFO.JOIN_DT": [
+      {
+        "name": "첫 거래 발생일",
+        "synonyms": [
+          "첫 거래 발생일",
+          "최초 거래일",
+          "거래 시작일",
+          "첫 거래 날짜",
+          "거래 개시일",
+          "최초 거래 발생일"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CUST_DB.CUST_BASE_INFO.JOIN_DT"
+          }
+        ]
+      }
+    ],
+    "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN": [
+      {
+        "name": "마케팅 정보 수신 동의 여부",
+        "synonyms": [
+          "마케팅 정보 수신 동의 여부",
+          "마케팅 동의 여부",
+          "마케팅 수신 동의 여부",
+          "광고 수신 동의 여부",
+          "마케팅 동의 상태"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN"
+          }
+        ]
+      },
+      {
+        "name": "마케팅 정보 수신 동의",
+        "synonyms": [
+          "마케팅 정보 수신 동의",
+          "마케팅 동의",
+          "마케팅 수신 동의",
+          "광고 수신 동의",
+          "마케팅 동의 고객"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN",
+            "value": "Y"
+          }
+        ]
+      },
+      {
+        "name": "마케팅 정보 수신 미동의",
+        "synonyms": [
+          "마케팅 정보 수신 미동의",
+          "마케팅 미동의",
+          "마케팅 수신 거부",
+          "광고 수신 거부",
+          "마케팅 동의 철회"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN",
+            "value": "N"
+          }
+        ]
+      }
+    ],
+    "CUST_DB.CUST_BASE_INFO.DORMANT_YN": [
+      {
+        "name": "휴면 여부",
+        "synonyms": [
+          "휴면 여부",
+          "휴면 상태 여부",
+          "계정 휴면 여부",
+          "휴면 계정 여부"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CUST_DB.CUST_BASE_INFO.DORMANT_YN"
+          }
+        ]
+      },
+      {
+        "name": "휴면 계정",
+        "synonyms": [
+          "휴면 계정",
+          "휴면 고객",
+          "휴면 상태",
+          "휴면 처리된 계정"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CUST_DB.CUST_BASE_INFO.DORMANT_YN",
+            "value": "Y"
+          }
+        ]
+      },
+      {
+        "name": "정상 계정",
+        "synonyms": [
+          "정상 계정",
+          "비휴면 계정",
+          "휴면이 아닌 계정",
+          "활성 계정"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CUST_DB.CUST_BASE_INFO.DORMANT_YN",
+            "value": "N"
+          }
+        ]
+      }
+    ],
+    "CUST_DB.CUST_BASE_INFO.CREATED_AT": [
+      {
+        "name": "레코드 최초 삽입 시각",
+        "synonyms": [
+          "레코드 최초 삽입 시각",
+          "DB 삽입 시각",
+          "레코드 생성 시각",
+          "최초 삽입 시각",
+          "생성 시각",
+          "created_at"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CUST_DB.CUST_BASE_INFO.CREATED_AT"
+          }
+        ]
+      }
+    ],
+    "CUST_DB.CUST_BASE_INFO.UPDATED_AT": [
+      {
+        "name": "고객 정보 최종 수정 시각",
+        "synonyms": [
+          "고객 정보 최종 수정 시각",
+          "마지막 변경 시각",
+          "최종 변경 시각",
+          "최종 수정 일시",
+          "고객 정보 수정 일시",
+          "레코드 갱신 시각",
+          "최근 수정 시각"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CUST_DB.CUST_BASE_INFO.UPDATED_AT"
+          }
+        ]
+      }
+    ],
+    "CUST_DB.CUST_CONTACT.CONTACT_SEQ": [
+      {
+        "name": "고객 연락처 식별자",
+        "synonyms": [
+          "고객 연락처 식별자",
+          "연락처 레코드 키",
+          "연락처 순번",
+          "CONTACT_SEQ"
+        ],
+        "links": [
+          {
+            "type": "identified_by",
+            "column": "CUST_DB.CUST_CONTACT.CONTACT_SEQ"
+          }
+        ]
+      }
+    ],
+    "CUST_DB.CUST_CONTACT.CUST_NO": [
+      {
+        "name": "고객 연락처 조인 키",
+        "synonyms": [
+          "고객 연락처 조인 키",
+          "연락처 테이블 고객번호",
+          "연락처 고객 식별자",
+          "고객 연락처 참조 번호"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CUST_DB.CUST_CONTACT.CUST_NO"
+          }
+        ]
+      }
+    ],
+    "CUST_DB.CUST_CONTACT.CNTC_TYPE_CD": [
+      {
+        "name": "연락처 채널 유형",
+        "synonyms": [
+          "연락처 채널 유형",
+          "연락처 유형",
+          "연락처 종류",
+          "연락 채널 유형",
+          "연락 수단 유형"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CUST_DB.CUST_CONTACT.CNTC_TYPE_CD"
+          }
+        ]
+      },
+      {
+        "name": "휴대폰 연락처",
+        "synonyms": [
+          "휴대폰 연락처",
+          "휴대폰",
+          "휴대전화",
+          "핸드폰",
+          "모바일 연락처",
+          "휴대폰 번호"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CUST_DB.CUST_CONTACT.CNTC_TYPE_CD",
+            "value": "01"
+          }
+        ]
+      },
+      {
+        "name": "집전화 연락처",
+        "synonyms": [
+          "집전화 연락처",
+          "집전화",
+          "자택 전화",
+          "집 전화번호",
+          "자택 연락처"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CUST_DB.CUST_CONTACT.CNTC_TYPE_CD",
+            "value": "02"
+          }
+        ]
+      },
+      {
+        "name": "이메일 연락처",
+        "synonyms": [
+          "이메일 연락처",
+          "이메일",
+          "이메일 주소",
+          "메일 주소",
+          "전자우편"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CUST_DB.CUST_CONTACT.CNTC_TYPE_CD",
+            "value": "03"
+          }
+        ]
+      },
+      {
+        "name": "직장 연락처",
+        "synonyms": [
+          "직장 연락처",
+          "직장",
+          "직장 전화",
+          "회사 연락처",
+          "직장 번호",
+          "회사 전화"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CUST_DB.CUST_CONTACT.CNTC_TYPE_CD",
+            "value": "04"
+          }
+        ]
+      }
+    ],
+    "CUST_DB.CUST_CONTACT.CNTC_VAL": [
+      {
+        "name": "연락처 값",
+        "synonyms": [
+          "연락처 값",
+          "연락처",
+          "연락처 정보",
+          "contact 값",
+          "CNTC_VAL"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CUST_DB.CUST_CONTACT.CNTC_VAL"
+          }
+        ]
+      },
+      {
+        "name": "이메일 주소 값",
+        "synonyms": [
+          "이메일 주소 값",
+          "이메일 주소",
+          "이메일",
+          "email 주소",
+          "메일 주소"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CUST_DB.CUST_CONTACT.CNTC_VAL"
+          }
+        ]
+      },
+      {
+        "name": "전화번호 값",
+        "synonyms": [
+          "전화번호 값",
+          "전화번호",
+          "전화 번호",
+          "연락처 전화번호",
+          "phone 번호"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CUST_DB.CUST_CONTACT.CNTC_VAL"
+          }
+        ]
+      },
+      {
+        "name": "주소 값",
+        "synonyms": [
+          "주소 값",
+          "주소",
+          "연락처 주소",
+          "거주지 주소",
+          "address 값"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CUST_DB.CUST_CONTACT.CNTC_VAL"
+          }
+        ]
+      }
+    ],
+    "CUST_DB.CUST_CONTACT.REG_DT": [
+      {
+        "name": "연락처 등록일",
+        "synonyms": [
+          "연락처 등록일",
+          "연락처 등록 날짜",
+          "연락처 신고일",
+          "연락처 제출일",
+          "연락처 등록 기준일"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CUST_DB.CUST_CONTACT.REG_DT"
+          }
+        ]
+      }
+    ],
+    "CUST_DB.CUST_CONTACT.VALID_YN": [
+      {
+        "name": "연락처 유효 여부",
+        "synonyms": [
+          "연락처 유효 여부",
+          "연락처 유효 상태",
+          "연락처 활성 여부"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CUST_DB.CUST_CONTACT.VALID_YN"
+          }
+        ]
+      },
+      {
+        "name": "유효한 연락처",
+        "synonyms": [
+          "유효한 연락처",
+          "유효 연락처",
+          "사용 가능한 연락처",
+          "활성 연락처",
+          "유효 처리된 연락처"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CUST_DB.CUST_CONTACT.VALID_YN",
+            "value": "Y"
+          }
+        ]
+      },
+      {
+        "name": "무효 처리된 연락처",
+        "synonyms": [
+          "무효 처리된 연락처",
+          "무효 연락처",
+          "사용 불가 연락처",
+          "비활성 연락처"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CUST_DB.CUST_CONTACT.VALID_YN",
+            "value": "N"
+          }
+        ]
+      }
+    ],
+    "CUST_DB.CUST_CONTACT.CREATED_AT": [
+      {
+        "name": "연락처 레코드 최초 삽입 시각",
+        "synonyms": [
+          "연락처 레코드 최초 삽입 시각",
+          "연락처 DB 삽입 시각",
+          "연락처 생성 타임스탬프",
+          "연락처 최초 등록 시각",
+          "연락처 등록 시점"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CUST_DB.CUST_CONTACT.CREATED_AT"
+          }
+        ]
+      }
+    ],
+    "CUST_DB.CUST_CONTACT.UPDATED_AT": [
+      {
+        "name": "연락처 최종 수정 시각",
+        "synonyms": [
+          "연락처 최종 수정 시각",
+          "연락처 마지막 수정 시각",
+          "연락처 최종 변경 시각",
+          "연락처 마지막 변경 시각",
+          "연락처 수정 일시",
+          "연락처 업데이트 시각"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CUST_DB.CUST_CONTACT.UPDATED_AT"
+          }
+        ]
+      }
+    ],
+    "CUST_DB.CUST_GRD_HIST.GRD_HIST_SEQ": [
+      {
+        "name": "고객 등급 변경 이력 식별자",
+        "synonyms": [
+          "고객 등급 변경 이력 식별자",
+          "등급 변경 이력 키",
+          "등급 이력 고유 키",
+          "등급 이력 ID"
+        ],
+        "links": [
+          {
+            "type": "identified_by",
+            "column": "CUST_DB.CUST_GRD_HIST.GRD_HIST_SEQ"
+          }
+        ]
+      }
+    ],
+    "CUST_DB.CUST_GRD_HIST.CUST_NO": [
+      {
+        "name": "고객 번호",
+        "synonyms": [
+          "고객 번호",
+          "고객번호",
+          "고객 ID",
+          "고객 식별자",
+          "고객 코드"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CUST_DB.CUST_GRD_HIST.CUST_NO"
+          }
+        ]
+      }
+    ],
+    "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD": [
+      {
+        "name": "고객 등급 코드",
+        "synonyms": [
+          "고객 등급 코드",
+          "고객 등급",
+          "등급 코드",
+          "고객 그레이드"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD"
+          }
+        ]
+      },
+      {
+        "name": "일반 등급 고객",
+        "synonyms": [
+          "일반 등급 고객",
+          "일반 고객",
+          "일반 등급"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD",
+            "value": "01"
+          }
+        ]
+      },
+      {
+        "name": "우수 등급 고객",
+        "synonyms": [
+          "우수 등급 고객",
+          "우수 고객",
+          "우수 등급"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD",
+            "value": "02"
+          }
+        ]
+      },
+      {
+        "name": "VIP 등급 고객",
+        "synonyms": [
+          "VIP 등급 고객",
+          "VIP 고객",
+          "VIP 등급"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD",
+            "value": "03"
+          }
+        ]
+      },
+      {
+        "name": "VVIP 등급 고객",
+        "synonyms": [
+          "VVIP 등급 고객",
+          "VVIP 고객",
+          "VVIP 등급"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD",
+            "value": "04"
+          }
+        ]
+      }
+    ],
+    "CUST_DB.CUST_GRD_HIST.APLD_DT": [
+      {
+        "name": "등급 적용일",
+        "synonyms": [
+          "등급 적용일",
+          "등급 발효일",
+          "등급 효력 발생일",
+          "등급 적용 날짜",
+          "등급 시작일"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CUST_DB.CUST_GRD_HIST.APLD_DT"
+          }
+        ]
+      }
+    ],
+    "CUST_DB.CUST_GRD_HIST.RSN_CD": [
+      {
+        "name": "등급 변경 사유 코드",
+        "synonyms": [
+          "등급 변경 사유 코드",
+          "등급 변경 사유",
+          "등급이 바뀐 이유",
+          "등급 변경 이유",
+          "등급 변경 원인"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CUST_DB.CUST_GRD_HIST.RSN_CD"
+          }
+        ]
+      }
+    ],
+    "CUST_DB.CUST_GRD_HIST.CREATED_AT": [
+      {
+        "name": "등급 변경 기록 시각",
+        "synonyms": [
+          "등급 변경 기록 시각",
+          "등급 변경 기록 시점",
+          "등급 변경 시스템 기록 시각",
+          "등급 이력 생성 시각",
+          "등급 이력 삽입 시각"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CUST_DB.CUST_GRD_HIST.CREATED_AT"
+          }
+        ]
+      }
+    ],
+    "CUST_DB.CUST_GRD_HIST.UPDATED_AT": [
+      {
+        "name": "등급 이력 레코드 수정 시각",
+        "synonyms": [
+          "등급 이력 레코드 수정 시각",
+          "등급 이력 수정 시각",
+          "등급 이력 마지막 수정 시각",
+          "등급 이력 레코드 변경 시각",
+          "수정 이력 추적 시각"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CUST_DB.CUST_GRD_HIST.UPDATED_AT"
+          }
+        ]
+      }
+    ],
+    "CUST_DB.CUST_GRD_HIST.UPDATED_BY": [
+      {
+        "name": "등급 이력 수정자 ID",
+        "synonyms": [
+          "등급 이력 수정자 ID",
+          "등급 이력 수정자",
+          "이력 레코드 수정 주체",
+          "등급 레코드 수정자",
+          "마지막 수정자 ID"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CUST_DB.CUST_GRD_HIST.UPDATED_BY"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_ACCT_MST.LOAN_NO": [
+      {
+        "name": "대출 계좌 번호",
+        "synonyms": [
+          "대출 계좌 번호",
+          "대출번호",
+          "대출 계좌 ID",
+          "대출 식별자",
+          "대출 계좌 식별 번호"
+        ],
+        "links": [
+          {
+            "type": "identified_by",
+            "column": "LOAN_DB.LOAN_ACCT_MST.LOAN_NO"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_ACCT_MST.CUST_NO": [
+      {
+        "name": "대출 계좌 보유 고객 번호",
+        "synonyms": [
+          "대출 계좌 보유 고객 번호",
+          "대출 고객 번호",
+          "대출 고객 ID",
+          "대출 계좌 고객 식별자"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "LOAN_DB.LOAN_ACCT_MST.CUST_NO"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_ACCT_MST.PRDT_CD": [
+      {
+        "name": "대출 상품 코드",
+        "synonyms": [
+          "대출 상품 코드",
+          "상품 코드",
+          "대출 상품 분류 코드",
+          "상품 식별 코드"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "LOAN_DB.LOAN_ACCT_MST.PRDT_CD"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_ACCT_MST.LOAN_AMT": [
+      {
+        "name": "대출 실행 금액",
+        "synonyms": [
+          "대출 실행 금액",
+          "최초 대출 금액",
+          "대출 원금",
+          "대출 실행 원금",
+          "대출액",
+          "대출금액"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "LOAN_DB.LOAN_ACCT_MST.LOAN_AMT"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_ACCT_MST.LOAN_BAL_AMT": [
+      {
+        "name": "대출 잔여 원금",
+        "synonyms": [
+          "대출 잔여 원금",
+          "대출 잔액",
+          "대출 원금 잔액",
+          "남은 대출 원금",
+          "미상환 원금"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "LOAN_DB.LOAN_ACCT_MST.LOAN_BAL_AMT"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_ACCT_MST.INT_RATE": [
+      {
+        "name": "대출 기준금리",
+        "synonyms": [
+          "대출 기준금리",
+          "기준금리",
+          "계약 기준금리",
+          "대출 계약 기준금리",
+          "우대 전 금리",
+          "우대 미반영 금리"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "LOAN_DB.LOAN_ACCT_MST.INT_RATE"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_ACCT_MST.APLD_RATE": [
+      {
+        "name": "적용금리",
+        "synonyms": [
+          "적용금리",
+          "실제 적용금리",
+          "최종 적용금리",
+          "부과금리",
+          "실부과금리",
+          "실제 금리",
+          "최종 금리"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "LOAN_DB.LOAN_ACCT_MST.APLD_RATE"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD": [
+      {
+        "name": "대출 상태 코드",
+        "synonyms": [
+          "대출 상태 코드",
+          "대출 계좌 상태",
+          "대출 상태",
+          "대출 현황"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD"
+          }
+        ]
+      },
+      {
+        "name": "정상 대출",
+        "synonyms": [
+          "정상 대출",
+          "정상 상태 대출",
+          "정상 계좌",
+          "정상 대출 계좌"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD",
+            "value": "01"
+          }
+        ]
+      },
+      {
+        "name": "연체 대출",
+        "synonyms": [
+          "연체 대출",
+          "연체 계좌",
+          "연체 상태 대출",
+          "연체 대출 계좌"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD",
+            "value": "02"
+          }
+        ]
+      },
+      {
+        "name": "기한이익상실 대출",
+        "synonyms": [
+          "기한이익상실 대출",
+          "기한이익상실 계좌",
+          "기한이익상실 상태",
+          "기이상 대출",
+          "전액 상환 의무 발생 대출"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD",
+            "value": "03"
+          }
+        ]
+      },
+      {
+        "name": "완제 대출",
+        "synonyms": [
+          "완제 대출",
+          "완제 계좌",
+          "완제 상태 대출",
+          "상환 완료 대출",
+          "종결 대출 계좌"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD",
+            "value": "04"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_ACCT_MST.EXEC_DT": [
+      {
+        "name": "대출 실행일",
+        "synonyms": [
+          "대출 실행일",
+          "실행일",
+          "자금 집행일",
+          "대출금 지급일",
+          "대출 집행 날짜",
+          "대출 개시일"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "LOAN_DB.LOAN_ACCT_MST.EXEC_DT"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_ACCT_MST.MTRT_DT": [
+      {
+        "name": "대출 만기일",
+        "synonyms": [
+          "대출 만기일",
+          "만기일",
+          "만기 날짜",
+          "대출 만기 날짜",
+          "최종 만기일",
+          "대출 계좌 만기일"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "LOAN_DB.LOAN_ACCT_MST.MTRT_DT"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD": [
+      {
+        "name": "상환방식",
+        "synonyms": [
+          "상환방식",
+          "대출 상환방식",
+          "원금 상환방식",
+          "상환 유형",
+          "상환 방법"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD"
+          }
+        ]
+      },
+      {
+        "name": "원금균등상환",
+        "synonyms": [
+          "원금균등상환",
+          "원금균등",
+          "매월 원금 동일 상환",
+          "원금균등분할상환"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD",
+            "value": "01"
+          }
+        ]
+      },
+      {
+        "name": "원리금균등상환",
+        "synonyms": [
+          "원리금균등상환",
+          "원리금균등",
+          "매월 납입액 동일 상환",
+          "원리금균등분할상환"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD",
+            "value": "02"
+          }
+        ]
+      },
+      {
+        "name": "만기일시상환",
+        "synonyms": [
+          "만기일시상환",
+          "만기일시",
+          "만기 원금 일시상환",
+          "만기 상환",
+          "이자만 납부 후 만기 상환"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD",
+            "value": "03"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_ACCT_MST.CREATED_AT": [
+      {
+        "name": "대출 계좌 레코드 생성 시각",
+        "synonyms": [
+          "대출 계좌 레코드 생성 시각",
+          "레코드 INSERT 시각",
+          "시스템 행 생성 시각",
+          "대출 계좌 생성 타임스탬프"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "LOAN_DB.LOAN_ACCT_MST.CREATED_AT"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_ACCT_MST.UPDATED_AT": [
+      {
+        "name": "대출 계좌 최종 수정 시각",
+        "synonyms": [
+          "대출 계좌 최종 수정 시각",
+          "대출 계좌 마지막 변경 시각",
+          "대출 계좌 최종 변경 일시",
+          "대출 계좌 수정 일시",
+          "대출 계좌 업데이트 시각"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "LOAN_DB.LOAN_ACCT_MST.UPDATED_AT"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_ACCT_MST.UPDATED_BY": [
+      {
+        "name": "마지막 수정 주체 ID",
+        "synonyms": [
+          "마지막 수정 주체 ID",
+          "수정 주체 ID",
+          "수정자 ID",
+          "최종 수정자 ID",
+          "레코드 수정자 ID",
+          "수정한 사람 ID",
+          "수정 계정"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "LOAN_DB.LOAN_ACCT_MST.UPDATED_BY"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_APPL_HIST.APPL_NO": [
+      {
+        "name": "대출 신청 번호",
+        "synonyms": [
+          "대출 신청 번호",
+          "신청 번호",
+          "대출 신청 ID",
+          "신청 ID",
+          "신청 식별자",
+          "대출 신청 식별번호"
+        ],
+        "links": [
+          {
+            "type": "identified_by",
+            "column": "LOAN_DB.LOAN_APPL_HIST.APPL_NO"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_APPL_HIST.CUST_NO": [
+      {
+        "name": "대출 신청 고객 번호",
+        "synonyms": [
+          "대출 신청 고객 번호",
+          "대출 신청 고객 ID",
+          "신청 고객 번호",
+          "신청 고객 식별자",
+          "신청인 고객 번호"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "LOAN_DB.LOAN_APPL_HIST.CUST_NO"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_APPL_HIST.PRDT_CD": [
+      {
+        "name": "신청 대출 상품 코드",
+        "synonyms": [
+          "신청 대출 상품 코드",
+          "대출 상품 코드",
+          "신청 상품 코드",
+          "대출 상품 식별 코드",
+          "신청한 상품 코드"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "LOAN_DB.LOAN_APPL_HIST.PRDT_CD"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_APPL_HIST.APRV_AMT": [
+      {
+        "name": "대출 승인 금액",
+        "synonyms": [
+          "대출 승인 금액",
+          "승인된 대출 금액",
+          "심사 승인 금액",
+          "대출 승인액",
+          "승인 한도"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "LOAN_DB.LOAN_APPL_HIST.APRV_AMT"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD": [
+      {
+        "name": "대출 신청 진행 단계",
+        "synonyms": [
+          "대출 신청 진행 단계",
+          "신청 진행 단계",
+          "대출 신청 상태",
+          "신청 처리 단계"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD"
+          }
+        ]
+      },
+      {
+        "name": "대출 접수",
+        "synonyms": [
+          "대출 접수",
+          "신청 접수",
+          "접수 상태",
+          "접수됨"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD",
+            "value": "01"
+          }
+        ]
+      },
+      {
+        "name": "대출 심사 중",
+        "synonyms": [
+          "대출 심사 중",
+          "심사 진행 중",
+          "심사중 상태",
+          "심사 단계"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD",
+            "value": "02"
+          }
+        ]
+      },
+      {
+        "name": "대출 신청 승인",
+        "synonyms": [
+          "대출 신청 승인",
+          "대출 승인",
+          "신청 승인됨",
+          "승인 완료"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD",
+            "value": "03"
+          }
+        ]
+      },
+      {
+        "name": "대출 신청 거절",
+        "synonyms": [
+          "대출 신청 거절",
+          "대출 거절",
+          "신청 거절됨",
+          "심사 탈락"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD",
+            "value": "04"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_APPL_HIST.APPL_DT": [
+      {
+        "name": "대출 신청일",
+        "synonyms": [
+          "대출 신청일",
+          "신청 접수일",
+          "대출 접수일",
+          "대출 신청 날짜",
+          "대출 신청 접수일",
+          "대출 신청 접수 날짜"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "LOAN_DB.LOAN_APPL_HIST.APPL_DT"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_APPL_HIST.APRV_DT": [
+      {
+        "name": "대출 승인 확정일",
+        "synonyms": [
+          "대출 승인 확정일",
+          "승인 확정일",
+          "승인일",
+          "대출 승인일",
+          "심사 완료일",
+          "심사 확정일",
+          "승인 날짜",
+          "대출 승인 날짜"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "LOAN_DB.LOAN_APPL_HIST.APRV_DT"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD": [
+      {
+        "name": "신청 상환 방식",
+        "synonyms": [
+          "신청 상환 방식",
+          "신청 시 상환 방식",
+          "신청 상환 방법",
+          "대출 신청 상환 방식",
+          "신청한 상환 방식 코드"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD"
+          }
+        ]
+      },
+      {
+        "name": "원금균등 신청",
+        "synonyms": [
+          "원금균등 신청",
+          "원금균등 상환 신청",
+          "원금균등 방식 신청",
+          "신청 원금균등"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD",
+            "value": "01"
+          }
+        ]
+      },
+      {
+        "name": "원리금균등 신청",
+        "synonyms": [
+          "원리금균등 신청",
+          "원리금균등 상환 신청",
+          "원리금균등 방식 신청",
+          "신청 원리금균등"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD",
+            "value": "02"
+          }
+        ]
+      },
+      {
+        "name": "만기일시 신청",
+        "synonyms": [
+          "만기일시 신청",
+          "만기일시 상환 신청",
+          "만기일시 방식 신청",
+          "신청 만기일시"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD",
+            "value": "03"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_APPL_HIST.CREATED_AT": [
+      {
+        "name": "레코드 생성 시각",
+        "synonyms": [
+          "레코드 생성 시각",
+          "레코드 삽입 시각",
+          "DB 삽입 시각",
+          "최초 삽입 시각",
+          "레코드 생성 일시"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "LOAN_DB.LOAN_APPL_HIST.CREATED_AT"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_APPL_HIST.UPDATED_AT": [
+      {
+        "name": "마지막 변경 시각",
+        "synonyms": [
+          "마지막 변경 시각",
+          "최종 변경 시각",
+          "최종 수정 시각",
+          "마지막 수정 시각",
+          "최종 업데이트 시각",
+          "레코드 갱신 시각"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "LOAN_DB.LOAN_APPL_HIST.UPDATED_AT"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_APPL_HIST.UPDATED_BY": [
+      {
+        "name": "마지막 수정 주체",
+        "synonyms": [
+          "마지막 수정 주체",
+          "최종 수정자",
+          "레코드 수정자",
+          "수정한 주체 ID",
+          "최종 변경자"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "LOAN_DB.LOAN_APPL_HIST.UPDATED_BY"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_SEQ": [
+      {
+        "name": "연체 이력 식별자",
+        "synonyms": [
+          "연체 이력 식별자",
+          "연체 이력 ID",
+          "연체 이벤트 식별자",
+          "연체 회차 식별자",
+          "DLNQ_SEQ"
+        ],
+        "links": [
+          {
+            "type": "identified_by",
+            "column": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_SEQ"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_DLNQ_HIST.LOAN_NO": [
+      {
+        "name": "대출 계좌 번호",
+        "synonyms": [
+          "대출 계좌 번호",
+          "대출번호",
+          "대출 계좌 식별자",
+          "대출 계좌 ID"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "LOAN_DB.LOAN_DLNQ_HIST.LOAN_NO"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD": [
+      {
+        "name": "연체 상태 코드",
+        "synonyms": [
+          "연체 상태 코드",
+          "연체 상태",
+          "연체 이력 상태",
+          "연체 단계"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD"
+          }
+        ]
+      },
+      {
+        "name": "연체 발생",
+        "synonyms": [
+          "연체 발생",
+          "연체 시작",
+          "신규 연체"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD",
+            "value": "01"
+          }
+        ]
+      },
+      {
+        "name": "연체 지속",
+        "synonyms": [
+          "연체 지속",
+          "연체 진행 중",
+          "연체 유지"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD",
+            "value": "02"
+          }
+        ]
+      },
+      {
+        "name": "연체 해소",
+        "synonyms": [
+          "연체 해소",
+          "연체 해제",
+          "연체 종료",
+          "연체 상환 완료"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD",
+            "value": "03"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_AMT": [
+      {
+        "name": "연체 원금",
+        "synonyms": [
+          "연체 원금",
+          "연체 발생 원금",
+          "미상환 연체 원금",
+          "연체 원금액",
+          "연체 원금 금액"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_AMT"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_DAYS": [
+      {
+        "name": "누적 연체 일수",
+        "synonyms": [
+          "누적 연체 일수",
+          "연체 일수",
+          "연체 기간",
+          "연체 경과 일수",
+          "연체 지속 일수",
+          "연체 일수 합계"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_DAYS"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_INT_AMT": [
+      {
+        "name": "연체 가산 이자 금액",
+        "synonyms": [
+          "연체 가산 이자 금액",
+          "연체 가산 이자",
+          "연체 이자 금액",
+          "연체 이자",
+          "가산 이자 금액",
+          "가산 이자"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_INT_AMT"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_DLNQ_HIST.OCUR_DT": [
+      {
+        "name": "연체 발생일",
+        "synonyms": [
+          "연체 발생일",
+          "연체 발생 날짜",
+          "연체 발생 일자",
+          "최초 상환 미이행일",
+          "연체 시작일",
+          "연체 개시일"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "LOAN_DB.LOAN_DLNQ_HIST.OCUR_DT"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_DLNQ_HIST.CLEAR_DT": [
+      {
+        "name": "연체 해소일",
+        "synonyms": [
+          "연체 해소일",
+          "연체 해소 날짜",
+          "연체 해소 시점",
+          "연체 해소된 날짜",
+          "상환 완료일",
+          "조건 충족일"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "LOAN_DB.LOAN_DLNQ_HIST.CLEAR_DT"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_DLNQ_HIST.CREATED_AT": [
+      {
+        "name": "연체 이력 레코드 생성 시각",
+        "synonyms": [
+          "연체 이력 레코드 생성 시각",
+          "연체 이력 생성 시각",
+          "연체 이력 DB 삽입 시각",
+          "연체 이력 레코드 삽입 시각",
+          "연체 이력 생성 일시"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "LOAN_DB.LOAN_DLNQ_HIST.CREATED_AT"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_DLNQ_HIST.UPDATED_AT": [
+      {
+        "name": "연체 이력 레코드 수정 시각",
+        "synonyms": [
+          "연체 이력 레코드 수정 시각",
+          "연체 이력 수정 시각",
+          "연체 이력 갱신 시각",
+          "연체 이력 레코드 갱신 시각",
+          "연체 이력 변경 시각"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "LOAN_DB.LOAN_DLNQ_HIST.UPDATED_AT"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_DLNQ_HIST.UPDATED_BY": [
+      {
+        "name": "연체 이력 마지막 수정자",
+        "synonyms": [
+          "연체 이력 마지막 수정자",
+          "연체 이력 수정 주체",
+          "연체 이력 최종 수정자",
+          "연체 이력 최종 변경자",
+          "연체 이력 수정자 ID"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "LOAN_DB.LOAN_DLNQ_HIST.UPDATED_BY"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_PRDT_MST.PRDT_CD": [
+      {
+        "name": "대출 상품 코드",
+        "synonyms": [
+          "대출 상품 코드",
+          "상품 코드",
+          "대출 상품 ID",
+          "상품 식별 코드",
+          "대출 상품 식별자"
+        ],
+        "links": [
+          {
+            "type": "identified_by",
+            "column": "LOAN_DB.LOAN_PRDT_MST.PRDT_CD"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_PRDT_MST.PRDT_NM": [
+      {
+        "name": "대출 상품명",
+        "synonyms": [
+          "대출 상품명",
+          "상품명",
+          "대출 상품 이름",
+          "상품 이름",
+          "대출명",
+          "상품 표시명",
+          "대출 상품 표시명"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "LOAN_DB.LOAN_PRDT_MST.PRDT_NM"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_PRDT_MST.PRDT_TYPE_CD": [
+      {
+        "name": "대출 상품 유형 코드",
+        "synonyms": [
+          "대출 상품 유형 코드",
+          "대출 유형 코드",
+          "상품 유형 코드",
+          "대출 상품 분류 코드",
+          "상품군 분류 코드"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "LOAN_DB.LOAN_PRDT_MST.PRDT_TYPE_CD"
+          }
+        ]
+      },
+      {
+        "name": "신용 대출 상품",
+        "synonyms": [
+          "신용 대출 상품",
+          "신용 대출",
+          "신용 상품",
+          "무담보 대출"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "LOAN_DB.LOAN_PRDT_MST.PRDT_TYPE_CD",
+            "value": "01"
+          }
+        ]
+      },
+      {
+        "name": "담보 대출 상품",
+        "synonyms": [
+          "담보 대출 상품",
+          "담보 대출",
+          "담보 상품",
+          "담보부 대출"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "LOAN_DB.LOAN_PRDT_MST.PRDT_TYPE_CD",
+            "value": "02"
+          }
+        ]
+      },
+      {
+        "name": "전세 대출 상품",
+        "synonyms": [
+          "전세 대출 상품",
+          "전세 대출",
+          "전세 상품",
+          "전세자금 대출"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "LOAN_DB.LOAN_PRDT_MST.PRDT_TYPE_CD",
+            "value": "03"
+          }
+        ]
+      },
+      {
+        "name": "정책 대출 상품",
+        "synonyms": [
+          "정책 대출 상품",
+          "정책 대출",
+          "정책 상품",
+          "정책성 대출"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "LOAN_DB.LOAN_PRDT_MST.PRDT_TYPE_CD",
+            "value": "04"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_PRDT_MST.BASE_RATE": [
+      {
+        "name": "상품 기준 금리",
+        "synonyms": [
+          "상품 기준 금리",
+          "기준 금리",
+          "기준금리",
+          "상품 기준금리",
+          "대출 기준 금리",
+          "대출 기준금리",
+          "가산 금리 기준값",
+          "우대 금리 기준값"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "LOAN_DB.LOAN_PRDT_MST.BASE_RATE"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_PRDT_MST.MAX_LMT_AMT": [
+      {
+        "name": "상품 최대 대출 한도",
+        "synonyms": [
+          "상품 최대 대출 한도",
+          "상품 한도 상한",
+          "대출 상품 최대 한도",
+          "상품 정책 한도 상한",
+          "상품 설계 최대 한도"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "LOAN_DB.LOAN_PRDT_MST.MAX_LMT_AMT"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_PRDT_MST.SALE_YN": [
+      {
+        "name": "대출 상품 판매 여부",
+        "synonyms": [
+          "대출 상품 판매 여부",
+          "판매 여부",
+          "신규 판매 여부",
+          "취급 여부"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "LOAN_DB.LOAN_PRDT_MST.SALE_YN"
+          }
+        ]
+      },
+      {
+        "name": "판매 중인 대출 상품",
+        "synonyms": [
+          "판매 중인 대출 상품",
+          "판매 중",
+          "신규 판매 중",
+          "취급 가능 상품",
+          "판매 가능 상품"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "LOAN_DB.LOAN_PRDT_MST.SALE_YN",
+            "value": "Y"
+          }
+        ]
+      },
+      {
+        "name": "판매 중단 대출 상품",
+        "synonyms": [
+          "판매 중단 대출 상품",
+          "판매 중단",
+          "미출시 상품",
+          "취급 불가 상품",
+          "판매 불가 상품"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "LOAN_DB.LOAN_PRDT_MST.SALE_YN",
+            "value": "N"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_PRDT_MST.CREATED_AT": [
+      {
+        "name": "상품 최초 등록 시각",
+        "synonyms": [
+          "상품 최초 등록 시각",
+          "상품 등록 시각",
+          "상품 등록 일시",
+          "상품 마스터 등록 시각",
+          "상품 출시 시점",
+          "상품 도입 시점",
+          "상품 생성 일시"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "LOAN_DB.LOAN_PRDT_MST.CREATED_AT"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_PRDT_MST.UPDATED_AT": [
+      {
+        "name": "상품 마스터 최종 수정 시각",
+        "synonyms": [
+          "상품 마스터 최종 수정 시각",
+          "상품 마스터 마지막 변경 시각",
+          "상품 정보 최종 수정 일시",
+          "상품 마스터 갱신 시각",
+          "상품 마스터 업데이트 시각"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "LOAN_DB.LOAN_PRDT_MST.UPDATED_AT"
+          }
+        ]
+      }
+    ],
+    "LOAN_DB.LOAN_PRDT_MST.UPDATED_BY": [
+      {
+        "name": "상품 마스터 최종 수정자 ID",
+        "synonyms": [
+          "상품 마스터 최종 수정자 ID",
+          "상품 마스터 수정자 ID",
+          "상품 마스터 변경자 ID",
+          "마지막으로 수정한 사용자 ID",
+          "상품 정보 수정자"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "LOAN_DB.LOAN_PRDT_MST.UPDATED_BY"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_MST.CARD_NO": [
+      {
+        "name": "카드 번호",
+        "synonyms": [
+          "카드 번호",
+          "카드번호",
+          "카드 식별번호",
+          "카드 고유번호",
+          "카드 관리번호",
+          "CARD_NO"
+        ],
+        "links": [
+          {
+            "type": "identified_by",
+            "column": "CARD_DB.CARD_MST.CARD_NO"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_MST.CUST_NO": [
+      {
+        "name": "카드 소유자 고객번호",
+        "synonyms": [
+          "카드 소유자 고객번호",
+          "카드 고객번호",
+          "카드 보유 고객번호",
+          "카드 소유 고객 식별번호"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CARD_DB.CARD_MST.CUST_NO"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_MST.CARD_GRD_CD": [
+      {
+        "name": "카드 등급 코드",
+        "synonyms": [
+          "카드 등급 코드",
+          "카드 등급",
+          "카드 그레이드",
+          "카드 티어"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CARD_DB.CARD_MST.CARD_GRD_CD"
+          }
+        ]
+      },
+      {
+        "name": "일반 카드 등급",
+        "synonyms": [
+          "일반 카드 등급",
+          "일반 등급",
+          "일반 카드",
+          "일반 회원 등급"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CARD_DB.CARD_MST.CARD_GRD_CD",
+            "value": "01"
+          }
+        ]
+      },
+      {
+        "name": "골드 카드 등급",
+        "synonyms": [
+          "골드 카드 등급",
+          "골드 등급",
+          "골드 카드",
+          "골드 회원 등급"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CARD_DB.CARD_MST.CARD_GRD_CD",
+            "value": "02"
+          }
+        ]
+      },
+      {
+        "name": "플래티넘 카드 등급",
+        "synonyms": [
+          "플래티넘 카드 등급",
+          "플래티넘 등급",
+          "플래티넘 카드",
+          "플래티넘 회원 등급"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CARD_DB.CARD_MST.CARD_GRD_CD",
+            "value": "03"
+          }
+        ]
+      },
+      {
+        "name": "다이아 카드 등급",
+        "synonyms": [
+          "다이아 카드 등급",
+          "다이아 등급",
+          "다이아 카드",
+          "다이아몬드 카드 등급",
+          "다이아몬드 등급"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CARD_DB.CARD_MST.CARD_GRD_CD",
+            "value": "04"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_MST.CARD_LMT_AMT": [
+      {
+        "name": "카드 이용 한도",
+        "synonyms": [
+          "카드 이용 한도",
+          "카드 한도 금액",
+          "카드 승인 한도",
+          "총 이용 한도",
+          "카드 한도액",
+          "한도 금액"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CARD_DB.CARD_MST.CARD_LMT_AMT"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_MST.CARD_BAL_AMT": [
+      {
+        "name": "카드 잔여 한도",
+        "synonyms": [
+          "카드 잔여 한도",
+          "잔여 한도",
+          "카드 잔여 사용 가능 금액",
+          "카드 가용 금액",
+          "카드 남은 한도",
+          "카드 사용 가능 잔액",
+          "카드 가용 한도"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CARD_DB.CARD_MST.CARD_BAL_AMT"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_MST.CARD_STAT_CD": [
+      {
+        "name": "카드 운영 상태",
+        "synonyms": [
+          "카드 운영 상태",
+          "카드 상태",
+          "카드 현재 상태",
+          "카드 사용 가능 여부"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CARD_DB.CARD_MST.CARD_STAT_CD"
+          }
+        ]
+      },
+      {
+        "name": "정상 카드",
+        "synonyms": [
+          "정상 카드",
+          "카드 정상",
+          "정상 상태 카드",
+          "사용 가능 카드",
+          "거래 가능 카드"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CARD_DB.CARD_MST.CARD_STAT_CD",
+            "value": "01"
+          }
+        ]
+      },
+      {
+        "name": "정지 카드",
+        "synonyms": [
+          "정지 카드",
+          "카드 정지",
+          "카드 사용 정지",
+          "정지 상태 카드"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CARD_DB.CARD_MST.CARD_STAT_CD",
+            "value": "02"
+          }
+        ]
+      },
+      {
+        "name": "연체 카드",
+        "synonyms": [
+          "연체 카드",
+          "카드 연체",
+          "연체 상태 카드",
+          "연체 중인 카드"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CARD_DB.CARD_MST.CARD_STAT_CD",
+            "value": "03"
+          }
+        ]
+      },
+      {
+        "name": "해지 카드",
+        "synonyms": [
+          "해지 카드",
+          "카드 해지",
+          "해지 상태 카드",
+          "해지된 카드"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CARD_DB.CARD_MST.CARD_STAT_CD",
+            "value": "04"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_MST.ISSUE_DT": [
+      {
+        "name": "카드 발급일",
+        "synonyms": [
+          "카드 발급일",
+          "발급일",
+          "카드 발급 날짜",
+          "카드 발급 일자",
+          "발급 날짜",
+          "발급 일자"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CARD_DB.CARD_MST.ISSUE_DT"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_MST.EXPIRE_DT": [
+      {
+        "name": "카드 유효기간 만료일",
+        "synonyms": [
+          "카드 유효기간 만료일",
+          "유효기간 만료일",
+          "카드 만료일",
+          "카드 유효기간 종료일",
+          "카드 유효기간 마지막 날",
+          "카드 만료 날짜"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CARD_DB.CARD_MST.EXPIRE_DT"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_MST.CREATED_AT": [
+      {
+        "name": "카드 레코드 생성 시각",
+        "synonyms": [
+          "카드 레코드 생성 시각",
+          "카드 DB 입력 시각",
+          "카드 시스템 등록 시각",
+          "카드 레코드 최초 삽입 시각",
+          "카드 데이터 생성 시점"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CARD_DB.CARD_MST.CREATED_AT"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_MST.UPDATED_AT": [
+      {
+        "name": "카드 마스터 최종 수정 시각",
+        "synonyms": [
+          "카드 마스터 최종 수정 시각",
+          "카드 정보 마지막 변경 시각",
+          "카드 레코드 최종 변경 일시",
+          "카드 마스터 수정 일시",
+          "카드 정보 업데이트 시각"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CARD_DB.CARD_MST.UPDATED_AT"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_APPL.CARD_APPL_NO": [
+      {
+        "name": "카드 신청 번호",
+        "synonyms": [
+          "카드 신청 번호",
+          "카드 신청번호",
+          "신청 번호",
+          "신청번호",
+          "카드 신청 식별자",
+          "카드 신청 ID"
+        ],
+        "links": [
+          {
+            "type": "identified_by",
+            "column": "CARD_DB.CARD_APPL.CARD_APPL_NO"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_APPL.CUST_NO": [
+      {
+        "name": "카드 신청 고객 번호",
+        "synonyms": [
+          "카드 신청 고객 번호",
+          "신청 고객 번호",
+          "신청자 고객 번호",
+          "카드 신청자 번호",
+          "신청인 고객 ID"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CARD_DB.CARD_APPL.CUST_NO"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_APPL.ISSUE_STAT_CD": [
+      {
+        "name": "카드 발급 처리 단계",
+        "synonyms": [
+          "카드 발급 처리 단계",
+          "카드 신청 처리 단계",
+          "카드 신청 진행 단계",
+          "카드 처리 상태",
+          "발급 프로세스 단계"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CARD_DB.CARD_APPL.ISSUE_STAT_CD"
+          }
+        ]
+      },
+      {
+        "name": "카드 신청 접수 단계",
+        "synonyms": [
+          "카드 신청 접수 단계",
+          "신청 접수 상태",
+          "카드 신청됨",
+          "신청 단계"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CARD_DB.CARD_APPL.ISSUE_STAT_CD",
+            "value": "01"
+          }
+        ]
+      },
+      {
+        "name": "카드 심사 진행 단계",
+        "synonyms": [
+          "카드 심사 진행 단계",
+          "심사 중 상태",
+          "카드 심사 중",
+          "심사 단계"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CARD_DB.CARD_APPL.ISSUE_STAT_CD",
+            "value": "02"
+          }
+        ]
+      },
+      {
+        "name": "카드 발급 완료 단계",
+        "synonyms": [
+          "카드 발급 완료 단계",
+          "발급 완료 상태",
+          "카드 발급됨",
+          "발급 단계",
+          "카드 발급 승인"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CARD_DB.CARD_APPL.ISSUE_STAT_CD",
+            "value": "03"
+          }
+        ]
+      },
+      {
+        "name": "카드 신청 반려 단계",
+        "synonyms": [
+          "카드 신청 반려 단계",
+          "반려 상태",
+          "카드 신청 거절",
+          "카드 반려됨",
+          "반려 단계"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CARD_DB.CARD_APPL.ISSUE_STAT_CD",
+            "value": "04"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_APPL.REQ_LMT_AMT": [
+      {
+        "name": "신청 희망 한도 금액",
+        "synonyms": [
+          "신청 희망 한도 금액",
+          "희망 한도 금액",
+          "신청 한도 금액",
+          "요청 한도 금액",
+          "신청 시 입력 한도",
+          "고객 희망 한도"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CARD_DB.CARD_APPL.REQ_LMT_AMT"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_APPL.APPL_DT": [
+      {
+        "name": "카드 신청일",
+        "synonyms": [
+          "카드 신청일",
+          "신청일",
+          "카드 접수일",
+          "신청 접수일",
+          "카드 신청 날짜",
+          "신청 날짜"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CARD_DB.CARD_APPL.APPL_DT"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_APPL.CREATED_AT": [
+      {
+        "name": "카드 신청 레코드 생성 시각",
+        "synonyms": [
+          "카드 신청 레코드 생성 시각",
+          "레코드 생성 시각",
+          "DB 삽입 시각",
+          "데이터 적재 시각",
+          "감사 추적 시각",
+          "시스템 등록 시각"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CARD_DB.CARD_APPL.CREATED_AT"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_APPL.UPDATED_AT": [
+      {
+        "name": "카드 신청 레코드 최종 수정 시각",
+        "synonyms": [
+          "카드 신청 레코드 최종 수정 시각",
+          "최종 수정 시각",
+          "마지막 수정 시각",
+          "최근 변경 시각",
+          "레코드 수정 일시",
+          "카드 신청 수정 일시"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CARD_DB.CARD_APPL.UPDATED_AT"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_APRV_HIST.APRV_SEQ": [
+      {
+        "name": "카드 승인 식별자",
+        "synonyms": [
+          "카드 승인 식별자",
+          "승인 식별자",
+          "승인 고유 키",
+          "승인 레코드 ID",
+          "카드 승인 ID",
+          "승인 순번"
+        ],
+        "links": [
+          {
+            "type": "identified_by",
+            "column": "CARD_DB.CARD_APRV_HIST.APRV_SEQ"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_APRV_HIST.CARD_NO": [
+      {
+        "name": "승인 이력 카드 번호",
+        "synonyms": [
+          "승인 이력 카드 번호",
+          "카드 번호",
+          "카드 식별 번호",
+          "카드 번호 기준"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CARD_DB.CARD_APRV_HIST.CARD_NO"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_APRV_HIST.APRV_AMT": [
+      {
+        "name": "승인금액",
+        "synonyms": [
+          "승인금액",
+          "결제 승인금액",
+          "승인 금액",
+          "카드 승인금액",
+          "승인액"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CARD_DB.CARD_APRV_HIST.APRV_AMT"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_APRV_HIST.MRCHT_NM": [
+      {
+        "name": "승인 당시 가맹점 상호명",
+        "synonyms": [
+          "승인 당시 가맹점 상호명",
+          "가맹점 상호명",
+          "가맹점명",
+          "결제 가맹점명",
+          "결제처 상호명",
+          "승인 가맹점 이름"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CARD_DB.CARD_APRV_HIST.MRCHT_NM"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_APRV_HIST.MRCHT_CTGR_CD": [
+      {
+        "name": "가맹점 업종 분류 코드",
+        "synonyms": [
+          "가맹점 업종 분류 코드",
+          "가맹점 업종 코드",
+          "가맹점 업종",
+          "업종 분류 코드",
+          "업종 코드",
+          "가맹점 카테고리 코드",
+          "가맹점 카테고리"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CARD_DB.CARD_APRV_HIST.MRCHT_CTGR_CD"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_APRV_HIST.APRV_DT": [
+      {
+        "name": "카드 승인 일시",
+        "synonyms": [
+          "카드 승인 일시",
+          "승인 일시",
+          "승인 날짜",
+          "승인 시각",
+          "카드 승인 날짜",
+          "카드 승인 시각",
+          "결제 승인 일시",
+          "결제 승인 날짜"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CARD_DB.CARD_APRV_HIST.APRV_DT"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_APRV_HIST.CNCL_YN": [
+      {
+        "name": "승인 취소 여부",
+        "synonyms": [
+          "승인 취소 여부",
+          "취소 여부",
+          "취소 플래그",
+          "취소 구분"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CARD_DB.CARD_APRV_HIST.CNCL_YN"
+          }
+        ]
+      },
+      {
+        "name": "취소된 승인",
+        "synonyms": [
+          "취소된 승인",
+          "취소 승인",
+          "취소 건",
+          "승인 취소"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CARD_DB.CARD_APRV_HIST.CNCL_YN",
+            "value": "Y"
+          }
+        ]
+      },
+      {
+        "name": "취소되지 않은 승인",
+        "synonyms": [
+          "취소되지 않은 승인",
+          "정상 승인",
+          "유효 승인",
+          "취소 아닌 승인"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CARD_DB.CARD_APRV_HIST.CNCL_YN",
+            "value": "N"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_APRV_HIST.CREATED_AT": [
+      {
+        "name": "승인 이력 DB 적재 시각",
+        "synonyms": [
+          "승인 이력 DB 적재 시각",
+          "승인 이력 삽입 시각",
+          "승인 이력 레코드 생성 시각",
+          "카드 승인 이력 적재 일시",
+          "데이터 적재 시각",
+          "감사 추적 시각"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CARD_DB.CARD_APRV_HIST.CREATED_AT"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_APRV_HIST.UPDATED_AT": [
+      {
+        "name": "승인 레코드 최종 변경 시각",
+        "synonyms": [
+          "승인 레코드 최종 변경 시각",
+          "승인 내역 마지막 수정 시각",
+          "승인 이력 최종 업데이트 시각",
+          "승인 후 상태 변경 시점",
+          "승인 레코드 변경 일시"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CARD_DB.CARD_APRV_HIST.UPDATED_AT"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_APRV_HIST.UPDATED_BY": [
+      {
+        "name": "마지막 수정자 ID",
+        "synonyms": [
+          "마지막 수정자 ID",
+          "최종 수정자 ID",
+          "수정 주체 ID",
+          "마지막으로 수정한 사람 ID",
+          "최종 변경자 ID"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CARD_DB.CARD_APRV_HIST.UPDATED_BY"
+          }
+        ]
+      },
+      {
+        "name": "수기 개입 여부 추적 ID",
+        "synonyms": [
+          "수기 개입 여부 추적 ID",
+          "수동 처리 주체 ID",
+          "운영자 개입 ID",
+          "수기 처리자 ID"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CARD_DB.CARD_APRV_HIST.UPDATED_BY"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_DLNQ_HIST.CDLNQ_SEQ": [
+      {
+        "name": "카드 연체 이력 식별자",
+        "synonyms": [
+          "카드 연체 이력 식별자",
+          "연체 이력 식별자",
+          "연체 이벤트 식별자",
+          "연체 이력 ID",
+          "CDLNQ_SEQ"
+        ],
+        "links": [
+          {
+            "type": "identified_by",
+            "column": "CARD_DB.CARD_DLNQ_HIST.CDLNQ_SEQ"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_DLNQ_HIST.CARD_NO": [
+      {
+        "name": "연체 이력 카드 번호",
+        "synonyms": [
+          "연체 이력 카드 번호",
+          "연체 카드 번호",
+          "연체 이력 카드"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CARD_DB.CARD_DLNQ_HIST.CARD_NO"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD": [
+      {
+        "name": "연체 상태 단계",
+        "synonyms": [
+          "연체 상태 단계",
+          "연체 상태",
+          "연체 단계",
+          "연체 이력 상태"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD"
+          }
+        ]
+      },
+      {
+        "name": "연체 발생",
+        "synonyms": [
+          "연체 발생",
+          "연체 시작",
+          "신규 연체"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD",
+            "value": "01"
+          }
+        ]
+      },
+      {
+        "name": "연체 지속 중",
+        "synonyms": [
+          "연체 지속 중",
+          "연체 계속",
+          "연체 진행 중",
+          "연체 유지"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD",
+            "value": "02"
+          }
+        ]
+      },
+      {
+        "name": "연체 해소됨",
+        "synonyms": [
+          "연체 해소됨",
+          "연체 해소",
+          "연체 종료",
+          "연체 정리됨"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD",
+            "value": "03"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_DLNQ_HIST.DLNQ_AMT": [
+      {
+        "name": "연체 발생 금액",
+        "synonyms": [
+          "연체 발생 금액",
+          "연체 발생 시점 금액",
+          "연체 원금",
+          "연체 발생 원금",
+          "미상환 연체 금액",
+          "연체액"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CARD_DB.CARD_DLNQ_HIST.DLNQ_AMT"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_DLNQ_HIST.DLNQ_DAYS": [
+      {
+        "name": "연체 일수",
+        "synonyms": [
+          "연체 일수",
+          "연체 경과 일수",
+          "연체 누적 일수",
+          "연체 발생 후 경과 일수"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CARD_DB.CARD_DLNQ_HIST.DLNQ_DAYS"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_DLNQ_HIST.OCUR_DT": [
+      {
+        "name": "연체 발생일",
+        "synonyms": [
+          "연체 발생일",
+          "연체 발생 날짜",
+          "연체 확정일",
+          "결제 미납 확정일",
+          "연체 기산일",
+          "연체 시작일"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CARD_DB.CARD_DLNQ_HIST.OCUR_DT"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_DLNQ_HIST.CREATED_AT": [
+      {
+        "name": "연체 이력 레코드 생성 시각",
+        "synonyms": [
+          "연체 이력 레코드 생성 시각",
+          "연체 이력 DB 삽입 시각",
+          "연체 이력 적재 시각",
+          "연체 이력 레코드 등록 시각"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CARD_DB.CARD_DLNQ_HIST.CREATED_AT"
+          }
+        ]
+      }
+    ],
+    "CARD_DB.CARD_DLNQ_HIST.UPDATED_AT": [
+      {
+        "name": "연체 이력 최종 수정 시각",
+        "synonyms": [
+          "연체 이력 최종 수정 시각",
+          "연체 이력 마지막 변경 시각",
+          "연체 이력 최종 변경 타임스탬프",
+          "연체 이력 수정 일시",
+          "연체 레코드 갱신 시각"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CARD_DB.CARD_DLNQ_HIST.UPDATED_AT"
+          }
+        ]
+      }
+    ],
+    "DEP_DB.DEP_ACCT_MST.DEP_NO": [
+      {
+        "name": "예금계좌번호",
+        "synonyms": [
+          "예금계좌번호",
+          "예금 계좌번호",
+          "예금계좌 번호",
+          "예금 계좌 식별자",
+          "예금 계좌 ID"
+        ],
+        "links": [
+          {
+            "type": "identified_by",
+            "column": "DEP_DB.DEP_ACCT_MST.DEP_NO"
+          }
+        ]
+      }
+    ],
+    "DEP_DB.DEP_ACCT_MST.CUST_NO": [
+      {
+        "name": "예금 계좌 보유 고객 번호",
+        "synonyms": [
+          "예금 계좌 보유 고객 번호",
+          "예금 계좌 고객 번호",
+          "예금 고객 번호",
+          "예금 계좌 고객 ID",
+          "예금 계좌 고객 식별자"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "DEP_DB.DEP_ACCT_MST.CUST_NO"
+          }
+        ]
+      }
+    ],
+    "DEP_DB.DEP_ACCT_MST.PRDT_CD": [
+      {
+        "name": "예금 상품 코드",
+        "synonyms": [
+          "예금 상품 코드",
+          "상품 코드",
+          "가입 상품 코드",
+          "예금 상품 식별 코드"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "DEP_DB.DEP_ACCT_MST.PRDT_CD"
+          }
+        ]
+      }
+    ],
+    "DEP_DB.DEP_ACCT_MST.DEP_BAL_AMT": [
+      {
+        "name": "예금 잔액",
+        "synonyms": [
+          "예금 잔액",
+          "잔액",
+          "계좌 잔액",
+          "예금 잔고",
+          "잔고",
+          "계좌 잔고",
+          "현재 잔액",
+          "현재 잔고"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "DEP_DB.DEP_ACCT_MST.DEP_BAL_AMT"
+          }
+        ]
+      }
+    ],
+    "DEP_DB.DEP_ACCT_MST.INT_RATE": [
+      {
+        "name": "계좌 적용 연이율",
+        "synonyms": [
+          "계좌 적용 연이율",
+          "적용 금리",
+          "계좌 금리",
+          "실적용 금리",
+          "실제 적용 금리",
+          "적용 이율",
+          "계좌 적용 금리",
+          "연이율"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "DEP_DB.DEP_ACCT_MST.INT_RATE"
+          }
+        ]
+      }
+    ],
+    "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD": [
+      {
+        "name": "예금 계좌 운영 상태",
+        "synonyms": [
+          "예금 계좌 운영 상태",
+          "계좌 상태",
+          "계좌 운영 상태",
+          "예금 계좌 상태"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD"
+          }
+        ]
+      },
+      {
+        "name": "정상 계좌",
+        "synonyms": [
+          "정상 계좌",
+          "정상 운영 계좌",
+          "정상 상태 계좌"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD",
+            "value": "01"
+          }
+        ]
+      },
+      {
+        "name": "지급정지 계좌",
+        "synonyms": [
+          "지급정지 계좌",
+          "지급 정지된 계좌",
+          "출금 정지 계좌",
+          "지급정지"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD",
+            "value": "02"
+          }
+        ]
+      },
+      {
+        "name": "해지 계좌",
+        "synonyms": [
+          "해지 계좌",
+          "해지된 계좌",
+          "해지"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD",
+            "value": "03"
+          }
+        ]
+      }
+    ],
+    "DEP_DB.DEP_ACCT_MST.OPEN_DT": [
+      {
+        "name": "계좌 개설일",
+        "synonyms": [
+          "계좌 개설일",
+          "개설일",
+          "개설 날짜",
+          "계좌 개설 날짜",
+          "가입일",
+          "계좌 가입일",
+          "계약 개시일",
+          "이자 기산일",
+          "가입 기간 기준일"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "DEP_DB.DEP_ACCT_MST.OPEN_DT"
+          }
+        ]
+      }
+    ],
+    "DEP_DB.DEP_ACCT_MST.MTRT_DT": [
+      {
+        "name": "예금 만기일",
+        "synonyms": [
+          "예금 만기일",
+          "만기일",
+          "만기 날짜",
+          "계약 종료일",
+          "만기 기준일",
+          "예금 만기 기준일"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "DEP_DB.DEP_ACCT_MST.MTRT_DT"
+          }
+        ]
+      }
+    ],
+    "DEP_DB.DEP_ACCT_MST.CREATED_AT": [
+      {
+        "name": "계좌 레코드 생성 시각",
+        "synonyms": [
+          "계좌 레코드 생성 시각",
+          "레코드 생성 시각",
+          "계좌 DB 입력 시각",
+          "시스템 입력 시각",
+          "계좌 최초 입력 시각",
+          "DB 삽입 시각"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "DEP_DB.DEP_ACCT_MST.CREATED_AT"
+          }
+        ]
+      }
+    ],
+    "DEP_DB.DEP_ACCT_MST.UPDATED_AT": [
+      {
+        "name": "계좌 최종 수정 시각",
+        "synonyms": [
+          "계좌 최종 수정 시각",
+          "계좌 마지막 수정 시각",
+          "계좌 최종 변경 시각",
+          "계좌 마지막 변경 시각",
+          "계좌 수정 일시",
+          "계좌 변경 일시"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "DEP_DB.DEP_ACCT_MST.UPDATED_AT"
+          }
+        ]
+      }
+    ],
+    "DEP_DB.DEP_TXN_HIST.TXN_SEQ": [
+      {
+        "name": "예금 거래 이력 식별자",
+        "synonyms": [
+          "예금 거래 이력 식별자",
+          "예금 거래 이력 ID",
+          "거래 이력 고유키",
+          "거래 이력 대리키",
+          "TXN_SEQ"
+        ],
+        "links": [
+          {
+            "type": "identified_by",
+            "column": "DEP_DB.DEP_TXN_HIST.TXN_SEQ"
+          }
+        ]
+      }
+    ],
+    "DEP_DB.DEP_TXN_HIST.DEP_NO": [
+      {
+        "name": "거래 계좌번호",
+        "synonyms": [
+          "거래 계좌번호",
+          "거래 당사자 계좌번호",
+          "거래 계좌",
+          "해당 계좌번호",
+          "예금 계좌번호"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "DEP_DB.DEP_TXN_HIST.DEP_NO"
+          }
+        ]
+      }
+    ],
+    "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD": [
+      {
+        "name": "거래 유형 코드",
+        "synonyms": [
+          "거래 유형 코드",
+          "거래 종류 코드",
+          "거래 타입 코드",
+          "TXN_TYPE_CD"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD"
+          }
+        ]
+      },
+      {
+        "name": "입금 거래",
+        "synonyms": [
+          "입금 거래",
+          "입금",
+          "입금 유형",
+          "입금 내역"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD",
+            "value": "01"
+          }
+        ]
+      },
+      {
+        "name": "출금 거래",
+        "synonyms": [
+          "출금 거래",
+          "출금",
+          "출금 유형",
+          "출금 내역"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD",
+            "value": "02"
+          }
+        ]
+      },
+      {
+        "name": "이체 거래",
+        "synonyms": [
+          "이체 거래",
+          "이체",
+          "이체 유형",
+          "계좌 이체"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD",
+            "value": "03"
+          }
+        ]
+      },
+      {
+        "name": "이자 거래",
+        "synonyms": [
+          "이자 거래",
+          "이자",
+          "이자 유형",
+          "이자 지급"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD",
+            "value": "04"
+          }
+        ]
+      }
+    ],
+    "DEP_DB.DEP_TXN_HIST.TXN_AMT": [
+      {
+        "name": "거래 금액",
+        "synonyms": [
+          "거래 금액",
+          "거래액",
+          "거래 발생 금액",
+          "트랜잭션 금액",
+          "거래 건 금액"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "DEP_DB.DEP_TXN_HIST.TXN_AMT"
+          }
+        ]
+      }
+    ],
+    "DEP_DB.DEP_TXN_HIST.BAL_AFTR_AMT": [
+      {
+        "name": "거래 후 잔액",
+        "synonyms": [
+          "거래 후 잔액",
+          "거래 후 계좌 잔액",
+          "처리 후 잔액",
+          "거래 완료 후 잔액",
+          "거래 결과 잔액",
+          "확정 잔액",
+          "잔액 스냅샷"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "DEP_DB.DEP_TXN_HIST.BAL_AFTR_AMT"
+          }
+        ]
+      }
+    ],
+    "DEP_DB.DEP_TXN_HIST.TXN_DT": [
+      {
+        "name": "거래 발생일",
+        "synonyms": [
+          "거래 발생일",
+          "거래일",
+          "거래 날짜",
+          "거래 일자",
+          "영업일 기준 거래일",
+          "실제 거래일",
+          "트랜잭션 발생일",
+          "트랜잭션 날짜",
+          "TXN_DT"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "DEP_DB.DEP_TXN_HIST.TXN_DT"
+          }
+        ]
+      }
+    ],
+    "DEP_DB.DEP_TXN_HIST.CREATED_AT": [
+      {
+        "name": "레코드 최초 삽입 시각",
+        "synonyms": [
+          "레코드 최초 삽입 시각",
+          "DB 삽입 시각",
+          "데이터 적재 시각",
+          "적재 시각",
+          "감사 추적 시각",
+          "레코드 생성 시각"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "DEP_DB.DEP_TXN_HIST.CREATED_AT"
+          }
+        ]
+      }
+    ],
+    "DEP_DB.DEP_TXN_HIST.UPDATED_AT": [
+      {
+        "name": "레코드 최종 변경 시각",
+        "synonyms": [
+          "레코드 최종 변경 시각",
+          "최종 변경 시각",
+          "마지막 변경 시각",
+          "최종 수정 시각",
+          "마지막 수정 시각",
+          "레코드 수정 일시",
+          "업데이트 일시"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "DEP_DB.DEP_TXN_HIST.UPDATED_AT"
+          }
+        ]
+      }
+    ],
+    "DEP_DB.DEP_TXN_HIST.UPDATED_BY": [
+      {
+        "name": "레코드 최종 수정자 ID",
+        "synonyms": [
+          "레코드 최종 수정자 ID",
+          "최종 수정자 ID",
+          "마지막 수정자 ID",
+          "수정 주체 ID",
+          "레코드 수정 계정"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "DEP_DB.DEP_TXN_HIST.UPDATED_BY"
+          }
+        ]
+      }
+    ],
+    "DEP_DB.DEP_PRDT_MST.PRDT_CD": [
+      {
+        "name": "예금 상품 코드",
+        "synonyms": [
+          "예금 상품 코드",
+          "예금 상품 ID",
+          "예금 상품 식별 코드",
+          "상품 코드",
+          "PRDT_CD"
+        ],
+        "links": [
+          {
+            "type": "identified_by",
+            "column": "DEP_DB.DEP_PRDT_MST.PRDT_CD"
+          }
+        ]
+      }
+    ],
+    "DEP_DB.DEP_PRDT_MST.PRDT_NM": [
+      {
+        "name": "예금 상품명",
+        "synonyms": [
+          "예금 상품명",
+          "상품명",
+          "상품 이름",
+          "예금 상품 이름",
+          "예금 명칭",
+          "상품 명칭",
+          "마케팅 상품명"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "DEP_DB.DEP_PRDT_MST.PRDT_NM"
+          }
+        ]
+      }
+    ],
+    "DEP_DB.DEP_PRDT_MST.PRDT_TYPE_CD": [
+      {
+        "name": "예금 상품 수신 유형",
+        "synonyms": [
+          "예금 상품 수신 유형",
+          "수신 유형",
+          "상품 유형 코드",
+          "예금 유형",
+          "상품군 분류"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "DEP_DB.DEP_PRDT_MST.PRDT_TYPE_CD"
+          }
+        ]
+      },
+      {
+        "name": "보통예금 상품",
+        "synonyms": [
+          "보통예금 상품",
+          "보통예금",
+          "자유입출금 예금",
+          "요구불예금"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "DEP_DB.DEP_PRDT_MST.PRDT_TYPE_CD",
+            "value": "01"
+          }
+        ]
+      },
+      {
+        "name": "정기예금 상품",
+        "synonyms": [
+          "정기예금 상품",
+          "정기예금",
+          "거치식 예금"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "DEP_DB.DEP_PRDT_MST.PRDT_TYPE_CD",
+            "value": "02"
+          }
+        ]
+      },
+      {
+        "name": "적금 상품",
+        "synonyms": [
+          "적금 상품",
+          "적금",
+          "정기적금",
+          "자유적금"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "DEP_DB.DEP_PRDT_MST.PRDT_TYPE_CD",
+            "value": "03"
+          }
+        ]
+      }
+    ],
+    "DEP_DB.DEP_PRDT_MST.BASE_RATE": [
+      {
+        "name": "기준금리",
+        "synonyms": [
+          "기준금리",
+          "기준 금리",
+          "상품 기준금리",
+          "상품 기준 금리",
+          "기본금리",
+          "기본 금리",
+          "연 기준금리",
+          "기준이율"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "DEP_DB.DEP_PRDT_MST.BASE_RATE"
+          }
+        ]
+      }
+    ],
+    "DEP_DB.DEP_PRDT_MST.SALE_YN": [
+      {
+        "name": "판매 여부",
+        "synonyms": [
+          "판매 여부",
+          "판매 가능 여부",
+          "판매 상태",
+          "판매 가능 상태"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "DEP_DB.DEP_PRDT_MST.SALE_YN"
+          }
+        ]
+      },
+      {
+        "name": "판매 중인 상품",
+        "synonyms": [
+          "판매 중인 상품",
+          "판매 가능 상품",
+          "판매중",
+          "현재 판매 상품",
+          "출시 상품"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "DEP_DB.DEP_PRDT_MST.SALE_YN",
+            "value": "Y"
+          }
+        ]
+      },
+      {
+        "name": "판매 중단 상품",
+        "synonyms": [
+          "판매 중단 상품",
+          "판매 불가 상품",
+          "판매 중단",
+          "미출시 상품",
+          "판매되지 않는 상품"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "DEP_DB.DEP_PRDT_MST.SALE_YN",
+            "value": "N"
+          }
+        ]
+      }
+    ],
+    "DEP_DB.DEP_PRDT_MST.CREATED_AT": [
+      {
+        "name": "상품 마스터 등록 시각",
+        "synonyms": [
+          "상품 마스터 등록 시각",
+          "상품 마스터 생성 시각",
+          "상품 마스터 삽입 시각",
+          "상품 레코드 등록 일시",
+          "상품 마스터 등록일시"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "DEP_DB.DEP_PRDT_MST.CREATED_AT"
+          }
+        ]
+      }
+    ],
+    "DEP_DB.DEP_PRDT_MST.UPDATED_AT": [
+      {
+        "name": "상품 마지막 변경 시각",
+        "synonyms": [
+          "상품 마지막 변경 시각",
+          "상품 최종 수정 시각",
+          "상품 최종 변경 시각",
+          "상품 마지막 수정 시각",
+          "상품 정보 수정 일시",
+          "상품 업데이트 일시"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "DEP_DB.DEP_PRDT_MST.UPDATED_AT"
+          }
+        ]
+      }
+    ],
+    "RISK_DB.CRDT_EVAL_HIST.EVAL_ID": [
+      {
+        "name": "신용 평가 건 식별자",
+        "synonyms": [
+          "신용 평가 건 식별자",
+          "신용 평가 ID",
+          "평가 건 ID",
+          "EVAL_ID",
+          "평가 식별자"
+        ],
+        "links": [
+          {
+            "type": "identified_by",
+            "column": "RISK_DB.CRDT_EVAL_HIST.EVAL_ID"
+          }
+        ]
+      }
+    ],
+    "RISK_DB.CRDT_EVAL_HIST.CUST_NO": [
+      {
+        "name": "평가 대상 고객 번호",
+        "synonyms": [
+          "평가 대상 고객 번호",
+          "평가 고객 번호",
+          "신용평가 고객 번호",
+          "신용평가 대상 고객 식별자",
+          "평가 이력 고객 번호"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "RISK_DB.CRDT_EVAL_HIST.CUST_NO"
+          }
+        ]
+      }
+    ],
+    "RISK_DB.CRDT_EVAL_HIST.CRDT_SCR": [
+      {
+        "name": "신용 점수",
+        "synonyms": [
+          "신용 점수",
+          "크레딧 스코어",
+          "신용평가 점수",
+          "신용 스코어",
+          "CRDT_SCR"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "RISK_DB.CRDT_EVAL_HIST.CRDT_SCR"
+          }
+        ]
+      }
+    ],
+    "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD": [
+      {
+        "name": "신용등급코드",
+        "synonyms": [
+          "신용등급코드",
+          "신용 등급 코드",
+          "신용평가등급코드",
+          "신용평가 등급 코드",
+          "CRDT_GRD_CD"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD"
+          }
+        ]
+      },
+      {
+        "name": "신용 1등급",
+        "synonyms": [
+          "신용 1등급",
+          "신용평가 1등급",
+          "최우량 신용등급",
+          "신용등급 1등급"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD",
+            "value": "01"
+          }
+        ]
+      },
+      {
+        "name": "신용 2등급",
+        "synonyms": [
+          "신용 2등급",
+          "신용평가 2등급",
+          "신용등급 2등급"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD",
+            "value": "02"
+          }
+        ]
+      },
+      {
+        "name": "신용 3등급",
+        "synonyms": [
+          "신용 3등급",
+          "신용평가 3등급",
+          "신용등급 3등급"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD",
+            "value": "03"
+          }
+        ]
+      },
+      {
+        "name": "신용 4등급",
+        "synonyms": [
+          "신용 4등급",
+          "신용평가 4등급",
+          "신용등급 4등급"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD",
+            "value": "04"
+          }
+        ]
+      },
+      {
+        "name": "신용 5등급",
+        "synonyms": [
+          "신용 5등급",
+          "신용평가 5등급",
+          "최하 신용등급",
+          "신용등급 5등급"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD",
+            "value": "05"
+          }
+        ]
+      }
+    ],
+    "RISK_DB.CRDT_EVAL_HIST.EVAL_DT": [
+      {
+        "name": "신용 평가 수행일",
+        "synonyms": [
+          "신용 평가 수행일",
+          "신용 평가일",
+          "평가 실시일",
+          "평가 수행 날짜",
+          "신용 평가 날짜"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "RISK_DB.CRDT_EVAL_HIST.EVAL_DT"
+          }
+        ]
+      }
+    ],
+    "RISK_DB.CRDT_EVAL_HIST.EVAL_RSN_CD": [
+      {
+        "name": "신용 평가 사유 코드",
+        "synonyms": [
+          "신용 평가 사유 코드",
+          "평가 사유 코드",
+          "평가 트리거 코드",
+          "신용 평가 원인 코드",
+          "평가 발생 사유"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "RISK_DB.CRDT_EVAL_HIST.EVAL_RSN_CD"
+          }
+        ]
+      }
+    ],
+    "RISK_DB.CRDT_EVAL_HIST.CREATED_AT": [
+      {
+        "name": "신용평가 이력 레코드 생성 시각",
+        "synonyms": [
+          "신용평가 이력 레코드 생성 시각",
+          "신용평가 이력 생성 시각",
+          "신용평가 이력 등록 시각",
+          "신용평가 이력 삽입 시각",
+          "신용평가 이력 생성 일시",
+          "신용평가 이력 등록 일시"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "RISK_DB.CRDT_EVAL_HIST.CREATED_AT"
+          }
+        ]
+      }
+    ],
+    "RISK_DB.CRDT_EVAL_HIST.UPDATED_AT": [
+      {
+        "name": "신용평가 레코드 최종 변경 시각",
+        "synonyms": [
+          "신용평가 레코드 최종 변경 시각",
+          "신용평가 데이터 최종 수정 시각",
+          "신용평가 이력 마지막 변경 시각",
+          "신용평가 레코드 갱신 시각",
+          "신용평가 데이터 변경 일시"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "RISK_DB.CRDT_EVAL_HIST.UPDATED_AT"
+          }
+        ]
+      }
+    ],
+    "RISK_DB.CRDT_EVAL_HIST.UPDATED_BY": [
+      {
+        "name": "마지막 수정 주체 ID",
+        "synonyms": [
+          "마지막 수정 주체 ID",
+          "수정자 ID",
+          "데이터 수정자 ID",
+          "레코드 수정자",
+          "최종 수정 계정"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "RISK_DB.CRDT_EVAL_HIST.UPDATED_BY"
+          }
+        ]
+      }
+    ],
+    "RISK_DB.CRDT_LMT_MST.LMT_SEQ": [
+      {
+        "name": "신용 한도 레코드 식별자",
+        "synonyms": [
+          "신용 한도 레코드 식별자",
+          "한도 레코드 키",
+          "신용 한도 일련번호",
+          "한도 시퀀스"
+        ],
+        "links": [
+          {
+            "type": "identified_by",
+            "column": "RISK_DB.CRDT_LMT_MST.LMT_SEQ"
+          }
+        ]
+      }
+    ],
+    "RISK_DB.CRDT_LMT_MST.CUST_NO": [
+      {
+        "name": "신용한도 고객번호",
+        "synonyms": [
+          "신용한도 고객번호",
+          "신용한도 고객 번호",
+          "신용 한도 고객번호",
+          "한도 고객번호"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "RISK_DB.CRDT_LMT_MST.CUST_NO"
+          }
+        ]
+      }
+    ],
+    "RISK_DB.CRDT_LMT_MST.CRDT_LMT_AMT": [
+      {
+        "name": "신용 공여 한도 금액",
+        "synonyms": [
+          "신용 공여 한도 금액",
+          "신용한도 금액",
+          "신용 한도액",
+          "여신 한도 금액",
+          "크레딧 한도 금액"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "RISK_DB.CRDT_LMT_MST.CRDT_LMT_AMT"
+          }
+        ]
+      }
+    ],
+    "RISK_DB.CRDT_LMT_MST.USE_AMT": [
+      {
+        "name": "신용 한도 사용 금액",
+        "synonyms": [
+          "신용 한도 사용 금액",
+          "한도 사용 금액",
+          "신용 공여 사용 금액",
+          "사용된 한도 금액",
+          "한도 사용액",
+          "신용 한도 사용액"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "RISK_DB.CRDT_LMT_MST.USE_AMT"
+          }
+        ]
+      }
+    ],
+    "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD": [
+      {
+        "name": "한도 등급 코드",
+        "synonyms": [
+          "한도 등급 코드",
+          "한도 등급",
+          "신용 한도 등급",
+          "한도 품질 등급",
+          "LMT_GRD_CD"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD"
+          }
+        ]
+      },
+      {
+        "name": "A등급 한도",
+        "synonyms": [
+          "A등급 한도",
+          "한도 A등급",
+          "최우량 한도 등급",
+          "최우량 등급"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD",
+            "value": "01"
+          }
+        ]
+      },
+      {
+        "name": "B등급 한도",
+        "synonyms": [
+          "B등급 한도",
+          "한도 B등급",
+          "일반 한도 등급",
+          "일반 등급 한도"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD",
+            "value": "02"
+          }
+        ]
+      },
+      {
+        "name": "C등급 한도",
+        "synonyms": [
+          "C등급 한도",
+          "한도 C등급",
+          "주의 한도 등급",
+          "주의 등급 한도",
+          "리스크 관리 대상 한도"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD",
+            "value": "03"
+          }
+        ]
+      }
+    ],
+    "RISK_DB.CRDT_LMT_MST.APLD_DT": [
+      {
+        "name": "한도 적용일",
+        "synonyms": [
+          "한도 적용일",
+          "한도 적용 기준일",
+          "한도 효력 발생일",
+          "한도 발효일",
+          "신용한도 적용일"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "RISK_DB.CRDT_LMT_MST.APLD_DT"
+          }
+        ]
+      }
+    ],
+    "RISK_DB.CRDT_LMT_MST.CREATED_AT": [
+      {
+        "name": "한도 레코드 생성 시각",
+        "synonyms": [
+          "한도 레코드 생성 시각",
+          "한도 레코드 생성 일시",
+          "한도 DB 기록 생성 시점",
+          "한도 이력 시작 시각",
+          "한도 이력 시작 일시"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "RISK_DB.CRDT_LMT_MST.CREATED_AT"
+          }
+        ]
+      }
+    ],
+    "RISK_DB.CRDT_LMT_MST.UPDATED_AT": [
+      {
+        "name": "신용한도 마지막 수정 시각",
+        "synonyms": [
+          "신용한도 마지막 수정 시각",
+          "신용한도 최종 수정 시각",
+          "신용한도 최종 변경 시각",
+          "신용한도 마지막 변경 시각",
+          "신용한도 수정 일시",
+          "신용한도 변경 일시"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "RISK_DB.CRDT_LMT_MST.UPDATED_AT"
+          }
+        ]
+      }
+    ],
+    "RISK_DB.CRDT_LMT_MST.UPDATED_BY": [
+      {
+        "name": "한도 레코드 최종 수정자 ID",
+        "synonyms": [
+          "한도 레코드 최종 수정자 ID",
+          "한도 최종 수정자",
+          "한도 수정 주체",
+          "마지막으로 수정한 사용자 ID",
+          "한도 레코드 수정 계정",
+          "한도 변경 주체"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "RISK_DB.CRDT_LMT_MST.UPDATED_BY"
+          }
+        ]
+      }
+    ],
+    "RISK_DB.FRAUD_DTCT_HIST.DTCT_SEQ": [
+      {
+        "name": "이상거래 탐지 이벤트 식별번호",
+        "synonyms": [
+          "이상거래 탐지 이벤트 식별번호",
+          "탐지 이벤트 일련번호",
+          "이상거래 탐지 일련번호",
+          "탐지 이벤트 ID",
+          "DTCT_SEQ"
+        ],
+        "links": [
+          {
+            "type": "identified_by",
+            "column": "RISK_DB.FRAUD_DTCT_HIST.DTCT_SEQ"
+          }
+        ]
+      }
+    ],
+    "RISK_DB.FRAUD_DTCT_HIST.CUST_NO": [
+      {
+        "name": "이상거래 탐지 대상 고객번호",
+        "synonyms": [
+          "이상거래 탐지 대상 고객번호",
+          "이상거래 탐지 고객번호",
+          "사기 탐지 대상 고객번호",
+          "FDS 대상 고객번호",
+          "탐지 이력 고객번호"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "RISK_DB.FRAUD_DTCT_HIST.CUST_NO"
+          }
+        ]
+      }
+    ],
+    "RISK_DB.FRAUD_DTCT_HIST.DTCT_TYPE_CD": [
+      {
+        "name": "이상거래 탐지 유형",
+        "synonyms": [
+          "이상거래 탐지 유형",
+          "탐지 유형",
+          "탐지 이벤트 유형",
+          "이상거래 유형 코드"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "RISK_DB.FRAUD_DTCT_HIST.DTCT_TYPE_CD"
+          }
+        ]
+      },
+      {
+        "name": "이상결제 탐지",
+        "synonyms": [
+          "이상결제 탐지",
+          "이상결제 이벤트",
+          "결제 이상거래 탐지",
+          "비정상 결제 탐지"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "RISK_DB.FRAUD_DTCT_HIST.DTCT_TYPE_CD",
+            "value": "01"
+          }
+        ]
+      },
+      {
+        "name": "이상로그인 탐지",
+        "synonyms": [
+          "이상로그인 탐지",
+          "이상 로그인 이벤트",
+          "비정상 로그인 탐지",
+          "로그인 이상거래 탐지"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "RISK_DB.FRAUD_DTCT_HIST.DTCT_TYPE_CD",
+            "value": "02"
+          }
+        ]
+      },
+      {
+        "name": "이상이체 탐지",
+        "synonyms": [
+          "이상이체 탐지",
+          "이상 이체 이벤트",
+          "비정상 이체 탐지",
+          "이체 이상거래 탐지"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "RISK_DB.FRAUD_DTCT_HIST.DTCT_TYPE_CD",
+            "value": "03"
+          }
+        ]
+      }
+    ],
+    "RISK_DB.FRAUD_DTCT_HIST.DTCT_AMT": [
+      {
+        "name": "이상거래 탐지 금액",
+        "synonyms": [
+          "이상거래 탐지 금액",
+          "탐지 금액",
+          "탐지 시점 거래금액",
+          "이상거래 탐지 시점 금액",
+          "사기 탐지 금액",
+          "FDS 탐지 금액"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "RISK_DB.FRAUD_DTCT_HIST.DTCT_AMT"
+          }
+        ]
+      }
+    ],
+    "RISK_DB.FRAUD_DTCT_HIST.RISK_SCR": [
+      {
+        "name": "사기 위험 점수",
+        "synonyms": [
+          "사기 위험 점수",
+          "위험 점수",
+          "리스크 점수",
+          "이상거래 위험 점수",
+          "사기 탐지 점수",
+          "FDS 점수",
+          "RISK_SCR"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "RISK_DB.FRAUD_DTCT_HIST.RISK_SCR"
+          }
+        ]
+      }
+    ],
+    "RISK_DB.FRAUD_DTCT_HIST.DTCT_DT": [
+      {
+        "name": "이상거래 탐지 일시",
+        "synonyms": [
+          "이상거래 탐지 일시",
+          "탐지 일시",
+          "탐지 시각",
+          "이상 탐지 시점",
+          "사기 탐지 일시",
+          "FDS 탐지 시각",
+          "이상거래 포착 시각",
+          "탐지 발생 일시"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "RISK_DB.FRAUD_DTCT_HIST.DTCT_DT"
+          }
+        ]
+      }
+    ],
+    "RISK_DB.FRAUD_DTCT_HIST.BLOCK_YN": [
+      {
+        "name": "차단 여부",
+        "synonyms": [
+          "차단 여부",
+          "차단 처리 여부",
+          "블락 여부",
+          "차단 실행 여부"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "RISK_DB.FRAUD_DTCT_HIST.BLOCK_YN"
+          }
+        ]
+      },
+      {
+        "name": "차단 실행됨",
+        "synonyms": [
+          "차단 실행됨",
+          "차단 처리됨",
+          "차단된 거래",
+          "차단된 계정",
+          "블락 처리됨",
+          "차단 완료"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "RISK_DB.FRAUD_DTCT_HIST.BLOCK_YN",
+            "value": "Y"
+          }
+        ]
+      },
+      {
+        "name": "차단되지 않음",
+        "synonyms": [
+          "차단되지 않음",
+          "미차단",
+          "차단 미실행",
+          "차단 처리 안 됨",
+          "블락 안 됨"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "RISK_DB.FRAUD_DTCT_HIST.BLOCK_YN",
+            "value": "N"
+          }
+        ]
+      }
+    ],
+    "RISK_DB.FRAUD_DTCT_HIST.CREATED_AT": [
+      {
+        "name": "사기탐지 이력 적재 시각",
+        "synonyms": [
+          "사기탐지 이력 적재 시각",
+          "사기탐지 레코드 삽입 시각",
+          "사기탐지 DB 적재 시각",
+          "사기탐지 이력 등록 시각",
+          "사기탐지 감사 기준 시각"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "RISK_DB.FRAUD_DTCT_HIST.CREATED_AT"
+          }
+        ]
+      }
+    ],
+    "RISK_DB.FRAUD_DTCT_HIST.UPDATED_AT": [
+      {
+        "name": "사기 탐지 레코드 최종 수정 시각",
+        "synonyms": [
+          "사기 탐지 레코드 최종 수정 시각",
+          "레코드 마지막 변경 시각",
+          "행 수정 시각",
+          "DB 행 갱신 시각",
+          "최종 업데이트 시각",
+          "후속 처리 갱신 시각"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "RISK_DB.FRAUD_DTCT_HIST.UPDATED_AT"
+          }
+        ]
+      }
+    ],
+    "PAY_DB.TRANSFER_HIST.TRF_SEQ": [
+      {
+        "name": "이체 고유 식별자",
+        "synonyms": [
+          "이체 고유 식별자",
+          "이체 레코드 키",
+          "이체 내부 키",
+          "이체 PK",
+          "이체 시퀀스"
+        ],
+        "links": [
+          {
+            "type": "identified_by",
+            "column": "PAY_DB.TRANSFER_HIST.TRF_SEQ"
+          }
+        ]
+      }
+    ],
+    "PAY_DB.TRANSFER_HIST.CUST_NO": [
+      {
+        "name": "이체 요청 고객 번호",
+        "synonyms": [
+          "이체 요청 고객 번호",
+          "이체 고객 번호",
+          "이체 요청자 고객 ID",
+          "송금 고객 번호",
+          "이체 요청 고객 식별자"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "PAY_DB.TRANSFER_HIST.CUST_NO"
+          }
+        ]
+      }
+    ],
+    "PAY_DB.TRANSFER_HIST.FROM_ACCT_NO": [
+      {
+        "name": "출금 계좌번호",
+        "synonyms": [
+          "출금 계좌번호",
+          "출금 계좌",
+          "보내는 계좌번호",
+          "보내는 계좌",
+          "송금 계좌번호",
+          "송금 계좌",
+          "이체 출금 계좌번호",
+          "출금 계좌 번호"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "PAY_DB.TRANSFER_HIST.FROM_ACCT_NO"
+          }
+        ]
+      }
+    ],
+    "PAY_DB.TRANSFER_HIST.TO_ACCT_NO": [
+      {
+        "name": "수취인 계좌번호",
+        "synonyms": [
+          "수취인 계좌번호",
+          "받는 계좌번호",
+          "입금 계좌번호",
+          "이체 수신 계좌번호",
+          "받는 분 계좌번호"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "PAY_DB.TRANSFER_HIST.TO_ACCT_NO"
+          }
+        ]
+      }
+    ],
+    "PAY_DB.TRANSFER_HIST.TRF_AMT": [
+      {
+        "name": "이체 원금",
+        "synonyms": [
+          "이체 원금",
+          "이체 금액",
+          "이체액",
+          "송금 금액",
+          "송금액",
+          "이체된 금액",
+          "이체 원금 금액"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "PAY_DB.TRANSFER_HIST.TRF_AMT"
+          }
+        ]
+      }
+    ],
+    "PAY_DB.TRANSFER_HIST.FEE_AMT": [
+      {
+        "name": "이체 수수료 금액",
+        "synonyms": [
+          "이체 수수료 금액",
+          "이체 수수료",
+          "송금 수수료",
+          "이체 수수료액",
+          "이체 건 수수료"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "PAY_DB.TRANSFER_HIST.FEE_AMT"
+          }
+        ]
+      }
+    ],
+    "PAY_DB.TRANSFER_HIST.TRF_STAT_CD": [
+      {
+        "name": "이체 상태",
+        "synonyms": [
+          "이체 상태",
+          "이체 처리 상태",
+          "이체 상태 코드",
+          "이체 단계"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD"
+          }
+        ]
+      },
+      {
+        "name": "이체 요청",
+        "synonyms": [
+          "이체 요청",
+          "이체 요청 상태",
+          "처리 전 이체",
+          "이체 접수"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD",
+            "value": "01"
+          }
+        ]
+      },
+      {
+        "name": "이체 완료",
+        "synonyms": [
+          "이체 완료",
+          "이체 확정",
+          "출금 입금 확정",
+          "완료된 이체"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD",
+            "value": "02"
+          }
+        ]
+      },
+      {
+        "name": "이체 실패",
+        "synonyms": [
+          "이체 실패",
+          "이체 오류",
+          "처리 오류 이체",
+          "실패한 이체"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD",
+            "value": "03"
+          }
+        ]
+      },
+      {
+        "name": "이체 취소",
+        "synonyms": [
+          "이체 취소",
+          "취소된 이체"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD",
+            "value": "04"
+          }
+        ]
+      }
+    ],
+    "PAY_DB.TRANSFER_HIST.TRF_DT": [
+      {
+        "name": "이체 실행 일시",
+        "synonyms": [
+          "이체 실행 일시",
+          "이체 일시",
+          "이체 발생 일시",
+          "이체 실행 시각",
+          "이체 거래 일시",
+          "이체된 시각",
+          "이체 시점",
+          "송금 일시",
+          "송금 시각",
+          "이체 실행 날짜"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "PAY_DB.TRANSFER_HIST.TRF_DT"
+          }
+        ]
+      }
+    ],
+    "PAY_DB.TRANSFER_HIST.CREATED_AT": [
+      {
+        "name": "이체 레코드 생성 시각",
+        "synonyms": [
+          "이체 레코드 생성 시각",
+          "레코드 생성 시각",
+          "DB 삽입 시각",
+          "레코드 삽입 시각",
+          "생성 타임스탬프",
+          "이체 이력 생성 시각"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "PAY_DB.TRANSFER_HIST.CREATED_AT"
+          }
+        ]
+      }
+    ],
+    "PAY_DB.TRANSFER_HIST.UPDATED_AT": [
+      {
+        "name": "이체 레코드 최종 변경 시각",
+        "synonyms": [
+          "이체 레코드 최종 변경 시각",
+          "이체 레코드 마지막 변경 시각",
+          "이체 데이터 최종 수정 시각",
+          "이체 데이터 변경 시각",
+          "이체 이력 최종 갱신 시각"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "PAY_DB.TRANSFER_HIST.UPDATED_AT"
+          }
+        ]
+      }
+    ],
+    "PAY_DB.TRANSFER_HIST.UPDATED_BY": [
+      {
+        "name": "마지막 수정 주체 ID",
+        "synonyms": [
+          "마지막 수정 주체 ID",
+          "최종 수정자 ID",
+          "레코드 수정자 ID",
+          "수정 주체 ID",
+          "최종 변경자 ID"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "PAY_DB.TRANSFER_HIST.UPDATED_BY"
+          }
+        ]
+      }
+    ],
+    "PAY_DB.AUTO_TRF_MST.AUTO_SEQ": [
+      {
+        "name": "자동이체 등록 식별자",
+        "synonyms": [
+          "자동이체 등록 식별자",
+          "자동이체 등록 번호",
+          "자동이체 등록 키",
+          "자동이체 일련번호",
+          "AUTO_SEQ"
+        ],
+        "links": [
+          {
+            "type": "identified_by",
+            "column": "PAY_DB.AUTO_TRF_MST.AUTO_SEQ"
+          }
+        ]
+      }
+    ],
+    "PAY_DB.AUTO_TRF_MST.CUST_NO": [
+      {
+        "name": "자동이체 고객번호",
+        "synonyms": [
+          "자동이체 고객번호",
+          "자동이체 등록 고객번호",
+          "자동이체 고객 ID",
+          "자동이체 신청 고객번호"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "PAY_DB.AUTO_TRF_MST.CUST_NO"
+          }
+        ]
+      }
+    ],
+    "PAY_DB.AUTO_TRF_MST.TRF_AMT": [
+      {
+        "name": "자동이체 약정금액",
+        "synonyms": [
+          "자동이체 약정금액",
+          "자동이체 등록금액",
+          "자동이체 신청금액",
+          "약정 이체금액",
+          "자동이체 예정금액"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "PAY_DB.AUTO_TRF_MST.TRF_AMT"
+          }
+        ]
+      }
+    ],
+    "PAY_DB.AUTO_TRF_MST.TRF_DAY": [
+      {
+        "name": "자동이체 약정일",
+        "synonyms": [
+          "자동이체 약정일",
+          "이체 약정일",
+          "자동이체일",
+          "약정 이체일",
+          "자동이체 지정일",
+          "이체 지정일"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "PAY_DB.AUTO_TRF_MST.TRF_DAY"
+          }
+        ]
+      }
+    ],
+    "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD": [
+      {
+        "name": "자동이체 운영 상태",
+        "synonyms": [
+          "자동이체 운영 상태",
+          "자동이체 상태",
+          "자동이체 상태 코드",
+          "자동이체 등록 상태"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD"
+          }
+        ]
+      },
+      {
+        "name": "자동이체 정상",
+        "synonyms": [
+          "자동이체 정상",
+          "이체 활성",
+          "자동이체 활성",
+          "정상 자동이체",
+          "자동이체 활성 상태"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD",
+            "value": "01"
+          }
+        ]
+      },
+      {
+        "name": "자동이체 정지",
+        "synonyms": [
+          "자동이체 정지",
+          "이체 일시 중단",
+          "자동이체 일시 중단",
+          "자동이체 중단"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD",
+            "value": "02"
+          }
+        ]
+      },
+      {
+        "name": "자동이체 해지",
+        "synonyms": [
+          "자동이체 해지",
+          "이체 계약 종료",
+          "자동이체 계약 종료",
+          "자동이체 종료"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD",
+            "value": "03"
+          }
+        ]
+      }
+    ],
+    "PAY_DB.AUTO_TRF_MST.REG_DT": [
+      {
+        "name": "자동이체 등록일",
+        "synonyms": [
+          "자동이체 등록일",
+          "자동이체 신청일",
+          "자동이체 약정일",
+          "자동이체 등록 날짜",
+          "자동이체 신청 날짜"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "PAY_DB.AUTO_TRF_MST.REG_DT"
+          }
+        ]
+      }
+    ],
+    "PAY_DB.AUTO_TRF_MST.CREATED_AT": [
+      {
+        "name": "자동이체 레코드 시스템 삽입 시각",
+        "synonyms": [
+          "자동이체 레코드 시스템 삽입 시각",
+          "자동이체 DB 삽입 시각",
+          "자동이체 레코드 생성 시각",
+          "자동이체 최초 삽입 시각"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "PAY_DB.AUTO_TRF_MST.CREATED_AT"
+          }
+        ]
+      }
+    ],
+    "PAY_DB.AUTO_TRF_MST.UPDATED_AT": [
+      {
+        "name": "자동이체 약정 최종 수정 시각",
+        "synonyms": [
+          "자동이체 약정 최종 수정 시각",
+          "자동이체 약정 수정 시각",
+          "자동이체 약정 변경 시각",
+          "자동이체 약정 마지막 수정 시각",
+          "자동이체 약정 최종 변경 시각",
+          "약정 수정 일시",
+          "약정 변경 일시"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "PAY_DB.AUTO_TRF_MST.UPDATED_AT"
+          }
+        ]
+      }
+    ],
+    "PAY_DB.AUTO_TRF_MST.UPDATED_BY": [
+      {
+        "name": "마지막 수정 주체 ID",
+        "synonyms": [
+          "마지막 수정 주체 ID",
+          "수정 주체 ID",
+          "수정자 ID",
+          "최종 수정자 ID",
+          "레코드 수정자 ID"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "PAY_DB.AUTO_TRF_MST.UPDATED_BY"
+          }
+        ]
+      }
+    ],
+    "CHN_DB.ACCESS_LOG.ACCESS_SEQ": [
+      {
+        "name": "접속 이벤트 식별자",
+        "synonyms": [
+          "접속 이벤트 식별자",
+          "접속 시퀀스",
+          "접속 일련번호",
+          "접속 키",
+          "ACCESS_SEQ"
+        ],
+        "links": [
+          {
+            "type": "identified_by",
+            "column": "CHN_DB.ACCESS_LOG.ACCESS_SEQ"
+          }
+        ]
+      }
+    ],
+    "CHN_DB.ACCESS_LOG.CUST_NO": [
+      {
+        "name": "접속 고객 번호",
+        "synonyms": [
+          "접속 고객 번호",
+          "접속 고객 ID",
+          "접속한 고객 식별자",
+          "로그 고객 번호",
+          "접속 로그 고객 번호"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CHN_DB.ACCESS_LOG.CUST_NO"
+          }
+        ]
+      }
+    ],
+    "CHN_DB.ACCESS_LOG.CHANNEL_CD": [
+      {
+        "name": "접속 채널 유형",
+        "synonyms": [
+          "접속 채널 유형",
+          "채널 유형",
+          "접속 채널",
+          "채널 코드",
+          "채널 구분"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CHN_DB.ACCESS_LOG.CHANNEL_CD"
+          }
+        ]
+      },
+      {
+        "name": "앱 접속",
+        "synonyms": [
+          "앱 접속",
+          "앱 채널",
+          "모바일 앱",
+          "앱으로 접속"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CHN_DB.ACCESS_LOG.CHANNEL_CD",
+            "value": "01"
+          }
+        ]
+      },
+      {
+        "name": "웹 접속",
+        "synonyms": [
+          "웹 접속",
+          "웹 채널",
+          "웹으로 접속",
+          "PC 웹"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CHN_DB.ACCESS_LOG.CHANNEL_CD",
+            "value": "02"
+          }
+        ]
+      },
+      {
+        "name": "ATM 접속",
+        "synonyms": [
+          "ATM 접속",
+          "ATM 채널",
+          "ATM 이용"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CHN_DB.ACCESS_LOG.CHANNEL_CD",
+            "value": "03"
+          }
+        ]
+      },
+      {
+        "name": "영업점 접속",
+        "synonyms": [
+          "영업점 접속",
+          "영업점 채널",
+          "영업점 방문",
+          "창구 이용"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CHN_DB.ACCESS_LOG.CHANNEL_CD",
+            "value": "04"
+          }
+        ]
+      }
+    ],
+    "CHN_DB.ACCESS_LOG.ACCESS_DT": [
+      {
+        "name": "채널 접속 일시",
+        "synonyms": [
+          "채널 접속 일시",
+          "접속 일시",
+          "접속 시각",
+          "접속 시간",
+          "채널 접속 시각",
+          "채널 접속 시간",
+          "접속 발생 일시",
+          "접속 이벤트 일시"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CHN_DB.ACCESS_LOG.ACCESS_DT"
+          }
+        ]
+      }
+    ],
+    "CHN_DB.ACCESS_LOG.DEVICE_CD": [
+      {
+        "name": "기기 유형 코드",
+        "synonyms": [
+          "기기 유형 코드",
+          "기기 코드",
+          "디바이스 코드",
+          "접속 기기 유형",
+          "사용 기기 코드"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CHN_DB.ACCESS_LOG.DEVICE_CD"
+          }
+        ]
+      }
+    ],
+    "CHN_DB.ACCESS_LOG.SUCCESS_YN": [
+      {
+        "name": "채널 접속 성공 여부",
+        "synonyms": [
+          "채널 접속 성공 여부",
+          "접속 성공 여부",
+          "접속 결과",
+          "채널 접속 결과"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CHN_DB.ACCESS_LOG.SUCCESS_YN"
+          }
+        ]
+      },
+      {
+        "name": "채널 접속 성공",
+        "synonyms": [
+          "채널 접속 성공",
+          "접속 성공",
+          "접속 완료",
+          "채널 접속 완료"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CHN_DB.ACCESS_LOG.SUCCESS_YN",
+            "value": "Y"
+          }
+        ]
+      },
+      {
+        "name": "채널 접속 실패",
+        "synonyms": [
+          "채널 접속 실패",
+          "접속 실패",
+          "접속 미완료",
+          "인증 실패로 인한 접속 실패",
+          "세션 오류로 인한 접속 실패"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CHN_DB.ACCESS_LOG.SUCCESS_YN",
+            "value": "N"
+          }
+        ]
+      }
+    ],
+    "CHN_DB.ACCESS_LOG.CREATED_AT": [
+      {
+        "name": "레코드 삽입 시각",
+        "synonyms": [
+          "레코드 삽입 시각",
+          "레코드 생성 시각",
+          "행 생성 시각",
+          "데이터 삽입 시각",
+          "최초 삽입 시각"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CHN_DB.ACCESS_LOG.CREATED_AT"
+          }
+        ]
+      }
+    ],
+    "CHN_DB.ACCESS_LOG.UPDATED_AT": [
+      {
+        "name": "레코드 마지막 변경 시각",
+        "synonyms": [
+          "레코드 마지막 변경 시각",
+          "마지막 변경 시각",
+          "최종 변경 시각",
+          "레코드 수정 시각",
+          "최종 수정 시각",
+          "변경 일시",
+          "수정 일시"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CHN_DB.ACCESS_LOG.UPDATED_AT"
+          }
+        ]
+      }
+    ],
+    "CHN_DB.CNSNT_HIST.CNSNT_SEQ": [
+      {
+        "name": "동의 이력 일련번호",
+        "synonyms": [
+          "동의 이력 일련번호",
+          "동의 이력 레코드 번호",
+          "동의 이력 식별자",
+          "동의 이력 PK"
+        ],
+        "links": [
+          {
+            "type": "identified_by",
+            "column": "CHN_DB.CNSNT_HIST.CNSNT_SEQ"
+          }
+        ]
+      }
+    ],
+    "CHN_DB.CNSNT_HIST.CUST_NO": [
+      {
+        "name": "약관 동의 고객 번호",
+        "synonyms": [
+          "약관 동의 고객 번호",
+          "동의 이력 고객 번호",
+          "동의 고객 ID",
+          "약관 동의 고객 ID"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CHN_DB.CNSNT_HIST.CUST_NO"
+          }
+        ]
+      }
+    ],
+    "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD": [
+      {
+        "name": "동의 약관 유형",
+        "synonyms": [
+          "동의 약관 유형",
+          "약관 유형",
+          "동의 유형",
+          "동의 종류",
+          "약관 종류"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD"
+          }
+        ]
+      },
+      {
+        "name": "필수 약관 동의",
+        "synonyms": [
+          "필수 약관 동의",
+          "필수 동의",
+          "필수 약관",
+          "필수 항목 동의"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD",
+            "value": "01"
+          }
+        ]
+      },
+      {
+        "name": "선택 약관 동의",
+        "synonyms": [
+          "선택 약관 동의",
+          "선택 동의",
+          "선택 약관",
+          "선택 항목 동의"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD",
+            "value": "02"
+          }
+        ]
+      },
+      {
+        "name": "마케팅 약관 동의",
+        "synonyms": [
+          "마케팅 약관 동의",
+          "마케팅 동의",
+          "마케팅 수신 동의",
+          "광고성 정보 수신 동의",
+          "마케팅 약관"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD",
+            "value": "03"
+          }
+        ]
+      },
+      {
+        "name": "마이데이터 약관 동의",
+        "synonyms": [
+          "마이데이터 약관 동의",
+          "마이데이터 동의",
+          "마이데이터 서비스 동의",
+          "마이데이터 약관"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD",
+            "value": "04"
+          }
+        ]
+      }
+    ],
+    "CHN_DB.CNSNT_HIST.CNSNT_YN": [
+      {
+        "name": "약관 동의 여부",
+        "synonyms": [
+          "약관 동의 여부",
+          "동의 여부",
+          "동의 상태",
+          "약관 동의 상태"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CHN_DB.CNSNT_HIST.CNSNT_YN"
+          }
+        ]
+      },
+      {
+        "name": "약관 동의함",
+        "synonyms": [
+          "약관 동의함",
+          "약관에 동의한",
+          "동의한 고객",
+          "동의 완료"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CHN_DB.CNSNT_HIST.CNSNT_YN",
+            "value": "Y"
+          }
+        ]
+      },
+      {
+        "name": "약관 미동의",
+        "synonyms": [
+          "약관 미동의",
+          "약관에 동의하지 않은",
+          "동의하지 않은 고객",
+          "동의 거부"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CHN_DB.CNSNT_HIST.CNSNT_YN",
+            "value": "N"
+          }
+        ]
+      }
+    ],
+    "CHN_DB.CNSNT_HIST.CNSNT_DT": [
+      {
+        "name": "동의 행위 일자",
+        "synonyms": [
+          "동의 행위 일자",
+          "동의 일자",
+          "약관 동의 일자",
+          "동의한 날짜",
+          "동의 날짜",
+          "철회 일자",
+          "철회 행위 일자",
+          "동의 또는 철회 일자",
+          "동의·철회 일자"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CHN_DB.CNSNT_HIST.CNSNT_DT"
+          }
+        ]
+      }
+    ],
+    "CHN_DB.CNSNT_HIST.CREATED_AT": [
+      {
+        "name": "동의 이력 레코드 생성 시각",
+        "synonyms": [
+          "동의 이력 레코드 생성 시각",
+          "레코드 생성 시각",
+          "DB 삽입 시각",
+          "데이터 적재 시각",
+          "감사 추적 기준 시각",
+          "이력 등록 시각"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CHN_DB.CNSNT_HIST.CREATED_AT"
+          }
+        ]
+      }
+    ],
+    "CHN_DB.CNSNT_HIST.UPDATED_AT": [
+      {
+        "name": "동의 이력 수정 시각",
+        "synonyms": [
+          "동의 이력 수정 시각",
+          "동의 이력 수정 일시",
+          "동의 레코드 수정 시각",
+          "동의 레코드 갱신 시각",
+          "동의 이력 마지막 변경 시각",
+          "동의 이력 업데이트 시각"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CHN_DB.CNSNT_HIST.UPDATED_AT"
+          }
+        ]
+      }
+    ],
+    "CHN_DB.CNSNT_HIST.UPDATED_BY": [
+      {
+        "name": "마지막 수정 주체 ID",
+        "synonyms": [
+          "마지막 수정 주체 ID",
+          "수정자 ID",
+          "데이터 변경자 ID",
+          "레코드 수정자",
+          "마지막으로 수정한 계정"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CHN_DB.CNSNT_HIST.UPDATED_BY"
+          }
+        ]
+      }
+    ],
+    "CHN_DB.MYDATA_LINK.LINK_SEQ": [
+      {
+        "name": "마이데이터 연동 식별자",
+        "synonyms": [
+          "마이데이터 연동 식별자",
+          "마이데이터 연동 키",
+          "마이데이터 연동 번호",
+          "연동 레코드 식별자"
+        ],
+        "links": [
+          {
+            "type": "identified_by",
+            "column": "CHN_DB.MYDATA_LINK.LINK_SEQ"
+          }
+        ]
+      }
+    ],
+    "CHN_DB.MYDATA_LINK.CUST_NO": [
+      {
+        "name": "마이데이터 연동 고객번호",
+        "synonyms": [
+          "마이데이터 연동 고객번호",
+          "마이데이터 고객번호",
+          "마이데이터 연동 고객 식별번호",
+          "마이데이터 동의 고객번호"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CHN_DB.MYDATA_LINK.CUST_NO"
+          }
+        ]
+      }
+    ],
+    "CHN_DB.MYDATA_LINK.PROVIDER_CD": [
+      {
+        "name": "마이데이터 정보제공기관 코드",
+        "synonyms": [
+          "마이데이터 정보제공기관 코드",
+          "정보제공기관 코드",
+          "마이데이터 연동 기관코드",
+          "금융위원회 마이데이터 기관코드",
+          "마이데이터 제공기관 식별코드"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CHN_DB.MYDATA_LINK.PROVIDER_CD"
+          }
+        ]
+      }
+    ],
+    "CHN_DB.MYDATA_LINK.LINK_STAT_CD": [
+      {
+        "name": "마이데이터 연동 상태",
+        "synonyms": [
+          "마이데이터 연동 상태",
+          "마이데이터 연동 상태 코드",
+          "마이데이터 처리 상태",
+          "마이데이터 연동 현황"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CHN_DB.MYDATA_LINK.LINK_STAT_CD"
+          }
+        ]
+      },
+      {
+        "name": "마이데이터 연동 중",
+        "synonyms": [
+          "마이데이터 연동 중",
+          "마이데이터 활성 상태",
+          "마이데이터 연동됨",
+          "마이데이터 연동 활성"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CHN_DB.MYDATA_LINK.LINK_STAT_CD",
+            "value": "01"
+          }
+        ]
+      },
+      {
+        "name": "마이데이터 연동 해지",
+        "synonyms": [
+          "마이데이터 연동 해지",
+          "마이데이터 고객 해지",
+          "마이데이터 직접 해지",
+          "마이데이터 해지됨"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CHN_DB.MYDATA_LINK.LINK_STAT_CD",
+            "value": "02"
+          }
+        ]
+      },
+      {
+        "name": "마이데이터 연동 만료",
+        "synonyms": [
+          "마이데이터 연동 만료",
+          "마이데이터 기간 만료",
+          "마이데이터 동의 만료",
+          "마이데이터 만료됨"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CHN_DB.MYDATA_LINK.LINK_STAT_CD",
+            "value": "03"
+          }
+        ]
+      }
+    ],
+    "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN": [
+      {
+        "name": "마이데이터 동의 여부",
+        "synonyms": [
+          "마이데이터 동의 여부",
+          "마이데이터 전송 동의 여부",
+          "마이데이터 수신 동의 여부",
+          "마이데이터 동의 상태"
+        ],
+        "links": [
+          {
+            "type": "value_of",
+            "column": "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN"
+          }
+        ]
+      },
+      {
+        "name": "마이데이터 전송 동의",
+        "synonyms": [
+          "마이데이터 전송 동의",
+          "마이데이터 동의",
+          "마이데이터 수신 동의",
+          "마이데이터 동의함"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN",
+            "value": "Y"
+          }
+        ]
+      },
+      {
+        "name": "마이데이터 전송 미동의",
+        "synonyms": [
+          "마이데이터 전송 미동의",
+          "마이데이터 동의 안 함",
+          "마이데이터 미동의",
+          "마이데이터 전송 동의하지 않음"
+        ],
+        "links": [
+          {
+            "type": "code_value_of",
+            "column": "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN",
+            "value": "N"
+          }
+        ]
+      }
+    ],
+    "CHN_DB.MYDATA_LINK.LINK_DT": [
+      {
+        "name": "마이데이터 연동 시작일",
+        "synonyms": [
+          "마이데이터 연동 시작일",
+          "마이데이터 연동 개시일",
+          "마이데이터 연동일",
+          "정보제공기관 연동 시작일",
+          "마이데이터 최초 연동일"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CHN_DB.MYDATA_LINK.LINK_DT"
+          }
+        ]
+      }
+    ],
+    "CHN_DB.MYDATA_LINK.CREATED_AT": [
+      {
+        "name": "연동 신청 기록 시각",
+        "synonyms": [
+          "연동 신청 기록 시각",
+          "연동 신청 시각",
+          "연동 동의 기록 시각",
+          "연동 최초 기록 시각",
+          "연동 신청일시",
+          "연동 생성일시"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CHN_DB.MYDATA_LINK.CREATED_AT"
+          }
+        ]
+      }
+    ],
+    "CHN_DB.MYDATA_LINK.UPDATED_AT": [
+      {
+        "name": "마지막 변경 시각",
+        "synonyms": [
+          "마지막 변경 시각",
+          "최종 변경 시각",
+          "최종 수정 시각",
+          "마지막 수정 시각",
+          "최근 변경 시각",
+          "업데이트 시각"
+        ],
+        "links": [
+          {
+            "type": "dated_by",
+            "column": "CHN_DB.MYDATA_LINK.UPDATED_AT"
+          }
+        ]
+      }
+    ]
+  }
+}

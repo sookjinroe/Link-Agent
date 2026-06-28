@@ -1,0 +1,4922 @@
+{
+  "method": "B-token (toekn Jaccard)",
+  "description": "1단계 v2 term의 동의어를 토큰 분리(공백+조사) 후 Jaccard 매칭. 같은 토큰을 공유하는 term들을 군집화.",
+  "total_terms_input": 186,
+  "cluster_count": 164,
+  "clusters": [
+    {
+      "key": "상태",
+      "size": 33,
+      "members": [
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN::마케팅 정보 수신 동의 여부",
+          "name": "마케팅 정보 수신 동의 여부",
+          "cid": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN"
+        },
+        {
+          "term_key": "CUST_DB.CUST_CONTACT.VALID_YN::연락처 유효 여부",
+          "name": "연락처 유효 여부",
+          "cid": "CUST_DB.CUST_CONTACT.VALID_YN"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD::대출 상태 코드",
+          "name": "대출 상태 코드",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD::정상 대출",
+          "name": "정상 대출",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD::연체 대출",
+          "name": "연체 대출",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD::기한이익상실 대출",
+          "name": "기한이익상실 대출",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD::완제 대출",
+          "name": "완제 대출",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD::대출 신청 진행 단계",
+          "name": "대출 신청 진행 단계",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD::대출 접수",
+          "name": "대출 접수",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD::대출 심사 중",
+          "name": "대출 심사 중",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD::연체 상태 코드",
+          "name": "연체 상태 코드",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_STAT_CD::카드 운영 상태",
+          "name": "카드 운영 상태",
+          "cid": "CARD_DB.CARD_MST.CARD_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_STAT_CD::정상 카드",
+          "name": "정상 카드",
+          "cid": "CARD_DB.CARD_MST.CARD_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_STAT_CD::정지 카드",
+          "name": "정지 카드",
+          "cid": "CARD_DB.CARD_MST.CARD_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_STAT_CD::연체 카드",
+          "name": "연체 카드",
+          "cid": "CARD_DB.CARD_MST.CARD_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_STAT_CD::해지 카드",
+          "name": "해지 카드",
+          "cid": "CARD_DB.CARD_MST.CARD_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.ISSUE_STAT_CD::카드 발급 처리 단계",
+          "name": "카드 발급 처리 단계",
+          "cid": "CARD_DB.CARD_APPL.ISSUE_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.ISSUE_STAT_CD::카드 신청 접수 단계",
+          "name": "카드 신청 접수 단계",
+          "cid": "CARD_DB.CARD_APPL.ISSUE_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.ISSUE_STAT_CD::카드 심사 진행 단계",
+          "name": "카드 심사 진행 단계",
+          "cid": "CARD_DB.CARD_APPL.ISSUE_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.ISSUE_STAT_CD::카드 발급 완료 단계",
+          "name": "카드 발급 완료 단계",
+          "cid": "CARD_DB.CARD_APPL.ISSUE_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.ISSUE_STAT_CD::카드 신청 반려 단계",
+          "name": "카드 신청 반려 단계",
+          "cid": "CARD_DB.CARD_APPL.ISSUE_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD::연체 상태 단계",
+          "name": "연체 상태 단계",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD::예금 계좌 운영 상태",
+          "name": "예금 계좌 운영 상태",
+          "cid": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD::정상 계좌",
+          "name": "정상 계좌",
+          "cid": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_PRDT_MST.SALE_YN::판매 여부",
+          "name": "판매 여부",
+          "cid": "DEP_DB.DEP_PRDT_MST.SALE_YN"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD::이체 상태",
+          "name": "이체 상태",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD::이체 요청",
+          "name": "이체 요청",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD"
+        },
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD::자동이체 운영 상태",
+          "name": "자동이체 운영 상태",
+          "cid": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD"
+        },
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD::자동이체 정상",
+          "name": "자동이체 정상",
+          "cid": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD"
+        },
+        {
+          "term_key": "CHN_DB.CNSNT_HIST.CNSNT_YN::약관 동의 여부",
+          "name": "약관 동의 여부",
+          "cid": "CHN_DB.CNSNT_HIST.CNSNT_YN"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.LINK_STAT_CD::마이데이터 연동 상태",
+          "name": "마이데이터 연동 상태",
+          "cid": "CHN_DB.MYDATA_LINK.LINK_STAT_CD"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.LINK_STAT_CD::마이데이터 연동 중",
+          "name": "마이데이터 연동 중",
+          "cid": "CHN_DB.MYDATA_LINK.LINK_STAT_CD"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN::마이데이터 동의 여부",
+          "name": "마이데이터 동의 여부",
+          "cid": "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN"
+        }
+      ]
+    },
+    {
+      "key": "대출",
+      "size": 25,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_AMT::대출 실행 금액",
+          "name": "대출 실행 금액",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_AMT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_BAL_AMT::대출 잔여 원금",
+          "name": "대출 잔여 원금",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_BAL_AMT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.INT_RATE::대출 기준금리",
+          "name": "대출 기준금리",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.INT_RATE"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD::대출 상태 코드",
+          "name": "대출 상태 코드",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD::정상 대출",
+          "name": "정상 대출",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD::연체 대출",
+          "name": "연체 대출",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD::기한이익상실 대출",
+          "name": "기한이익상실 대출",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD::완제 대출",
+          "name": "완제 대출",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.EXEC_DT::대출 실행일",
+          "name": "대출 실행일",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.EXEC_DT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.MTRT_DT::대출 만기일",
+          "name": "대출 만기일",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.MTRT_DT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD::상환방식",
+          "name": "상환방식",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APRV_AMT::대출 승인 금액",
+          "name": "대출 승인 금액",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APRV_AMT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD::대출 신청 진행 단계",
+          "name": "대출 신청 진행 단계",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD::대출 접수",
+          "name": "대출 접수",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD::대출 심사 중",
+          "name": "대출 심사 중",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD::대출 신청 승인",
+          "name": "대출 신청 승인",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD::대출 신청 거절",
+          "name": "대출 신청 거절",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APPL_DT::대출 신청일",
+          "name": "대출 신청일",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APPL_DT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APRV_DT::대출 승인 확정일",
+          "name": "대출 승인 확정일",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APRV_DT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD::신청 상환 방식",
+          "name": "신청 상환 방식",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_PRDT_MST.BASE_RATE::상품 기준 금리",
+          "name": "상품 기준 금리",
+          "cid": "LOAN_DB.LOAN_PRDT_MST.BASE_RATE"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_PRDT_MST.MAX_LMT_AMT::상품 최대 대출 한도",
+          "name": "상품 최대 대출 한도",
+          "cid": "LOAN_DB.LOAN_PRDT_MST.MAX_LMT_AMT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_PRDT_MST.SALE_YN::대출 상품 판매 여부",
+          "name": "대출 상품 판매 여부",
+          "cid": "LOAN_DB.LOAN_PRDT_MST.SALE_YN"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_PRDT_MST.SALE_YN::판매 중인 대출 상품",
+          "name": "판매 중인 대출 상품",
+          "cid": "LOAN_DB.LOAN_PRDT_MST.SALE_YN"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_PRDT_MST.SALE_YN::판매 중단 대출 상품",
+          "name": "판매 중단 대출 상품",
+          "cid": "LOAN_DB.LOAN_PRDT_MST.SALE_YN"
+        }
+      ]
+    },
+    {
+      "key": "카드",
+      "size": 23,
+      "members": [
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_GRD_CD::카드 등급 코드",
+          "name": "카드 등급 코드",
+          "cid": "CARD_DB.CARD_MST.CARD_GRD_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_GRD_CD::일반 카드 등급",
+          "name": "일반 카드 등급",
+          "cid": "CARD_DB.CARD_MST.CARD_GRD_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_GRD_CD::골드 카드 등급",
+          "name": "골드 카드 등급",
+          "cid": "CARD_DB.CARD_MST.CARD_GRD_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_GRD_CD::플래티넘 카드 등급",
+          "name": "플래티넘 카드 등급",
+          "cid": "CARD_DB.CARD_MST.CARD_GRD_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_GRD_CD::다이아 카드 등급",
+          "name": "다이아 카드 등급",
+          "cid": "CARD_DB.CARD_MST.CARD_GRD_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_LMT_AMT::카드 이용 한도",
+          "name": "카드 이용 한도",
+          "cid": "CARD_DB.CARD_MST.CARD_LMT_AMT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_BAL_AMT::카드 잔여 한도",
+          "name": "카드 잔여 한도",
+          "cid": "CARD_DB.CARD_MST.CARD_BAL_AMT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_STAT_CD::카드 운영 상태",
+          "name": "카드 운영 상태",
+          "cid": "CARD_DB.CARD_MST.CARD_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_STAT_CD::정상 카드",
+          "name": "정상 카드",
+          "cid": "CARD_DB.CARD_MST.CARD_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_STAT_CD::정지 카드",
+          "name": "정지 카드",
+          "cid": "CARD_DB.CARD_MST.CARD_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_STAT_CD::연체 카드",
+          "name": "연체 카드",
+          "cid": "CARD_DB.CARD_MST.CARD_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_STAT_CD::해지 카드",
+          "name": "해지 카드",
+          "cid": "CARD_DB.CARD_MST.CARD_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.ISSUE_DT::카드 발급일",
+          "name": "카드 발급일",
+          "cid": "CARD_DB.CARD_MST.ISSUE_DT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.EXPIRE_DT::카드 유효기간 만료일",
+          "name": "카드 유효기간 만료일",
+          "cid": "CARD_DB.CARD_MST.EXPIRE_DT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.CUST_NO::카드 신청 고객 번호",
+          "name": "카드 신청 고객 번호",
+          "cid": "CARD_DB.CARD_APPL.CUST_NO"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.ISSUE_STAT_CD::카드 발급 처리 단계",
+          "name": "카드 발급 처리 단계",
+          "cid": "CARD_DB.CARD_APPL.ISSUE_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.ISSUE_STAT_CD::카드 신청 접수 단계",
+          "name": "카드 신청 접수 단계",
+          "cid": "CARD_DB.CARD_APPL.ISSUE_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.ISSUE_STAT_CD::카드 심사 진행 단계",
+          "name": "카드 심사 진행 단계",
+          "cid": "CARD_DB.CARD_APPL.ISSUE_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.ISSUE_STAT_CD::카드 발급 완료 단계",
+          "name": "카드 발급 완료 단계",
+          "cid": "CARD_DB.CARD_APPL.ISSUE_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.ISSUE_STAT_CD::카드 신청 반려 단계",
+          "name": "카드 신청 반려 단계",
+          "cid": "CARD_DB.CARD_APPL.ISSUE_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.APPL_DT::카드 신청일",
+          "name": "카드 신청일",
+          "cid": "CARD_DB.CARD_APPL.APPL_DT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APRV_HIST.APRV_AMT::승인금액",
+          "name": "승인금액",
+          "cid": "CARD_DB.CARD_APRV_HIST.APRV_AMT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.CARD_NO::연체 이력 카드 번호",
+          "name": "연체 이력 카드 번호",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.CARD_NO"
+        }
+      ]
+    },
+    {
+      "key": "고객",
+      "size": 22,
+      "members": [
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.BIRTH_DT::고객 생년월일",
+          "name": "고객 생년월일",
+          "cid": "CUST_DB.CUST_BASE_INFO.BIRTH_DT"
+        },
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.GENDER_CD::성별 코드",
+          "name": "성별 코드",
+          "cid": "CUST_DB.CUST_BASE_INFO.GENDER_CD"
+        },
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.GENDER_CD::남성 고객",
+          "name": "남성 고객",
+          "cid": "CUST_DB.CUST_BASE_INFO.GENDER_CD"
+        },
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.GENDER_CD::여성 고객",
+          "name": "여성 고객",
+          "cid": "CUST_DB.CUST_BASE_INFO.GENDER_CD"
+        },
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD::고객 등급 코드",
+          "name": "고객 등급 코드",
+          "cid": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD"
+        },
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD::일반 등급 고객",
+          "name": "일반 등급 고객",
+          "cid": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD"
+        },
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD::우수 등급 고객",
+          "name": "우수 등급 고객",
+          "cid": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD"
+        },
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD::VIP 등급 고객",
+          "name": "VIP 등급 고객",
+          "cid": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD"
+        },
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD::VVIP 등급 고객",
+          "name": "VVIP 등급 고객",
+          "cid": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD"
+        },
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN::마케팅 정보 수신 동의",
+          "name": "마케팅 정보 수신 동의",
+          "cid": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN"
+        },
+        {
+          "term_key": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD::고객 등급 코드",
+          "name": "고객 등급 코드",
+          "cid": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD"
+        },
+        {
+          "term_key": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD::일반 등급 고객",
+          "name": "일반 등급 고객",
+          "cid": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD"
+        },
+        {
+          "term_key": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD::우수 등급 고객",
+          "name": "우수 등급 고객",
+          "cid": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD"
+        },
+        {
+          "term_key": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD::VIP 등급 고객",
+          "name": "VIP 등급 고객",
+          "cid": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD"
+        },
+        {
+          "term_key": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD::VVIP 등급 고객",
+          "name": "VVIP 등급 고객",
+          "cid": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.CUST_NO::카드 신청 고객 번호",
+          "name": "카드 신청 고객 번호",
+          "cid": "CARD_DB.CARD_APPL.CUST_NO"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.REQ_LMT_AMT::신청 희망 한도 금액",
+          "name": "신청 희망 한도 금액",
+          "cid": "CARD_DB.CARD_APPL.REQ_LMT_AMT"
+        },
+        {
+          "term_key": "CHN_DB.ACCESS_LOG.CUST_NO::접속 고객 번호",
+          "name": "접속 고객 번호",
+          "cid": "CHN_DB.ACCESS_LOG.CUST_NO"
+        },
+        {
+          "term_key": "CHN_DB.CNSNT_HIST.CNSNT_YN::약관 동의함",
+          "name": "약관 동의함",
+          "cid": "CHN_DB.CNSNT_HIST.CNSNT_YN"
+        },
+        {
+          "term_key": "CHN_DB.CNSNT_HIST.CNSNT_YN::약관 미동의",
+          "name": "약관 미동의",
+          "cid": "CHN_DB.CNSNT_HIST.CNSNT_YN"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.CUST_NO::마이데이터 연동 고객번호",
+          "name": "마이데이터 연동 고객번호",
+          "cid": "CHN_DB.MYDATA_LINK.CUST_NO"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.LINK_STAT_CD::마이데이터 연동 해지",
+          "name": "마이데이터 연동 해지",
+          "cid": "CHN_DB.MYDATA_LINK.LINK_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "등급",
+      "size": 22,
+      "members": [
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD::고객 등급 코드",
+          "name": "고객 등급 코드",
+          "cid": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD"
+        },
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD::일반 등급 고객",
+          "name": "일반 등급 고객",
+          "cid": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD"
+        },
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD::우수 등급 고객",
+          "name": "우수 등급 고객",
+          "cid": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD"
+        },
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD::VIP 등급 고객",
+          "name": "VIP 등급 고객",
+          "cid": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD"
+        },
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD::VVIP 등급 고객",
+          "name": "VVIP 등급 고객",
+          "cid": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD"
+        },
+        {
+          "term_key": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD::고객 등급 코드",
+          "name": "고객 등급 코드",
+          "cid": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD"
+        },
+        {
+          "term_key": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD::일반 등급 고객",
+          "name": "일반 등급 고객",
+          "cid": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD"
+        },
+        {
+          "term_key": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD::우수 등급 고객",
+          "name": "우수 등급 고객",
+          "cid": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD"
+        },
+        {
+          "term_key": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD::VIP 등급 고객",
+          "name": "VIP 등급 고객",
+          "cid": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD"
+        },
+        {
+          "term_key": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD::VVIP 등급 고객",
+          "name": "VVIP 등급 고객",
+          "cid": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD"
+        },
+        {
+          "term_key": "CUST_DB.CUST_GRD_HIST.APLD_DT::등급 적용일",
+          "name": "등급 적용일",
+          "cid": "CUST_DB.CUST_GRD_HIST.APLD_DT"
+        },
+        {
+          "term_key": "CUST_DB.CUST_GRD_HIST.RSN_CD::등급 변경 사유 코드",
+          "name": "등급 변경 사유 코드",
+          "cid": "CUST_DB.CUST_GRD_HIST.RSN_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_GRD_CD::카드 등급 코드",
+          "name": "카드 등급 코드",
+          "cid": "CARD_DB.CARD_MST.CARD_GRD_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_GRD_CD::일반 카드 등급",
+          "name": "일반 카드 등급",
+          "cid": "CARD_DB.CARD_MST.CARD_GRD_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_GRD_CD::골드 카드 등급",
+          "name": "골드 카드 등급",
+          "cid": "CARD_DB.CARD_MST.CARD_GRD_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_GRD_CD::플래티넘 카드 등급",
+          "name": "플래티넘 카드 등급",
+          "cid": "CARD_DB.CARD_MST.CARD_GRD_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_GRD_CD::다이아 카드 등급",
+          "name": "다이아 카드 등급",
+          "cid": "CARD_DB.CARD_MST.CARD_GRD_CD"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD::신용등급코드",
+          "name": "신용등급코드",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD::한도 등급 코드",
+          "name": "한도 등급 코드",
+          "cid": "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD::A등급 한도",
+          "name": "A등급 한도",
+          "cid": "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD::B등급 한도",
+          "name": "B등급 한도",
+          "cid": "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD::C등급 한도",
+          "name": "C등급 한도",
+          "cid": "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD"
+        }
+      ]
+    },
+    {
+      "key": "연체",
+      "size": 19,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD::연체 대출",
+          "name": "연체 대출",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD::연체 상태 코드",
+          "name": "연체 상태 코드",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD::연체 발생",
+          "name": "연체 발생",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD::연체 지속",
+          "name": "연체 지속",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD::연체 해소",
+          "name": "연체 해소",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_AMT::연체 원금",
+          "name": "연체 원금",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_AMT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_DAYS::누적 연체 일수",
+          "name": "누적 연체 일수",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_DAYS"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_INT_AMT::연체 가산 이자 금액",
+          "name": "연체 가산 이자 금액",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_INT_AMT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.OCUR_DT::연체 발생일",
+          "name": "연체 발생일",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.OCUR_DT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.CLEAR_DT::연체 해소일",
+          "name": "연체 해소일",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.CLEAR_DT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_STAT_CD::연체 카드",
+          "name": "연체 카드",
+          "cid": "CARD_DB.CARD_MST.CARD_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.CARD_NO::연체 이력 카드 번호",
+          "name": "연체 이력 카드 번호",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.CARD_NO"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD::연체 상태 단계",
+          "name": "연체 상태 단계",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD::연체 발생",
+          "name": "연체 발생",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD::연체 지속 중",
+          "name": "연체 지속 중",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD::연체 해소됨",
+          "name": "연체 해소됨",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.DLNQ_AMT::연체 발생 금액",
+          "name": "연체 발생 금액",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.DLNQ_AMT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.DLNQ_DAYS::연체 일수",
+          "name": "연체 일수",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.DLNQ_DAYS"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.OCUR_DT::연체 발생일",
+          "name": "연체 발생일",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.OCUR_DT"
+        }
+      ]
+    },
+    {
+      "key": "계좌",
+      "size": 17,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD::대출 상태 코드",
+          "name": "대출 상태 코드",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD::정상 대출",
+          "name": "정상 대출",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD::연체 대출",
+          "name": "연체 대출",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD::기한이익상실 대출",
+          "name": "기한이익상실 대출",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD::완제 대출",
+          "name": "완제 대출",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.MTRT_DT::대출 만기일",
+          "name": "대출 만기일",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.MTRT_DT"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.DEP_BAL_AMT::예금 잔액",
+          "name": "예금 잔액",
+          "cid": "DEP_DB.DEP_ACCT_MST.DEP_BAL_AMT"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.INT_RATE::계좌 적용 연이율",
+          "name": "계좌 적용 연이율",
+          "cid": "DEP_DB.DEP_ACCT_MST.INT_RATE"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD::예금 계좌 운영 상태",
+          "name": "예금 계좌 운영 상태",
+          "cid": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD::정상 계좌",
+          "name": "정상 계좌",
+          "cid": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD::지급정지 계좌",
+          "name": "지급정지 계좌",
+          "cid": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD::해지 계좌",
+          "name": "해지 계좌",
+          "cid": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.OPEN_DT::계좌 개설일",
+          "name": "계좌 개설일",
+          "cid": "DEP_DB.DEP_ACCT_MST.OPEN_DT"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.DEP_NO::거래 계좌번호",
+          "name": "거래 계좌번호",
+          "cid": "DEP_DB.DEP_TXN_HIST.DEP_NO"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD::이체 거래",
+          "name": "이체 거래",
+          "cid": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.BAL_AFTR_AMT::거래 후 잔액",
+          "name": "거래 후 잔액",
+          "cid": "DEP_DB.DEP_TXN_HIST.BAL_AFTR_AMT"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.FROM_ACCT_NO::출금 계좌번호",
+          "name": "출금 계좌번호",
+          "cid": "PAY_DB.TRANSFER_HIST.FROM_ACCT_NO"
+        }
+      ]
+    },
+    {
+      "key": "날짜",
+      "size": 17,
+      "members": [
+        {
+          "term_key": "CUST_DB.CUST_GRD_HIST.APLD_DT::등급 적용일",
+          "name": "등급 적용일",
+          "cid": "CUST_DB.CUST_GRD_HIST.APLD_DT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.EXEC_DT::대출 실행일",
+          "name": "대출 실행일",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.EXEC_DT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.MTRT_DT::대출 만기일",
+          "name": "대출 만기일",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.MTRT_DT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APPL_DT::대출 신청일",
+          "name": "대출 신청일",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APPL_DT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APRV_DT::대출 승인 확정일",
+          "name": "대출 승인 확정일",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APRV_DT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.OCUR_DT::연체 발생일",
+          "name": "연체 발생일",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.OCUR_DT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.CLEAR_DT::연체 해소일",
+          "name": "연체 해소일",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.CLEAR_DT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.ISSUE_DT::카드 발급일",
+          "name": "카드 발급일",
+          "cid": "CARD_DB.CARD_MST.ISSUE_DT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.EXPIRE_DT::카드 유효기간 만료일",
+          "name": "카드 유효기간 만료일",
+          "cid": "CARD_DB.CARD_MST.EXPIRE_DT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.APPL_DT::카드 신청일",
+          "name": "카드 신청일",
+          "cid": "CARD_DB.CARD_APPL.APPL_DT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.OCUR_DT::연체 발생일",
+          "name": "연체 발생일",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.OCUR_DT"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.OPEN_DT::계좌 개설일",
+          "name": "계좌 개설일",
+          "cid": "DEP_DB.DEP_ACCT_MST.OPEN_DT"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.MTRT_DT::예금 만기일",
+          "name": "예금 만기일",
+          "cid": "DEP_DB.DEP_ACCT_MST.MTRT_DT"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.TXN_DT::거래 발생일",
+          "name": "거래 발생일",
+          "cid": "DEP_DB.DEP_TXN_HIST.TXN_DT"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.EVAL_DT::신용 평가 수행일",
+          "name": "신용 평가 수행일",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.EVAL_DT"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_DT::이체 실행 일시",
+          "name": "이체 실행 일시",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_DT"
+        },
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.REG_DT::자동이체 등록일",
+          "name": "자동이체 등록일",
+          "cid": "PAY_DB.AUTO_TRF_MST.REG_DT"
+        }
+      ]
+    },
+    {
+      "key": "신청",
+      "size": 16,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD::대출 신청 진행 단계",
+          "name": "대출 신청 진행 단계",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD::대출 접수",
+          "name": "대출 접수",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD::대출 신청 승인",
+          "name": "대출 신청 승인",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD::대출 신청 거절",
+          "name": "대출 신청 거절",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APPL_DT::대출 신청일",
+          "name": "대출 신청일",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APPL_DT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD::신청 상환 방식",
+          "name": "신청 상환 방식",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD::원금균등 신청",
+          "name": "원금균등 신청",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD::원리금균등 신청",
+          "name": "원리금균등 신청",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD::만기일시 신청",
+          "name": "만기일시 신청",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.CUST_NO::카드 신청 고객 번호",
+          "name": "카드 신청 고객 번호",
+          "cid": "CARD_DB.CARD_APPL.CUST_NO"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.ISSUE_STAT_CD::카드 발급 처리 단계",
+          "name": "카드 발급 처리 단계",
+          "cid": "CARD_DB.CARD_APPL.ISSUE_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.ISSUE_STAT_CD::카드 신청 접수 단계",
+          "name": "카드 신청 접수 단계",
+          "cid": "CARD_DB.CARD_APPL.ISSUE_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.ISSUE_STAT_CD::카드 신청 반려 단계",
+          "name": "카드 신청 반려 단계",
+          "cid": "CARD_DB.CARD_APPL.ISSUE_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.REQ_LMT_AMT::신청 희망 한도 금액",
+          "name": "신청 희망 한도 금액",
+          "cid": "CARD_DB.CARD_APPL.REQ_LMT_AMT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.APPL_DT::카드 신청일",
+          "name": "카드 신청일",
+          "cid": "CARD_DB.CARD_APPL.APPL_DT"
+        },
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.REG_DT::자동이체 등록일",
+          "name": "자동이체 등록일",
+          "cid": "PAY_DB.AUTO_TRF_MST.REG_DT"
+        }
+      ]
+    },
+    {
+      "key": "금액",
+      "size": 15,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_AMT::대출 실행 금액",
+          "name": "대출 실행 금액",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_AMT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APRV_AMT::대출 승인 금액",
+          "name": "대출 승인 금액",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APRV_AMT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_AMT::연체 원금",
+          "name": "연체 원금",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_AMT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_INT_AMT::연체 가산 이자 금액",
+          "name": "연체 가산 이자 금액",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_INT_AMT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_LMT_AMT::카드 이용 한도",
+          "name": "카드 이용 한도",
+          "cid": "CARD_DB.CARD_MST.CARD_LMT_AMT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_BAL_AMT::카드 잔여 한도",
+          "name": "카드 잔여 한도",
+          "cid": "CARD_DB.CARD_MST.CARD_BAL_AMT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.REQ_LMT_AMT::신청 희망 한도 금액",
+          "name": "신청 희망 한도 금액",
+          "cid": "CARD_DB.CARD_APPL.REQ_LMT_AMT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APRV_HIST.APRV_AMT::승인금액",
+          "name": "승인금액",
+          "cid": "CARD_DB.CARD_APRV_HIST.APRV_AMT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.DLNQ_AMT::연체 발생 금액",
+          "name": "연체 발생 금액",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.DLNQ_AMT"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.TXN_AMT::거래 금액",
+          "name": "거래 금액",
+          "cid": "DEP_DB.DEP_TXN_HIST.TXN_AMT"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_LMT_MST.CRDT_LMT_AMT::신용 공여 한도 금액",
+          "name": "신용 공여 한도 금액",
+          "cid": "RISK_DB.CRDT_LMT_MST.CRDT_LMT_AMT"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_LMT_MST.USE_AMT::신용 한도 사용 금액",
+          "name": "신용 한도 사용 금액",
+          "cid": "RISK_DB.CRDT_LMT_MST.USE_AMT"
+        },
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.DTCT_AMT::이상거래 탐지 금액",
+          "name": "이상거래 탐지 금액",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.DTCT_AMT"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_AMT::이체 원금",
+          "name": "이체 원금",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_AMT"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.FEE_AMT::이체 수수료 금액",
+          "name": "이체 수수료 금액",
+          "cid": "PAY_DB.TRANSFER_HIST.FEE_AMT"
+        }
+      ]
+    },
+    {
+      "key": "이체",
+      "size": 14,
+      "members": [
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD::이체 거래",
+          "name": "이체 거래",
+          "cid": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.FROM_ACCT_NO::출금 계좌번호",
+          "name": "출금 계좌번호",
+          "cid": "PAY_DB.TRANSFER_HIST.FROM_ACCT_NO"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_AMT::이체 원금",
+          "name": "이체 원금",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_AMT"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.FEE_AMT::이체 수수료 금액",
+          "name": "이체 수수료 금액",
+          "cid": "PAY_DB.TRANSFER_HIST.FEE_AMT"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD::이체 상태",
+          "name": "이체 상태",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD::이체 요청",
+          "name": "이체 요청",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD::이체 완료",
+          "name": "이체 완료",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD::이체 실패",
+          "name": "이체 실패",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD::이체 취소",
+          "name": "이체 취소",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_DT::이체 실행 일시",
+          "name": "이체 실행 일시",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_DT"
+        },
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.TRF_DAY::자동이체 약정일",
+          "name": "자동이체 약정일",
+          "cid": "PAY_DB.AUTO_TRF_MST.TRF_DAY"
+        },
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD::자동이체 정상",
+          "name": "자동이체 정상",
+          "cid": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD"
+        },
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD::자동이체 정지",
+          "name": "자동이체 정지",
+          "cid": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD"
+        },
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD::자동이체 해지",
+          "name": "자동이체 해지",
+          "cid": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "거래",
+      "size": 13,
+      "members": [
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD::고객 등급 코드",
+          "name": "고객 등급 코드",
+          "cid": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_STAT_CD::정상 카드",
+          "name": "정상 카드",
+          "cid": "CARD_DB.CARD_MST.CARD_STAT_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.DEP_NO::거래 계좌번호",
+          "name": "거래 계좌번호",
+          "cid": "DEP_DB.DEP_TXN_HIST.DEP_NO"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD::거래 유형 코드",
+          "name": "거래 유형 코드",
+          "cid": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD::입금 거래",
+          "name": "입금 거래",
+          "cid": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD::출금 거래",
+          "name": "출금 거래",
+          "cid": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD::이체 거래",
+          "name": "이체 거래",
+          "cid": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD::이자 거래",
+          "name": "이자 거래",
+          "cid": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.TXN_AMT::거래 금액",
+          "name": "거래 금액",
+          "cid": "DEP_DB.DEP_TXN_HIST.TXN_AMT"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.BAL_AFTR_AMT::거래 후 잔액",
+          "name": "거래 후 잔액",
+          "cid": "DEP_DB.DEP_TXN_HIST.BAL_AFTR_AMT"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.TXN_DT::거래 발생일",
+          "name": "거래 발생일",
+          "cid": "DEP_DB.DEP_TXN_HIST.TXN_DT"
+        },
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.BLOCK_YN::차단 실행됨",
+          "name": "차단 실행됨",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.BLOCK_YN"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_DT::이체 실행 일시",
+          "name": "이체 실행 일시",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_DT"
+        }
+      ]
+    },
+    {
+      "key": "상품",
+      "size": 13,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_PRDT_MST.BASE_RATE::상품 기준 금리",
+          "name": "상품 기준 금리",
+          "cid": "LOAN_DB.LOAN_PRDT_MST.BASE_RATE"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_PRDT_MST.MAX_LMT_AMT::상품 최대 대출 한도",
+          "name": "상품 최대 대출 한도",
+          "cid": "LOAN_DB.LOAN_PRDT_MST.MAX_LMT_AMT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_PRDT_MST.SALE_YN::대출 상품 판매 여부",
+          "name": "대출 상품 판매 여부",
+          "cid": "LOAN_DB.LOAN_PRDT_MST.SALE_YN"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_PRDT_MST.SALE_YN::판매 중인 대출 상품",
+          "name": "판매 중인 대출 상품",
+          "cid": "LOAN_DB.LOAN_PRDT_MST.SALE_YN"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_PRDT_MST.SALE_YN::판매 중단 대출 상품",
+          "name": "판매 중단 대출 상품",
+          "cid": "LOAN_DB.LOAN_PRDT_MST.SALE_YN"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.PRDT_CD::예금 상품 코드",
+          "name": "예금 상품 코드",
+          "cid": "DEP_DB.DEP_ACCT_MST.PRDT_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_PRDT_MST.PRDT_TYPE_CD::예금 상품 수신 유형",
+          "name": "예금 상품 수신 유형",
+          "cid": "DEP_DB.DEP_PRDT_MST.PRDT_TYPE_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_PRDT_MST.PRDT_TYPE_CD::보통예금 상품",
+          "name": "보통예금 상품",
+          "cid": "DEP_DB.DEP_PRDT_MST.PRDT_TYPE_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_PRDT_MST.PRDT_TYPE_CD::정기예금 상품",
+          "name": "정기예금 상품",
+          "cid": "DEP_DB.DEP_PRDT_MST.PRDT_TYPE_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_PRDT_MST.PRDT_TYPE_CD::적금 상품",
+          "name": "적금 상품",
+          "cid": "DEP_DB.DEP_PRDT_MST.PRDT_TYPE_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_PRDT_MST.BASE_RATE::기준금리",
+          "name": "기준금리",
+          "cid": "DEP_DB.DEP_PRDT_MST.BASE_RATE"
+        },
+        {
+          "term_key": "DEP_DB.DEP_PRDT_MST.SALE_YN::판매 중인 상품",
+          "name": "판매 중인 상품",
+          "cid": "DEP_DB.DEP_PRDT_MST.SALE_YN"
+        },
+        {
+          "term_key": "DEP_DB.DEP_PRDT_MST.SALE_YN::판매 중단 상품",
+          "name": "판매 중단 상품",
+          "cid": "DEP_DB.DEP_PRDT_MST.SALE_YN"
+        }
+      ]
+    },
+    {
+      "key": "상환",
+      "size": 13,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD::기한이익상실 대출",
+          "name": "기한이익상실 대출",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD::완제 대출",
+          "name": "완제 대출",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD::상환방식",
+          "name": "상환방식",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD::원금균등상환",
+          "name": "원금균등상환",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD::원리금균등상환",
+          "name": "원리금균등상환",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD::만기일시상환",
+          "name": "만기일시상환",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD::신청 상환 방식",
+          "name": "신청 상환 방식",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD::원금균등 신청",
+          "name": "원금균등 신청",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD::원리금균등 신청",
+          "name": "원리금균등 신청",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD::만기일시 신청",
+          "name": "만기일시 신청",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD::연체 해소",
+          "name": "연체 해소",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.OCUR_DT::연체 발생일",
+          "name": "연체 발생일",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.OCUR_DT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.CLEAR_DT::연체 해소일",
+          "name": "연체 해소일",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.CLEAR_DT"
+        }
+      ]
+    },
+    {
+      "key": "신용",
+      "size": 13,
+      "members": [
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.EVAL_ID::신용 평가 건 식별자",
+          "name": "신용 평가 건 식별자",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.EVAL_ID"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.CRDT_SCR::신용 점수",
+          "name": "신용 점수",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.CRDT_SCR"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD::신용등급코드",
+          "name": "신용등급코드",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD::신용 1등급",
+          "name": "신용 1등급",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD::신용 2등급",
+          "name": "신용 2등급",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD::신용 3등급",
+          "name": "신용 3등급",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD::신용 4등급",
+          "name": "신용 4등급",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD::신용 5등급",
+          "name": "신용 5등급",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.EVAL_DT::신용 평가 수행일",
+          "name": "신용 평가 수행일",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.EVAL_DT"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.EVAL_RSN_CD::신용 평가 사유 코드",
+          "name": "신용 평가 사유 코드",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.EVAL_RSN_CD"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_LMT_MST.CRDT_LMT_AMT::신용 공여 한도 금액",
+          "name": "신용 공여 한도 금액",
+          "cid": "RISK_DB.CRDT_LMT_MST.CRDT_LMT_AMT"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_LMT_MST.USE_AMT::신용 한도 사용 금액",
+          "name": "신용 한도 사용 금액",
+          "cid": "RISK_DB.CRDT_LMT_MST.USE_AMT"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD::한도 등급 코드",
+          "name": "한도 등급 코드",
+          "cid": "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD"
+        }
+      ]
+    },
+    {
+      "key": "발생",
+      "size": 12,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD::기한이익상실 대출",
+          "name": "기한이익상실 대출",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD::연체 발생",
+          "name": "연체 발생",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_AMT::연체 원금",
+          "name": "연체 원금",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_AMT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.OCUR_DT::연체 발생일",
+          "name": "연체 발생일",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.OCUR_DT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD::연체 발생",
+          "name": "연체 발생",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.DLNQ_AMT::연체 발생 금액",
+          "name": "연체 발생 금액",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.DLNQ_AMT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.DLNQ_DAYS::연체 일수",
+          "name": "연체 일수",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.DLNQ_DAYS"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.OCUR_DT::연체 발생일",
+          "name": "연체 발생일",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.OCUR_DT"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.TXN_AMT::거래 금액",
+          "name": "거래 금액",
+          "cid": "DEP_DB.DEP_TXN_HIST.TXN_AMT"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.EVAL_RSN_CD::신용 평가 사유 코드",
+          "name": "신용 평가 사유 코드",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.EVAL_RSN_CD"
+        },
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.DTCT_DT::이상거래 탐지 일시",
+          "name": "이상거래 탐지 일시",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.DTCT_DT"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_DT::이체 실행 일시",
+          "name": "이체 실행 일시",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_DT"
+        }
+      ]
+    },
+    {
+      "key": "마이데이터",
+      "size": 11,
+      "members": [
+        {
+          "term_key": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD::마이데이터 약관 동의",
+          "name": "마이데이터 약관 동의",
+          "cid": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.CUST_NO::마이데이터 연동 고객번호",
+          "name": "마이데이터 연동 고객번호",
+          "cid": "CHN_DB.MYDATA_LINK.CUST_NO"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.PROVIDER_CD::마이데이터 정보제공기관 코드",
+          "name": "마이데이터 정보제공기관 코드",
+          "cid": "CHN_DB.MYDATA_LINK.PROVIDER_CD"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.LINK_STAT_CD::마이데이터 연동 상태",
+          "name": "마이데이터 연동 상태",
+          "cid": "CHN_DB.MYDATA_LINK.LINK_STAT_CD"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.LINK_STAT_CD::마이데이터 연동 중",
+          "name": "마이데이터 연동 중",
+          "cid": "CHN_DB.MYDATA_LINK.LINK_STAT_CD"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.LINK_STAT_CD::마이데이터 연동 해지",
+          "name": "마이데이터 연동 해지",
+          "cid": "CHN_DB.MYDATA_LINK.LINK_STAT_CD"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.LINK_STAT_CD::마이데이터 연동 만료",
+          "name": "마이데이터 연동 만료",
+          "cid": "CHN_DB.MYDATA_LINK.LINK_STAT_CD"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN::마이데이터 동의 여부",
+          "name": "마이데이터 동의 여부",
+          "cid": "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN::마이데이터 전송 동의",
+          "name": "마이데이터 전송 동의",
+          "cid": "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN::마이데이터 전송 미동의",
+          "name": "마이데이터 전송 미동의",
+          "cid": "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.LINK_DT::마이데이터 연동 시작일",
+          "name": "마이데이터 연동 시작일",
+          "cid": "CHN_DB.MYDATA_LINK.LINK_DT"
+        }
+      ]
+    },
+    {
+      "key": "한도",
+      "size": 11,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APRV_AMT::대출 승인 금액",
+          "name": "대출 승인 금액",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APRV_AMT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_PRDT_MST.MAX_LMT_AMT::상품 최대 대출 한도",
+          "name": "상품 최대 대출 한도",
+          "cid": "LOAN_DB.LOAN_PRDT_MST.MAX_LMT_AMT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_LMT_AMT::카드 이용 한도",
+          "name": "카드 이용 한도",
+          "cid": "CARD_DB.CARD_MST.CARD_LMT_AMT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_BAL_AMT::카드 잔여 한도",
+          "name": "카드 잔여 한도",
+          "cid": "CARD_DB.CARD_MST.CARD_BAL_AMT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.REQ_LMT_AMT::신청 희망 한도 금액",
+          "name": "신청 희망 한도 금액",
+          "cid": "CARD_DB.CARD_APPL.REQ_LMT_AMT"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_LMT_MST.CRDT_LMT_AMT::신용 공여 한도 금액",
+          "name": "신용 공여 한도 금액",
+          "cid": "RISK_DB.CRDT_LMT_MST.CRDT_LMT_AMT"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_LMT_MST.USE_AMT::신용 한도 사용 금액",
+          "name": "신용 한도 사용 금액",
+          "cid": "RISK_DB.CRDT_LMT_MST.USE_AMT"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD::한도 등급 코드",
+          "name": "한도 등급 코드",
+          "cid": "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD::A등급 한도",
+          "name": "A등급 한도",
+          "cid": "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD::B등급 한도",
+          "name": "B등급 한도",
+          "cid": "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD::C등급 한도",
+          "name": "C등급 한도",
+          "cid": "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD"
+        }
+      ]
+    },
+    {
+      "key": "단계",
+      "size": 10,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD::대출 신청 진행 단계",
+          "name": "대출 신청 진행 단계",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD::대출 심사 중",
+          "name": "대출 심사 중",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD::연체 상태 코드",
+          "name": "연체 상태 코드",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.ISSUE_STAT_CD::카드 발급 처리 단계",
+          "name": "카드 발급 처리 단계",
+          "cid": "CARD_DB.CARD_APPL.ISSUE_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.ISSUE_STAT_CD::카드 신청 접수 단계",
+          "name": "카드 신청 접수 단계",
+          "cid": "CARD_DB.CARD_APPL.ISSUE_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.ISSUE_STAT_CD::카드 심사 진행 단계",
+          "name": "카드 심사 진행 단계",
+          "cid": "CARD_DB.CARD_APPL.ISSUE_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.ISSUE_STAT_CD::카드 발급 완료 단계",
+          "name": "카드 발급 완료 단계",
+          "cid": "CARD_DB.CARD_APPL.ISSUE_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.ISSUE_STAT_CD::카드 신청 반려 단계",
+          "name": "카드 신청 반려 단계",
+          "cid": "CARD_DB.CARD_APPL.ISSUE_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD::연체 상태 단계",
+          "name": "연체 상태 단계",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD::이체 상태",
+          "name": "이체 상태",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "승인",
+      "size": 9,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APRV_AMT::대출 승인 금액",
+          "name": "대출 승인 금액",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APRV_AMT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD::대출 신청 승인",
+          "name": "대출 신청 승인",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APRV_DT::대출 승인 확정일",
+          "name": "대출 승인 확정일",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APRV_DT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_LMT_AMT::카드 이용 한도",
+          "name": "카드 이용 한도",
+          "cid": "CARD_DB.CARD_MST.CARD_LMT_AMT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.ISSUE_STAT_CD::카드 발급 완료 단계",
+          "name": "카드 발급 완료 단계",
+          "cid": "CARD_DB.CARD_APPL.ISSUE_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APRV_HIST.APRV_AMT::승인금액",
+          "name": "승인금액",
+          "cid": "CARD_DB.CARD_APRV_HIST.APRV_AMT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APRV_HIST.CNCL_YN::승인 취소 여부",
+          "name": "승인 취소 여부",
+          "cid": "CARD_DB.CARD_APRV_HIST.CNCL_YN"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APRV_HIST.CNCL_YN::취소된 승인",
+          "name": "취소된 승인",
+          "cid": "CARD_DB.CARD_APRV_HIST.CNCL_YN"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APRV_HIST.CNCL_YN::취소되지 않은 승인",
+          "name": "취소되지 않은 승인",
+          "cid": "CARD_DB.CARD_APRV_HIST.CNCL_YN"
+        }
+      ]
+    },
+    {
+      "key": "유형",
+      "size": 9,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD::상환방식",
+          "name": "상환방식",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD::거래 유형 코드",
+          "name": "거래 유형 코드",
+          "cid": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD::입금 거래",
+          "name": "입금 거래",
+          "cid": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD::출금 거래",
+          "name": "출금 거래",
+          "cid": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD::이체 거래",
+          "name": "이체 거래",
+          "cid": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD::이자 거래",
+          "name": "이자 거래",
+          "cid": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_PRDT_MST.PRDT_TYPE_CD::예금 상품 수신 유형",
+          "name": "예금 상품 수신 유형",
+          "cid": "DEP_DB.DEP_PRDT_MST.PRDT_TYPE_CD"
+        },
+        {
+          "term_key": "CHN_DB.ACCESS_LOG.CHANNEL_CD::접속 채널 유형",
+          "name": "접속 채널 유형",
+          "cid": "CHN_DB.ACCESS_LOG.CHANNEL_CD"
+        },
+        {
+          "term_key": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD::동의 약관 유형",
+          "name": "동의 약관 유형",
+          "cid": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD"
+        }
+      ]
+    },
+    {
+      "key": "처리",
+      "size": 9,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD::대출 신청 진행 단계",
+          "name": "대출 신청 진행 단계",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.ISSUE_STAT_CD::카드 발급 처리 단계",
+          "name": "카드 발급 처리 단계",
+          "cid": "CARD_DB.CARD_APPL.ISSUE_STAT_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.BAL_AFTR_AMT::거래 후 잔액",
+          "name": "거래 후 잔액",
+          "cid": "DEP_DB.DEP_TXN_HIST.BAL_AFTR_AMT"
+        },
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.BLOCK_YN::차단 여부",
+          "name": "차단 여부",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.BLOCK_YN"
+        },
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.BLOCK_YN::차단되지 않음",
+          "name": "차단되지 않음",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.BLOCK_YN"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD::이체 상태",
+          "name": "이체 상태",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD::이체 요청",
+          "name": "이체 요청",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD::이체 실패",
+          "name": "이체 실패",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.LINK_STAT_CD::마이데이터 연동 상태",
+          "name": "마이데이터 연동 상태",
+          "cid": "CHN_DB.MYDATA_LINK.LINK_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "약관",
+      "size": 8,
+      "members": [
+        {
+          "term_key": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD::동의 약관 유형",
+          "name": "동의 약관 유형",
+          "cid": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD"
+        },
+        {
+          "term_key": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD::필수 약관 동의",
+          "name": "필수 약관 동의",
+          "cid": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD"
+        },
+        {
+          "term_key": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD::선택 약관 동의",
+          "name": "선택 약관 동의",
+          "cid": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD"
+        },
+        {
+          "term_key": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD::마케팅 약관 동의",
+          "name": "마케팅 약관 동의",
+          "cid": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD"
+        },
+        {
+          "term_key": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD::마이데이터 약관 동의",
+          "name": "마이데이터 약관 동의",
+          "cid": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD"
+        },
+        {
+          "term_key": "CHN_DB.CNSNT_HIST.CNSNT_YN::약관 동의 여부",
+          "name": "약관 동의 여부",
+          "cid": "CHN_DB.CNSNT_HIST.CNSNT_YN"
+        },
+        {
+          "term_key": "CHN_DB.CNSNT_HIST.CNSNT_YN::약관 동의함",
+          "name": "약관 동의함",
+          "cid": "CHN_DB.CNSNT_HIST.CNSNT_YN"
+        },
+        {
+          "term_key": "CHN_DB.CNSNT_HIST.CNSNT_YN::약관 미동의",
+          "name": "약관 미동의",
+          "cid": "CHN_DB.CNSNT_HIST.CNSNT_YN"
+        }
+      ]
+    },
+    {
+      "key": "예금",
+      "size": 8,
+      "members": [
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.PRDT_CD::예금 상품 코드",
+          "name": "예금 상품 코드",
+          "cid": "DEP_DB.DEP_ACCT_MST.PRDT_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.DEP_BAL_AMT::예금 잔액",
+          "name": "예금 잔액",
+          "cid": "DEP_DB.DEP_ACCT_MST.DEP_BAL_AMT"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD::예금 계좌 운영 상태",
+          "name": "예금 계좌 운영 상태",
+          "cid": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.MTRT_DT::예금 만기일",
+          "name": "예금 만기일",
+          "cid": "DEP_DB.DEP_ACCT_MST.MTRT_DT"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.DEP_NO::거래 계좌번호",
+          "name": "거래 계좌번호",
+          "cid": "DEP_DB.DEP_TXN_HIST.DEP_NO"
+        },
+        {
+          "term_key": "DEP_DB.DEP_PRDT_MST.PRDT_TYPE_CD::예금 상품 수신 유형",
+          "name": "예금 상품 수신 유형",
+          "cid": "DEP_DB.DEP_PRDT_MST.PRDT_TYPE_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_PRDT_MST.PRDT_TYPE_CD::보통예금 상품",
+          "name": "보통예금 상품",
+          "cid": "DEP_DB.DEP_PRDT_MST.PRDT_TYPE_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_PRDT_MST.PRDT_TYPE_CD::정기예금 상품",
+          "name": "정기예금 상품",
+          "cid": "DEP_DB.DEP_PRDT_MST.PRDT_TYPE_CD"
+        }
+      ]
+    },
+    {
+      "key": "완료",
+      "size": 8,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD::완제 대출",
+          "name": "완제 대출",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD::대출 신청 승인",
+          "name": "대출 신청 승인",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD::연체 해소",
+          "name": "연체 해소",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.ISSUE_STAT_CD::카드 발급 완료 단계",
+          "name": "카드 발급 완료 단계",
+          "cid": "CARD_DB.CARD_APPL.ISSUE_STAT_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.BAL_AFTR_AMT::거래 후 잔액",
+          "name": "거래 후 잔액",
+          "cid": "DEP_DB.DEP_TXN_HIST.BAL_AFTR_AMT"
+        },
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.BLOCK_YN::차단 실행됨",
+          "name": "차단 실행됨",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.BLOCK_YN"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD::이체 완료",
+          "name": "이체 완료",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD"
+        },
+        {
+          "term_key": "CHN_DB.CNSNT_HIST.CNSNT_YN::약관 동의함",
+          "name": "약관 동의함",
+          "cid": "CHN_DB.CNSNT_HIST.CNSNT_YN"
+        }
+      ]
+    },
+    {
+      "key": "원금",
+      "size": 8,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_AMT::대출 실행 금액",
+          "name": "대출 실행 금액",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_AMT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_BAL_AMT::대출 잔여 원금",
+          "name": "대출 잔여 원금",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_BAL_AMT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD::상환방식",
+          "name": "상환방식",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD::원금균등상환",
+          "name": "원금균등상환",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD::만기일시상환",
+          "name": "만기일시상환",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_AMT::연체 원금",
+          "name": "연체 원금",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_AMT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.DLNQ_AMT::연체 발생 금액",
+          "name": "연체 발생 금액",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.DLNQ_AMT"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_AMT::이체 원금",
+          "name": "이체 원금",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_AMT"
+        }
+      ]
+    },
+    {
+      "key": "사용",
+      "size": 7,
+      "members": [
+        {
+          "term_key": "CUST_DB.CUST_CONTACT.VALID_YN::유효한 연락처",
+          "name": "유효한 연락처",
+          "cid": "CUST_DB.CUST_CONTACT.VALID_YN"
+        },
+        {
+          "term_key": "CUST_DB.CUST_CONTACT.VALID_YN::무효 처리된 연락처",
+          "name": "무효 처리된 연락처",
+          "cid": "CUST_DB.CUST_CONTACT.VALID_YN"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_BAL_AMT::카드 잔여 한도",
+          "name": "카드 잔여 한도",
+          "cid": "CARD_DB.CARD_MST.CARD_BAL_AMT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_STAT_CD::카드 운영 상태",
+          "name": "카드 운영 상태",
+          "cid": "CARD_DB.CARD_MST.CARD_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_STAT_CD::정상 카드",
+          "name": "정상 카드",
+          "cid": "CARD_DB.CARD_MST.CARD_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_STAT_CD::정지 카드",
+          "name": "정지 카드",
+          "cid": "CARD_DB.CARD_MST.CARD_STAT_CD"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_LMT_MST.USE_AMT::신용 한도 사용 금액",
+          "name": "신용 한도 사용 금액",
+          "cid": "RISK_DB.CRDT_LMT_MST.USE_AMT"
+        }
+      ]
+    },
+    {
+      "key": "수신",
+      "size": 7,
+      "members": [
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN::마케팅 정보 수신 동의 여부",
+          "name": "마케팅 정보 수신 동의 여부",
+          "cid": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN"
+        },
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN::마케팅 정보 수신 동의",
+          "name": "마케팅 정보 수신 동의",
+          "cid": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN"
+        },
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN::마케팅 정보 수신 미동의",
+          "name": "마케팅 정보 수신 미동의",
+          "cid": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN"
+        },
+        {
+          "term_key": "DEP_DB.DEP_PRDT_MST.PRDT_TYPE_CD::예금 상품 수신 유형",
+          "name": "예금 상품 수신 유형",
+          "cid": "DEP_DB.DEP_PRDT_MST.PRDT_TYPE_CD"
+        },
+        {
+          "term_key": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD::마케팅 약관 동의",
+          "name": "마케팅 약관 동의",
+          "cid": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN::마이데이터 동의 여부",
+          "name": "마이데이터 동의 여부",
+          "cid": "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN::마이데이터 전송 동의",
+          "name": "마이데이터 전송 동의",
+          "cid": "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN"
+        }
+      ]
+    },
+    {
+      "key": "신용평",
+      "size": 7,
+      "members": [
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.CRDT_SCR::신용 점수",
+          "name": "신용 점수",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.CRDT_SCR"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD::신용등급코드",
+          "name": "신용등급코드",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD::신용 1등급",
+          "name": "신용 1등급",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD::신용 2등급",
+          "name": "신용 2등급",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD::신용 3등급",
+          "name": "신용 3등급",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD::신용 4등급",
+          "name": "신용 4등급",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD::신용 5등급",
+          "name": "신용 5등급",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD"
+        }
+      ]
+    },
+    {
+      "key": "연동",
+      "size": 7,
+      "members": [
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.CUST_NO::마이데이터 연동 고객번호",
+          "name": "마이데이터 연동 고객번호",
+          "cid": "CHN_DB.MYDATA_LINK.CUST_NO"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.PROVIDER_CD::마이데이터 정보제공기관 코드",
+          "name": "마이데이터 정보제공기관 코드",
+          "cid": "CHN_DB.MYDATA_LINK.PROVIDER_CD"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.LINK_STAT_CD::마이데이터 연동 상태",
+          "name": "마이데이터 연동 상태",
+          "cid": "CHN_DB.MYDATA_LINK.LINK_STAT_CD"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.LINK_STAT_CD::마이데이터 연동 중",
+          "name": "마이데이터 연동 중",
+          "cid": "CHN_DB.MYDATA_LINK.LINK_STAT_CD"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.LINK_STAT_CD::마이데이터 연동 해지",
+          "name": "마이데이터 연동 해지",
+          "cid": "CHN_DB.MYDATA_LINK.LINK_STAT_CD"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.LINK_STAT_CD::마이데이터 연동 만료",
+          "name": "마이데이터 연동 만료",
+          "cid": "CHN_DB.MYDATA_LINK.LINK_STAT_CD"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.LINK_DT::마이데이터 연동 시작일",
+          "name": "마이데이터 연동 시작일",
+          "cid": "CHN_DB.MYDATA_LINK.LINK_DT"
+        }
+      ]
+    },
+    {
+      "key": "자동이체",
+      "size": 7,
+      "members": [
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.TRF_AMT::자동이체 약정금액",
+          "name": "자동이체 약정금액",
+          "cid": "PAY_DB.AUTO_TRF_MST.TRF_AMT"
+        },
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.TRF_DAY::자동이체 약정일",
+          "name": "자동이체 약정일",
+          "cid": "PAY_DB.AUTO_TRF_MST.TRF_DAY"
+        },
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD::자동이체 운영 상태",
+          "name": "자동이체 운영 상태",
+          "cid": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD"
+        },
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD::자동이체 정상",
+          "name": "자동이체 정상",
+          "cid": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD"
+        },
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD::자동이체 정지",
+          "name": "자동이체 정지",
+          "cid": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD"
+        },
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD::자동이체 해지",
+          "name": "자동이체 해지",
+          "cid": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD"
+        },
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.REG_DT::자동이체 등록일",
+          "name": "자동이체 등록일",
+          "cid": "PAY_DB.AUTO_TRF_MST.REG_DT"
+        }
+      ]
+    },
+    {
+      "key": "가능",
+      "size": 6,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_PRDT_MST.SALE_YN::판매 중인 대출 상품",
+          "name": "판매 중인 대출 상품",
+          "cid": "LOAN_DB.LOAN_PRDT_MST.SALE_YN"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_BAL_AMT::카드 잔여 한도",
+          "name": "카드 잔여 한도",
+          "cid": "CARD_DB.CARD_MST.CARD_BAL_AMT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_STAT_CD::카드 운영 상태",
+          "name": "카드 운영 상태",
+          "cid": "CARD_DB.CARD_MST.CARD_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_STAT_CD::정상 카드",
+          "name": "정상 카드",
+          "cid": "CARD_DB.CARD_MST.CARD_STAT_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_PRDT_MST.SALE_YN::판매 여부",
+          "name": "판매 여부",
+          "cid": "DEP_DB.DEP_PRDT_MST.SALE_YN"
+        },
+        {
+          "term_key": "DEP_DB.DEP_PRDT_MST.SALE_YN::판매 중인 상품",
+          "name": "판매 중인 상품",
+          "cid": "DEP_DB.DEP_PRDT_MST.SALE_YN"
+        }
+      ]
+    },
+    {
+      "key": "신용등급",
+      "size": 6,
+      "members": [
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD::신용등급코드",
+          "name": "신용등급코드",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD::신용 1등급",
+          "name": "신용 1등급",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD::신용 2등급",
+          "name": "신용 2등급",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD::신용 3등급",
+          "name": "신용 3등급",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD::신용 4등급",
+          "name": "신용 4등급",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD::신용 5등급",
+          "name": "신용 5등급",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD"
+        }
+      ]
+    },
+    {
+      "key": "접속",
+      "size": 6,
+      "members": [
+        {
+          "term_key": "CHN_DB.ACCESS_LOG.CUST_NO::접속 고객 번호",
+          "name": "접속 고객 번호",
+          "cid": "CHN_DB.ACCESS_LOG.CUST_NO"
+        },
+        {
+          "term_key": "CHN_DB.ACCESS_LOG.CHANNEL_CD::접속 채널 유형",
+          "name": "접속 채널 유형",
+          "cid": "CHN_DB.ACCESS_LOG.CHANNEL_CD"
+        },
+        {
+          "term_key": "CHN_DB.ACCESS_LOG.CHANNEL_CD::앱 접속",
+          "name": "앱 접속",
+          "cid": "CHN_DB.ACCESS_LOG.CHANNEL_CD"
+        },
+        {
+          "term_key": "CHN_DB.ACCESS_LOG.CHANNEL_CD::웹 접속",
+          "name": "웹 접속",
+          "cid": "CHN_DB.ACCESS_LOG.CHANNEL_CD"
+        },
+        {
+          "term_key": "CHN_DB.ACCESS_LOG.CHANNEL_CD::ATM 접속",
+          "name": "ATM 접속",
+          "cid": "CHN_DB.ACCESS_LOG.CHANNEL_CD"
+        },
+        {
+          "term_key": "CHN_DB.ACCESS_LOG.CHANNEL_CD::영업점 접속",
+          "name": "영업점 접속",
+          "cid": "CHN_DB.ACCESS_LOG.CHANNEL_CD"
+        }
+      ]
+    },
+    {
+      "key": "진행",
+      "size": 6,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD::대출 신청 진행 단계",
+          "name": "대출 신청 진행 단계",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD::대출 심사 중",
+          "name": "대출 심사 중",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD::연체 지속",
+          "name": "연체 지속",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.ISSUE_STAT_CD::카드 발급 처리 단계",
+          "name": "카드 발급 처리 단계",
+          "cid": "CARD_DB.CARD_APPL.ISSUE_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.ISSUE_STAT_CD::카드 심사 진행 단계",
+          "name": "카드 심사 진행 단계",
+          "cid": "CARD_DB.CARD_APPL.ISSUE_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD::연체 지속 중",
+          "name": "연체 지속 중",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "판매",
+      "size": 6,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_PRDT_MST.SALE_YN::대출 상품 판매 여부",
+          "name": "대출 상품 판매 여부",
+          "cid": "LOAN_DB.LOAN_PRDT_MST.SALE_YN"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_PRDT_MST.SALE_YN::판매 중인 대출 상품",
+          "name": "판매 중인 대출 상품",
+          "cid": "LOAN_DB.LOAN_PRDT_MST.SALE_YN"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_PRDT_MST.SALE_YN::판매 중단 대출 상품",
+          "name": "판매 중단 대출 상품",
+          "cid": "LOAN_DB.LOAN_PRDT_MST.SALE_YN"
+        },
+        {
+          "term_key": "DEP_DB.DEP_PRDT_MST.SALE_YN::판매 여부",
+          "name": "판매 여부",
+          "cid": "DEP_DB.DEP_PRDT_MST.SALE_YN"
+        },
+        {
+          "term_key": "DEP_DB.DEP_PRDT_MST.SALE_YN::판매 중인 상품",
+          "name": "판매 중인 상품",
+          "cid": "DEP_DB.DEP_PRDT_MST.SALE_YN"
+        },
+        {
+          "term_key": "DEP_DB.DEP_PRDT_MST.SALE_YN::판매 중단 상품",
+          "name": "판매 중단 상품",
+          "cid": "DEP_DB.DEP_PRDT_MST.SALE_YN"
+        }
+      ]
+    },
+    {
+      "key": "금리",
+      "size": 5,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.INT_RATE::대출 기준금리",
+          "name": "대출 기준금리",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.INT_RATE"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.APLD_RATE::적용금리",
+          "name": "적용금리",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.APLD_RATE"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_PRDT_MST.BASE_RATE::상품 기준 금리",
+          "name": "상품 기준 금리",
+          "cid": "LOAN_DB.LOAN_PRDT_MST.BASE_RATE"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.INT_RATE::계좌 적용 연이율",
+          "name": "계좌 적용 연이율",
+          "cid": "DEP_DB.DEP_ACCT_MST.INT_RATE"
+        },
+        {
+          "term_key": "DEP_DB.DEP_PRDT_MST.BASE_RATE::기준금리",
+          "name": "기준금리",
+          "cid": "DEP_DB.DEP_PRDT_MST.BASE_RATE"
+        }
+      ]
+    },
+    {
+      "key": "시점",
+      "size": 5,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.CLEAR_DT::연체 해소일",
+          "name": "연체 해소일",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.CLEAR_DT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.DLNQ_AMT::연체 발생 금액",
+          "name": "연체 발생 금액",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.DLNQ_AMT"
+        },
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.DTCT_AMT::이상거래 탐지 금액",
+          "name": "이상거래 탐지 금액",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.DTCT_AMT"
+        },
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.DTCT_DT::이상거래 탐지 일시",
+          "name": "이상거래 탐지 일시",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.DTCT_DT"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_DT::이체 실행 일시",
+          "name": "이체 실행 일시",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_DT"
+        }
+      ]
+    },
+    {
+      "key": "심사",
+      "size": 5,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APRV_AMT::대출 승인 금액",
+          "name": "대출 승인 금액",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APRV_AMT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD::대출 심사 중",
+          "name": "대출 심사 중",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD::대출 신청 거절",
+          "name": "대출 신청 거절",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APRV_DT::대출 승인 확정일",
+          "name": "대출 승인 확정일",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APRV_DT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.ISSUE_STAT_CD::카드 심사 진행 단계",
+          "name": "카드 심사 진행 단계",
+          "cid": "CARD_DB.CARD_APPL.ISSUE_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "정상",
+      "size": 5,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD::정상 대출",
+          "name": "정상 대출",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_STAT_CD::정상 카드",
+          "name": "정상 카드",
+          "cid": "CARD_DB.CARD_MST.CARD_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APRV_HIST.CNCL_YN::취소되지 않은 승인",
+          "name": "취소되지 않은 승인",
+          "cid": "CARD_DB.CARD_APRV_HIST.CNCL_YN"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD::정상 계좌",
+          "name": "정상 계좌",
+          "cid": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD"
+        },
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD::자동이체 정상",
+          "name": "자동이체 정상",
+          "cid": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "채널",
+      "size": 5,
+      "members": [
+        {
+          "term_key": "CHN_DB.ACCESS_LOG.CHANNEL_CD::접속 채널 유형",
+          "name": "접속 채널 유형",
+          "cid": "CHN_DB.ACCESS_LOG.CHANNEL_CD"
+        },
+        {
+          "term_key": "CHN_DB.ACCESS_LOG.CHANNEL_CD::앱 접속",
+          "name": "앱 접속",
+          "cid": "CHN_DB.ACCESS_LOG.CHANNEL_CD"
+        },
+        {
+          "term_key": "CHN_DB.ACCESS_LOG.CHANNEL_CD::웹 접속",
+          "name": "웹 접속",
+          "cid": "CHN_DB.ACCESS_LOG.CHANNEL_CD"
+        },
+        {
+          "term_key": "CHN_DB.ACCESS_LOG.CHANNEL_CD::ATM 접속",
+          "name": "ATM 접속",
+          "cid": "CHN_DB.ACCESS_LOG.CHANNEL_CD"
+        },
+        {
+          "term_key": "CHN_DB.ACCESS_LOG.CHANNEL_CD::영업점 접속",
+          "name": "영업점 접속",
+          "cid": "CHN_DB.ACCESS_LOG.CHANNEL_CD"
+        }
+      ]
+    },
+    {
+      "key": "개시일",
+      "size": 4,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.EXEC_DT::대출 실행일",
+          "name": "대출 실행일",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.EXEC_DT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.OCUR_DT::연체 발생일",
+          "name": "연체 발생일",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.OCUR_DT"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.OPEN_DT::계좌 개설일",
+          "name": "계좌 개설일",
+          "cid": "DEP_DB.DEP_ACCT_MST.OPEN_DT"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.LINK_DT::마이데이터 연동 시작일",
+          "name": "마이데이터 연동 시작일",
+          "cid": "CHN_DB.MYDATA_LINK.LINK_DT"
+        }
+      ]
+    },
+    {
+      "key": "계약",
+      "size": 4,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.INT_RATE::대출 기준금리",
+          "name": "대출 기준금리",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.INT_RATE"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.OPEN_DT::계좌 개설일",
+          "name": "계좌 개설일",
+          "cid": "DEP_DB.DEP_ACCT_MST.OPEN_DT"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.MTRT_DT::예금 만기일",
+          "name": "예금 만기일",
+          "cid": "DEP_DB.DEP_ACCT_MST.MTRT_DT"
+        },
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD::자동이체 해지",
+          "name": "자동이체 해지",
+          "cid": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "마케팅",
+      "size": 4,
+      "members": [
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN::마케팅 정보 수신 동의 여부",
+          "name": "마케팅 정보 수신 동의 여부",
+          "cid": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN"
+        },
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN::마케팅 정보 수신 동의",
+          "name": "마케팅 정보 수신 동의",
+          "cid": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN"
+        },
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN::마케팅 정보 수신 미동의",
+          "name": "마케팅 정보 수신 미동의",
+          "cid": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN"
+        },
+        {
+          "term_key": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD::마케팅 약관 동의",
+          "name": "마케팅 약관 동의",
+          "cid": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD"
+        }
+      ]
+    },
+    {
+      "key": "발생일",
+      "size": 4,
+      "members": [
+        {
+          "term_key": "CUST_DB.CUST_GRD_HIST.APLD_DT::등급 적용일",
+          "name": "등급 적용일",
+          "cid": "CUST_DB.CUST_GRD_HIST.APLD_DT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.OCUR_DT::연체 발생일",
+          "name": "연체 발생일",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.OCUR_DT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.OCUR_DT::연체 발생일",
+          "name": "연체 발생일",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.OCUR_DT"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.TXN_DT::거래 발생일",
+          "name": "거래 발생일",
+          "cid": "DEP_DB.DEP_TXN_HIST.TXN_DT"
+        }
+      ]
+    },
+    {
+      "key": "방식",
+      "size": 4,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD::신청 상환 방식",
+          "name": "신청 상환 방식",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD::원금균등 신청",
+          "name": "원금균등 신청",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD::원리금균등 신청",
+          "name": "원리금균등 신청",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD::만기일시 신청",
+          "name": "만기일시 신청",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD"
+        }
+      ]
+    },
+    {
+      "key": "번호",
+      "size": 4,
+      "members": [
+        {
+          "term_key": "CARD_DB.CARD_APPL.CUST_NO::카드 신청 고객 번호",
+          "name": "카드 신청 고객 번호",
+          "cid": "CARD_DB.CARD_APPL.CUST_NO"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.CARD_NO::연체 이력 카드 번호",
+          "name": "연체 이력 카드 번호",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.CARD_NO"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.FROM_ACCT_NO::출금 계좌번호",
+          "name": "출금 계좌번호",
+          "cid": "PAY_DB.TRANSFER_HIST.FROM_ACCT_NO"
+        },
+        {
+          "term_key": "CHN_DB.ACCESS_LOG.CUST_NO::접속 고객 번호",
+          "name": "접속 고객 번호",
+          "cid": "CHN_DB.ACCESS_LOG.CUST_NO"
+        }
+      ]
+    },
+    {
+      "key": "송금",
+      "size": 4,
+      "members": [
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.FROM_ACCT_NO::출금 계좌번호",
+          "name": "출금 계좌번호",
+          "cid": "PAY_DB.TRANSFER_HIST.FROM_ACCT_NO"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_AMT::이체 원금",
+          "name": "이체 원금",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_AMT"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.FEE_AMT::이체 수수료 금액",
+          "name": "이체 수수료 금액",
+          "cid": "PAY_DB.TRANSFER_HIST.FEE_AMT"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_DT::이체 실행 일시",
+          "name": "이체 실행 일시",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_DT"
+        }
+      ]
+    },
+    {
+      "key": "시작일",
+      "size": 4,
+      "members": [
+        {
+          "term_key": "CUST_DB.CUST_GRD_HIST.APLD_DT::등급 적용일",
+          "name": "등급 적용일",
+          "cid": "CUST_DB.CUST_GRD_HIST.APLD_DT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.OCUR_DT::연체 발생일",
+          "name": "연체 발생일",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.OCUR_DT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.OCUR_DT::연체 발생일",
+          "name": "연체 발생일",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.OCUR_DT"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.LINK_DT::마이데이터 연동 시작일",
+          "name": "마이데이터 연동 시작일",
+          "cid": "CHN_DB.MYDATA_LINK.LINK_DT"
+        }
+      ]
+    },
+    {
+      "key": "신규",
+      "size": 4,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD::연체 발생",
+          "name": "연체 발생",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_PRDT_MST.SALE_YN::대출 상품 판매 여부",
+          "name": "대출 상품 판매 여부",
+          "cid": "LOAN_DB.LOAN_PRDT_MST.SALE_YN"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_PRDT_MST.SALE_YN::판매 중인 대출 상품",
+          "name": "판매 중인 대출 상품",
+          "cid": "LOAN_DB.LOAN_PRDT_MST.SALE_YN"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD::연체 발생",
+          "name": "연체 발생",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "운영",
+      "size": 4,
+      "members": [
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_STAT_CD::카드 운영 상태",
+          "name": "카드 운영 상태",
+          "cid": "CARD_DB.CARD_MST.CARD_STAT_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD::예금 계좌 운영 상태",
+          "name": "예금 계좌 운영 상태",
+          "cid": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD::정상 계좌",
+          "name": "정상 계좌",
+          "cid": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD"
+        },
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD::자동이체 운영 상태",
+          "name": "자동이체 운영 상태",
+          "cid": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "일반",
+      "size": 4,
+      "members": [
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD::일반 등급 고객",
+          "name": "일반 등급 고객",
+          "cid": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD"
+        },
+        {
+          "term_key": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD::일반 등급 고객",
+          "name": "일반 등급 고객",
+          "cid": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_GRD_CD::일반 카드 등급",
+          "name": "일반 카드 등급",
+          "cid": "CARD_DB.CARD_MST.CARD_GRD_CD"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD::B등급 한도",
+          "name": "B등급 한도",
+          "cid": "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD"
+        }
+      ]
+    },
+    {
+      "key": "잔액",
+      "size": 4,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_BAL_AMT::대출 잔여 원금",
+          "name": "대출 잔여 원금",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_BAL_AMT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_BAL_AMT::카드 잔여 한도",
+          "name": "카드 잔여 한도",
+          "cid": "CARD_DB.CARD_MST.CARD_BAL_AMT"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.DEP_BAL_AMT::예금 잔액",
+          "name": "예금 잔액",
+          "cid": "DEP_DB.DEP_ACCT_MST.DEP_BAL_AMT"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.BAL_AFTR_AMT::거래 후 잔액",
+          "name": "거래 후 잔액",
+          "cid": "DEP_DB.DEP_TXN_HIST.BAL_AFTR_AMT"
+        }
+      ]
+    },
+    {
+      "key": "접수",
+      "size": 4,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD::대출 접수",
+          "name": "대출 접수",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APPL_DT::대출 신청일",
+          "name": "대출 신청일",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APPL_DT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.ISSUE_STAT_CD::카드 신청 접수 단계",
+          "name": "카드 신청 접수 단계",
+          "cid": "CARD_DB.CARD_APPL.ISSUE_STAT_CD"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD::이체 요청",
+          "name": "이체 요청",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "정보",
+      "size": 4,
+      "members": [
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN::마케팅 정보 수신 동의 여부",
+          "name": "마케팅 정보 수신 동의 여부",
+          "cid": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN"
+        },
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN::마케팅 정보 수신 동의",
+          "name": "마케팅 정보 수신 동의",
+          "cid": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN"
+        },
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN::마케팅 정보 수신 미동의",
+          "name": "마케팅 정보 수신 미동의",
+          "cid": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN"
+        },
+        {
+          "term_key": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD::마케팅 약관 동의",
+          "name": "마케팅 약관 동의",
+          "cid": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD"
+        }
+      ]
+    },
+    {
+      "key": "출금",
+      "size": 4,
+      "members": [
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD::지급정지 계좌",
+          "name": "지급정지 계좌",
+          "cid": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD::출금 거래",
+          "name": "출금 거래",
+          "cid": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.FROM_ACCT_NO::출금 계좌번호",
+          "name": "출금 계좌번호",
+          "cid": "PAY_DB.TRANSFER_HIST.FROM_ACCT_NO"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD::이체 완료",
+          "name": "이체 완료",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "취소",
+      "size": 4,
+      "members": [
+        {
+          "term_key": "CARD_DB.CARD_APRV_HIST.CNCL_YN::승인 취소 여부",
+          "name": "승인 취소 여부",
+          "cid": "CARD_DB.CARD_APRV_HIST.CNCL_YN"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APRV_HIST.CNCL_YN::취소된 승인",
+          "name": "취소된 승인",
+          "cid": "CARD_DB.CARD_APRV_HIST.CNCL_YN"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APRV_HIST.CNCL_YN::취소되지 않은 승인",
+          "name": "취소되지 않은 승인",
+          "cid": "CARD_DB.CARD_APRV_HIST.CNCL_YN"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD::이체 취소",
+          "name": "이체 취소",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "해지",
+      "size": 4,
+      "members": [
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_STAT_CD::해지 카드",
+          "name": "해지 카드",
+          "cid": "CARD_DB.CARD_MST.CARD_STAT_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD::해지 계좌",
+          "name": "해지 계좌",
+          "cid": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD"
+        },
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD::자동이체 해지",
+          "name": "자동이체 해지",
+          "cid": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.LINK_STAT_CD::마이데이터 연동 해지",
+          "name": "마이데이터 연동 해지",
+          "cid": "CHN_DB.MYDATA_LINK.LINK_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "활성",
+      "size": 4,
+      "members": [
+        {
+          "term_key": "CUST_DB.CUST_CONTACT.VALID_YN::연락처 유효 여부",
+          "name": "연락처 유효 여부",
+          "cid": "CUST_DB.CUST_CONTACT.VALID_YN"
+        },
+        {
+          "term_key": "CUST_DB.CUST_CONTACT.VALID_YN::유효한 연락처",
+          "name": "유효한 연락처",
+          "cid": "CUST_DB.CUST_CONTACT.VALID_YN"
+        },
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD::자동이체 정상",
+          "name": "자동이체 정상",
+          "cid": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.LINK_STAT_CD::마이데이터 연동 중",
+          "name": "마이데이터 연동 중",
+          "cid": "CHN_DB.MYDATA_LINK.LINK_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "FDS",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.DTCT_AMT::이상거래 탐지 금액",
+          "name": "이상거래 탐지 금액",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.DTCT_AMT"
+        },
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.RISK_SCR::사기 위험 점수",
+          "name": "사기 위험 점수",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.RISK_SCR"
+        },
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.DTCT_DT::이상거래 탐지 일시",
+          "name": "이상거래 탐지 일시",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.DTCT_DT"
+        }
+      ]
+    },
+    {
+      "key": "ID",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "CARD_DB.CARD_APPL.CUST_NO::카드 신청 고객 번호",
+          "name": "카드 신청 고객 번호",
+          "cid": "CARD_DB.CARD_APPL.CUST_NO"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.EVAL_ID::신용 평가 건 식별자",
+          "name": "신용 평가 건 식별자",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.EVAL_ID"
+        },
+        {
+          "term_key": "CHN_DB.ACCESS_LOG.CUST_NO::접속 고객 번호",
+          "name": "접속 고객 번호",
+          "cid": "CHN_DB.ACCESS_LOG.CUST_NO"
+        }
+      ]
+    },
+    {
+      "key": "광고",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN::마케팅 정보 수신 동의 여부",
+          "name": "마케팅 정보 수신 동의 여부",
+          "cid": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN"
+        },
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN::마케팅 정보 수신 동의",
+          "name": "마케팅 정보 수신 동의",
+          "cid": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN"
+        },
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN::마케팅 정보 수신 미동의",
+          "name": "마케팅 정보 수신 미동의",
+          "cid": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN"
+        }
+      ]
+    },
+    {
+      "key": "기간",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_DAYS::누적 연체 일수",
+          "name": "누적 연체 일수",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_DAYS"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.OPEN_DT::계좌 개설일",
+          "name": "계좌 개설일",
+          "cid": "DEP_DB.DEP_ACCT_MST.OPEN_DT"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.LINK_STAT_CD::마이데이터 연동 만료",
+          "name": "마이데이터 연동 만료",
+          "cid": "CHN_DB.MYDATA_LINK.LINK_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "기준",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_PRDT_MST.BASE_RATE::상품 기준 금리",
+          "name": "상품 기준 금리",
+          "cid": "LOAN_DB.LOAN_PRDT_MST.BASE_RATE"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.TXN_DT::거래 발생일",
+          "name": "거래 발생일",
+          "cid": "DEP_DB.DEP_TXN_HIST.TXN_DT"
+        },
+        {
+          "term_key": "DEP_DB.DEP_PRDT_MST.BASE_RATE::기준금리",
+          "name": "기준금리",
+          "cid": "DEP_DB.DEP_PRDT_MST.BASE_RATE"
+        }
+      ]
+    },
+    {
+      "key": "기준금리",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.INT_RATE::대출 기준금리",
+          "name": "대출 기준금리",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.INT_RATE"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_PRDT_MST.BASE_RATE::상품 기준 금리",
+          "name": "상품 기준 금리",
+          "cid": "LOAN_DB.LOAN_PRDT_MST.BASE_RATE"
+        },
+        {
+          "term_key": "DEP_DB.DEP_PRDT_MST.BASE_RATE::기준금리",
+          "name": "기준금리",
+          "cid": "DEP_DB.DEP_PRDT_MST.BASE_RATE"
+        }
+      ]
+    },
+    {
+      "key": "만기",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.MTRT_DT::대출 만기일",
+          "name": "대출 만기일",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.MTRT_DT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD::만기일시상환",
+          "name": "만기일시상환",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.MTRT_DT::예금 만기일",
+          "name": "예금 만기일",
+          "cid": "DEP_DB.DEP_ACCT_MST.MTRT_DT"
+        }
+      ]
+    },
+    {
+      "key": "미동",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN::마케팅 정보 수신 미동의",
+          "name": "마케팅 정보 수신 미동의",
+          "cid": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN"
+        },
+        {
+          "term_key": "CHN_DB.CNSNT_HIST.CNSNT_YN::약관 미동의",
+          "name": "약관 미동의",
+          "cid": "CHN_DB.CNSNT_HIST.CNSNT_YN"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN::마이데이터 전송 미동의",
+          "name": "마이데이터 전송 미동의",
+          "cid": "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN"
+        }
+      ]
+    },
+    {
+      "key": "미상환",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_BAL_AMT::대출 잔여 원금",
+          "name": "대출 잔여 원금",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_BAL_AMT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_AMT::연체 원금",
+          "name": "연체 원금",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_AMT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.DLNQ_AMT::연체 발생 금액",
+          "name": "연체 발생 금액",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.DLNQ_AMT"
+        }
+      ]
+    },
+    {
+      "key": "발급",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "CARD_DB.CARD_MST.ISSUE_DT::카드 발급일",
+          "name": "카드 발급일",
+          "cid": "CARD_DB.CARD_MST.ISSUE_DT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.ISSUE_STAT_CD::카드 발급 처리 단계",
+          "name": "카드 발급 처리 단계",
+          "cid": "CARD_DB.CARD_APPL.ISSUE_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.ISSUE_STAT_CD::카드 발급 완료 단계",
+          "name": "카드 발급 완료 단계",
+          "cid": "CARD_DB.CARD_APPL.ISSUE_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "블락",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.BLOCK_YN::차단 여부",
+          "name": "차단 여부",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.BLOCK_YN"
+        },
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.BLOCK_YN::차단 실행됨",
+          "name": "차단 실행됨",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.BLOCK_YN"
+        },
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.BLOCK_YN::차단되지 않음",
+          "name": "차단되지 않음",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.BLOCK_YN"
+        }
+      ]
+    },
+    {
+      "key": "사기",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.DTCT_AMT::이상거래 탐지 금액",
+          "name": "이상거래 탐지 금액",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.DTCT_AMT"
+        },
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.RISK_SCR::사기 위험 점수",
+          "name": "사기 위험 점수",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.RISK_SCR"
+        },
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.DTCT_DT::이상거래 탐지 일시",
+          "name": "이상거래 탐지 일시",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.DTCT_DT"
+        }
+      ]
+    },
+    {
+      "key": "신청일",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APPL_DT::대출 신청일",
+          "name": "대출 신청일",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APPL_DT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.APPL_DT::카드 신청일",
+          "name": "카드 신청일",
+          "cid": "CARD_DB.CARD_APPL.APPL_DT"
+        },
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.REG_DT::자동이체 등록일",
+          "name": "자동이체 등록일",
+          "cid": "PAY_DB.AUTO_TRF_MST.REG_DT"
+        }
+      ]
+    },
+    {
+      "key": "실제",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.APLD_RATE::적용금리",
+          "name": "적용금리",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.APLD_RATE"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.INT_RATE::계좌 적용 연이율",
+          "name": "계좌 적용 연이율",
+          "cid": "DEP_DB.DEP_ACCT_MST.INT_RATE"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.TXN_DT::거래 발생일",
+          "name": "거래 발생일",
+          "cid": "DEP_DB.DEP_TXN_HIST.TXN_DT"
+        }
+      ]
+    },
+    {
+      "key": "실행",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_AMT::대출 실행 금액",
+          "name": "대출 실행 금액",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_AMT"
+        },
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.BLOCK_YN::차단 여부",
+          "name": "차단 여부",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.BLOCK_YN"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_DT::이체 실행 일시",
+          "name": "이체 실행 일시",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_DT"
+        }
+      ]
+    },
+    {
+      "key": "연락처",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "CUST_DB.CUST_CONTACT.VALID_YN::연락처 유효 여부",
+          "name": "연락처 유효 여부",
+          "cid": "CUST_DB.CUST_CONTACT.VALID_YN"
+        },
+        {
+          "term_key": "CUST_DB.CUST_CONTACT.VALID_YN::유효한 연락처",
+          "name": "유효한 연락처",
+          "cid": "CUST_DB.CUST_CONTACT.VALID_YN"
+        },
+        {
+          "term_key": "CUST_DB.CUST_CONTACT.VALID_YN::무효 처리된 연락처",
+          "name": "무효 처리된 연락처",
+          "cid": "CUST_DB.CUST_CONTACT.VALID_YN"
+        }
+      ]
+    },
+    {
+      "key": "유효",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "CUST_DB.CUST_CONTACT.VALID_YN::연락처 유효 여부",
+          "name": "연락처 유효 여부",
+          "cid": "CUST_DB.CUST_CONTACT.VALID_YN"
+        },
+        {
+          "term_key": "CUST_DB.CUST_CONTACT.VALID_YN::유효한 연락처",
+          "name": "유효한 연락처",
+          "cid": "CUST_DB.CUST_CONTACT.VALID_YN"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APRV_HIST.CNCL_YN::취소되지 않은 승인",
+          "name": "취소되지 않은 승인",
+          "cid": "CARD_DB.CARD_APRV_HIST.CNCL_YN"
+        }
+      ]
+    },
+    {
+      "key": "이력",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD::연체 상태 코드",
+          "name": "연체 상태 코드",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.CARD_NO::연체 이력 카드 번호",
+          "name": "연체 이력 카드 번호",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.CARD_NO"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD::연체 상태 단계",
+          "name": "연체 상태 단계",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "이상거래",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.DTCT_AMT::이상거래 탐지 금액",
+          "name": "이상거래 탐지 금액",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.DTCT_AMT"
+        },
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.RISK_SCR::사기 위험 점수",
+          "name": "사기 위험 점수",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.RISK_SCR"
+        },
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.DTCT_DT::이상거래 탐지 일시",
+          "name": "이상거래 탐지 일시",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.DTCT_DT"
+        }
+      ]
+    },
+    {
+      "key": "이용",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_LMT_AMT::카드 이용 한도",
+          "name": "카드 이용 한도",
+          "cid": "CARD_DB.CARD_MST.CARD_LMT_AMT"
+        },
+        {
+          "term_key": "CHN_DB.ACCESS_LOG.CHANNEL_CD::ATM 접속",
+          "name": "ATM 접속",
+          "cid": "CHN_DB.ACCESS_LOG.CHANNEL_CD"
+        },
+        {
+          "term_key": "CHN_DB.ACCESS_LOG.CHANNEL_CD::영업점 접속",
+          "name": "영업점 접속",
+          "cid": "CHN_DB.ACCESS_LOG.CHANNEL_CD"
+        }
+      ]
+    },
+    {
+      "key": "이자",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_INT_AMT::연체 가산 이자 금액",
+          "name": "연체 가산 이자 금액",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_INT_AMT"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.OPEN_DT::계좌 개설일",
+          "name": "계좌 개설일",
+          "cid": "DEP_DB.DEP_ACCT_MST.OPEN_DT"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD::이자 거래",
+          "name": "이자 거래",
+          "cid": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD"
+        }
+      ]
+    },
+    {
+      "key": "일시",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.DTCT_DT::이상거래 탐지 일시",
+          "name": "이상거래 탐지 일시",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.DTCT_DT"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_DT::이체 실행 일시",
+          "name": "이체 실행 일시",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_DT"
+        },
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD::자동이체 정지",
+          "name": "자동이체 정지",
+          "cid": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "일자",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.OCUR_DT::연체 발생일",
+          "name": "연체 발생일",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.OCUR_DT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.ISSUE_DT::카드 발급일",
+          "name": "카드 발급일",
+          "cid": "CARD_DB.CARD_MST.ISSUE_DT"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.TXN_DT::거래 발생일",
+          "name": "거래 발생일",
+          "cid": "DEP_DB.DEP_TXN_HIST.TXN_DT"
+        }
+      ]
+    },
+    {
+      "key": "전송",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN::마이데이터 동의 여부",
+          "name": "마이데이터 동의 여부",
+          "cid": "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN::마이데이터 전송 동의",
+          "name": "마이데이터 전송 동의",
+          "cid": "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN::마이데이터 전송 미동의",
+          "name": "마이데이터 전송 미동의",
+          "cid": "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN"
+        }
+      ]
+    },
+    {
+      "key": "정지",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_STAT_CD::정지 카드",
+          "name": "정지 카드",
+          "cid": "CARD_DB.CARD_MST.CARD_STAT_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD::지급정지 계좌",
+          "name": "지급정지 계좌",
+          "cid": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD"
+        },
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD::자동이체 정지",
+          "name": "자동이체 정지",
+          "cid": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "종료",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD::연체 해소",
+          "name": "연체 해소",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD::연체 해소됨",
+          "name": "연체 해소됨",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD"
+        },
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD::자동이체 해지",
+          "name": "자동이체 해지",
+          "cid": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "중단",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_PRDT_MST.SALE_YN::판매 중단 대출 상품",
+          "name": "판매 중단 대출 상품",
+          "cid": "LOAN_DB.LOAN_PRDT_MST.SALE_YN"
+        },
+        {
+          "term_key": "DEP_DB.DEP_PRDT_MST.SALE_YN::판매 중단 상품",
+          "name": "판매 중단 상품",
+          "cid": "DEP_DB.DEP_PRDT_MST.SALE_YN"
+        },
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD::자동이체 정지",
+          "name": "자동이체 정지",
+          "cid": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "중인",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_PRDT_MST.SALE_YN::판매 중인 대출 상품",
+          "name": "판매 중인 대출 상품",
+          "cid": "LOAN_DB.LOAN_PRDT_MST.SALE_YN"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_STAT_CD::연체 카드",
+          "name": "연체 카드",
+          "cid": "CARD_DB.CARD_MST.CARD_STAT_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_PRDT_MST.SALE_YN::판매 중인 상품",
+          "name": "판매 중인 상품",
+          "cid": "DEP_DB.DEP_PRDT_MST.SALE_YN"
+        }
+      ]
+    },
+    {
+      "key": "지속",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD::연체 지속",
+          "name": "연체 지속",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_DAYS::누적 연체 일수",
+          "name": "누적 연체 일수",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_DAYS"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD::연체 지속 중",
+          "name": "연체 지속 중",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "차단",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.BLOCK_YN::차단 여부",
+          "name": "차단 여부",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.BLOCK_YN"
+        },
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.BLOCK_YN::차단 실행됨",
+          "name": "차단 실행됨",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.BLOCK_YN"
+        },
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.BLOCK_YN::차단되지 않음",
+          "name": "차단되지 않음",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.BLOCK_YN"
+        }
+      ]
+    },
+    {
+      "key": "최초",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_AMT::대출 실행 금액",
+          "name": "대출 실행 금액",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_AMT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.OCUR_DT::연체 발생일",
+          "name": "연체 발생일",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.OCUR_DT"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.LINK_DT::마이데이터 연동 시작일",
+          "name": "마이데이터 연동 시작일",
+          "cid": "CHN_DB.MYDATA_LINK.LINK_DT"
+        }
+      ]
+    },
+    {
+      "key": "취급",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_PRDT_MST.SALE_YN::대출 상품 판매 여부",
+          "name": "대출 상품 판매 여부",
+          "cid": "LOAN_DB.LOAN_PRDT_MST.SALE_YN"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_PRDT_MST.SALE_YN::판매 중인 대출 상품",
+          "name": "판매 중인 대출 상품",
+          "cid": "LOAN_DB.LOAN_PRDT_MST.SALE_YN"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_PRDT_MST.SALE_YN::판매 중단 대출 상품",
+          "name": "판매 중단 대출 상품",
+          "cid": "LOAN_DB.LOAN_PRDT_MST.SALE_YN"
+        }
+      ]
+    },
+    {
+      "key": "탐지",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.DTCT_AMT::이상거래 탐지 금액",
+          "name": "이상거래 탐지 금액",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.DTCT_AMT"
+        },
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.RISK_SCR::사기 위험 점수",
+          "name": "사기 위험 점수",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.RISK_SCR"
+        },
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.DTCT_DT::이상거래 탐지 일시",
+          "name": "이상거래 탐지 일시",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.DTCT_DT"
+        }
+      ]
+    },
+    {
+      "key": "해소",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD::연체 해소",
+          "name": "연체 해소",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.CLEAR_DT::연체 해소일",
+          "name": "연체 해소일",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.CLEAR_DT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD::연체 해소됨",
+          "name": "연체 해소됨",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "현재",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_STAT_CD::카드 운영 상태",
+          "name": "카드 운영 상태",
+          "cid": "CARD_DB.CARD_MST.CARD_STAT_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.DEP_BAL_AMT::예금 잔액",
+          "name": "예금 잔액",
+          "cid": "DEP_DB.DEP_ACCT_MST.DEP_BAL_AMT"
+        },
+        {
+          "term_key": "DEP_DB.DEP_PRDT_MST.SALE_YN::판매 중인 상품",
+          "name": "판매 중인 상품",
+          "cid": "DEP_DB.DEP_PRDT_MST.SALE_YN"
+        }
+      ]
+    },
+    {
+      "key": "회원",
+      "size": 3,
+      "members": [
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_GRD_CD::일반 카드 등급",
+          "name": "일반 카드 등급",
+          "cid": "CARD_DB.CARD_MST.CARD_GRD_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_GRD_CD::골드 카드 등급",
+          "name": "골드 카드 등급",
+          "cid": "CARD_DB.CARD_MST.CARD_GRD_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_GRD_CD::플래티넘 카드 등급",
+          "name": "플래티넘 카드 등급",
+          "cid": "CARD_DB.CARD_MST.CARD_GRD_CD"
+        }
+      ]
+    },
+    {
+      "key": "VIP",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD::VIP 등급 고객",
+          "name": "VIP 등급 고객",
+          "cid": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD"
+        },
+        {
+          "term_key": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD::VIP 등급 고객",
+          "name": "VIP 등급 고객",
+          "cid": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD"
+        }
+      ]
+    },
+    {
+      "key": "VVIP",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD::VVIP 등급 고객",
+          "name": "VVIP 등급 고객",
+          "cid": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD"
+        },
+        {
+          "term_key": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD::VVIP 등급 고객",
+          "name": "VVIP 등급 고객",
+          "cid": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD"
+        }
+      ]
+    },
+    {
+      "key": "가산",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_INT_AMT::연체 가산 이자 금액",
+          "name": "연체 가산 이자 금액",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_INT_AMT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_PRDT_MST.BASE_RATE::상품 기준 금리",
+          "name": "상품 기준 금리",
+          "cid": "LOAN_DB.LOAN_PRDT_MST.BASE_RATE"
+        }
+      ]
+    },
+    {
+      "key": "가입",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.PRDT_CD::예금 상품 코드",
+          "name": "예금 상품 코드",
+          "cid": "DEP_DB.DEP_ACCT_MST.PRDT_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.OPEN_DT::계좌 개설일",
+          "name": "계좌 개설일",
+          "cid": "DEP_DB.DEP_ACCT_MST.OPEN_DT"
+        }
+      ]
+    },
+    {
+      "key": "거부",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN::마케팅 정보 수신 미동의",
+          "name": "마케팅 정보 수신 미동의",
+          "cid": "CUST_DB.CUST_BASE_INFO.MKTG_CNSNT_YN"
+        },
+        {
+          "term_key": "CHN_DB.CNSNT_HIST.CNSNT_YN::약관 미동의",
+          "name": "약관 미동의",
+          "cid": "CHN_DB.CNSNT_HIST.CNSNT_YN"
+        }
+      ]
+    },
+    {
+      "key": "거절",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD::대출 신청 거절",
+          "name": "대출 신청 거절",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APPL_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.ISSUE_STAT_CD::카드 신청 반려 단계",
+          "name": "카드 신청 반려 단계",
+          "cid": "CARD_DB.CARD_APPL.ISSUE_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "결제",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "CARD_DB.CARD_APRV_HIST.APRV_AMT::승인금액",
+          "name": "승인금액",
+          "cid": "CARD_DB.CARD_APRV_HIST.APRV_AMT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.OCUR_DT::연체 발생일",
+          "name": "연체 발생일",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.OCUR_DT"
+        }
+      ]
+    },
+    {
+      "key": "계좌번호",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.DEP_NO::거래 계좌번호",
+          "name": "거래 계좌번호",
+          "cid": "DEP_DB.DEP_TXN_HIST.DEP_NO"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.FROM_ACCT_NO::출금 계좌번호",
+          "name": "출금 계좌번호",
+          "cid": "PAY_DB.TRANSFER_HIST.FROM_ACCT_NO"
+        }
+      ]
+    },
+    {
+      "key": "공여",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "RISK_DB.CRDT_LMT_MST.CRDT_LMT_AMT::신용 공여 한도 금액",
+          "name": "신용 공여 한도 금액",
+          "cid": "RISK_DB.CRDT_LMT_MST.CRDT_LMT_AMT"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_LMT_MST.USE_AMT::신용 한도 사용 금액",
+          "name": "신용 한도 사용 금액",
+          "cid": "RISK_DB.CRDT_LMT_MST.USE_AMT"
+        }
+      ]
+    },
+    {
+      "key": "구분",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "CARD_DB.CARD_APRV_HIST.CNCL_YN::승인 취소 여부",
+          "name": "승인 취소 여부",
+          "cid": "CARD_DB.CARD_APRV_HIST.CNCL_YN"
+        },
+        {
+          "term_key": "CHN_DB.ACCESS_LOG.CHANNEL_CD::접속 채널 유형",
+          "name": "접속 채널 유형",
+          "cid": "CHN_DB.ACCESS_LOG.CHANNEL_CD"
+        }
+      ]
+    },
+    {
+      "key": "그레이드",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD::고객 등급 코드",
+          "name": "고객 등급 코드",
+          "cid": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_GRD_CD::카드 등급 코드",
+          "name": "카드 등급 코드",
+          "cid": "CARD_DB.CARD_MST.CARD_GRD_CD"
+        }
+      ]
+    },
+    {
+      "key": "기산일",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.OCUR_DT::연체 발생일",
+          "name": "연체 발생일",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.OCUR_DT"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.OPEN_DT::계좌 개설일",
+          "name": "계좌 개설일",
+          "cid": "DEP_DB.DEP_ACCT_MST.OPEN_DT"
+        }
+      ]
+    },
+    {
+      "key": "기준일",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.OPEN_DT::계좌 개설일",
+          "name": "계좌 개설일",
+          "cid": "DEP_DB.DEP_ACCT_MST.OPEN_DT"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.MTRT_DT::예금 만기일",
+          "name": "예금 만기일",
+          "cid": "DEP_DB.DEP_ACCT_MST.MTRT_DT"
+        }
+      ]
+    },
+    {
+      "key": "남은",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_BAL_AMT::대출 잔여 원금",
+          "name": "대출 잔여 원금",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_BAL_AMT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_BAL_AMT::카드 잔여 한도",
+          "name": "카드 잔여 한도",
+          "cid": "CARD_DB.CARD_MST.CARD_BAL_AMT"
+        }
+      ]
+    },
+    {
+      "key": "내역",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD::입금 거래",
+          "name": "입금 거래",
+          "cid": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD::출금 거래",
+          "name": "출금 거래",
+          "cid": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD"
+        }
+      ]
+    },
+    {
+      "key": "누적",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_DAYS::누적 연체 일수",
+          "name": "누적 연체 일수",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_DAYS"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.DLNQ_DAYS::연체 일수",
+          "name": "연체 일수",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.DLNQ_DAYS"
+        }
+      ]
+    },
+    {
+      "key": "동의하지",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "CHN_DB.CNSNT_HIST.CNSNT_YN::약관 미동의",
+          "name": "약관 미동의",
+          "cid": "CHN_DB.CNSNT_HIST.CNSNT_YN"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN::마이데이터 전송 미동의",
+          "name": "마이데이터 전송 미동의",
+          "cid": "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN"
+        }
+      ]
+    },
+    {
+      "key": "동의함",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "CHN_DB.CNSNT_HIST.CNSNT_YN::약관 동의함",
+          "name": "약관 동의함",
+          "cid": "CHN_DB.CNSNT_HIST.CNSNT_YN"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN::마이데이터 전송 동의",
+          "name": "마이데이터 전송 동의",
+          "cid": "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN"
+        }
+      ]
+    },
+    {
+      "key": "동일",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD::원금균등상환",
+          "name": "원금균등상환",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD::원리금균등상환",
+          "name": "원리금균등상환",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD"
+        }
+      ]
+    },
+    {
+      "key": "등록",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD::자동이체 운영 상태",
+          "name": "자동이체 운영 상태",
+          "cid": "PAY_DB.AUTO_TRF_MST.AUTO_STAT_CD"
+        },
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.REG_DT::자동이체 등록일",
+          "name": "자동이체 등록일",
+          "cid": "PAY_DB.AUTO_TRF_MST.REG_DT"
+        }
+      ]
+    },
+    {
+      "key": "리스크",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD::C등급 한도",
+          "name": "C등급 한도",
+          "cid": "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD"
+        },
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.RISK_SCR::사기 위험 점수",
+          "name": "사기 위험 점수",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.RISK_SCR"
+        }
+      ]
+    },
+    {
+      "key": "만기일",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.MTRT_DT::대출 만기일",
+          "name": "대출 만기일",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.MTRT_DT"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.MTRT_DT::예금 만기일",
+          "name": "예금 만기일",
+          "cid": "DEP_DB.DEP_ACCT_MST.MTRT_DT"
+        }
+      ]
+    },
+    {
+      "key": "만기일시",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD::만기일시상환",
+          "name": "만기일시상환",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD::만기일시 신청",
+          "name": "만기일시 신청",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD"
+        }
+      ]
+    },
+    {
+      "key": "만료",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "CARD_DB.CARD_MST.EXPIRE_DT::카드 유효기간 만료일",
+          "name": "카드 유효기간 만료일",
+          "cid": "CARD_DB.CARD_MST.EXPIRE_DT"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.LINK_STAT_CD::마이데이터 연동 만료",
+          "name": "마이데이터 연동 만료",
+          "cid": "CHN_DB.MYDATA_LINK.LINK_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "매월",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD::원금균등상환",
+          "name": "원금균등상환",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD::원리금균등상환",
+          "name": "원리금균등상환",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD"
+        }
+      ]
+    },
+    {
+      "key": "미출시",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_PRDT_MST.SALE_YN::판매 중단 대출 상품",
+          "name": "판매 중단 대출 상품",
+          "cid": "LOAN_DB.LOAN_PRDT_MST.SALE_YN"
+        },
+        {
+          "term_key": "DEP_DB.DEP_PRDT_MST.SALE_YN::판매 중단 상품",
+          "name": "판매 중단 상품",
+          "cid": "DEP_DB.DEP_PRDT_MST.SALE_YN"
+        }
+      ]
+    },
+    {
+      "key": "방법",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD::상환방식",
+          "name": "상환방식",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD::신청 상환 방식",
+          "name": "신청 상환 방식",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD"
+        }
+      ]
+    },
+    {
+      "key": "분류",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "CARD_DB.CARD_APRV_HIST.MRCHT_CTGR_CD::가맹점 업종 분류 코드",
+          "name": "가맹점 업종 분류 코드",
+          "cid": "CARD_DB.CARD_APRV_HIST.MRCHT_CTGR_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_PRDT_MST.PRDT_TYPE_CD::예금 상품 수신 유형",
+          "name": "예금 상품 수신 유형",
+          "cid": "DEP_DB.DEP_PRDT_MST.PRDT_TYPE_CD"
+        }
+      ]
+    },
+    {
+      "key": "사유",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "CUST_DB.CUST_GRD_HIST.RSN_CD::등급 변경 사유 코드",
+          "name": "등급 변경 사유 코드",
+          "cid": "CUST_DB.CUST_GRD_HIST.RSN_CD"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.EVAL_RSN_CD::신용 평가 사유 코드",
+          "name": "신용 평가 사유 코드",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.EVAL_RSN_CD"
+        }
+      ]
+    },
+    {
+      "key": "승인액",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APRV_AMT::대출 승인 금액",
+          "name": "대출 승인 금액",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APRV_AMT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APRV_HIST.APRV_AMT::승인금액",
+          "name": "승인금액",
+          "cid": "CARD_DB.CARD_APRV_HIST.APRV_AMT"
+        }
+      ]
+    },
+    {
+      "key": "시각",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.DTCT_DT::이상거래 탐지 일시",
+          "name": "이상거래 탐지 일시",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.DTCT_DT"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_DT::이체 실행 일시",
+          "name": "이체 실행 일시",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_DT"
+        }
+      ]
+    },
+    {
+      "key": "시작",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD::연체 발생",
+          "name": "연체 발생",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD::연체 발생",
+          "name": "연체 발생",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "식별",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.PRDT_CD::예금 상품 코드",
+          "name": "예금 상품 코드",
+          "cid": "DEP_DB.DEP_ACCT_MST.PRDT_CD"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.PROVIDER_CD::마이데이터 정보제공기관 코드",
+          "name": "마이데이터 정보제공기관 코드",
+          "cid": "CHN_DB.MYDATA_LINK.PROVIDER_CD"
+        }
+      ]
+    },
+    {
+      "key": "식별자",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.EVAL_ID::신용 평가 건 식별자",
+          "name": "신용 평가 건 식별자",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.EVAL_ID"
+        },
+        {
+          "term_key": "CHN_DB.ACCESS_LOG.CUST_NO::접속 고객 번호",
+          "name": "접속 고객 번호",
+          "cid": "CHN_DB.ACCESS_LOG.CUST_NO"
+        }
+      ]
+    },
+    {
+      "key": "않은",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "CARD_DB.CARD_APRV_HIST.CNCL_YN::취소되지 않은 승인",
+          "name": "취소되지 않은 승인",
+          "cid": "CARD_DB.CARD_APRV_HIST.CNCL_YN"
+        },
+        {
+          "term_key": "CHN_DB.CNSNT_HIST.CNSNT_YN::약관 미동의",
+          "name": "약관 미동의",
+          "cid": "CHN_DB.CNSNT_HIST.CNSNT_YN"
+        }
+      ]
+    },
+    {
+      "key": "않음",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.BLOCK_YN::차단되지 않음",
+          "name": "차단되지 않음",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.BLOCK_YN"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN::마이데이터 전송 미동의",
+          "name": "마이데이터 전송 미동의",
+          "cid": "CHN_DB.MYDATA_LINK.MYDATA_CNSNT_YN"
+        }
+      ]
+    },
+    {
+      "key": "약정",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.TRF_AMT::자동이체 약정금액",
+          "name": "자동이체 약정금액",
+          "cid": "PAY_DB.AUTO_TRF_MST.TRF_AMT"
+        },
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.TRF_DAY::자동이체 약정일",
+          "name": "자동이체 약정일",
+          "cid": "PAY_DB.AUTO_TRF_MST.TRF_DAY"
+        }
+      ]
+    },
+    {
+      "key": "약정일",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.TRF_DAY::자동이체 약정일",
+          "name": "자동이체 약정일",
+          "cid": "PAY_DB.AUTO_TRF_MST.TRF_DAY"
+        },
+        {
+          "term_key": "PAY_DB.AUTO_TRF_MST.REG_DT::자동이체 등록일",
+          "name": "자동이체 등록일",
+          "cid": "PAY_DB.AUTO_TRF_MST.REG_DT"
+        }
+      ]
+    },
+    {
+      "key": "완료일",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APRV_DT::대출 승인 확정일",
+          "name": "대출 승인 확정일",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APRV_DT"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.CLEAR_DT::연체 해소일",
+          "name": "연체 해소일",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.CLEAR_DT"
+        }
+      ]
+    },
+    {
+      "key": "요청",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "CARD_DB.CARD_APPL.REQ_LMT_AMT::신청 희망 한도 금액",
+          "name": "신청 희망 한도 금액",
+          "cid": "CARD_DB.CARD_APPL.REQ_LMT_AMT"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD::이체 요청",
+          "name": "이체 요청",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "우대",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.INT_RATE::대출 기준금리",
+          "name": "대출 기준금리",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.INT_RATE"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_PRDT_MST.BASE_RATE::상품 기준 금리",
+          "name": "상품 기준 금리",
+          "cid": "LOAN_DB.LOAN_PRDT_MST.BASE_RATE"
+        }
+      ]
+    },
+    {
+      "key": "우수",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD::우수 등급 고객",
+          "name": "우수 등급 고객",
+          "cid": "CUST_DB.CUST_BASE_INFO.CUST_GRD_CD"
+        },
+        {
+          "term_key": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD::우수 등급 고객",
+          "name": "우수 등급 고객",
+          "cid": "CUST_DB.CUST_GRD_HIST.CUST_GRD_CD"
+        }
+      ]
+    },
+    {
+      "key": "원금균등",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD::원금균등상환",
+          "name": "원금균등상환",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD::원금균등 신청",
+          "name": "원금균등 신청",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD"
+        }
+      ]
+    },
+    {
+      "key": "원리금균등",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD::원리금균등상환",
+          "name": "원리금균등상환",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.RPY_MTHD_CD"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD::원리금균등 신청",
+          "name": "원리금균등 신청",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.RPY_MTHD_CD"
+        }
+      ]
+    },
+    {
+      "key": "원인",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "CUST_DB.CUST_GRD_HIST.RSN_CD::등급 변경 사유 코드",
+          "name": "등급 변경 사유 코드",
+          "cid": "CUST_DB.CUST_GRD_HIST.RSN_CD"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.EVAL_RSN_CD::신용 평가 사유 코드",
+          "name": "신용 평가 사유 코드",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.EVAL_RSN_CD"
+        }
+      ]
+    },
+    {
+      "key": "유지",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD::연체 지속",
+          "name": "연체 지속",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_STAT_CD"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD::연체 지속 중",
+          "name": "연체 지속 중",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.DLNQ_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "이체된",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_AMT::이체 원금",
+          "name": "이체 원금",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_AMT"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_DT::이체 실행 일시",
+          "name": "이체 실행 일시",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_DT"
+        }
+      ]
+    },
+    {
+      "key": "일수",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_DAYS::누적 연체 일수",
+          "name": "누적 연체 일수",
+          "cid": "LOAN_DB.LOAN_DLNQ_HIST.DLNQ_DAYS"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.DLNQ_DAYS::연체 일수",
+          "name": "연체 일수",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.DLNQ_DAYS"
+        }
+      ]
+    },
+    {
+      "key": "입금",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD::입금 거래",
+          "name": "입금 거래",
+          "cid": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD::이체 완료",
+          "name": "이체 완료",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "잔여",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_BAL_AMT::대출 잔여 원금",
+          "name": "대출 잔여 원금",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_BAL_AMT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_BAL_AMT::카드 잔여 한도",
+          "name": "카드 잔여 한도",
+          "cid": "CARD_DB.CARD_MST.CARD_BAL_AMT"
+        }
+      ]
+    },
+    {
+      "key": "적용",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "CUST_DB.CUST_GRD_HIST.APLD_DT::등급 적용일",
+          "name": "등급 적용일",
+          "cid": "CUST_DB.CUST_GRD_HIST.APLD_DT"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.INT_RATE::계좌 적용 연이율",
+          "name": "계좌 적용 연이율",
+          "cid": "DEP_DB.DEP_ACCT_MST.INT_RATE"
+        }
+      ]
+    },
+    {
+      "key": "점수",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.CRDT_SCR::신용 점수",
+          "name": "신용 점수",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.CRDT_SCR"
+        },
+        {
+          "term_key": "RISK_DB.FRAUD_DTCT_HIST.RISK_SCR::사기 위험 점수",
+          "name": "사기 위험 점수",
+          "cid": "RISK_DB.FRAUD_DTCT_HIST.RISK_SCR"
+        }
+      ]
+    },
+    {
+      "key": "접수일",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APPL_DT::대출 신청일",
+          "name": "대출 신청일",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APPL_DT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_APPL.APPL_DT::카드 신청일",
+          "name": "카드 신청일",
+          "cid": "CARD_DB.CARD_APPL.APPL_DT"
+        }
+      ]
+    },
+    {
+      "key": "정보제공기관",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.PROVIDER_CD::마이데이터 정보제공기관 코드",
+          "name": "마이데이터 정보제공기관 코드",
+          "cid": "CHN_DB.MYDATA_LINK.PROVIDER_CD"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.LINK_DT::마이데이터 연동 시작일",
+          "name": "마이데이터 연동 시작일",
+          "cid": "CHN_DB.MYDATA_LINK.LINK_DT"
+        }
+      ]
+    },
+    {
+      "key": "종료일",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "CARD_DB.CARD_MST.EXPIRE_DT::카드 유효기간 만료일",
+          "name": "카드 유효기간 만료일",
+          "cid": "CARD_DB.CARD_MST.EXPIRE_DT"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.MTRT_DT::예금 만기일",
+          "name": "예금 만기일",
+          "cid": "DEP_DB.DEP_ACCT_MST.MTRT_DT"
+        }
+      ]
+    },
+    {
+      "key": "종류",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD::거래 유형 코드",
+          "name": "거래 유형 코드",
+          "cid": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD"
+        },
+        {
+          "term_key": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD::동의 약관 유형",
+          "name": "동의 약관 유형",
+          "cid": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD"
+        }
+      ]
+    },
+    {
+      "key": "지급",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD::지급정지 계좌",
+          "name": "지급정지 계좌",
+          "cid": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD::이자 거래",
+          "name": "이자 거래",
+          "cid": "DEP_DB.DEP_TXN_HIST.TXN_TYPE_CD"
+        }
+      ]
+    },
+    {
+      "key": "처리된",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "CUST_DB.CUST_CONTACT.VALID_YN::유효한 연락처",
+          "name": "유효한 연락처",
+          "cid": "CUST_DB.CUST_CONTACT.VALID_YN"
+        },
+        {
+          "term_key": "CUST_DB.CUST_CONTACT.VALID_YN::무효 처리된 연락처",
+          "name": "무효 처리된 연락처",
+          "cid": "CUST_DB.CUST_CONTACT.VALID_YN"
+        }
+      ]
+    },
+    {
+      "key": "최우량",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD::신용 1등급",
+          "name": "신용 1등급",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.CRDT_GRD_CD"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD::A등급 한도",
+          "name": "A등급 한도",
+          "cid": "RISK_DB.CRDT_LMT_MST.LMT_GRD_CD"
+        }
+      ]
+    },
+    {
+      "key": "최종",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.APLD_RATE::적용금리",
+          "name": "적용금리",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.APLD_RATE"
+        },
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.MTRT_DT::대출 만기일",
+          "name": "대출 만기일",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.MTRT_DT"
+        }
+      ]
+    },
+    {
+      "key": "취소된",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "CARD_DB.CARD_APRV_HIST.CNCL_YN::취소된 승인",
+          "name": "취소된 승인",
+          "cid": "CARD_DB.CARD_APRV_HIST.CNCL_YN"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD::이체 취소",
+          "name": "이체 취소",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "크레딧",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "RISK_DB.CRDT_EVAL_HIST.CRDT_SCR::신용 점수",
+          "name": "신용 점수",
+          "cid": "RISK_DB.CRDT_EVAL_HIST.CRDT_SCR"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_LMT_MST.CRDT_LMT_AMT::신용 공여 한도 금액",
+          "name": "신용 공여 한도 금액",
+          "cid": "RISK_DB.CRDT_LMT_MST.CRDT_LMT_AMT"
+        }
+      ]
+    },
+    {
+      "key": "트랜잭션",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.TXN_AMT::거래 금액",
+          "name": "거래 금액",
+          "cid": "DEP_DB.DEP_TXN_HIST.TXN_AMT"
+        },
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.TXN_DT::거래 발생일",
+          "name": "거래 발생일",
+          "cid": "DEP_DB.DEP_TXN_HIST.TXN_DT"
+        }
+      ]
+    },
+    {
+      "key": "한도액",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_LMT_AMT::카드 이용 한도",
+          "name": "카드 이용 한도",
+          "cid": "CARD_DB.CARD_MST.CARD_LMT_AMT"
+        },
+        {
+          "term_key": "RISK_DB.CRDT_LMT_MST.CRDT_LMT_AMT::신용 공여 한도 금액",
+          "name": "신용 공여 한도 금액",
+          "cid": "RISK_DB.CRDT_LMT_MST.CRDT_LMT_AMT"
+        }
+      ]
+    },
+    {
+      "key": "항목",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD::필수 약관 동의",
+          "name": "필수 약관 동의",
+          "cid": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD"
+        },
+        {
+          "term_key": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD::선택 약관 동의",
+          "name": "선택 약관 동의",
+          "cid": "CHN_DB.CNSNT_HIST.CNSNT_TYPE_CD"
+        }
+      ]
+    },
+    {
+      "key": "해지된",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "CARD_DB.CARD_MST.CARD_STAT_CD::해지 카드",
+          "name": "해지 카드",
+          "cid": "CARD_DB.CARD_MST.CARD_STAT_CD"
+        },
+        {
+          "term_key": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD::해지 계좌",
+          "name": "해지 계좌",
+          "cid": "DEP_DB.DEP_ACCT_MST.DEP_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "현황",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD::대출 상태 코드",
+          "name": "대출 상태 코드",
+          "cid": "LOAN_DB.LOAN_ACCT_MST.LOAN_STAT_CD"
+        },
+        {
+          "term_key": "CHN_DB.MYDATA_LINK.LINK_STAT_CD::마이데이터 연동 상태",
+          "name": "마이데이터 연동 상태",
+          "cid": "CHN_DB.MYDATA_LINK.LINK_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "확정",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "DEP_DB.DEP_TXN_HIST.BAL_AFTR_AMT::거래 후 잔액",
+          "name": "거래 후 잔액",
+          "cid": "DEP_DB.DEP_TXN_HIST.BAL_AFTR_AMT"
+        },
+        {
+          "term_key": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD::이체 완료",
+          "name": "이체 완료",
+          "cid": "PAY_DB.TRANSFER_HIST.TRF_STAT_CD"
+        }
+      ]
+    },
+    {
+      "key": "확정일",
+      "size": 2,
+      "members": [
+        {
+          "term_key": "LOAN_DB.LOAN_APPL_HIST.APRV_DT::대출 승인 확정일",
+          "name": "대출 승인 확정일",
+          "cid": "LOAN_DB.LOAN_APPL_HIST.APRV_DT"
+        },
+        {
+          "term_key": "CARD_DB.CARD_DLNQ_HIST.OCUR_DT::연체 발생일",
+          "name": "연체 발생일",
+          "cid": "CARD_DB.CARD_DLNQ_HIST.OCUR_DT"
+        }
+      ]
+    }
+  ]
+}
