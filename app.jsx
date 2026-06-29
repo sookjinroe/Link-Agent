@@ -459,7 +459,7 @@ function KeyAndModel() {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
       {!showKey && (
-        <div onClick={() => setShowKey(true)} title={has ? "API 키 설정됨 — 클릭해 변경" : "API 키 없음 — 클릭해 입력"}
+        <div onClick={() => setShowKey(true)} title={has ? "API 키 설정됨" : "API 키 없음"}
           style={{ ...mono, fontSize: 12, padding: "4px 10px", border: "1px solid var(--border)", borderRadius: 4, cursor: "pointer",
             color: has ? "var(--high)" : "var(--low)" }}>
           {has ? "키 ✓" : "키 입력"}
@@ -490,94 +490,84 @@ function KeyAndModel() {
   );
 }
 
-function termsByColumn(G) {
-  const m = (G.terms_refined && G.terms_refined.by_column) || {};
-  return m;
-}
-function patchesByTermKey(G) {
-  const out = {};
-  for (const p of (G.stage2_patches || [])) (out[p.term_key] = out[p.term_key] || []).push(p);
-  return out;
+// 스냅샷·즉석 배지
+function ResultBadge({ source }) {
+  const isLive = source && source.startsWith("live");
+  return (
+    <span style={{ ...mono, fontSize: 11, padding: "1px 7px", borderRadius: 3, marginLeft: 8,
+      background: isLive ? "rgba(74,201,138,0.15)" : "rgba(107,169,224,0.12)",
+      color: isLive ? "var(--high)" : "var(--sig)",
+      border: `1px solid ${isLive ? "var(--high)" : "var(--sig)"}33` }}>
+      {isLive ? "방금 실행" : "스냅샷"}
+    </span>
+  );
 }
 
-function TermCard({ term, patches, showPatches }) {
-  const linkLabel = term.links[0].type + (term.links[0].value ? `='${term.links[0].value}'` : "");
-  const linkColor = LINK_COLOR[term.links[0].type] || "var(--text)";
-  const syns = term.synonyms.filter(s => s !== term.name);
-  const amb = term.ambiguous_with || [];
+// 한 term의 작은 카드 (1단계에서 쓰임)
+function TermMini({ term }) {
+  const l = term.links[0];
+  const linkLabel = l.type + (l.value ? `='${l.value}'` : "");
+  const linkColor = LINK_COLOR[l.type] || "var(--text)";
+  const syns = (term.synonyms || []).filter(s => s !== term.name);
   return (
-    <div style={{ padding: "10px 12px", border: "1px solid var(--border)", borderRadius: 6, marginBottom: 8, background: "rgba(0,0,0,0.15)" }}>
-      <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: 4 }}>
-        <span style={{ ...mono, fontSize: 14, color: "var(--text)" }}>{term.name}</span>
+    <div style={{ padding: "8px 10px", border: "1px solid var(--border)", borderRadius: 5, marginBottom: 6, background: "rgba(0,0,0,0.15)" }}>
+      <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
+        <span style={{ ...mono, fontSize: 13.5, color: "var(--text)" }}>{term.name}</span>
         <Badge color={linkColor}>{linkLabel}</Badge>
       </div>
       {syns.length > 0 && (
-        <div style={{ ...mono, fontSize: 12.5, color: "var(--lin)", marginTop: 4 }}>
-          syn: {syns.join(" · ")}
-        </div>
-      )}
-      {amb.length > 0 && (
-        <div style={{ marginTop: 6, paddingTop: 6, borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-          {amb.map((aw, i) => (
-            <div key={i} style={{ ...mono, fontSize: 12, color: aw.kind === "same_concept_cross_domain" ? "var(--high)" : "var(--low)", marginBottom: 2 }}>
-              ⚠ "{aw.key}" {aw.kind === "same_concept_cross_domain" ? "같은 개념·도메인 가로지름" : "라벨 일치, 의미 다름"} · with {(aw.with||[]).length}건
-              <div style={{ ...mono, fontSize: 11.5, color: "var(--dim)", marginLeft: 12, marginTop: 2 }}>
-                {(aw.with||[]).map(tk => tk.split("::")[1] || tk).join(", ")}
-              </div>
-            </div>
-          ))}
+        <div style={{ ...mono, fontSize: 12, color: "var(--lin)", marginTop: 3 }}>
+          {syns.join(" · ")}
         </div>
       )}
     </div>
   );
 }
 
-// 1단계 — 저장된 결과 보기 + 단건 실행 (시연용)
+// ─── 1단계 — 컬럼 컨텍스트 ↔ term의 시각적 연결 ───
 function Stage1View({ G, route, nav }) {
   const passed = new Set(Object.keys(G.gate.gate || {}));
-  const terms = termsByColumn(G);
+  const snapTerms = (G.snapshot && G.snapshot.stage1_terms) || {};
+  
+  // 게이트 통과 + term 있는 컬럼
+  const allCids = Object.keys(snapTerms).filter(cid => passed.has(cid)).sort();
   const tables = useMemo(() => {
-    const tk = new Set();
-    for (const cid of Object.keys(terms)) if (passed.has(cid)) tk.add(tableName(cid));
+    const tk = new Set(); for (const cid of allCids) tk.add(tableName(cid));
     return [...tk].sort();
   }, [G]);
-  const [selTable, setSelTable] = useState(tables[0] || null);
-  const [selCol, setSelCol] = useState(null); // 단건 실행용 컬럼 선택
-  const [liveResult, setLiveResult] = useState(null);
+  
+  const [selTable, setSelTable] = useState(tables[0]);
+  const [selCol, setSelCol] = useState(null);
+  const [liveResult, setLiveResult] = useState(null); // 즉석 결과
   const [running, setRunning] = useState(false);
   const [error, setError] = useState(null);
   const dc = L.domainColor(G);
-  if (!selTable) return <Center>표시할 데이터 없음</Center>;
-  const cidsInTable = Object.keys(terms).filter(cid => tableName(cid) === selTable && passed.has(cid)).sort();
+  
+  const cidsInTable = allCids.filter(cid => tableName(cid) === selTable);
   
   async function runOne(cid) {
-    setRunning(true); setError(null); setLiveResult(null); setSelCol(cid);
+    setRunning(true); setError(null); setSelCol(cid);
     try {
       const parts = cid.split("."), tk = parts.slice(0,2).join("."), cn = parts.slice(2).join(".");
       const sc = G.schema[tk].columns.find(c => c.name === cn);
       const r = G.render[cid] || {};
       const ctx = {
-        column_id: cid,
-        name: sc.name,
-        dtype: sc.dtype,
-        pk: sc.pk,
-        fk: sc.fk,
+        column_id: cid, name: sc.name, dtype: sc.dtype, pk: sc.pk, fk: sc.fk,
         capability: (r.type_candidate || [null])[0],
-        codedict: r.codedict,
-        format: r.format,
-        description: r.description || "",
-        gate_tags: G.gate.gate[cid] || [],
+        codedict: r.codedict, format: r.format,
+        description: r.description || "", gate_tags: G.gate.gate[cid] || [],
       };
       const userMsg = "다음 컬럼에 대해 term을 생성하라. JSON 배열만 출력.\n\n" + JSON.stringify(ctx, null, 2);
       const text = await window.LinkAPI.callModel({ system: window.LinkPrompts.STAGE1, user: userMsg, maxTokens: 1500 });
       const result = window.LinkAPI.parseJSON(text);
-      setLiveResult(result);
+      setLiveResult({ cid, terms: result });
     } catch (e) {
       setError(String(e.message || e));
     }
     setRunning(false);
   }
   
+  // 좌측: 테이블 리스트. 우측: 컬럼 카드들 — 각 카드 안에 컨텍스트와 term이 좌우로 연결
   return (
     <TwoPane
       left={
@@ -586,7 +576,8 @@ function Stage1View({ G, route, nav }) {
             게이트 통과 테이블 ({tables.length}개)
           </div>
           {tables.map(tk => (
-            <HoverRow key={tk} active={selTable === tk} onClick={() => { setSelTable(tk); setSelCol(null); setLiveResult(null); }} style={{ padding: "4px 8px", borderRadius: 4 }}>
+            <HoverRow key={tk} active={selTable === tk} onClick={() => { setSelTable(tk); setSelCol(null); setLiveResult(null); }}
+              style={{ padding: "4px 8px", borderRadius: 4 }}>
               <div style={{ ...mono, fontSize: 13, color: dc(L.domainOf(tk)) }}>{tk.split(".")[1]}</div>
               <div style={{ ...mono, fontSize: 11, color: "var(--dim)" }}>{tk.split(".")[0]}</div>
             </HoverRow>
@@ -597,38 +588,60 @@ function Stage1View({ G, route, nav }) {
         <div>
           <div style={{ ...mono, fontSize: 15, color: "var(--text)", marginBottom: 4 }}>{selTable}</div>
           <div style={{ fontSize: 13, color: "var(--muted)", marginBottom: 16, lineHeight: 1.6 }}>
-            1단계 term은 각 컬럼의 풍부화된 description과 메타로부터 LLM이 생성합니다. 컬럼 옆 ▶ 버튼으로 즉석 재실행하면 저장된 결과와 비교할 수 있습니다.
+            컬럼 컨텍스트(왼쪽)가 term(오른쪽)을 만듭니다. codedict 항목과 code_value_of term이 1:1 매칭됩니다.
           </div>
           {error && <div style={{ color: "var(--low)", ...mono, fontSize: 12.5, padding: 10, background: "rgba(224,107,94,0.08)", borderRadius: 4, marginBottom: 12 }}>{error}</div>}
           {cidsInTable.map(cid => {
-            const colNameStr = colName(cid);
-            const cTerms = terms[cid] || [];
-            const isLive = selCol === cid;
+            const cn = colName(cid);
+            const r = G.render[cid] || {};
+            const sc = (G.schema[tableName(cid)].columns || []).find(c => c.name === cn);
+            const showLive = liveResult && liveResult.cid === cid;
+            const terms = showLive ? liveResult.terms : snapTerms[cid];
+            const codedict = r.codedict || {};
+            const codedictKeys = Object.keys(codedict);
+            
             return (
-              <div key={cid} style={{ marginBottom: 22 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>
-                  <span style={{ ...mono, fontSize: 13.5, color: "var(--accent)" }}>{colNameStr}</span>
-                  <span style={{ color: "var(--dim)", ...mono, fontSize: 12 }}>· {cTerms.length}개 term</span>
+              <div key={cid} style={{ marginBottom: 22, padding: "12px 14px", border: "1px solid var(--border)", borderRadius: 6, background: "rgba(0,0,0,0.1)" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
+                  <span style={{ ...mono, fontSize: 14, color: "var(--accent)", fontWeight: 500 }}>{cn}</span>
+                  <span style={{ ...mono, fontSize: 11, color: "var(--dim)" }}>{sc && sc.dtype}{sc && sc.pk && " · PK"}{sc && sc.fk && " · FK→"+sc.fk.split(".").pop()}</span>
+                  <ResultBadge source={showLive ? "live" : "snapshot"} />
+                  <div style={{ flex: 1 }} />
                   <button onClick={() => runOne(cid)} disabled={running}
-                    style={{ ...mono, fontSize: 11.5, padding: "2px 8px", background: "transparent", color: "var(--sig)",
+                    style={{ ...mono, fontSize: 11.5, padding: "3px 9px", background: "transparent", color: "var(--sig)",
                       border: "1px solid var(--border)", borderRadius: 4, cursor: running ? "not-allowed" : "pointer", opacity: running ? 0.4 : 1 }}>
-                    {running && isLive ? "실행 중…" : "▶ 즉석 실행"}
+                    {running && selCol === cid ? "실행 중…" : "▶ 즉석 실행"}
                   </button>
+                  {showLive && <button onClick={() => { setLiveResult(null); setSelCol(null); }}
+                    style={{ ...mono, fontSize: 11, padding: "3px 7px", background: "transparent", color: "var(--dim)",
+                      border: "1px solid var(--border)", borderRadius: 4, cursor: "pointer" }}>스냅샷으로</button>}
                 </div>
-                {!isLive && cTerms.map((t, i) => <TermCard key={i} term={t} />)}
-                {isLive && (
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-                    <div>
-                      <div style={{ ...mono, fontSize: 11.5, color: "var(--muted)", marginBottom: 4 }}>저장된 (v2)</div>
-                      {cTerms.map((t, i) => <TermCard key={i} term={t} />)}
+                
+                {/* 좌(컨텍스트) / 우(term) 매핑 — 핵심 시각 */}
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+                  {/* 좌측: 컨텍스트 */}
+                  <div style={{ borderRight: "1px dashed var(--border)", paddingRight: 14 }}>
+                    <div style={{ ...mono, fontSize: 11, color: "var(--muted)", marginBottom: 4 }}>컨텍스트 (입력)</div>
+                    <div style={{ fontSize: 12.5, color: "var(--text)", marginBottom: 8, lineHeight: 1.55 }}>
+                      {r.description}
                     </div>
-                    <div>
-                      <div style={{ ...mono, fontSize: 11.5, color: "var(--muted)", marginBottom: 4 }}>즉석 실행 결과</div>
-                      {!liveResult && running && <div style={{ ...mono, fontSize: 12, color: "var(--dim)" }}>실행 중…</div>}
-                      {liveResult && liveResult.map((t, i) => <TermCard key={i} term={t} />)}
-                    </div>
+                    {codedictKeys.length > 0 && (
+                      <div style={{ marginTop: 8 }}>
+                        <div style={{ ...mono, fontSize: 11, color: "var(--muted)", marginBottom: 3 }}>codedict</div>
+                        {codedictKeys.map(k => (
+                          <div key={k} style={{ ...mono, fontSize: 12, color: "var(--text)", padding: "2px 0" }}>
+                            <span style={{ color: "var(--accent)" }}>{k}</span> · {codedict[k]}
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                )}
+                  {/* 우측: term */}
+                  <div>
+                    <div style={{ ...mono, fontSize: 11, color: "var(--muted)", marginBottom: 4 }}>term {terms ? terms.length : 0}개 (출력)</div>
+                    {(terms || []).map((t, i) => <TermMini key={i} term={t} />)}
+                  </div>
+                </div>
               </div>
             );
           })}
@@ -638,9 +651,9 @@ function Stage1View({ G, route, nav }) {
   );
 }
 
-// 1.5단계 — 클러스터링 (호명별 군집)
+// ─── 1.5단계 — 클러스터링 ───
 function Stage15View({ G, route, nav }) {
-  const C = G.clusters || { clusters: [] };
+  const C = (G.snapshot && G.snapshot.clusters) || { clusters: [] };
   const [sel, setSel] = useState((C.clusters[0] || {}).key);
   const [filter, setFilter] = useState("");
   const filtered = useMemo(() => 
@@ -687,172 +700,310 @@ function Stage15View({ G, route, nav }) {
   );
 }
 
-// 2단계 — 충돌 명시 + 의미 격차 보강 (단건 실행 포함)
-function Stage2View({ G, route, nav }) {
-  const patches = G.stage2_patches || [];
-  const [op, setOp] = useState("set_ambiguous_with");
-  const [livePatches, setLivePatches] = useState(null);
-  const [liveTarget, setLiveTarget] = useState(null); // "cluster:key" or "enrich:cid"
+// ─── 2단계 충돌 명시 — 호명 중심 그룹 박스 시각 ───
+function Stage2ConflictView({ G, route, nav }) {
+  const snapTerms = (G.snapshot && G.snapshot.stage1_terms) || {};
+  
+  // ambiguous_with가 있는 term들을 호명별로 묶기
+  const byKey = useMemo(() => {
+    const out = {}; // key -> { kind -> [{term_key, name, link, cid}] }
+    for (const [cid, terms] of Object.entries(snapTerms)) {
+      for (const t of terms) {
+        for (const aw of (t.ambiguous_with || [])) {
+          const k = aw.key;
+          if (!out[k]) out[k] = { same: new Set(), label: new Set(), members: {} };
+          const tkid = `${cid}::${t.name}`;
+          out[k].members[tkid] = { term_key: tkid, name: t.name, link: t.links[0], cid };
+          // 자기 자신을 그룹에 추가
+          if (aw.kind === "same_concept_cross_domain") out[k].same.add(tkid);
+          else if (aw.kind === "label_collision") out[k].label.add(tkid);
+          // with도 추가
+          for (const w of (aw.with || [])) {
+            if (!out[k].members[w]) {
+              const [wcid, wname] = w.split("::");
+              const wterms = snapTerms[wcid] || [];
+              const wt = wterms.find(x => x.name === wname);
+              out[k].members[w] = { term_key: w, name: wname, link: wt ? wt.links[0] : {}, cid: wcid };
+            }
+            if (aw.kind === "same_concept_cross_domain") out[k].same.add(w);
+            else if (aw.kind === "label_collision") out[k].label.add(w);
+          }
+        }
+      }
+    }
+    // sort
+    return Object.entries(out).map(([key, v]) => ({
+      key, members: v.members, 
+      same: [...v.same], label: [...v.label],
+      totalSize: Object.keys(v.members).length
+    })).sort((a, b) => b.totalSize - a.totalSize);
+  }, [snapTerms]);
+  
+  const [selKey, setSelKey] = useState(byKey[0] && byKey[0].key);
+  const [filter, setFilter] = useState("");
+  const [liveResult, setLiveResult] = useState(null);
   const [running, setRunning] = useState(false);
   const [error, setError] = useState(null);
   
-  const filtered = patches.filter(p => p.op === op);
-  
-  const grouped = useMemo(() => {
-    if (op !== "set_ambiguous_with") return null;
-    const g = {};
-    for (const p of filtered) {
-      const k = p.value.key + " · " + p.value.kind;
-      (g[k] = g[k] || []).push(p);
-    }
-    return Object.entries(g).sort((a,b) => b[1].length - a[1].length);
-  }, [op, patches]);
-  
-  // 단건 실행 — 군집 충돌 명시
-  async function runCluster(key) {
-    setRunning(true); setError(null); setLivePatches(null); setLiveTarget("cluster:" + key);
+  async function runOne(keyEntry) {
+    setRunning(true); setError(null); setLiveResult(null);
     try {
-      const cluster = (G.clusters.clusters || []).find(c => c.key === key);
+      // 그 호명의 1.5단계 군집 찾기
+      const C = (G.snapshot && G.snapshot.clusters) || { clusters: [] };
+      const cluster = C.clusters.find(c => c.key === keyEntry.key);
       if (!cluster) throw new Error("군집을 찾을 수 없음");
-      const terms = (G.terms_refined.by_column) || {};
       const members = cluster.members.map(m => {
-        const cTerms = terms[m.cid] || [];
+        const cTerms = snapTerms[m.cid] || [];
         const t = cTerms.find(x => x.name === m.name);
         if (!t) return null;
         const l = t.links[0];
         return {
-          term_key: m.term_key,
-          name: t.name,
-          synonyms: t.synonyms,
+          term_key: m.term_key, name: t.name, synonyms: t.synonyms,
           link: l.type + (l.value ? `='${l.value}'` : "") + (l.column ? ` @ ${l.column}` : ""),
         };
       }).filter(Boolean);
       const userMsg = `호명 키: "${cluster.key}"\n군집 크기: ${members.length}개 term\n\n[군집 멤버]\n${members.map(m => JSON.stringify(m)).join("\n")}\n\n위 군집에 대해 충돌 명시 패치를 JSON 배열로 출력. 충돌 없으면 빈 배열.`;
       const text = await window.LinkAPI.callModel({ system: window.LinkPrompts.STAGE2_CLUSTER, user: userMsg, maxTokens: 4000 });
       const result = window.LinkAPI.parseJSON(text);
-      setLivePatches(result);
+      setLiveResult({ key: keyEntry.key, patches: result });
     } catch (e) {
       setError(String(e.message || e));
     }
     setRunning(false);
   }
   
-  // 단건 실행 — 한 컬럼의 의미 격차 보강
-  async function runEnrich(cid) {
-    setRunning(true); setError(null); setLivePatches(null); setLiveTarget("enrich:" + cid);
+  const filteredKeys = byKey.filter(k => !filter || k.key.includes(filter));
+  const selEntry = byKey.find(k => k.key === selKey) || byKey[0];
+  
+  function GroupBox({ title, members, color, kind }) {
+    if (!members || members.length === 0) return null;
+    return (
+      <div style={{ padding: "10px 12px", border: `1px solid ${color}66`, borderRadius: 5, background: `${color}11`, marginBottom: 10 }}>
+        <div style={{ ...mono, fontSize: 12, color, marginBottom: 6, fontWeight: 500 }}>{title} · {members.length}개</div>
+        {members.map((m, i) => (
+          <div key={i} style={{ padding: "5px 6px", marginBottom: 3, background: "rgba(0,0,0,0.2)", borderRadius: 3 }}>
+            <div style={{ ...mono, fontSize: 12.5, color: "var(--text)" }}>{m.name}</div>
+            <div style={{ ...mono, fontSize: 11, color: "var(--dim)", marginTop: 2 }}>
+              {m.link && m.link.type}{m.link && m.link.value && `='${m.link.value}'`} · {m.cid.split(".").slice(1).join(".")}
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+  
+  return (
+    <TwoPane
+      left={
+        <div>
+          <div style={{ ...mono, fontSize: 12, color: "var(--muted)", marginBottom: 6 }}>
+            충돌 호명 · {byKey.length}개
+          </div>
+          <input value={filter} onChange={e => setFilter(e.target.value)} placeholder="호명 검색"
+            style={{ width: "100%", ...mono, fontSize: 12.5, padding: "5px 8px", marginBottom: 8,
+              background: "var(--panel2)", border: "1px solid var(--border)", color: "var(--text)", borderRadius: 4 }} />
+          {filteredKeys.map(k => (
+            <HoverRow key={k.key} active={selKey === k.key} onClick={() => { setSelKey(k.key); setLiveResult(null); }}
+              style={{ padding: "4px 8px", borderRadius: 4 }}>
+              <div style={{ ...mono, fontSize: 12.5, color: "var(--text)" }}>
+                {k.key} <span style={{ color: "var(--dim)" }}>· {k.totalSize}</span>
+              </div>
+              <div style={{ ...mono, fontSize: 10.5, color: "var(--dim)" }}>
+                {k.same.length > 0 && <span style={{ color: "var(--high)" }}>같음·{k.same.length}</span>}
+                {k.same.length > 0 && k.label.length > 0 && " · "}
+                {k.label.length > 0 && <span style={{ color: "var(--low)" }}>라벨·{k.label.length}</span>}
+              </div>
+            </HoverRow>
+          ))}
+        </div>
+      }
+      right={
+        selEntry ? (
+          <div>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>
+              <div style={{ ...mono, fontSize: 22, color: "var(--text)" }}>"{selEntry.key}"</div>
+              <ResultBadge source={liveResult && liveResult.key === selEntry.key ? "live" : "snapshot"} />
+              <div style={{ flex: 1 }} />
+              <button onClick={() => runOne(selEntry)} disabled={running}
+                style={{ ...mono, fontSize: 12, padding: "4px 10px", background: "transparent", color: "var(--sig)",
+                  border: "1px solid var(--border)", borderRadius: 4, cursor: running ? "not-allowed" : "pointer", opacity: running ? 0.4 : 1 }}>
+                {running ? "실행 중…" : "▶ 즉석 실행"}
+              </button>
+            </div>
+            <div style={{ fontSize: 13, color: "var(--muted)", marginBottom: 16, lineHeight: 1.6 }}>
+              이 호명을 공유하는 {selEntry.totalSize}개 term을 LLM이 의미 단위로 갈래잡은 결과입니다. 그룹 박스 안의 link 정보(컬럼·코드값)가 의미 차이를 직접 드러냅니다.
+            </div>
+            {error && <div style={{ color: "var(--low)", ...mono, fontSize: 12.5, padding: 10, background: "rgba(224,107,94,0.08)", borderRadius: 4, marginBottom: 12 }}>{error}</div>}
+            
+            {/* 그룹 박스 — 핵심 시각 */}
+            <GroupBox
+              title="같은 개념 · 도메인 가로지름"
+              members={selEntry.same.map(tk => selEntry.members[tk]).filter(Boolean)}
+              color="var(--high)"
+              kind="same"
+            />
+            <GroupBox
+              title="라벨 일치 · 의미 다름"
+              members={selEntry.label.map(tk => selEntry.members[tk]).filter(Boolean)}
+              color="var(--low)"
+              kind="label"
+            />
+            
+            {liveResult && liveResult.key === selEntry.key && (
+              <div style={{ marginTop: 16, padding: "10px 12px", border: "1px dashed var(--sig)", borderRadius: 5 }}>
+                <div style={{ ...mono, fontSize: 11.5, color: "var(--sig)", marginBottom: 6 }}>방금 실행 결과 ({liveResult.patches.length}개 패치)</div>
+                {liveResult.patches.length === 0 ? <span style={{ ...mono, fontSize: 12, color: "var(--dim)" }}>충돌 없음 — LLM이 의미 충돌 없다고 판단</span> :
+                  liveResult.patches.map((p, i) => (
+                    <div key={i} style={{ ...mono, fontSize: 12, color: "var(--text)", marginBottom: 2 }}>
+                      {p.term_key.split("::")[1]} → "{p.value && p.value.key}" ({p.value && p.value.kind}) with {(p.value && p.value.with || []).length}건
+                    </div>
+                  ))}
+              </div>
+            )}
+          </div>
+        ) : <Center>충돌 명시된 호명 없음</Center>
+      }
+    />
+  );
+}
+
+// ─── 2단계 의미 격차 보강 — 기존 vs 추가 동의어 대비 ───
+function Stage2EnrichView({ G, route, nav }) {
+  const snapTerms = (G.snapshot && G.snapshot.stage1_terms) || {};
+  const rawTerms = (G.snapshot && G.snapshot.stage1_raw) || {};
+  const patches = (G.snapshot && G.snapshot.stage2_patches) || [];
+  
+  // add_synonyms 패치만, 컬럼별 묶기
+  const addPatches = patches.filter(p => p.op === "add_synonyms");
+  const byCid = useMemo(() => {
+    const out = {};
+    for (const p of addPatches) {
+      const [cid, name] = p.term_key.split("::");
+      if (!out[cid]) out[cid] = [];
+      out[cid].push({ name, added: p.value });
+    }
+    return out;
+  }, [patches]);
+  
+  const cids = Object.keys(byCid).sort();
+  const [selCid, setSelCid] = useState(cids[0]);
+  const [liveResult, setLiveResult] = useState(null);
+  const [running, setRunning] = useState(false);
+  const [error, setError] = useState(null);
+  const dc = L.domainColor(G);
+  
+  async function runOne(cid) {
+    setRunning(true); setError(null); setLiveResult(null);
     try {
-      const terms = (G.terms_refined.by_column || {})[cid] || [];
+      const terms = (snapTerms[cid] || []);
       const input = terms.map(t => ({
-        term_key: `${cid}::${t.name}`,
-        name: t.name,
-        synonyms: t.synonyms,
-        link: t.links[0],
+        term_key: `${cid}::${t.name}`, name: t.name, synonyms: t.synonyms, link: t.links[0],
       }));
       const userMsg = `다음은 한 컬럼의 term들이다. 의미 격차 보강 패치를 출력하라.\n\n${input.map(t => JSON.stringify(t)).join("\n")}\n\nJSON 배열만.`;
       const text = await window.LinkAPI.callModel({ system: window.LinkPrompts.STAGE2_ENRICH, user: userMsg, maxTokens: 2000 });
       const result = window.LinkAPI.parseJSON(text);
-      setLivePatches(result);
+      setLiveResult({ cid, patches: result });
     } catch (e) {
       setError(String(e.message || e));
     }
     setRunning(false);
   }
   
+  const selTerms = rawTerms[selCid] || [];
+  const selAdded = byCid[selCid] || [];
+  const addedMap = {};
+  for (const a of selAdded) addedMap[a.name] = a.added;
+  const isLive = liveResult && liveResult.cid === selCid;
+  
   return (
-    <div style={{ padding: "18px 26px", overflowY: "auto", maxHeight: "calc(100vh - 92px)" }}>
-      <div style={{ display: "flex", gap: 8, marginBottom: 16, alignItems: "center" }}>
-        <span style={{ ...mono, fontSize: 13, color: "var(--muted)" }}>패치 종류</span>
-        {[["set_ambiguous_with", `충돌 명시 (${patches.filter(p=>p.op==="set_ambiguous_with").length})`],
-          ["add_synonyms", `동의어 추가 (${patches.filter(p=>p.op==="add_synonyms").length})`]].map(([k, label]) => (
-          <div key={k} onClick={() => { setOp(k); setLivePatches(null); setLiveTarget(null); }}
-            style={{ ...mono, fontSize: 13, padding: "4px 10px", borderRadius: 4, cursor: "pointer",
-            background: op === k ? "rgba(255,255,255,0.08)" : "transparent",
-            color: op === k ? "var(--text)" : "var(--dim)", border: `1px solid ${op === k ? "var(--border)" : "transparent"}` }}>{label}</div>
-        ))}
-      </div>
-      
-      <div style={{ fontSize: 13, color: "var(--dim)", marginBottom: 14, lineHeight: 1.6 }}>
-        2단계는 1.5단계 군집을 입력으로 받아 의미 판단을 합니다. ▶ 버튼으로 단건 즉석 실행하면 저장된 패치와 비교할 수 있습니다.
-      </div>
-      
-      {error && <div style={{ color: "var(--low)", ...mono, fontSize: 12.5, padding: 10, background: "rgba(224,107,94,0.08)", borderRadius: 4, marginBottom: 12 }}>{error}</div>}
-      
-      {op === "set_ambiguous_with" && grouped && grouped.map(([groupKey, ps]) => {
-        const [key, kind] = groupKey.split(" · ");
-        const isSame = kind === "same_concept_cross_domain";
-        const isLive = liveTarget === "cluster:" + key;
-        return (
-          <div key={groupKey} style={{ marginBottom: 18, padding: "10px 14px", border: "1px solid var(--border)", borderRadius: 6 }}>
-            <div style={{ marginBottom: 8, display: "flex", alignItems: "center", gap: 8 }}>
-              <span style={{ ...mono, fontSize: 14, color: "var(--text)" }}>"{key}"</span>
-              <Badge color={isSame ? "var(--high)" : "var(--low)"}>{isSame ? "같은 개념·도메인 가로지름" : "라벨 일치, 의미 다름"}</Badge>
-              <span style={{ ...mono, fontSize: 12, color: "var(--dim)" }}>· {ps.length}개 term</span>
-              <button onClick={() => runCluster(key)} disabled={running}
-                style={{ ...mono, fontSize: 11.5, padding: "2px 8px", background: "transparent", color: "var(--sig)",
-                  border: "1px solid var(--border)", borderRadius: 4, cursor: running ? "not-allowed" : "pointer", opacity: running ? 0.4 : 1, marginLeft: "auto" }}>
-                {running && isLive ? "실행 중…" : "▶ 즉석 실행"}
+    <TwoPane
+      left={
+        <div>
+          <div style={{ ...mono, fontSize: 12, color: "var(--muted)", marginBottom: 8 }}>
+            의미 격차 보강된 컬럼 ({cids.length}개)
+          </div>
+          {cids.map(cid => (
+            <HoverRow key={cid} active={selCid === cid} onClick={() => { setSelCid(cid); setLiveResult(null); }}
+              style={{ padding: "4px 8px", borderRadius: 4 }}>
+              <div style={{ ...mono, fontSize: 12.5, color: dc(L.domainOf(tableName(cid))) }}>{colName(cid)}</div>
+              <div style={{ ...mono, fontSize: 10.5, color: "var(--dim)" }}>{tableName(cid).split(".")[1]} · +{byCid[cid].length}</div>
+            </HoverRow>
+          ))}
+        </div>
+      }
+      right={
+        selCid ? (
+          <div>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+              <div style={{ ...mono, fontSize: 15, color: "var(--text)" }}>{selCid}</div>
+              <ResultBadge source={isLive ? "live" : "snapshot"} />
+              <div style={{ flex: 1 }} />
+              <button onClick={() => runOne(selCid)} disabled={running}
+                style={{ ...mono, fontSize: 12, padding: "4px 10px", background: "transparent", color: "var(--sig)",
+                  border: "1px solid var(--border)", borderRadius: 4, cursor: running ? "not-allowed" : "pointer", opacity: running ? 0.4 : 1 }}>
+                {running ? "실행 중…" : "▶ 즉석 실행"}
               </button>
             </div>
-            {ps.map((p, i) => (
-              <div key={i} style={{ ...mono, fontSize: 12.5, color: "var(--text)", marginBottom: 3 }}>
-                {p.term_key.split("::")[1]} <span style={{ color: "var(--dim)" }}>@ {p.term_key.split("::")[0].split(".").slice(-2).join(".")}</span>
-              </div>
-            ))}
-            {isLive && livePatches && (
-              <div style={{ marginTop: 10, paddingTop: 10, borderTop: "1px dashed var(--border)" }}>
-                <div style={{ ...mono, fontSize: 11.5, color: "var(--muted)", marginBottom: 4 }}>즉석 실행 결과 — {livePatches.length}개 패치</div>
-                {livePatches.length === 0 ? <span style={{ ...mono, fontSize: 12, color: "var(--dim)" }}>충돌 없음</span> : livePatches.map((p, i) => (
-                  <div key={i} style={{ ...mono, fontSize: 12, color: "var(--sig)", marginBottom: 3 }}>
-                    {p.term_key.split("::")[1]} → {p.value && p.value.key} ({p.value && p.value.kind}) with {(p.value && p.value.with || []).length}건
+            <div style={{ fontSize: 13, color: "var(--muted)", marginBottom: 16, lineHeight: 1.6 }}>
+              기존 동의어(회색)에 LLM이 추가한 자연어 변형(녹색 +)이 더해집니다. fuzzy로 못 닿는 도메인 약어·별칭이 들어옵니다.
+            </div>
+            {error && <div style={{ color: "var(--low)", ...mono, fontSize: 12.5, padding: 10, background: "rgba(224,107,94,0.08)", borderRadius: 4, marginBottom: 12 }}>{error}</div>}
+            
+            {(isLive ? (function() {
+              // 즉석 결과를 같은 형태로
+              const m = {};
+              for (const p of (liveResult.patches || [])) {
+                const [_, name] = p.term_key.split("::");
+                m[name] = p.value;
+              }
+              return selTerms.map(t => ({ t, added: m[t.name] }));
+            })() : selTerms.map(t => ({ t, added: addedMap[t.name] }))).map(({ t, added }, i) => {
+              const l = t.links[0];
+              const linkLabel = l.type + (l.value ? `='${l.value}'` : "");
+              const linkColor = LINK_COLOR[l.type] || "var(--text)";
+              const baseSyns = t.synonyms.filter(s => s !== t.name);
+              return (
+                <div key={i} style={{ marginBottom: 12, padding: "10px 12px", border: `1px solid ${added ? "var(--high)33" : "var(--border)"}`, borderRadius: 5, background: added ? "rgba(74,201,138,0.05)" : "rgba(0,0,0,0.15)" }}>
+                  <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginBottom: 4 }}>
+                    <span style={{ ...mono, fontSize: 14, color: "var(--text)" }}>{t.name}</span>
+                    <Badge color={linkColor}>{linkLabel}</Badge>
                   </div>
-                ))}
-              </div>
+                  <div style={{ ...mono, fontSize: 12.5, color: "var(--dim)" }}>
+                    {baseSyns.join(" · ")}
+                  </div>
+                  {added && added.length > 0 && (
+                    <div style={{ ...mono, fontSize: 12.5, color: "var(--high)", marginTop: 4 }}>
+                      + {added.join(" · ")}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+            
+            {isLive && (liveResult.patches || []).length === 0 && (
+              <div style={{ ...mono, fontSize: 12, color: "var(--dim)" }}>방금 실행 결과: 추가 동의어 없음 — LLM이 의미 격차 없다고 판단</div>
             )}
           </div>
-        );
-      })}
-      
-      {op === "add_synonyms" && (() => {
-        // 컬럼별 묶음
-        const byCid = {};
-        for (const p of filtered) {
-          const cid = p.term_key.split("::")[0];
-          (byCid[cid] = byCid[cid] || []).push(p);
-        }
-        return Object.entries(byCid).map(([cid, ps]) => {
-          const isLive = liveTarget === "enrich:" + cid;
-          return (
-            <div key={cid} style={{ marginBottom: 18, padding: "10px 14px", border: "1px solid var(--border)", borderRadius: 6 }}>
-              <div style={{ marginBottom: 8, display: "flex", alignItems: "center", gap: 8 }}>
-                <span style={{ ...mono, fontSize: 13, color: "var(--accent)" }}>{cid.split(".").slice(-2).join(".")}</span>
-                <span style={{ ...mono, fontSize: 12, color: "var(--dim)" }}>· {ps.length}개 추가</span>
-                <button onClick={() => runEnrich(cid)} disabled={running}
-                  style={{ ...mono, fontSize: 11.5, padding: "2px 8px", background: "transparent", color: "var(--sig)",
-                    border: "1px solid var(--border)", borderRadius: 4, cursor: running ? "not-allowed" : "pointer", opacity: running ? 0.4 : 1, marginLeft: "auto" }}>
-                  {running && isLive ? "실행 중…" : "▶ 즉석 실행"}
-                </button>
-              </div>
-              {ps.map((p, i) => (
-                <div key={i} style={{ ...mono, fontSize: 12.5, marginBottom: 3 }}>
-                  <span style={{ color: "var(--text)" }}>{p.term_key.split("::")[1]}</span>
-                  <span style={{ color: "var(--high)", marginLeft: 8 }}>+ {p.value.join(" · ")}</span>
-                </div>
-              ))}
-              {isLive && livePatches && (
-                <div style={{ marginTop: 10, paddingTop: 10, borderTop: "1px dashed var(--border)" }}>
-                  <div style={{ ...mono, fontSize: 11.5, color: "var(--muted)", marginBottom: 4 }}>즉석 실행 결과 — {livePatches.length}개 패치</div>
-                  {livePatches.length === 0 ? <span style={{ ...mono, fontSize: 12, color: "var(--dim)" }}>추가 동의어 없음</span> : livePatches.map((p, i) => (
-                    <div key={i} style={{ ...mono, fontSize: 12, marginBottom: 3 }}>
-                      <span style={{ color: "var(--sig)" }}>{p.term_key.split("::")[1]}</span>
-                      <span style={{ color: "var(--high)", marginLeft: 8 }}>+ {(p.value || []).join(" · ")}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          );
-        });
-      })()}
+        ) : <Center>컬럼 선택</Center>
+      }
+    />
+  );
+}
+
+// 2단계 통합 — 두 종류 탭
+function Stage2View({ G, route, nav }) {
+  const [tab, setTab] = useState("conflict");
+  return (
+    <div>
+      <div style={{ display: "flex", gap: 6, padding: "10px 24px 0", background: "rgba(255,255,255,0.02)", borderBottom: "1px solid var(--border)" }}>
+        {[["conflict", "충돌 명시"], ["enrich", "의미 격차 보강"]].map(([k, label]) => (
+          <div key={k} onClick={() => setTab(k)}
+            style={{ ...mono, fontSize: 13, padding: "5px 12px", cursor: "pointer", borderBottom: tab === k ? "2px solid var(--accent)" : "2px solid transparent",
+              color: tab === k ? "var(--text)" : "var(--dim)", marginBottom: -1 }}>{label}</div>
+        ))}
+      </div>
+      {tab === "conflict" && <Stage2ConflictView G={G} route={route} nav={nav} />}
+      {tab === "enrich" && <Stage2EnrichView G={G} route={route} nav={nav} />}
     </div>
   );
 }
@@ -917,10 +1068,10 @@ function App({ G }) {
 function Root() {
   const [G, setG] = useState(null); const [err, setErr] = useState(null);
   useEffect(() => {
-    const files = ["schema", "render_output", "psql_output", "gate_output", "terms_refined", "clusters_b_tok", "stage2_patches"];
+    const files = ["schema", "render_output", "psql_output", "gate_output"];
     Promise.all(files.map((f) => fetch("data/" + f + ".json").then((r) => { if (!r.ok) throw new Error(f + " " + r.status); return r.json(); })))
-      .then(([schema, render, psql, gate, terms_refined, clusters, stage2_patches]) => 
-        setG({ schema, render, psql, gate, terms_refined, clusters, stage2_patches })).catch((e) => setErr(String(e.message || e)));
+      .then(([schema, render, psql, gate]) => 
+        setG({ schema, render, psql, gate, snapshot: window.LinkSnapshot || null })).catch((e) => setErr(String(e.message || e)));
   }, []);
   if (err) return <Center>로드 실패: {err}<br />(http 서버로 실행했는지 확인)</Center>;
   if (!G) return <Center>데이터 적재 중…</Center>;
