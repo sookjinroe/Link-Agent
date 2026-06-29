@@ -504,20 +504,53 @@ function ResultBadge({ source }) {
 }
 
 // 한 term의 작은 카드 (1단계에서 쓰임)
-function TermMini({ term }) {
+function TermMini({ term, onJumpToConflict }) {
   const l = term.links[0];
   const linkLabel = l.type + (l.value ? `='${l.value}'` : "");
   const linkColor = LINK_COLOR[l.type] || "var(--text)";
   const syns = (term.synonyms || []).filter(s => s !== term.name);
+  const amb = term.ambiguous_with || [];
+  const [open, setOpen] = useState(false);
   return (
     <div style={{ padding: "8px 10px", border: "1px solid var(--border)", borderRadius: 5, marginBottom: 6, background: "rgba(0,0,0,0.15)" }}>
       <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
         <span style={{ ...mono, fontSize: 13.5, color: "var(--text)" }}>{term.name}</span>
         <Badge color={linkColor}>{linkLabel}</Badge>
+        {amb.length > 0 && (
+          <span onClick={() => setOpen(!open)}
+            style={{ ...mono, fontSize: 11, padding: "1px 7px", borderRadius: 3, marginLeft: "auto", cursor: "pointer",
+              background: "rgba(232,179,65,0.12)", color: "var(--accent)", border: "1px solid var(--accent)33" }}>
+            충돌 {amb.length}개 {open ? "▲" : "▼"}
+          </span>
+        )}
       </div>
       {syns.length > 0 && (
         <div style={{ ...mono, fontSize: 12, color: "var(--lin)", marginTop: 3 }}>
           {syns.join(" · ")}
+        </div>
+      )}
+      {open && amb.length > 0 && (
+        <div style={{ marginTop: 7, paddingTop: 6, borderTop: "1px dashed var(--border)" }}>
+          {amb.map((aw, i) => {
+            const isSame = aw.kind === "same_concept_cross_domain";
+            const color = isSame ? "var(--high)" : "var(--low)";
+            const label = isSame ? "같은 의미, 다른 도메인" : "같은 표현, 다른 의미";
+            return (
+              <div key={i} style={{ marginBottom: 4, padding: "5px 7px", background: `${color}11`, borderLeft: `2px solid ${color}`, borderRadius: 2 }}>
+                <div style={{ ...mono, fontSize: 11.5 }}>
+                  <span style={{ color, fontWeight: 500 }}>"{aw.key}"</span>
+                  <span style={{ color: "var(--muted)", marginLeft: 6 }}>{label}</span>
+                  {onJumpToConflict && (
+                    <span onClick={(e) => { e.stopPropagation(); onJumpToConflict(aw.key); }}
+                      style={{ color: "var(--sig)", marginLeft: 8, cursor: "pointer" }}>2단계로 →</span>
+                  )}
+                </div>
+                <div style={{ ...mono, fontSize: 11, color: "var(--dim)", marginTop: 2 }}>
+                  with {(aw.with || []).map(tk => tk.split("::")[1] || tk).join(", ")}
+                </div>
+              </div>
+            );
+          })}
         </div>
       )}
     </div>
@@ -639,7 +672,9 @@ function Stage1View({ G, route, nav }) {
                   {/* 우측: term */}
                   <div>
                     <div style={{ ...mono, fontSize: 11, color: "var(--muted)", marginBottom: 4 }}>term {terms ? terms.length : 0}개 (출력)</div>
-                    {(terms || []).map((t, i) => <TermMini key={i} term={t} />)}
+                    {(terms || []).map((t, i) => 
+                      <TermMini key={i} term={t} onJumpToConflict={(key) => nav("stage2", "conflict:" + key)} />
+                    )}
                   </div>
                 </div>
               </div>
@@ -704,42 +739,84 @@ function Stage15View({ G, route, nav }) {
 function Stage2ConflictView({ G, route, nav }) {
   const snapTerms = (G.snapshot && G.snapshot.stage1_terms) || {};
   
-  // ambiguous_with가 있는 term들을 호명별로 묶기
+  // ambiguous_with가 있는 term들을 호명별로 묶고, 같음 그룹은 with-overlap으로 세부 분할
   const byKey = useMemo(() => {
-    const out = {}; // key -> { kind -> [{term_key, name, link, cid}] }
+    // 1) 호명별로 raw 모음: 각 term의 같음 신청(자기+with), 라벨 신청을 따로 기록
+    const raw = {}; // key -> { sameSets: Set<tkid>[] (각 신청 하나가 한 집합), labelSets: Set<tkid>[], members: {tkid: {...}} }
     for (const [cid, terms] of Object.entries(snapTerms)) {
       for (const t of terms) {
         for (const aw of (t.ambiguous_with || [])) {
           const k = aw.key;
-          if (!out[k]) out[k] = { same: new Set(), label: new Set(), members: {} };
+          if (!raw[k]) raw[k] = { sameSets: [], labelSets: [], members: {} };
           const tkid = `${cid}::${t.name}`;
-          out[k].members[tkid] = { term_key: tkid, name: t.name, link: t.links[0], cid };
-          // 자기 자신을 그룹에 추가
-          if (aw.kind === "same_concept_cross_domain") out[k].same.add(tkid);
-          else if (aw.kind === "label_collision") out[k].label.add(tkid);
-          // with도 추가
+          raw[k].members[tkid] = { term_key: tkid, name: t.name, link: t.links[0], cid };
+          // with 멤버도 등록 (정보 없으면 빈 link)
+          const allMembers = new Set([tkid, ...(aw.with || [])]);
           for (const w of (aw.with || [])) {
-            if (!out[k].members[w]) {
+            if (!raw[k].members[w]) {
               const [wcid, wname] = w.split("::");
               const wterms = snapTerms[wcid] || [];
               const wt = wterms.find(x => x.name === wname);
-              out[k].members[w] = { term_key: w, name: wname, link: wt ? wt.links[0] : {}, cid: wcid };
+              raw[k].members[w] = { term_key: w, name: wname, link: wt ? wt.links[0] : {}, cid: wcid };
             }
-            if (aw.kind === "same_concept_cross_domain") out[k].same.add(w);
-            else if (aw.kind === "label_collision") out[k].label.add(w);
           }
+          if (aw.kind === "same_concept_cross_domain") raw[k].sameSets.push(allMembers);
+          else if (aw.kind === "label_collision") raw[k].labelSets.push(allMembers);
         }
       }
     }
-    // sort
-    return Object.entries(out).map(([key, v]) => ({
-      key, members: v.members, 
-      same: [...v.same], label: [...v.label],
-      totalSize: Object.keys(v.members).length
+    // 2) sameSets와 labelSets 각자에서 overlap 있는 신청을 union-find로 합치기 = 세부 그룹
+    function unionMerge(sets) {
+      const merged = [];
+      for (const s of sets) {
+        let mergeWith = -1;
+        for (let i = 0; i < merged.length; i++) {
+          for (const m of s) if (merged[i].has(m)) { mergeWith = i; break; }
+          if (mergeWith >= 0) break;
+        }
+        if (mergeWith >= 0) {
+          for (const m of s) merged[mergeWith].add(m);
+        } else merged.push(new Set(s));
+      }
+      // 추이성 보강: 합친 후 더 합칠 게 있을 수 있음 (한 번 더 패스)
+      let changed = true;
+      while (changed) {
+        changed = false;
+        for (let i = 0; i < merged.length; i++) {
+          for (let j = i + 1; j < merged.length; j++) {
+            let overlap = false;
+            for (const m of merged[j]) if (merged[i].has(m)) { overlap = true; break; }
+            if (overlap) {
+              for (const m of merged[j]) merged[i].add(m);
+              merged.splice(j, 1);
+              changed = true; break;
+            }
+          }
+          if (changed) break;
+        }
+      }
+      return merged;
+    }
+    return Object.entries(raw).map(([key, v]) => ({
+      key,
+      members: v.members,
+      sameGroups: unionMerge(v.sameSets).map(s => [...s]).sort((a,b) => b.length - a.length),
+      labelGroups: unionMerge(v.labelSets).map(s => [...s]).sort((a,b) => b.length - a.length),
+      totalSize: Object.keys(v.members).length,
     })).sort((a, b) => b.totalSize - a.totalSize);
   }, [snapTerms]);
   
-  const [selKey, setSelKey] = useState(byKey[0] && byKey[0].key);
+  // route.sel이 "conflict:키" 면 그 호명을 초기 선택
+  const initialKey = useMemo(() => {
+    if (route.sel && route.sel.startsWith("conflict:")) {
+      const want = route.sel.slice("conflict:".length);
+      const found = byKey.find(k => k.key === want);
+      if (found) return want;
+    }
+    return byKey[0] && byKey[0].key;
+  }, [byKey, route.sel]);
+  const [selKey, setSelKey] = useState(initialKey);
+  useEffect(() => { if (initialKey && initialKey !== selKey) setSelKey(initialKey); }, [initialKey]);
   const [filter, setFilter] = useState("");
   const [liveResult, setLiveResult] = useState(null);
   const [running, setRunning] = useState(false);
@@ -775,21 +852,36 @@ function Stage2ConflictView({ G, route, nav }) {
   const filteredKeys = byKey.filter(k => !filter || k.key.includes(filter));
   const selEntry = byKey.find(k => k.key === selKey) || byKey[0];
   
-  function GroupBox({ title, members, color, kind }) {
+  function GroupBox({ title, members, color, kind, getDescription }) {
     if (!members || members.length === 0) return null;
     return (
       <div style={{ padding: "10px 12px", border: `1px solid ${color}66`, borderRadius: 5, background: `${color}11`, marginBottom: 10 }}>
         <div style={{ ...mono, fontSize: 12, color, marginBottom: 6, fontWeight: 500 }}>{title} · {members.length}개</div>
-        {members.map((m, i) => (
-          <div key={i} style={{ padding: "5px 6px", marginBottom: 3, background: "rgba(0,0,0,0.2)", borderRadius: 3 }}>
-            <div style={{ ...mono, fontSize: 12.5, color: "var(--text)" }}>{m.name}</div>
-            <div style={{ ...mono, fontSize: 11, color: "var(--dim)", marginTop: 2 }}>
-              {m.link && m.link.type}{m.link && m.link.value && `='${m.link.value}'`} · {m.cid.split(".").slice(1).join(".")}
+        {members.map((m, i) => {
+          const desc = getDescription ? getDescription(m) : null;
+          return (
+            <div key={i} style={{ padding: "5px 7px", marginBottom: 3, background: "rgba(0,0,0,0.2)", borderRadius: 3 }}>
+              <div style={{ ...mono, fontSize: 12.5, color: "var(--text)" }}>{m.name}</div>
+              <div style={{ ...mono, fontSize: 11, color: "var(--dim)", marginTop: 2 }}>
+                {m.link && m.link.type}{m.link && m.link.value && `='${m.link.value}'`} · {m.cid.split(".").slice(1).join(".")}
+              </div>
+              {desc && <div style={{ fontSize: 11.5, color: "var(--muted)", marginTop: 3, lineHeight: 1.45, maxWidth: 540 }}>{desc}</div>}
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     );
+  }
+  
+  // 컬럼 id에서 description 첫 문장 한 줄 추출
+  function descOf(cid) {
+    const d = (G.render[cid] || {}).description || "";
+    if (!d) return null;
+    // 첫 마침표나 줄바꿈까지
+    const m = d.match(/^[^.\n]{4,200}([.\n]|$)/);
+    let line = m ? m[0].replace(/[\n.]$/,"") : d.slice(0, 140);
+    if (line.length > 140) line = line.slice(0, 137) + "…";
+    return line;
   }
   
   return (
@@ -809,9 +901,9 @@ function Stage2ConflictView({ G, route, nav }) {
                 {k.key} <span style={{ color: "var(--dim)" }}>· {k.totalSize}</span>
               </div>
               <div style={{ ...mono, fontSize: 10.5, color: "var(--dim)" }}>
-                {k.same.length > 0 && <span style={{ color: "var(--high)" }}>같음·{k.same.length}</span>}
-                {k.same.length > 0 && k.label.length > 0 && " · "}
-                {k.label.length > 0 && <span style={{ color: "var(--low)" }}>라벨·{k.label.length}</span>}
+                {k.sameGroups.length > 0 && <span style={{ color: "var(--high)" }}>같음 {k.sameGroups.length}그룹·{k.sameGroups.reduce((s,g)=>s+g.length,0)}</span>}
+                {k.sameGroups.length > 0 && k.labelGroups.length > 0 && " · "}
+                {k.labelGroups.length > 0 && <span style={{ color: "var(--low)" }}>라벨 {k.labelGroups.length}그룹·{k.labelGroups.reduce((s,g)=>s+g.length,0)}</span>}
               </div>
             </HoverRow>
           ))}
@@ -831,23 +923,32 @@ function Stage2ConflictView({ G, route, nav }) {
               </button>
             </div>
             <div style={{ fontSize: 13, color: "var(--muted)", marginBottom: 16, lineHeight: 1.6 }}>
-              이 호명을 공유하는 {selEntry.totalSize}개 term을 LLM이 의미 단위로 갈래잡은 결과입니다. 그룹 박스 안의 link 정보(컬럼·코드값)가 의미 차이를 직접 드러냅니다.
+              이 호명을 공유하는 {selEntry.totalSize}개 term을 LLM이 의미 단위로 갈래잡은 결과입니다. 같은 호명 안에서 의미 그룹이 여러 개로 갈래잡혔으면 각 그룹마다 박스가 따로 보입니다.
             </div>
             {error && <div style={{ color: "var(--low)", ...mono, fontSize: 12.5, padding: 10, background: "rgba(224,107,94,0.08)", borderRadius: 4, marginBottom: 12 }}>{error}</div>}
             
-            {/* 그룹 박스 — 핵심 시각 */}
-            <GroupBox
-              title="같은 개념 · 도메인 가로지름"
-              members={selEntry.same.map(tk => selEntry.members[tk]).filter(Boolean)}
-              color="var(--high)"
-              kind="same"
-            />
-            <GroupBox
-              title="라벨 일치 · 의미 다름"
-              members={selEntry.label.map(tk => selEntry.members[tk]).filter(Boolean)}
-              color="var(--low)"
-              kind="label"
-            />
+            {/* 같음 세부 그룹들 — 의미 그룹마다 박스 하나 */}
+            {selEntry.sameGroups.map((grp, gi) => (
+              <GroupBox
+                key={"s"+gi}
+                title={`같은 의미, 다른 도메인 · 그룹 ${gi+1}`}
+                members={grp.map(tk => selEntry.members[tk]).filter(Boolean)}
+                color="var(--high)"
+                kind="same"
+                getDescription={(m) => descOf(m.cid)}
+              />
+            ))}
+            {/* 라벨 세부 그룹들 — 같은 표현이지만 의미가 다른 자리 */}
+            {selEntry.labelGroups.map((grp, gi) => (
+              <GroupBox
+                key={"l"+gi}
+                title={`같은 표현, 다른 의미 · 그룹 ${gi+1}`}
+                members={grp.map(tk => selEntry.members[tk]).filter(Boolean)}
+                color="var(--low)"
+                kind="label"
+                getDescription={(m) => descOf(m.cid)}
+              />
+            ))}
             
             {liveResult && liveResult.key === selEntry.key && (
               <div style={{ marginTop: 16, padding: "10px 12px", border: "1px dashed var(--sig)", borderRadius: 5 }}>
@@ -992,7 +1093,14 @@ function Stage2EnrichView({ G, route, nav }) {
 
 // 2단계 통합 — 두 종류 탭
 function Stage2View({ G, route, nav }) {
-  const [tab, setTab] = useState("conflict");
+  // route.sel이 "conflict:" 또는 "enrich:" 로 시작하면 그 탭으로
+  const initialTab = useMemo(() => {
+    if (route.sel && route.sel.startsWith("enrich:")) return "enrich";
+    if (route.sel && route.sel.startsWith("conflict:")) return "conflict";
+    return "conflict";
+  }, [route.sel]);
+  const [tab, setTab] = useState(initialTab);
+  useEffect(() => { if (initialTab && initialTab !== tab) setTab(initialTab); }, [initialTab]);
   return (
     <div>
       <div style={{ display: "flex", gap: 6, padding: "10px 24px 0", background: "rgba(255,255,255,0.02)", borderBottom: "1px solid var(--border)" }}>
